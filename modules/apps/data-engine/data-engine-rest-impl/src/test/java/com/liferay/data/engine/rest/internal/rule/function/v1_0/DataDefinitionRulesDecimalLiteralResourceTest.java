@@ -112,8 +112,8 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 		DataRuleFunction dataRuleFunction =
 			new DecimalLiteralDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("salary", "numeric")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"numeric", "salary");
 
 		return dataRuleFunction.validate(
 			_dataDefinitionDecimalLiteralRules()[0].

@@ -133,8 +133,8 @@ public class DataDefinitionRulesEmptyResourceTest
 
 		DataRuleFunction dataRuleFunction = new EmptyDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("textField", "text")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"text", "textField");
 
 		return dataRuleFunction.validate(
 			dataDefinitionRule.getDataDefinitionRuleParameters(),

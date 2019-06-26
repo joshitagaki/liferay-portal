@@ -97,8 +97,8 @@ public class DataDefinitionRulesURLResourceTest
 
 		DataRuleFunction dataRuleFunction = new URLDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("url", "text")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"text", "url");
 
 		return dataRuleFunction.validate(
 			dataDefinitionRule.getDataDefinitionRuleParameters(),

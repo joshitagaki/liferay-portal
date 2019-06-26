@@ -117,8 +117,8 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 		DataRuleFunction dataRuleFunction =
 			new IntegerLiteralDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("age", "numeric")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"numeric", "age");
 
 		return dataRuleFunction.validate(
 			dataDefinitionRule.getDataDefinitionRuleParameters(),

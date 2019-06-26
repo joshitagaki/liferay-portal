@@ -132,8 +132,8 @@ public class DataDefinitionRulesEmailAddressResourceTest
 
 		DataRuleFunction dataRuleFunction = new EmailAddressDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("emailAddress", "text")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"text", "emailAddress");
 
 		return dataRuleFunction.validate(
 			dataDefinitionRule.getDataDefinitionRuleParameters(),

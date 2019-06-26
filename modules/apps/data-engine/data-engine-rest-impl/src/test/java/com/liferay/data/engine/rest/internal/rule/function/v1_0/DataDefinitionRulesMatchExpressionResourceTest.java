@@ -152,8 +152,8 @@ public class DataDefinitionRulesMatchExpressionResourceTest
 		DataRuleFunction dataRuleFunction =
 			new MatchExpressionDataRuleFunction();
 
-		DataDefinitionField dataDefinitionField =
-			randomDataDefinitionFields("field", "text")[0];
+		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
+			"text", "field");
 
 		return dataRuleFunction.validate(
 			dataDefinitionRule.getDataDefinitionRuleParameters(),

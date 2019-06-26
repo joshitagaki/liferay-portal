@@ -24,23 +24,24 @@ import java.util.HashMap;
  */
 public abstract class BaseDataDefinitionRulesTestCase {
 
-	protected DataDefinitionField[] randomDataDefinitionFields(
-		String fieldName, String type) {
+	protected DataDefinitionField randomDataDefinitionFields(
+		String fieldType, String name) {
 
-		return new DataDefinitionField[] {
-			new DataDefinitionField() {
-				{
-					id = RandomTestUtil.randomLong();
-					indexable = false;
-					label = new HashMap();
-					localizable = false;
-					name = fieldName;
-					fieldType = type;
-					repeatable = false;
-					tip = new HashMap();
-				}
+		DataDefinitionField dataDefinitionField = new DataDefinitionField() {
+			{
+				id = RandomTestUtil.randomLong();
+				indexable = false;
+				label = new HashMap();
+				localizable = false;
+				repeatable = false;
+				tip = new HashMap();
 			}
 		};
+
+		dataDefinitionField.setFieldType(fieldType);
+		dataDefinitionField.setName(name);
+
+		return dataDefinitionField;
 	}
 
 }
