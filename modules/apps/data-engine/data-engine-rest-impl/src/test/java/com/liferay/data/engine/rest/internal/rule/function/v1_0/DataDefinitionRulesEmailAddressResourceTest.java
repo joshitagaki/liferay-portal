@@ -14,10 +14,6 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionField;
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionRule;
-import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
-import com.liferay.data.engine.rest.internal.dto.v1_0.util.DataDefinitionFieldUtil;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
@@ -26,7 +22,7 @@ import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -35,14 +31,20 @@ import org.junit.Test;
 public class DataDefinitionRulesEmailAddressResourceTest
 	extends BaseDataDefinitionRulesTestCase {
 
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
+	@BeforeClass
+	public static void setUpClass() {
+		dataDefinitionRuleParameters = new HashMap() {
+			{
+				put(
+					DataDefinitionRuleConstants.EXPRESSION,
+					"^[0-9]+(\\.[0-9]{1,2})?");
+			}
+		};
 	}
 
 	@Test
 	public void testInvalidEmailAddress1() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("emailAddress", "TEXT");
@@ -60,7 +62,7 @@ public class DataDefinitionRulesEmailAddressResourceTest
 
 	@Test
 	public void testInvalidEmailAddress2() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("emailAddress", "TEXT,test@liferay.com");
@@ -77,8 +79,8 @@ public class DataDefinitionRulesEmailAddressResourceTest
 	}
 
 	@Test
-	public void testMulitpleEmailAddress() {
-		_dataRecord.setDataRecordValues(
+	public void testMultipleEmailAddress() {
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("emailAddress", "test1@liferay.com,test2@liferay.com");
@@ -94,7 +96,7 @@ public class DataDefinitionRulesEmailAddressResourceTest
 
 	@Test
 	public void testNullValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("emailAddress", null);
@@ -112,7 +114,7 @@ public class DataDefinitionRulesEmailAddressResourceTest
 
 	@Test
 	public void testSingleEmailAddress() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("emailAddress", "test1@liferay.com,test2@liferay.com");
@@ -126,36 +128,19 @@ public class DataDefinitionRulesEmailAddressResourceTest
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
-	protected DataRuleFunctionResult getDataRuleFunctionResult() {
-		DataDefinitionRule dataDefinitionRule =
-			_dataDefinitionAddressRules()[0];
-
-		DataRuleFunction dataRuleFunction = new EmailAddressDataRuleFunction();
-
-		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
-			"text", "emailAddress");
-
-		return dataRuleFunction.validate(
-			dataDefinitionRule.getDataDefinitionRuleParameters(),
-			DataDefinitionFieldUtil.toSPIDataDefinitionField(
-				dataDefinitionField),
-			_dataRecord.getDataRecordValues(
-			).get(
-				dataDefinitionField.getName()
-			));
+	@Override
+	protected DataRuleFunction getDataRuleFunction() {
+		return new EmailAddressDataRuleFunction();
 	}
 
-	private DataDefinitionRule[] _dataDefinitionAddressRules() {
-		return new DataDefinitionRule[] {
-			new DataDefinitionRule() {
-				{
-					dataDefinitionFieldNames = new String[] {"emailAddress"};
-					name = "emailAddress";
-				}
-			}
-		};
+	@Override
+	protected String getFieldName() {
+		return "emailAddress";
 	}
 
-	private DataRecord _dataRecord;
+	@Override
+	protected String getFieldType() {
+		return "text";
+	}
 
 }

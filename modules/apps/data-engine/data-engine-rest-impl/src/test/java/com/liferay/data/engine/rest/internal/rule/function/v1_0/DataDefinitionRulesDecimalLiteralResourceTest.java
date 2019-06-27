@@ -14,10 +14,6 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionField;
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionRule;
-import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
-import com.liferay.data.engine.rest.internal.dto.v1_0.util.DataDefinitionFieldUtil;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
@@ -26,7 +22,6 @@ import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -35,14 +30,9 @@ import org.junit.Test;
 public class DataDefinitionRulesDecimalLiteralResourceTest
 	extends BaseDataDefinitionRulesTestCase {
 
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
-
 	@Test
 	public void testDecimalValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("salary", "1.2");
@@ -58,7 +48,7 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 
 	@Test
 	public void testIntegerValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("salary", "1");
@@ -74,7 +64,7 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 
 	@Test
 	public void testNullValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("salary", null);
@@ -92,7 +82,7 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 
 	@Test
 	public void testStringValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("salary", "NUMBER");
@@ -108,42 +98,19 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 			dataRuleFunctionResult.getErrorCode());
 	}
 
-	protected DataRuleFunctionResult getDataRuleFunctionResult() {
-		DataRuleFunction dataRuleFunction =
-			new DecimalLiteralDataRuleFunction();
-
-		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
-			"numeric", "salary");
-
-		return dataRuleFunction.validate(
-			_dataDefinitionDecimalLiteralRules()[0].
-				getDataDefinitionRuleParameters(),
-			DataDefinitionFieldUtil.toSPIDataDefinitionField(
-				dataDefinitionField),
-			_dataRecord.getDataRecordValues(
-			).get(
-				dataDefinitionField.getName()
-			));
+	@Override
+	protected DataRuleFunction getDataRuleFunction() {
+		return new DecimalLiteralDataRuleFunction();
 	}
 
-	private DataDefinitionRule[] _dataDefinitionDecimalLiteralRules() {
-		return new DataDefinitionRule[] {
-			new DataDefinitionRule() {
-				{
-					dataDefinitionFieldNames = new String[] {"salary"};
-					dataDefinitionRuleParameters = new HashMap() {
-						{
-							put(
-								DataDefinitionRuleConstants.EXPRESSION,
-								"^[0-9]+(\\.[0-9]{1,2})?");
-						}
-					};
-					name = "decimalLiteral";
-				}
-			}
-		};
+	@Override
+	protected String getFieldName() {
+		return "salary";
 	}
 
-	private DataRecord _dataRecord;
+	@Override
+	protected String getFieldType() {
+		return "numeric";
+	}
 
 }

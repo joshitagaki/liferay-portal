@@ -14,10 +14,6 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionField;
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionRule;
-import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
-import com.liferay.data.engine.rest.internal.dto.v1_0.util.DataDefinitionFieldUtil;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
@@ -26,7 +22,6 @@ import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -35,14 +30,9 @@ import org.junit.Test;
 public class DataDefinitionRulesURLResourceTest
 	extends BaseDataDefinitionRulesTestCase {
 
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
-
 	@Test
 	public void testInvalidURL() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("url", "INVALID");
@@ -60,7 +50,7 @@ public class DataDefinitionRulesURLResourceTest
 
 	@Test
 	public void testNullValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("url", null);
@@ -78,7 +68,7 @@ public class DataDefinitionRulesURLResourceTest
 
 	@Test
 	public void testValidURL() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("url", "http://www.liferay.com");
@@ -92,35 +82,19 @@ public class DataDefinitionRulesURLResourceTest
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
-	protected DataRuleFunctionResult getDataRuleFunctionResult() {
-		DataDefinitionRule dataDefinitionRule = _dataDefinitionURLRules()[0];
-
-		DataRuleFunction dataRuleFunction = new URLDataRuleFunction();
-
-		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
-			"text", "url");
-
-		return dataRuleFunction.validate(
-			dataDefinitionRule.getDataDefinitionRuleParameters(),
-			DataDefinitionFieldUtil.toSPIDataDefinitionField(
-				dataDefinitionField),
-			_dataRecord.getDataRecordValues(
-			).get(
-				dataDefinitionField.getName()
-			));
+	@Override
+	protected DataRuleFunction getDataRuleFunction() {
+		return new URLDataRuleFunction();
 	}
 
-	private DataDefinitionRule[] _dataDefinitionURLRules() {
-		return new DataDefinitionRule[] {
-			new DataDefinitionRule() {
-				{
-					dataDefinitionFieldNames = new String[] {"url"};
-					name = "url";
-				}
-			}
-		};
+	@Override
+	protected String getFieldName() {
+		return "url";
 	}
 
-	private DataRecord _dataRecord;
+	@Override
+	protected String getFieldType() {
+		return "text";
+	}
 
 }

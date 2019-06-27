@@ -14,10 +14,6 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionField;
-import com.liferay.data.engine.rest.dto.v1_0.DataDefinitionRule;
-import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
-import com.liferay.data.engine.rest.internal.dto.v1_0.util.DataDefinitionFieldUtil;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
@@ -26,7 +22,6 @@ import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -35,14 +30,9 @@ import org.junit.Test;
 public class DataDefinitionRulesIntegerLiteralResourceTest
 	extends BaseDataDefinitionRulesTestCase {
 
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
-
 	@Test
 	public void testInteger() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("age", "132512");
@@ -58,7 +48,7 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 
 	@Test
 	public void testNotAInteger() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("age", "number");
@@ -76,7 +66,7 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 
 	@Test
 	public void testNullValue() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("age", null);
@@ -94,7 +84,7 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 
 	@Test
 	public void testOutbound() {
-		_dataRecord.setDataRecordValues(
+		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
 					put("age", "2312321243423432423424234233234324324242");
@@ -110,37 +100,19 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 			dataRuleFunctionResult.getErrorCode());
 	}
 
-	protected DataRuleFunctionResult getDataRuleFunctionResult() {
-		DataDefinitionRule dataDefinitionRule =
-			_dataDefinitionIntegerLiteralRules()[0];
-
-		DataRuleFunction dataRuleFunction =
-			new IntegerLiteralDataRuleFunction();
-
-		DataDefinitionField dataDefinitionField = randomDataDefinitionFields(
-			"numeric", "age");
-
-		return dataRuleFunction.validate(
-			dataDefinitionRule.getDataDefinitionRuleParameters(),
-			DataDefinitionFieldUtil.toSPIDataDefinitionField(
-				dataDefinitionField),
-			_dataRecord.getDataRecordValues(
-			).get(
-				dataDefinitionField.getName()
-			));
+	@Override
+	protected DataRuleFunction getDataRuleFunction() {
+		return new IntegerLiteralDataRuleFunction();
 	}
 
-	private DataDefinitionRule[] _dataDefinitionIntegerLiteralRules() {
-		return new DataDefinitionRule[] {
-			new DataDefinitionRule() {
-				{
-					dataDefinitionFieldNames = new String[] {"age"};
-					name = "integerLiteral";
-				}
-			}
-		};
+	@Override
+	protected String getFieldName() {
+		return "age";
 	}
 
-	private DataRecord _dataRecord;
+	@Override
+	protected String getFieldType() {
+		return "numeric";
+	}
 
 }
