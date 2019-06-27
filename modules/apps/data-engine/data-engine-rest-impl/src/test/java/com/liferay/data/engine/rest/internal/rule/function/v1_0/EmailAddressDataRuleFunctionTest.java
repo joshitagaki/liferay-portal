@@ -14,7 +14,7 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
+import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataRuleFunctionTest;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
@@ -22,36 +22,67 @@ import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  * @author Marcelo Mello
  */
-public class DataDefinitionRulesDecimalLiteralResourceTest
-	extends BaseDataDefinitionRulesTestCase {
+public class EmailAddressDataRuleFunctionTest extends BaseDataRuleFunctionTest {
+
+	@BeforeClass
+	public static void setUpClass() {
+		dataDefinitionRuleParameters = new HashMap() {
+			{
+				put(
+					DataDefinitionRuleConstants.EXPRESSION,
+					"^[0-9]+(\\.[0-9]{1,2})?");
+			}
+		};
+	}
 
 	@Test
-	public void testDecimalValue() {
+	public void testInvalidEmailAddress1() {
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("salary", "1.2");
+					put("emailAddress", "TEXT");
 				}
 			});
 
 		DataRuleFunctionResult dataRuleFunctionResult =
 			getDataRuleFunctionResult();
 
-		Assert.assertTrue(dataRuleFunctionResult.isValid());
-		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.EMAIL_ADDRESS_IS_INVALID,
+			dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
-	public void testIntegerValue() {
+	public void testInvalidEmailAddress2() {
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("salary", "1");
+					put("emailAddress", "TEXT,test@liferay.com");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.EMAIL_ADDRESS_IS_INVALID,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testMultipleEmailAddress() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("emailAddress", "test1@liferay.com,test2@liferay.com");
 				}
 			});
 
@@ -67,7 +98,7 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("salary", null);
+					put("emailAddress", null);
 				}
 			});
 
@@ -76,41 +107,39 @@ public class DataDefinitionRulesDecimalLiteralResourceTest
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_BE_A_DECIMAL_VALUE,
+			DataDefinitionRuleConstants.EMAIL_ADDRESS_IS_INVALID,
 			dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
-	public void testStringValue() {
+	public void testSingleEmailAddress() {
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("salary", "NUMBER");
+					put("emailAddress", "test1@liferay.com,test2@liferay.com");
 				}
 			});
 
 		DataRuleFunctionResult dataRuleFunctionResult =
 			getDataRuleFunctionResult();
 
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_BE_A_DECIMAL_VALUE,
-			dataRuleFunctionResult.getErrorCode());
+		Assert.assertTrue(dataRuleFunctionResult.isValid());
+		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Override
 	protected DataRuleFunction getDataRuleFunction() {
-		return new DecimalLiteralDataRuleFunction();
+		return new EmailAddressDataRuleFunction();
 	}
 
 	@Override
 	protected String getFieldName() {
-		return "salary";
+		return "emailAddress";
 	}
 
 	@Override
 	protected String getFieldType() {
-		return "numeric";
+		return "text";
 	}
 
 }

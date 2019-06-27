@@ -14,7 +14,7 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
+import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataRuleFunctionTest;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
@@ -27,51 +27,15 @@ import org.junit.Test;
 /**
  * @author Marcelo Mello
  */
-public class DataDefinitionRulesURLResourceTest
-	extends BaseDataDefinitionRulesTestCase {
+public class IntegerLiteralDataRuleFunctionTest
+	extends BaseDataRuleFunctionTest {
 
 	@Test
-	public void testInvalidURL() {
+	public void testInteger() {
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("url", "INVALID");
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.URL_IS_INVALID,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testNullValue() {
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("url", null);
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.URL_IS_INVALID,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testValidURL() {
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("url", "http://www.liferay.com");
+					put("age", "132512");
 				}
 			});
 
@@ -82,19 +46,73 @@ public class DataDefinitionRulesURLResourceTest
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
+	@Test
+	public void testNotAInteger() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("age", "number");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testNullValue() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("age", null);
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testOutbound() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("age", "2312321243423432423424234233234324324242");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
 	@Override
 	protected DataRuleFunction getDataRuleFunction() {
-		return new URLDataRuleFunction();
+		return new IntegerLiteralDataRuleFunction();
 	}
 
 	@Override
 	protected String getFieldName() {
-		return "url";
+		return "age";
 	}
 
 	@Override
 	protected String getFieldType() {
-		return "text";
+		return "numeric";
 	}
 
 }

@@ -14,7 +14,7 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
+import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataRuleFunctionTest;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
@@ -27,71 +27,15 @@ import org.junit.Test;
 /**
  * @author Marcelo Mello
  */
-public class DataDefinitionRulesMatchExpressionResourceTest
-	extends BaseDataDefinitionRulesTestCase {
+public class DecimalLiteralDataRuleFunctionTest
+	extends BaseDataRuleFunctionTest {
 
 	@Test
-	public void testInvalidRegex() {
-		dataDefinitionRuleParameters = new HashMap() {
-			{
-				put(
-					DataDefinitionRuleConstants.EXPRESSION,
-					"\\\\\\\\S+[@\\\\S+\\\\.\\\\S+");
-			}
-		};
-
+	public void testDecimalValue() {
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("field", "test@liferay");
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_MATCH_EXPRESSION,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testNotMatch() {
-		dataDefinitionRuleParameters = new HashMap() {
-			{
-				put(DataDefinitionRuleConstants.EXPRESSION, "\\S+@\\S+\\.\\S+");
-			}
-		};
-
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("field", "test@liferay");
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_MATCH_EXPRESSION,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testValidMatch() {
-		dataDefinitionRuleParameters = new HashMap() {
-			{
-				put(DataDefinitionRuleConstants.EXPRESSION, "\\S+@\\S+\\.\\S+");
-			}
-		};
-
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("field", "test@liferay.com");
+					put("salary", "1.2");
 				}
 			});
 
@@ -102,19 +46,71 @@ public class DataDefinitionRulesMatchExpressionResourceTest
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
+	@Test
+	public void testIntegerValue() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("salary", "1");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertTrue(dataRuleFunctionResult.isValid());
+		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testNullValue() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("salary", null);
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_BE_A_DECIMAL_VALUE,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testStringValue() {
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("salary", "NUMBER");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_BE_A_DECIMAL_VALUE,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
 	@Override
 	protected DataRuleFunction getDataRuleFunction() {
-		return new MatchExpressionDataRuleFunction();
+		return new DecimalLiteralDataRuleFunction();
 	}
 
 	@Override
 	protected String getFieldName() {
-		return "field";
+		return "salary";
 	}
 
 	@Override
 	protected String getFieldType() {
-		return "text";
+		return "numeric";
 	}
 
 }

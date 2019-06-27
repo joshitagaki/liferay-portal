@@ -14,7 +14,7 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
+import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataRuleFunctionTest;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
@@ -27,8 +27,7 @@ import org.junit.Test;
 /**
  * @author Marcelo Mello
  */
-public class DataDefinitionRulesEmptyResourceTest
-	extends BaseDataDefinitionRulesTestCase {
+public class EmptyDataRuleFunctionTest extends BaseDataRuleFunctionTest {
 
 	@Test
 	public void testEmpty() {

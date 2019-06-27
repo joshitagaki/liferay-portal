@@ -14,7 +14,7 @@
 
 package com.liferay.data.engine.rest.internal.rule.function.v1_0;
 
-import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataDefinitionRulesTestCase;
+import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.BaseDataRuleFunctionTest;
 import com.liferay.data.engine.rest.internal.rule.function.v1_0.util.constants.DataDefinitionRuleConstants;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunction;
 import com.liferay.data.engine.spi.rule.function.DataRuleFunctionResult;
@@ -27,15 +27,71 @@ import org.junit.Test;
 /**
  * @author Marcelo Mello
  */
-public class DataDefinitionRulesIntegerLiteralResourceTest
-	extends BaseDataDefinitionRulesTestCase {
+public class MatchExpressionDataRuleFunctionTest
+	extends BaseDataRuleFunctionTest {
 
 	@Test
-	public void testInteger() {
+	public void testInvalidRegex() {
+		dataDefinitionRuleParameters = new HashMap() {
+			{
+				put(
+					DataDefinitionRuleConstants.EXPRESSION,
+					"\\\\\\\\S+[@\\\\S+\\\\.\\\\S+");
+			}
+		};
+
 		dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put("age", "132512");
+					put("field", "test@liferay");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_MATCH_EXPRESSION,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testNotMatch() {
+		dataDefinitionRuleParameters = new HashMap() {
+			{
+				put(DataDefinitionRuleConstants.EXPRESSION, "\\S+@\\S+\\.\\S+");
+			}
+		};
+
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("field", "test@liferay");
+				}
+			});
+
+		DataRuleFunctionResult dataRuleFunctionResult =
+			getDataRuleFunctionResult();
+
+		Assert.assertFalse(dataRuleFunctionResult.isValid());
+		Assert.assertEquals(
+			DataDefinitionRuleConstants.VALUE_MUST_MATCH_EXPRESSION,
+			dataRuleFunctionResult.getErrorCode());
+	}
+
+	@Test
+	public void testValidMatch() {
+		dataDefinitionRuleParameters = new HashMap() {
+			{
+				put(DataDefinitionRuleConstants.EXPRESSION, "\\S+@\\S+\\.\\S+");
+			}
+		};
+
+		dataRecord.setDataRecordValues(
+			new HashMap() {
+				{
+					put("field", "test@liferay.com");
 				}
 			});
 
@@ -46,73 +102,19 @@ public class DataDefinitionRulesIntegerLiteralResourceTest
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
-	@Test
-	public void testNotAInteger() {
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("age", "number");
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testNullValue() {
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("age", null);
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
-	@Test
-	public void testOutbound() {
-		dataRecord.setDataRecordValues(
-			new HashMap() {
-				{
-					put("age", "2312321243423432423424234233234324324242");
-				}
-			});
-
-		DataRuleFunctionResult dataRuleFunctionResult =
-			getDataRuleFunctionResult();
-
-		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			DataDefinitionRuleConstants.VALUE_MUST_BE_AN_INTEGER_VALUE,
-			dataRuleFunctionResult.getErrorCode());
-	}
-
 	@Override
 	protected DataRuleFunction getDataRuleFunction() {
-		return new IntegerLiteralDataRuleFunction();
+		return new MatchExpressionDataRuleFunction();
 	}
 
 	@Override
 	protected String getFieldName() {
-		return "age";
+		return "field";
 	}
 
 	@Override
 	protected String getFieldType() {
-		return "numeric";
+		return "text";
 	}
 
 }

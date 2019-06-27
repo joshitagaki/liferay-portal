@@ -31,7 +31,7 @@ import org.junit.Before;
 /**
  * @author Marcelo Mello
  */
-public abstract class BaseDataDefinitionRulesTestCase {
+public class BaseDataRuleFunctionTest {
 
 	@AfterClass
 	public static void tearDownClass() {
