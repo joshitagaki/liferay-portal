@@ -50,7 +50,7 @@ public abstract class BaseMBThreadUADAnonymizer
 			mbThread.setUserId(anonymousUser.getUserId());
 			mbThread.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(mbThread, anonymousUser);
+			autoAnonymizeAssetEntry(mbThread, anonymousUser);
 		}
 
 		if (mbThread.getRootMessageUserId() == userId) {
@@ -79,7 +79,9 @@ public abstract class BaseMBThreadUADAnonymizer
 		return MBThread.class;
 	}
 
-	protected void autoAnonymizeAsset(MBThread mbThread, User anonymousUser) {
+	protected void autoAnonymizeAssetEntry(
+		MBThread mbThread, User anonymousUser) {
+
 		AssetEntry assetEntry = fetchAssetEntry(mbThread);
 
 		if (assetEntry != null) {

@@ -50,7 +50,7 @@ public abstract class BaseWikiPageUADAnonymizer
 			wikiPage.setUserId(anonymousUser.getUserId());
 			wikiPage.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(wikiPage, anonymousUser);
+			autoAnonymizeAssetEntry(wikiPage, anonymousUser);
 		}
 
 		if (wikiPage.getStatusByUserId() == userId) {
@@ -71,7 +71,9 @@ public abstract class BaseWikiPageUADAnonymizer
 		return WikiPage.class;
 	}
 
-	protected void autoAnonymizeAsset(WikiPage wikiPage, User anonymousUser) {
+	protected void autoAnonymizeAssetEntry(
+		WikiPage wikiPage, User anonymousUser) {
+
 		AssetEntry assetEntry = fetchAssetEntry(wikiPage);
 
 		if (assetEntry != null) {

@@ -50,7 +50,7 @@ public abstract class BaseBlogsEntryUADAnonymizer
 			blogsEntry.setUserId(anonymousUser.getUserId());
 			blogsEntry.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(blogsEntry, anonymousUser);
+			autoAnonymizeAssetEntry(blogsEntry, anonymousUser);
 		}
 
 		if (blogsEntry.getStatusByUserId() == userId) {
@@ -71,7 +71,7 @@ public abstract class BaseBlogsEntryUADAnonymizer
 		return BlogsEntry.class;
 	}
 
-	protected void autoAnonymizeAsset(
+	protected void autoAnonymizeAssetEntry(
 		BlogsEntry blogsEntry, User anonymousUser) {
 
 		AssetEntry assetEntry = fetchAssetEntry(blogsEntry);

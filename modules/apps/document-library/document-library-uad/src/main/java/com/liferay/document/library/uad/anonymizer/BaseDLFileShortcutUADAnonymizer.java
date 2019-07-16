@@ -50,7 +50,7 @@ public abstract class BaseDLFileShortcutUADAnonymizer
 			dlFileShortcut.setUserId(anonymousUser.getUserId());
 			dlFileShortcut.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(dlFileShortcut, anonymousUser);
+			autoAnonymizeAssetEntry(dlFileShortcut, anonymousUser);
 		}
 
 		if (dlFileShortcut.getStatusByUserId() == userId) {
@@ -71,7 +71,7 @@ public abstract class BaseDLFileShortcutUADAnonymizer
 		return DLFileShortcut.class;
 	}
 
-	protected void autoAnonymizeAsset(
+	protected void autoAnonymizeAssetEntry(
 		DLFileShortcut dlFileShortcut, User anonymousUser) {
 
 		AssetEntry assetEntry = fetchAssetEntry(dlFileShortcut);

@@ -50,7 +50,7 @@ public abstract class BaseDLFileEntryUADAnonymizer
 			dlFileEntry.setUserId(anonymousUser.getUserId());
 			dlFileEntry.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(dlFileEntry, anonymousUser);
+			autoAnonymizeAssetEntry(dlFileEntry, anonymousUser);
 		}
 
 		dlFileEntryLocalService.updateDLFileEntry(dlFileEntry);
@@ -66,7 +66,7 @@ public abstract class BaseDLFileEntryUADAnonymizer
 		return DLFileEntry.class;
 	}
 
-	protected void autoAnonymizeAsset(
+	protected void autoAnonymizeAssetEntry(
 		DLFileEntry dlFileEntry, User anonymousUser) {
 
 		AssetEntry assetEntry = fetchAssetEntry(dlFileEntry);

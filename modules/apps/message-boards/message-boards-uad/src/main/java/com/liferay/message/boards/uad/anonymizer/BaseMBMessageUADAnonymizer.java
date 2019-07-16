@@ -50,7 +50,7 @@ public abstract class BaseMBMessageUADAnonymizer
 			mbMessage.setUserId(anonymousUser.getUserId());
 			mbMessage.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(mbMessage, anonymousUser);
+			autoAnonymizeAssetEntry(mbMessage, anonymousUser);
 		}
 
 		if (mbMessage.getStatusByUserId() == userId) {
@@ -71,7 +71,9 @@ public abstract class BaseMBMessageUADAnonymizer
 		return MBMessage.class;
 	}
 
-	protected void autoAnonymizeAsset(MBMessage mbMessage, User anonymousUser) {
+	protected void autoAnonymizeAssetEntry(
+		MBMessage mbMessage, User anonymousUser) {
+
 		AssetEntry assetEntry = fetchAssetEntry(mbMessage);
 
 		if (assetEntry != null) {

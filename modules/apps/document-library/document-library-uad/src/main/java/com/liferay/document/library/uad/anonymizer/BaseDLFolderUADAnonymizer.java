@@ -50,7 +50,7 @@ public abstract class BaseDLFolderUADAnonymizer
 			dlFolder.setUserId(anonymousUser.getUserId());
 			dlFolder.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(dlFolder, anonymousUser);
+			autoAnonymizeAssetEntry(dlFolder, anonymousUser);
 		}
 
 		if (dlFolder.getStatusByUserId() == userId) {
@@ -71,7 +71,9 @@ public abstract class BaseDLFolderUADAnonymizer
 		return DLFolder.class;
 	}
 
-	protected void autoAnonymizeAsset(DLFolder dlFolder, User anonymousUser) {
+	protected void autoAnonymizeAssetEntry(
+		DLFolder dlFolder, User anonymousUser) {
+
 		AssetEntry assetEntry = fetchAssetEntry(dlFolder);
 
 		if (assetEntry != null) {

@@ -49,7 +49,7 @@ public abstract class BaseLayoutUADAnonymizer
 			layout.setUserId(anonymousUser.getUserId());
 			layout.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(layout, anonymousUser);
+			autoAnonymizeAssetEntry(layout, anonymousUser);
 		}
 
 		layoutLocalService.updateLayout(layout);
@@ -65,7 +65,7 @@ public abstract class BaseLayoutUADAnonymizer
 		return Layout.class;
 	}
 
-	protected void autoAnonymizeAsset(Layout layout, User anonymousUser) {
+	protected void autoAnonymizeAssetEntry(Layout layout, User anonymousUser) {
 		AssetEntry assetEntry = fetchAssetEntry(layout);
 
 		if (assetEntry != null) {

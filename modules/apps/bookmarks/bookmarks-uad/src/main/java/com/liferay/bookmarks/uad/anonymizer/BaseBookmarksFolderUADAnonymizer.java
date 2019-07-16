@@ -50,7 +50,7 @@ public abstract class BaseBookmarksFolderUADAnonymizer
 			bookmarksFolder.setUserId(anonymousUser.getUserId());
 			bookmarksFolder.setUserName(anonymousUser.getFullName());
 
-			autoAnonymizeAsset(bookmarksFolder, anonymousUser);
+			autoAnonymizeAssetEntry(bookmarksFolder, anonymousUser);
 		}
 
 		if (bookmarksFolder.getStatusByUserId() == userId) {
@@ -71,7 +71,7 @@ public abstract class BaseBookmarksFolderUADAnonymizer
 		return BookmarksFolder.class;
 	}
 
-	protected void autoAnonymizeAsset(
+	protected void autoAnonymizeAssetEntry(
 		BookmarksFolder bookmarksFolder, User anonymousUser) {
 
 		AssetEntry assetEntry = fetchAssetEntry(bookmarksFolder);
