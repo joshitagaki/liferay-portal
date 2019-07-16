@@ -178,7 +178,7 @@ public class ContentPageEditorDisplayContext {
 		).put(
 			"assetBrowserLinks", _getAssetBrowserLinksSoyContexts()
 		).put(
-			"availableAssets", _getAvailableAssets()
+			"availableAssets", _getAvailableAssetsSoyContexts()
 		).put(
 			"availableLanguages", _getAvailableLanguagesSoyContext()
 		).put(
@@ -524,7 +524,7 @@ public class ContentPageEditorDisplayContext {
 		return assetBrowserURL.toString();
 	}
 
-	private List<SoyContext> _getAvailableAssets() throws Exception {
+	private List<SoyContext> _getAvailableAssetsSoyContexts() throws Exception {
 		List<SoyContext> soyContexts = new ArrayList<>();
 
 		long[] classNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(
