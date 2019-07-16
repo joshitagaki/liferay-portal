@@ -45,7 +45,7 @@ public abstract class Base${entity.name}UADAnonymizer extends DynamicQueryUADAno
 						</#if>
 
 						<#if hasAssetEntry && stringUtil.equals(uadUserIdEntityColumn.name, "userId")>
-							autoAnonymizeAsset(${entity.varName}, anonymousUser);
+							autoAnonymizeAssetEntry(${entity.varName}, anonymousUser);
 						</#if>
 					}
 		</#list>
@@ -66,7 +66,7 @@ public abstract class Base${entity.name}UADAnonymizer extends DynamicQueryUADAno
 	}
 
 	<#if hasAssetEntry>
-		protected void autoAnonymizeAsset(${entity.name} ${entity.varName}, User anonymousUser) {
+		protected void autoAnonymizeAssetEntry(${entity.name} ${entity.varName}, User anonymousUser) {
 			AssetEntry assetEntry = fetchAssetEntry(${entity.varName});
 
 			if (assetEntry != null) {
