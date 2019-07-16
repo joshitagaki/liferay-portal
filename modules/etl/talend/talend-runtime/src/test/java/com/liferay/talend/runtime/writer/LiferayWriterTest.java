@@ -90,6 +90,7 @@ public class LiferayWriterTest extends BaseTest {
 		testLiferayOutputProperties.setSchema(SchemaProperties.EMPTY_SCHEMA);
 
 		testLiferayOutputProperties.init();
+
 		testLiferayOutputProperties.setupProperties();
 
 		LiferayWriter liferayWriter = new LiferayWriter(
@@ -117,8 +118,6 @@ public class LiferayWriterTest extends BaseTest {
 
 		liferayOutputProperties.init();
 
-		liferayOutputProperties.setSchema(SchemaProperties.EMPTY_SCHEMA);
-
 		liferayOutputProperties.setConnectionApiSpecURLValue(apiSpecURL);
 		liferayOutputProperties.setResourceEndpointValue(endpoint);
 		liferayOutputProperties.setResourceOperationsValue(Action.Insert);
@@ -129,6 +128,7 @@ public class LiferayWriterTest extends BaseTest {
 			"path");
 		liferayOutputProperties.setResourceParametersTableValueColumnNameValue(
 			"111111");
+		liferayOutputProperties.setSchema(SchemaProperties.EMPTY_SCHEMA);
 
 		return liferayOutputProperties;
 	}
