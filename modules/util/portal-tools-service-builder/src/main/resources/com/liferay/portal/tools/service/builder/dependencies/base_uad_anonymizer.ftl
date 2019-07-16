@@ -1,14 +1,11 @@
 package ${entity.UADPackagePath}.uad.anonymizer;
 
-<#if hasAssetEntry>
-	import com.liferay.asset.kernel.model.AssetEntry;
-	import com.liferay.asset.kernel.service.AssetEntryLocalService;
-</#if>
-
 import ${apiPackagePath}.model.${entity.name};
 import ${apiPackagePath}.service.${entity.name}LocalService;
 import ${entity.UADPackagePath}.uad.constants.${entity.UADApplicationName}UADConstants;
 
+import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
