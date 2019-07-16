@@ -118,10 +118,10 @@ const INITIAL_STATE = {
 
 	availableAssets: Config.arrayOf(
 		Config.shapeOf({
+			assetBrowserURL: Config.string(),
 			className: Config.string(),
 			classNameId: Config.string(),
-			name: Config.string(),
-			assetBrowserURL: Config.string()
+			name: Config.string()
 		})
 	).value([]),
 
