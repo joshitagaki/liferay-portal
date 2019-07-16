@@ -83,7 +83,7 @@ public class SchemaUtils {
 		return newSchema(inputSchema, "rejectOutput", rejectFields);
 	}
 
-	public static Schema.Field findFieldByName(String name, Schema schema) {
+	public static Schema.Field getField(String name, Schema schema) {
 		for (Schema.Field field : schema.getFields()) {
 			if (Objects.equals(name, field.name())) {
 				return field;

@@ -325,7 +325,7 @@ public class LiferayWriter
 	}
 
 	private Schema.Field _getByName(String name, IndexedRecord indexedRecord) {
-		return SchemaUtils.findFieldByName(name, indexedRecord.getSchema());
+		return SchemaUtils.getField(name, indexedRecord.getSchema());
 	}
 
 	private void _handleFailedIndexedRecord(Exception exception)
