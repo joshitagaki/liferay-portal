@@ -2179,11 +2179,9 @@ public class ServiceBuilder {
 
 		context.put("entity", entity);
 
-		List<Entity> referenceEntities = _mergeReferenceEntities(entity);
-
 		boolean hasAssetEntry = false;
 
-		for (Entity referenceEntity : referenceEntities) {
+		for (Entity referenceEntity : _mergeReferenceEntities(entity)) {
 			if (Objects.equals(referenceEntity.getName(), "AssetEntry")) {
 				hasAssetEntry = true;
 			}
