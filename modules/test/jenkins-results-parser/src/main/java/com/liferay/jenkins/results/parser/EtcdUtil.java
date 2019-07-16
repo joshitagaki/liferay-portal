@@ -213,7 +213,7 @@ public class EtcdUtil {
 		catch (URISyntaxException urise) {
 			throw new RuntimeException(
 				JenkinsResultsParserUtil.combine(
-					"Unable to create an Etcd client for ", url),
+					"Unable to create an etcd client for ", url),
 				urise);
 		}
 	}
