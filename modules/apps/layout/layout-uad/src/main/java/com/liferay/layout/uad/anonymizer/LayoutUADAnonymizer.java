@@ -33,7 +33,7 @@ public class LayoutUADAnonymizer extends BaseLayoutUADAnonymizer {
 
 		layoutLocalService.anonymizeLayout(layout, userId, anonymousUser);
 
-		autoAnonymizeAsset(layout, anonymousUser);
+		autoAnonymizeAssetEntry(layout, anonymousUser);
 	}
 
 }
