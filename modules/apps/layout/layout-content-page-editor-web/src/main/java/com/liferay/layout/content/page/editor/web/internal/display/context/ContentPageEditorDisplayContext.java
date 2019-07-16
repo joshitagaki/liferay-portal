@@ -525,7 +525,7 @@ public class ContentPageEditorDisplayContext {
 	}
 
 	private List<SoyContext> _getAvailableAssets() throws Exception {
-		ArrayList<SoyContext> soyContexts = new ArrayList<>();
+		List<SoyContext> soyContexts = new ArrayList<>();
 
 		long[] classNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(
 			themeDisplay.getCompanyId(), true);
