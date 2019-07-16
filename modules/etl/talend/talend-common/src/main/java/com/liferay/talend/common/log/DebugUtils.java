@@ -33,14 +33,14 @@ public class DebugUtils {
 	public static void debugCurrentStackTrace(Logger logger) {
 		if (logger.isDebugEnabled()) {
 			logger.debug(
-				"Actual thread's stacktrace: " + _getCurrentStackTrace());
+				"Actual thread's stack trace: " + _getCurrentStackTrace());
 		}
 	}
 
 	public static void infoCurrentStackTrace(Logger logger) {
 		if (logger.isInfoEnabled()) {
 			logger.info(
-				"Actual thread's stacktrace: " + _getCurrentStackTrace());
+				"Actual thread's stack trace: " + _getCurrentStackTrace());
 		}
 	}
 
