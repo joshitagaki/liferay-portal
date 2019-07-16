@@ -484,7 +484,7 @@ public class GraphQLServletExtender {
 					argument = 1;
 				}
 				else if (parameterName.equals("pageSize")) {
-					argument = 30;
+					argument = 20;
 				}
 			}
 
