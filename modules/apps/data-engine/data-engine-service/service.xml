@@ -49,9 +49,9 @@
 
 		<!-- Other fields -->
 
+		<column name="deDataRecordQueryId" type="long" />
 		<column name="ddmStructureId" type="long" />
 		<column localized="true" name="name" type="String" />
-		<column name="deDataRecordQueryId" type="long" />
 
 		<!-- Finder methods -->
 
