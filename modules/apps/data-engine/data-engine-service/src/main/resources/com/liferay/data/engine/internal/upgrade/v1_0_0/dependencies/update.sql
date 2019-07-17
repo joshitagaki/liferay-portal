@@ -4,7 +4,7 @@ create table DEDataDefinitionFieldLink (
 	groupId LONG,
 	classNameId LONG,
 	classPK LONG,
-	DDMStructureId LONG,
+	ddmStructureId LONG,
 	fieldName LONG
 );
 
@@ -20,9 +20,9 @@ create table DEDataListView (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	deDataRecordQueryId LONG,
 	ddmStructureId LONG,
-	name STRING null,
-	deDataRecordQueryId LONG
+	name STRING null
 );
 
 create index IX_FA1639C7 on DEDataListView (groupId, companyId, ddmStructureId);
