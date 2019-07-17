@@ -226,6 +226,7 @@ public abstract class BaseDataRecordResourceTestCase {
 		assertValid(page);
 
 		dataRecordResource.deleteDataRecord(dataRecord1.getId());
+
 		dataRecordResource.deleteDataRecord(dataRecord2.getId());
 	}
 
@@ -367,6 +368,7 @@ public abstract class BaseDataRecordResourceTestCase {
 		assertValid(page);
 
 		dataRecordResource.deleteDataRecord(dataRecord1.getId());
+
 		dataRecordResource.deleteDataRecord(dataRecord2.getId());
 	}
 
@@ -463,7 +465,7 @@ public abstract class BaseDataRecordResourceTestCase {
 
 	@Test
 	public void testGetDataRecordCollectionDataRecordExport() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test

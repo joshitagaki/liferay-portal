@@ -239,6 +239,7 @@ public abstract class BaseWikiPageResourceTestCase {
 		assertValid(page);
 
 		wikiPageResource.deleteWikiPage(wikiPage1.getId());
+
 		wikiPageResource.deleteWikiPage(wikiPage2.getId());
 	}
 

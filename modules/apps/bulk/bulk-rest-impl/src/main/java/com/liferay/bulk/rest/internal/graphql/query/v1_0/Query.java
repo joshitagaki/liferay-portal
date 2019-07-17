@@ -31,6 +31,9 @@ import java.util.function.BiFunction;
 
 import javax.annotation.Generated;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.osgi.service.component.ComponentServiceObjects;
 
 /**
@@ -104,6 +107,8 @@ public class Query {
 
 		statusResource.setContextAcceptLanguage(_acceptLanguage);
 		statusResource.setContextCompany(_company);
+		statusResource.setContextHttpServletRequest(_httpServletRequest);
+		statusResource.setContextHttpServletResponse(_httpServletResponse);
 		statusResource.setContextUser(_user);
 	}
 
@@ -114,6 +119,8 @@ public class Query {
 	private BiFunction<Object, String, Filter> _filterBiFunction;
 	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
 	private Company _company;
+	private HttpServletRequest _httpServletRequest;
+	private HttpServletResponse _httpServletResponse;
 	private User _user;
 
 }

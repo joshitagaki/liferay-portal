@@ -252,6 +252,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 
 		structuredContentFolderResource.deleteStructuredContentFolder(
 			structuredContentFolder1.getId());
+
 		structuredContentFolderResource.deleteStructuredContentFolder(
 			structuredContentFolder2.getId());
 	}
@@ -607,6 +608,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 
 		structuredContentFolderResource.deleteStructuredContentFolder(
 			structuredContentFolder1.getId());
+
 		structuredContentFolderResource.deleteStructuredContentFolder(
 			structuredContentFolder2.getId());
 	}

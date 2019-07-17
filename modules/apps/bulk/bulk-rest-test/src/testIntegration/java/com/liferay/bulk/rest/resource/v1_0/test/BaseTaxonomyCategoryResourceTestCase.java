@@ -182,12 +182,12 @@ public abstract class BaseTaxonomyCategoryResourceTestCase {
 
 	@Test
 	public void testPatchTaxonomyCategoryBatch() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
 	public void testPutTaxonomyCategoryBatch() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	protected void assertHttpResponseStatusCode(

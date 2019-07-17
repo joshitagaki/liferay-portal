@@ -241,6 +241,7 @@ public abstract class BaseTaxonomyVocabularyResourceTestCase {
 
 		taxonomyVocabularyResource.deleteTaxonomyVocabulary(
 			taxonomyVocabulary1.getId());
+
 		taxonomyVocabularyResource.deleteTaxonomyVocabulary(
 			taxonomyVocabulary2.getId());
 	}

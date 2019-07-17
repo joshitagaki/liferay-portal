@@ -233,6 +233,7 @@ public abstract class BaseWikiNodeResourceTestCase {
 		assertValid(page);
 
 		wikiNodeResource.deleteWikiNode(wikiNode1.getId());
+
 		wikiNodeResource.deleteWikiNode(wikiNode2.getId());
 	}
 

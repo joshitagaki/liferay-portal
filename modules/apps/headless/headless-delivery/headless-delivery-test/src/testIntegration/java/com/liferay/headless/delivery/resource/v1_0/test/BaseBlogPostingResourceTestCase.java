@@ -364,6 +364,7 @@ public abstract class BaseBlogPostingResourceTestCase {
 		assertValid(page);
 
 		blogPostingResource.deleteBlogPosting(blogPosting1.getId());
+
 		blogPostingResource.deleteBlogPosting(blogPosting2.getId());
 	}
 

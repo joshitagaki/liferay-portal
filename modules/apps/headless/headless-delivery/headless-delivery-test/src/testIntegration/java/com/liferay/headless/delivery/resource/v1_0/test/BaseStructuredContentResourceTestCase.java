@@ -256,6 +256,7 @@ public abstract class BaseStructuredContentResourceTestCase {
 
 		structuredContentResource.deleteStructuredContent(
 			structuredContent1.getId());
+
 		structuredContentResource.deleteStructuredContent(
 			structuredContent2.getId());
 	}
@@ -570,6 +571,7 @@ public abstract class BaseStructuredContentResourceTestCase {
 
 		structuredContentResource.deleteStructuredContent(
 			structuredContent1.getId());
+
 		structuredContentResource.deleteStructuredContent(
 			structuredContent2.getId());
 	}
@@ -949,6 +951,7 @@ public abstract class BaseStructuredContentResourceTestCase {
 
 		structuredContentResource.deleteStructuredContent(
 			structuredContent1.getId());
+
 		structuredContentResource.deleteStructuredContent(
 			structuredContent2.getId());
 	}

@@ -253,6 +253,7 @@ public abstract class BaseKnowledgeBaseAttachmentResourceTestCase {
 
 		knowledgeBaseAttachmentResource.deleteKnowledgeBaseAttachment(
 			knowledgeBaseAttachment1.getId());
+
 		knowledgeBaseAttachmentResource.deleteKnowledgeBaseAttachment(
 			knowledgeBaseAttachment2.getId());
 	}

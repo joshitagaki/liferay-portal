@@ -249,6 +249,7 @@ public abstract class BaseTaxonomyCategoryResourceTestCase {
 
 		taxonomyCategoryResource.deleteTaxonomyCategory(
 			taxonomyCategory1.getId());
+
 		taxonomyCategoryResource.deleteTaxonomyCategory(
 			taxonomyCategory2.getId());
 	}
@@ -709,6 +710,7 @@ public abstract class BaseTaxonomyCategoryResourceTestCase {
 
 		taxonomyCategoryResource.deleteTaxonomyCategory(
 			taxonomyCategory1.getId());
+
 		taxonomyCategoryResource.deleteTaxonomyCategory(
 			taxonomyCategory2.getId());
 	}

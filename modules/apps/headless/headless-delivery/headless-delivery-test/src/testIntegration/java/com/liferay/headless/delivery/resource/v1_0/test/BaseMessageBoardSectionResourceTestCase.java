@@ -368,6 +368,7 @@ public abstract class BaseMessageBoardSectionResourceTestCase {
 
 		messageBoardSectionResource.deleteMessageBoardSection(
 			messageBoardSection1.getId());
+
 		messageBoardSectionResource.deleteMessageBoardSection(
 			messageBoardSection2.getId());
 	}
@@ -718,6 +719,7 @@ public abstract class BaseMessageBoardSectionResourceTestCase {
 
 		messageBoardSectionResource.deleteMessageBoardSection(
 			messageBoardSection1.getId());
+
 		messageBoardSectionResource.deleteMessageBoardSection(
 			messageBoardSection2.getId());
 	}

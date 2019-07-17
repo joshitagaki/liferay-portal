@@ -305,6 +305,7 @@ public abstract class BaseMessageBoardAttachmentResourceTestCase {
 
 		messageBoardAttachmentResource.deleteMessageBoardAttachment(
 			messageBoardAttachment1.getId());
+
 		messageBoardAttachmentResource.deleteMessageBoardAttachment(
 			messageBoardAttachment2.getId());
 	}
@@ -424,6 +425,7 @@ public abstract class BaseMessageBoardAttachmentResourceTestCase {
 
 		messageBoardAttachmentResource.deleteMessageBoardAttachment(
 			messageBoardAttachment1.getId());
+
 		messageBoardAttachmentResource.deleteMessageBoardAttachment(
 			messageBoardAttachment2.getId());
 	}

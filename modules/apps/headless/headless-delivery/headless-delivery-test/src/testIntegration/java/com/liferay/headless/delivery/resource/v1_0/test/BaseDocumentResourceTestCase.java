@@ -246,6 +246,7 @@ public abstract class BaseDocumentResourceTestCase {
 		assertValid(page);
 
 		documentResource.deleteDocument(document1.getId());
+
 		documentResource.deleteDocument(document2.getId());
 	}
 
@@ -668,6 +669,7 @@ public abstract class BaseDocumentResourceTestCase {
 		assertValid(page);
 
 		documentResource.deleteDocument(document1.getId());
+
 		documentResource.deleteDocument(document2.getId());
 	}
 

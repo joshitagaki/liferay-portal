@@ -269,12 +269,12 @@ public abstract class BaseDataDefinitionResourceTestCase {
 	public void testPostDataDefinitionDataDefinitionPermission()
 		throws Exception {
 
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
 	public void testPostSiteDataDefinitionPermission() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
@@ -325,6 +325,7 @@ public abstract class BaseDataDefinitionResourceTestCase {
 		assertValid(page);
 
 		dataDefinitionResource.deleteDataDefinition(dataDefinition1.getId());
+
 		dataDefinitionResource.deleteDataDefinition(dataDefinition2.getId());
 	}
 

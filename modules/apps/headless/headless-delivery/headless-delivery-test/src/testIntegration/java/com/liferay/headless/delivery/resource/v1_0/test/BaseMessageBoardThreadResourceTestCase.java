@@ -258,6 +258,7 @@ public abstract class BaseMessageBoardThreadResourceTestCase {
 
 		messageBoardThreadResource.deleteMessageBoardThread(
 			messageBoardThread1.getId());
+
 		messageBoardThreadResource.deleteMessageBoardThread(
 			messageBoardThread2.getId());
 	}
@@ -751,6 +752,7 @@ public abstract class BaseMessageBoardThreadResourceTestCase {
 
 		messageBoardThreadResource.deleteMessageBoardThread(
 			messageBoardThread1.getId());
+
 		messageBoardThreadResource.deleteMessageBoardThread(
 			messageBoardThread2.getId());
 	}

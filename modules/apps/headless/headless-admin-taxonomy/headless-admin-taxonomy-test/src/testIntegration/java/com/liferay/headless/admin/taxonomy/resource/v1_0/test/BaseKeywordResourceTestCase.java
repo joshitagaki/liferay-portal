@@ -287,6 +287,7 @@ public abstract class BaseKeywordResourceTestCase {
 		assertValid(page);
 
 		keywordResource.deleteKeyword(keyword1.getId());
+
 		keywordResource.deleteKeyword(keyword2.getId());
 	}
 

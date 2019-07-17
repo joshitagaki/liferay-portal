@@ -245,6 +245,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 
 		dataRecordCollectionResource.deleteDataRecordCollection(
 			dataRecordCollection1.getId());
+
 		dataRecordCollectionResource.deleteDataRecordCollection(
 			dataRecordCollection2.getId());
 	}
@@ -441,12 +442,12 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	public void testPostDataRecordCollectionDataRecordCollectionPermission()
 		throws Exception {
 
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
 	public void testPostSiteDataRecordCollectionPermission() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
@@ -499,6 +500,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 
 		dataRecordCollectionResource.deleteDataRecordCollection(
 			dataRecordCollection1.getId());
+
 		dataRecordCollectionResource.deleteDataRecordCollection(
 			dataRecordCollection2.getId());
 	}

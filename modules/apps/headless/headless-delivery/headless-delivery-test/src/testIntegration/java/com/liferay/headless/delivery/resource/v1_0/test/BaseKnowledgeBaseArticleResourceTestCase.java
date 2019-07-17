@@ -411,6 +411,7 @@ public abstract class BaseKnowledgeBaseArticleResourceTestCase {
 
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle1.getId());
+
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle2.getId());
 	}
@@ -778,6 +779,7 @@ public abstract class BaseKnowledgeBaseArticleResourceTestCase {
 
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle1.getId());
+
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle2.getId());
 	}
@@ -1135,6 +1137,7 @@ public abstract class BaseKnowledgeBaseArticleResourceTestCase {
 
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle1.getId());
+
 		knowledgeBaseArticleResource.deleteKnowledgeBaseArticle(
 			knowledgeBaseArticle2.getId());
 	}

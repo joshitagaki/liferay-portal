@@ -361,6 +361,7 @@ public abstract class BaseKnowledgeBaseFolderResourceTestCase {
 
 		knowledgeBaseFolderResource.deleteKnowledgeBaseFolder(
 			knowledgeBaseFolder1.getId());
+
 		knowledgeBaseFolderResource.deleteKnowledgeBaseFolder(
 			knowledgeBaseFolder2.getId());
 	}
@@ -521,6 +522,7 @@ public abstract class BaseKnowledgeBaseFolderResourceTestCase {
 
 		knowledgeBaseFolderResource.deleteKnowledgeBaseFolder(
 			knowledgeBaseFolder1.getId());
+
 		knowledgeBaseFolderResource.deleteKnowledgeBaseFolder(
 			knowledgeBaseFolder2.getId());
 	}

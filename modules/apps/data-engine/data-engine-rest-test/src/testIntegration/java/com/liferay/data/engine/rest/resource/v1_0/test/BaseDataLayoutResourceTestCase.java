@@ -241,6 +241,7 @@ public abstract class BaseDataLayoutResourceTestCase {
 		assertValid(page);
 
 		dataLayoutResource.deleteDataLayout(dataLayout1.getId());
+
 		dataLayoutResource.deleteDataLayout(dataLayout2.getId());
 	}
 
@@ -440,7 +441,7 @@ public abstract class BaseDataLayoutResourceTestCase {
 
 	@Test
 	public void testPostDataLayoutDataLayoutPermission() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test
@@ -549,6 +550,7 @@ public abstract class BaseDataLayoutResourceTestCase {
 		assertValid(page);
 
 		dataLayoutResource.deleteDataLayout(dataLayout1.getId());
+
 		dataLayoutResource.deleteDataLayout(dataLayout2.getId());
 	}
 
@@ -707,7 +709,7 @@ public abstract class BaseDataLayoutResourceTestCase {
 
 	@Test
 	public void testPostSiteDataLayoutPermission() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	@Test

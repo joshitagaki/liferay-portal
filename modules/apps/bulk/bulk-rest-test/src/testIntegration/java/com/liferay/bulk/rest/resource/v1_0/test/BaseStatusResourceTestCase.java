@@ -177,7 +177,7 @@ public abstract class BaseStatusResourceTestCase {
 
 	@Test
 	public void testGetStatus() throws Exception {
-		Assert.assertTrue(true);
+		Assert.assertTrue(false);
 	}
 
 	protected void assertHttpResponseStatusCode(

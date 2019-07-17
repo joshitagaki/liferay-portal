@@ -294,6 +294,7 @@ public abstract class BaseBlogPostingImageResourceTestCase {
 
 		blogPostingImageResource.deleteBlogPostingImage(
 			blogPostingImage1.getId());
+
 		blogPostingImageResource.deleteBlogPostingImage(
 			blogPostingImage2.getId());
 	}

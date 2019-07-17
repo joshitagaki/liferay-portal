@@ -232,6 +232,7 @@ public abstract class BaseCommentResourceTestCase {
 		assertValid(page);
 
 		commentResource.deleteComment(comment1.getId());
+
 		commentResource.deleteComment(comment2.getId());
 	}
 
@@ -578,6 +579,7 @@ public abstract class BaseCommentResourceTestCase {
 		assertValid(page);
 
 		commentResource.deleteComment(comment1.getId());
+
 		commentResource.deleteComment(comment2.getId());
 	}
 
@@ -857,6 +859,7 @@ public abstract class BaseCommentResourceTestCase {
 		assertValid(page);
 
 		commentResource.deleteComment(comment1.getId());
+
 		commentResource.deleteComment(comment2.getId());
 	}
 
@@ -1135,6 +1138,7 @@ public abstract class BaseCommentResourceTestCase {
 		assertValid(page);
 
 		commentResource.deleteComment(comment1.getId());
+
 		commentResource.deleteComment(comment2.getId());
 	}
 
