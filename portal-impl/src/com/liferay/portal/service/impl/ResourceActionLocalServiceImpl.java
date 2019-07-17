@@ -101,7 +101,7 @@ public class ResourceActionLocalServiceImpl
 		}
 
 		long availableBits = -2;
-		Map<String, ResourceAction> resourceActionMap = null;
+		Map<String, ResourceAction> resourceActionsMap = null;
 
 		List<Object[]> keyActionIdAndBitwiseValues = null;
 
@@ -112,20 +112,20 @@ public class ResourceActionLocalServiceImpl
 				continue;
 			}
 
-			if (resourceActionMap == null) {
-				resourceActionMap = new HashMap<>();
+			if (resourceActionsMap == null) {
+				resourceActionsMap = new HashMap<>();
 
 				List<ResourceAction> resourceActions = getResourceActions(name);
 
 				for (ResourceAction resourceAction : resourceActions) {
 					availableBits &= ~resourceAction.getBitwiseValue();
 
-					resourceActionMap.put(
+					resourceActionsMap.put(
 						resourceAction.getActionId(), resourceAction);
 				}
 			}
 
-			ResourceAction resourceAction = resourceActionMap.get(actionId);
+			ResourceAction resourceAction = resourceActionsMap.get(actionId);
 
 			if (resourceAction == null) {
 				long bitwiseValue = 1;
