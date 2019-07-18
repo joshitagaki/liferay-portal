@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -122,8 +121,8 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 					{
 						put(LocaleUtil.getDefault(), role.getName());
 					}
-				}, null,
-				_toRoleType(role.getRoleType()), null,
+				},
+				null, _toRoleType(role.getRoleType()), null,
 				new ServiceContext() {
 					{
 						setCompanyId(testCompany.getCompanyId());
