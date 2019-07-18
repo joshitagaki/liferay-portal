@@ -198,9 +198,9 @@ public class GraphQLServletExtender {
 
 			};
 
-		ParentalSearch parentalSearch = new ParentalSearch(
-			graphQLObjectInfoRetriever);
 		BreadthFirstSearch breadthFirstSearch = new BreadthFirstSearch(
+			graphQLObjectInfoRetriever);
+		ParentalSearch parentalSearch = new ParentalSearch(
 			graphQLObjectInfoRetriever);
 
 		GraphQLTypeRetriever graphQLTypeRetriever = new GraphQLTypeRetriever() {
