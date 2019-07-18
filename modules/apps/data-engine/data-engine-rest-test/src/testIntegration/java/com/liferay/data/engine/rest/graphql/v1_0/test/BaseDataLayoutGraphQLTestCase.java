@@ -84,7 +84,7 @@ public abstract class BaseDataLayoutGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getDataLayout",
+				"dataLayout",
 				new HashMap<String, Object>() {
 					{
 						put("dataLayoutId", postDataLayout.getId());
@@ -98,8 +98,7 @@ public abstract class BaseDataLayoutGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(
-				postDataLayout, dataJSONObject.getJSONObject("getDataLayout")));
+			equals(postDataLayout, dataJSONObject.getJSONObject("dataLayout")));
 	}
 
 	protected DataLayout testGetDataLayout_addDataLayout() throws Exception {
@@ -124,7 +123,7 @@ public abstract class BaseDataLayoutGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getSiteDataLayout",
+				"dataLayout",
 				new HashMap<String, Object>() {
 					{
 						put("dataLayoutId", postDataLayout.getId());
@@ -138,9 +137,7 @@ public abstract class BaseDataLayoutGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(
-				postDataLayout,
-				dataJSONObject.getJSONObject("getSiteDataLayout")));
+			equals(postDataLayout, dataJSONObject.getJSONObject("dataLayout")));
 	}
 
 	protected DataLayout testGetSiteDataLayout_addDataLayout()

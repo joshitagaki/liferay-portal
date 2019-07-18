@@ -85,7 +85,7 @@ public abstract class BaseDataDefinitionGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getDataDefinition",
+				"dataDefinition",
 				new HashMap<String, Object>() {
 					{
 						put("dataDefinitionId", postDataDefinition.getId());
@@ -101,7 +101,7 @@ public abstract class BaseDataDefinitionGraphQLTestCase {
 		Assert.assertTrue(
 			equals(
 				postDataDefinition,
-				dataJSONObject.getJSONObject("getDataDefinition")));
+				dataJSONObject.getJSONObject("dataDefinition")));
 	}
 
 	protected DataDefinition testGetDataDefinition_addDataDefinition()
@@ -129,7 +129,7 @@ public abstract class BaseDataDefinitionGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getSiteDataDefinition",
+				"dataDefinition",
 				new HashMap<String, Object>() {
 					{
 						put("dataDefinitionId", postDataDefinition.getId());
@@ -145,7 +145,7 @@ public abstract class BaseDataDefinitionGraphQLTestCase {
 		Assert.assertTrue(
 			equals(
 				postDataDefinition,
-				dataJSONObject.getJSONObject("getSiteDataDefinition")));
+				dataJSONObject.getJSONObject("dataDefinition")));
 	}
 
 	protected DataDefinition testGetSiteDataDefinition_addDataDefinition()

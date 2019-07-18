@@ -85,7 +85,7 @@ public abstract class BaseDataRecordCollectionGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getDataRecordCollection",
+				"dataRecordCollection",
 				new HashMap<String, Object>() {
 					{
 						put(
@@ -103,7 +103,7 @@ public abstract class BaseDataRecordCollectionGraphQLTestCase {
 		Assert.assertTrue(
 			equals(
 				postDataRecordCollection,
-				dataJSONObject.getJSONObject("getDataRecordCollection")));
+				dataJSONObject.getJSONObject("dataRecordCollection")));
 	}
 
 	protected DataRecordCollection
@@ -132,7 +132,7 @@ public abstract class BaseDataRecordCollectionGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getSiteDataRecordCollection",
+				"dataRecordCollection",
 				new HashMap<String, Object>() {
 					{
 						put(
@@ -150,7 +150,7 @@ public abstract class BaseDataRecordCollectionGraphQLTestCase {
 		Assert.assertTrue(
 			equals(
 				postDataRecordCollection,
-				dataJSONObject.getJSONObject("getSiteDataRecordCollection")));
+				dataJSONObject.getJSONObject("dataRecordCollection")));
 	}
 
 	protected DataRecordCollection

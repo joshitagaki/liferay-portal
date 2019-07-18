@@ -85,7 +85,7 @@ public abstract class BaseCollectionGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getCollection",
+				"collection",
 				new HashMap<String, Object>() {
 					{
 						put("collectionId", postCollection.getId());
@@ -99,8 +99,7 @@ public abstract class BaseCollectionGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(
-				postCollection, dataJSONObject.getJSONObject("getCollection")));
+			equals(postCollection, dataJSONObject.getJSONObject("collection")));
 	}
 
 	protected Collection testGetCollection_addCollection() throws Exception {

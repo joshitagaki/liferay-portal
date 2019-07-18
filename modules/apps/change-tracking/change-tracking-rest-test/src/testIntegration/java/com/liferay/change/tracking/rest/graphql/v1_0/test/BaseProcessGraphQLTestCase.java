@@ -85,7 +85,7 @@ public abstract class BaseProcessGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getProcess",
+				"process",
 				new HashMap<String, Object>() {
 					{
 						put("processId", postProcess.getId());
@@ -99,7 +99,7 @@ public abstract class BaseProcessGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(postProcess, dataJSONObject.getJSONObject("getProcess")));
+			equals(postProcess, dataJSONObject.getJSONObject("process")));
 	}
 
 	protected Process testGetProcess_addProcess() throws Exception {

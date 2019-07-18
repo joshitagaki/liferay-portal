@@ -84,7 +84,7 @@ public abstract class BaseEntryGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getEntry",
+				"entry",
 				new HashMap<String, Object>() {
 					{
 						put("entryId", postEntry.getId());
@@ -98,7 +98,7 @@ public abstract class BaseEntryGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(postEntry, dataJSONObject.getJSONObject("getEntry")));
+			equals(postEntry, dataJSONObject.getJSONObject("entry")));
 	}
 
 	protected Entry testGetEntry_addEntry() throws Exception {

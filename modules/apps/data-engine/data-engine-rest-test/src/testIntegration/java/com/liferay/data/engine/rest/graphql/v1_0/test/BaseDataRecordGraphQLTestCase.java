@@ -84,7 +84,7 @@ public abstract class BaseDataRecordGraphQLTestCase {
 		GraphQLField graphQLField = new GraphQLField(
 			"query",
 			new GraphQLField(
-				"getDataRecord",
+				"dataRecord",
 				new HashMap<String, Object>() {
 					{
 						put("dataRecordId", postDataRecord.getId());
@@ -98,8 +98,7 @@ public abstract class BaseDataRecordGraphQLTestCase {
 		JSONObject dataJSONObject = responseJSONObject.getJSONObject("data");
 
 		Assert.assertTrue(
-			equals(
-				postDataRecord, dataJSONObject.getJSONObject("getDataRecord")));
+			equals(postDataRecord, dataJSONObject.getJSONObject("dataRecord")));
 	}
 
 	protected DataRecord testGetDataRecord_addDataRecord() throws Exception {

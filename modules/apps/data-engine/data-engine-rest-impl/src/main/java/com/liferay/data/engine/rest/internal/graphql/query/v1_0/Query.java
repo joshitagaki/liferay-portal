@@ -97,7 +97,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataDefinitionPage siteDataDefinitions(
+	public DataDefinitionPage dataDefinitions(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("keywords") String keywords,
 			@GraphQLName("pageSize") int pageSize,
@@ -116,7 +116,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataDefinition siteDataDefinition(
+	public DataDefinition dataDefinition(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("dataDefinitionKey") String dataDefinitionKey)
 		throws Exception {
@@ -159,7 +159,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataLayoutPage siteDataLayout(
+	public DataLayoutPage dataLayout(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("keywords") String keywords,
 			@GraphQLName("pageSize") int pageSize,
@@ -177,7 +177,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataLayout siteDataLayout(
+	public DataLayout dataLayout(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("dataLayoutKey") String dataLayoutKey)
 		throws Exception {
@@ -277,7 +277,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataRecordCollectionPage siteDataRecordCollections(
+	public DataRecordCollectionPage dataRecordCollections(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("keywords") String keywords,
 			@GraphQLName("pageSize") int pageSize,
@@ -293,7 +293,7 @@ public class Query {
 	}
 
 	@GraphQLField
-	public DataRecordCollection siteDataRecordCollection(
+	public DataRecordCollection dataRecordCollection(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("dataRecordCollectionKey") String
 				dataRecordCollectionKey)
