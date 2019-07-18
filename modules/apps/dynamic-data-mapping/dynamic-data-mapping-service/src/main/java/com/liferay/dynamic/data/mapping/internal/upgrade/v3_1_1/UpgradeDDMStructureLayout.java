@@ -36,22 +36,18 @@ public class UpgradeDDMStructureLayout extends UpgradeProcess {
 	}
 
 	protected void populateFields() throws Exception {
-		StringBundler sb = new StringBundler(2);
-
-		sb.append("select structureLayoutId from DDMStructureLayout where ");
-		sb.append("structureLayoutKey is null or structureLayoutKey = ''");
-
-		StringBundler sb2 = new StringBundler(2);
-
-		sb2.append("update DDMStructureLayout set classNameId = ?, ");
-		sb2.append("structureLayoutKey = ? where structureLayoutId = ?");
-
 		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
-		try (PreparedStatement ps1 = connection.prepareStatement(sb.toString());
+		try (PreparedStatement ps1 = connection.prepareStatement(
+				"select structureLayoutId from DDMStructureLayout where " +
+					"structureLayoutKey is null or structureLayoutKey = ''");
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection, sb2.toString())) {
+					connection,
+					StringBundler.concat(
+						"update DDMStructureLayout set classNameId = ?, ",
+						"structureLayoutKey = ? where structureLayoutId = ",
+						"?"))) {
 
 			try (ResultSet rs = ps1.executeQuery()) {
 				while (rs.next()) {
