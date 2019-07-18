@@ -535,6 +535,7 @@ public class FreeMarkerTool {
 
 		String propertyName = StringUtil.upperCaseFirstLetter(
 			javaMethodParameter.getParameterName());
+
 		String returnType = javaMethodSignature.getReturnType();
 
 		if ((returnType.endsWith(javaMethodSignature.getSchemaName()) &&
