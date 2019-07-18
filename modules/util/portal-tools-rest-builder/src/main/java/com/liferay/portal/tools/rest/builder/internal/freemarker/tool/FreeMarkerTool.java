@@ -532,18 +532,12 @@ public class FreeMarkerTool {
 		}
 
 		JavaMethodParameter javaMethodParameter = javaMethodParameters.get(0);
-
+		String property = StringUtil.upperCaseFirstLetter(
+			javaMethodParameter.getParameterName());
 		String returnType = javaMethodSignature.getReturnType();
 
-		String schemaName = javaMethodSignature.getSchemaName();
-
-		String relationParameterName = javaMethodParameter.getParameterName();
-
-		String property = StringUtil.upperCaseFirstLetter(
-			relationParameterName);
-
-		if ((returnType.endsWith(schemaName) &&
-			 parameterName.equals(relationParameterName)) ||
+		if ((returnType.endsWith(javaMethodSignature.getSchemaName()) &&
+			 parameterName.equals(javaMethodParameter.getParameterName())) ||
 			parameterName.equals("parent" + property)) {
 
 			return true;
@@ -558,7 +552,6 @@ public class FreeMarkerTool {
 
 		String returnType = StringUtil.toLowerCase(
 			javaMethodSignature.getReturnType());
-
 		String schemaName = parameterName.replace("Id", "");
 
 		if (propertyName.equals(parameterName) &&
