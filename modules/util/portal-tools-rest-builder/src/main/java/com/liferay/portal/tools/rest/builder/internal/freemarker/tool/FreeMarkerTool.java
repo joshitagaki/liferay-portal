@@ -161,10 +161,10 @@ public class FreeMarkerTool {
 	public String getGraphQLPropertyName(String methodName) {
 		methodName = methodName.replaceFirst("get", "");
 
-		int lastIndex = methodName.lastIndexOf("Page");
+		int index = methodName.lastIndexOf("Page");
 
-		if (lastIndex != -1) {
-			methodName = methodName.substring(0, lastIndex);
+		if (index != -1) {
+			methodName = methodName.substring(0, index);
 		}
 
 		methodName = methodName.replaceFirst("Site", "");
