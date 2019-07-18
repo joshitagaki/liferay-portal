@@ -1003,9 +1003,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		/>
 
 		<#list javaMethodSignatures as javaMethodSignature>
-			<#assign returnType = javaMethodSignature.getReturnType() />
-
-			<#if freeMarkerTool.hasHTTPMethod(javaMethodSignature, "get") && returnType?ends_with("." + relatedSchemaName)>
+			<#if freeMarkerTool.hasHTTPMethod(javaMethodSignature, "get") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
 				<#assign methodName = javaMethodSignature.methodName?cap_first />
 
 				@Test
@@ -1032,14 +1030,14 @@ public abstract class Base${schemaName}ResourceTestCase {
 						${schemaVarName}Id, ${relatedSchemaVarName});
 				}
 
-			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "post") && returnType?ends_with("." + relatedSchemaName)>
+			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "post") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
 
 				@Test
 				public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 					Assert.assertTrue(true);
 				}
 
-			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "put") && returnType?ends_with("." + relatedSchemaName)>
+			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "put") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
 
 				<#assign methodName = javaMethodSignature.methodName?cap_first />
 
