@@ -1931,6 +1931,7 @@ rerun your task.
 					<propertyref name="org.gradle.internal.launcher.welcomeMessageEnabled" />
 					<propertyref name="org.gradle.warning.mode" />
 					<propertyref name="project.templates.test.builds" />
+					<propertyref name="release.versions.test.other.dir" />
 					<propertyref name="release.versions.test.other.dir.names" />
 					<propertyref name="sass.compiler.class.name" />
 					<propertyref name="sass.generate.source.map" />
