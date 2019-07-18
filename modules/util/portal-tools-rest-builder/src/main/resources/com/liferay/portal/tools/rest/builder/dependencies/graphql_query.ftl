@@ -81,47 +81,49 @@ public class Query {
 		@GraphQLTypeExtension(${javaMethodSignature.parentSchemaName}.class)
 		public class ${javaMethodSignature.methodName?cap_first}TypeExtension {
 
-			private ${javaMethodSignature.parentSchemaName} _${javaMethodSignature.parentSchemaName?uncap_first};
-
 			public ${javaMethodSignature.methodName?cap_first}TypeExtension(${javaMethodSignature.parentSchemaName} ${javaMethodSignature.parentSchemaName?uncap_first}) {
 				_${javaMethodSignature.parentSchemaName?uncap_first} = ${javaMethodSignature.parentSchemaName?uncap_first};
 			}
 
 			${freeMarkerTool.getGraphQLMethodAnnotations(javaMethodSignature)}
 			public
+
 			<#if javaMethodSignature.returnType?contains("Collection<")>
 				${javaMethodSignature.schemaName}Page
 			<#else>
 				${javaMethodSignature.returnType}
 			</#if>
-		${javaMethodSignature.methodName}(${freeMarkerTool.getGraphQLParameters(javaMethodSignature.javaMethodParameters, javaMethodSignature.operation, true)?replace("com.liferay.portal.kernel.search.filter.Filter filter", "String filterString")?replace("com.liferay.portal.kernel.search.Sort[] sorts", "String sortsString")}) throws Exception {
-			<#assign arguments = freeMarkerTool.getGraphQLArguments(javaMethodSignature.javaMethodParameters) />
 
-			<#if javaMethodSignature.returnType?contains("Collection<")>
-				return _applyComponentServiceObjects(
-					_${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}ResourceComponentServiceObjects,
-					Query.this::_populateResourceContext,
-					${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource ->
-						new ${javaMethodSignature.schemaName}Page(
-							${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource.${javaMethodSignature.methodName}(_${javaMethodSignature.parentSchemaName?uncap_first}.getId()
+			${javaMethodSignature.methodName}(${freeMarkerTool.getGraphQLParameters(javaMethodSignature.javaMethodParameters, javaMethodSignature.operation, true)?replace("com.liferay.portal.kernel.search.filter.Filter filter", "String filterString")?replace("com.liferay.portal.kernel.search.Sort[] sorts", "String sortsString")}) throws Exception {
+				<#assign arguments = freeMarkerTool.getGraphQLArguments(javaMethodSignature.javaMethodParameters) />
+
+				<#if javaMethodSignature.returnType?contains("Collection<")>
+					return _applyComponentServiceObjects(
+						_${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}ResourceComponentServiceObjects,
+						Query.this::_populateResourceContext,
+						${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource ->
+							new ${javaMethodSignature.schemaName}Page(
+								${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource.${javaMethodSignature.methodName}(_${javaMethodSignature.parentSchemaName?uncap_first}.getId()
+
 								<#if arguments?has_content>
 									, ${arguments?replace("filter", "_filterBiFunction.apply(${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource, filterString)")?replace("pageSize,page", "Pagination.of(page, pageSize)")?replace("sorts", "_sortsBiFunction.apply(${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource, sortsString)")}
-								</#if>
-						))
-					);
-			<#else>
-				return _applyComponentServiceObjects(_${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}ResourceComponentServiceObjects, Query.this::_populateResourceContext, ${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource -> ${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource.${javaMethodSignature.methodName}(
-					<#if javaMethodSignature.methodName?contains(javaMethodSignature.parentSchemaName)>
-						_${javaMethodSignature.parentSchemaName?uncap_first}.getId()
-					<#else>
-						_${javaMethodSignature.parentSchemaName?uncap_first}.${javaMethodSignature.methodName}Id()
-					</#if>
-					<#if arguments?has_content>
-						, ${arguments?replace("pageSize,page", "Pagination.of(page, pageSize)")}
-					</#if>)
-				);
-			</#if>
+								</#if>)));
+				<#else>
+					return _applyComponentServiceObjects(_${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}ResourceComponentServiceObjects, Query.this::_populateResourceContext, ${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource -> ${freeMarkerTool.getSchemaVarName(javaMethodSignature.schemaName)}Resource.${javaMethodSignature.methodName}(
+						<#if javaMethodSignature.methodName?contains(javaMethodSignature.parentSchemaName)>
+							_${javaMethodSignature.parentSchemaName?uncap_first}.getId()
+						<#else>
+							_${javaMethodSignature.parentSchemaName?uncap_first}.${javaMethodSignature.methodName}Id()
+						</#if>
+
+						<#if arguments?has_content>
+							, ${arguments?replace("pageSize,page", "Pagination.of(page, pageSize)")}
+						</#if>));
+				</#if>
 			}
+
+			private ${javaMethodSignature.parentSchemaName} _${javaMethodSignature.parentSchemaName?uncap_first};
+
 		}
 	</#list>
 
