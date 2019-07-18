@@ -1000,7 +1000,6 @@ public abstract class Base${schemaName}ResourceTestCase {
 		<#assign
 			relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
 			relatedSchemaVarName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
-			relatedSchemaPathName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
 		/>
 
 		<#list javaMethodSignatures as javaMethodSignature>
