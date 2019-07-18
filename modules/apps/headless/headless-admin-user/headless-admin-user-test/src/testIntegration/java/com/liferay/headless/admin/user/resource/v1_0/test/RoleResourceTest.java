@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -74,9 +75,8 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 
 		long totalCount = page.getTotalCount();
 
-		_roles.add(_addRole(randomRole()));
-
-		_roles.add(_addRole(randomRole()));
+		_addRole(randomRole());
+		_addRole(randomRole());
 
 		page = roleResource.getRolesPage(
 			Pagination.of(1, (int)totalCount + _roles.size()));
@@ -112,11 +112,7 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 
 	@Override
 	protected Role testGetRole_addRole() throws Exception {
-		Role role = _addRole(randomRole());
-
-		_roles.add(role);
-
-		return role;
+		return _addRole(randomRole());
 	}
 
 	private Role _addRole(Role role) throws Exception {
@@ -125,7 +121,7 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 			RoleLocalServiceUtil.getRole(
 				testGroup.getCompanyId(), RoleConstants.USER));
 
-		HashMap<Locale, String> titleMap = new HashMap<>();
+		Map<Locale, String> titleMap = new HashMap<>();
 
 		titleMap.put(LocaleUtil.getDefault(), role.getName());
 
@@ -141,7 +137,11 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 
 		RoleLocalServiceUtil.addUserRole(_user.getUserId(), serviceBuilderRole);
 
-		return _toRole(serviceBuilderRole);
+		role = _toRole(serviceBuilderRole);
+
+		_roles.add(role);
+
+		return role;
 	}
 
 	private Role _toRole(com.liferay.portal.kernel.model.Role role) {
