@@ -651,7 +651,7 @@ public class GraphQLServletExtender {
 			ProcessingElementsContainer processingElementsContainer =
 				new ProcessingElementsContainer(_defaultTypeFunction);
 
-			Map<Class<?>, Set<Class<?>>> typeRegistryMap =
+			Map<Class<?>, Set<Class<?>>> classesMap =
 				processingElementsContainer.getExtensionsTypeRegistry();
 
 			for (ServletData servletData : _servletDataList) {
@@ -669,11 +669,11 @@ public class GraphQLServletExtender {
 
 						Class<?> clazz = graphQLTypeExtension.value();
 
-						if (!typeRegistryMap.containsKey(clazz)) {
-							typeRegistryMap.put(clazz, new HashSet<>());
+						if (!classesMap.containsKey(clazz)) {
+							classesMap.put(clazz, new HashSet<>());
 						}
 
-						Set<Class<?>> classes = typeRegistryMap.get(clazz);
+						Set<Class<?>> classes = classesMap.get(clazz);
 
 						classes.add(innerClasses);
 					}
