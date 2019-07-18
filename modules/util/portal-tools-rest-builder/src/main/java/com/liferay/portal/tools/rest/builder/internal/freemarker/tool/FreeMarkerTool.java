@@ -411,6 +411,7 @@ public class FreeMarkerTool {
 
 		if (returnTypeParts.length > 0) {
 			String string = returnTypeParts[returnTypeParts.length - 1];
+
 			return relatedSchemaNames.contains(string);
 		}
 

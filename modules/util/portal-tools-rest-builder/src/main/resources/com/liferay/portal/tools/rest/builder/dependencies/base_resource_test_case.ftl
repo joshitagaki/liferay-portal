@@ -1004,15 +1004,13 @@ public abstract class Base${schemaName}ResourceTestCase {
 
 		<#list javaMethodSignatures as javaMethodSignature>
 			<#if freeMarkerTool.hasHTTPMethod(javaMethodSignature, "get") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
-				<#assign methodName = javaMethodSignature.methodName?cap_first />
-
 				@Test
-				public void test${methodName}() throws Exception {
+				public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 					${schemaName} post${schemaName} = testGet${schemaName}_add${schemaName}();
 
 					${relatedSchemaName} random${relatedSchemaName} = random${relatedSchemaName}();
 
-					${relatedSchemaName} post${relatedSchemaName} = test${methodName}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName});
+					${relatedSchemaName} post${relatedSchemaName} = test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName});
 
 					${relatedSchemaName} get${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(post${schemaName}.getId());
 
@@ -1031,13 +1029,11 @@ public abstract class Base${schemaName}ResourceTestCase {
 					Assert.assertTrue(true);
 				}
 			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "put") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
-				<#assign methodName = javaMethodSignature.methodName?cap_first />
-
 				@Test
-				public void test${methodName}() throws Exception {
+				public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 					${schemaName} post${schemaName} = testPut${schemaName}_add${schemaName}();
 
-					test${methodName}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName}());
+					test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName}());
 
 					${relatedSchemaName} random${relatedSchemaName} = random${relatedSchemaName}();
 
