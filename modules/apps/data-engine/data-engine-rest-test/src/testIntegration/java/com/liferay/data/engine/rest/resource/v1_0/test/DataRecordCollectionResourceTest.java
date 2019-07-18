@@ -47,14 +47,11 @@ public class DataRecordCollectionResourceTest
 	public void testPostDataDefinitionDataRecordCollection() throws Exception {
 		super.testPostDataDefinitionDataRecordCollection();
 
-		DataRecordCollection randomDataRecordCollection =
-			randomDataRecordCollection();
-
 		assertHttpResponseStatusCode(
 			404,
 			dataRecordCollectionResource.
 				postDataDefinitionDataRecordCollectionHttpResponse(
-					Long.valueOf(0), randomDataRecordCollection));
+					0L, randomDataRecordCollection()));
 	}
 
 	@Override
