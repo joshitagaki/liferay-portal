@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -121,27 +120,29 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 			RoleLocalServiceUtil.getRole(
 				testGroup.getCompanyId(), RoleConstants.USER));
 
-		Map<Locale, String> titleMap = new HashMap<>();
-
-		titleMap.put(LocaleUtil.getDefault(), role.getName());
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setCompanyId(testCompany.getCompanyId());
-		serviceContext.setUserId(_user.getUserId());
-
 		com.liferay.portal.kernel.model.Role serviceBuilderRole =
 			RoleLocalServiceUtil.addRole(
-				_user.getUserId(), null, 0, role.getName(), titleMap, null,
-				_toRoleType(role.getRoleType()), null, serviceContext);
+				_user.getUserId(), null, 0, role.getName(),
+				new HashMap<Locale, String>() {
+					{
+						put(LocaleUtil.getDefault(), role.getName());
+					}
+				}, null,
+				_toRoleType(role.getRoleType()), null,
+				new ServiceContext() {
+					{
+						setCompanyId(testCompany.getCompanyId());
+						setUserId(_user.getUserId());
+					}
+				});
 
 		RoleLocalServiceUtil.addUserRole(_user.getUserId(), serviceBuilderRole);
 
-		role = _toRole(serviceBuilderRole);
+		Role newRole = _toRole(serviceBuilderRole);
 
-		_roles.add(role);
+		_roles.add(newRole);
 
-		return role;
+		return newRole;
 	}
 
 	private Role _toRole(com.liferay.portal.kernel.model.Role role) {
