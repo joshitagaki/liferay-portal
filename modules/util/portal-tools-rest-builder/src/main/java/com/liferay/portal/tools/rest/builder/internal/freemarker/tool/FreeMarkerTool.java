@@ -532,6 +532,7 @@ public class FreeMarkerTool {
 		}
 
 		JavaMethodParameter javaMethodParameter = javaMethodParameters.get(0);
+
 		String propertyName = StringUtil.upperCaseFirstLetter(
 			javaMethodParameter.getParameterName());
 		String returnType = javaMethodSignature.getReturnType();
