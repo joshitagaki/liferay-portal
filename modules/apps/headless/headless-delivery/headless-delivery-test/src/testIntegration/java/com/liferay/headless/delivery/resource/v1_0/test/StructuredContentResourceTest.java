@@ -136,25 +136,18 @@ public class StructuredContentResourceTest
 	public void testGetStructuredContentRenderedContentTemplate()
 		throws Exception {
 
-		StructuredContent postStructuredContent =
+		StructuredContent structuredContent =
 			testGetSiteStructuredContentByKey_addStructuredContent();
 
-		String structuredContentRenderedContent =
-			structuredContentResource.
-				getStructuredContentRenderedContentTemplate(
-					postStructuredContent.getId(),
-					_ddmTemplate.getTemplateId());
-
-		ContentField[] contentFields = postStructuredContent.getContentFields();
+		ContentField[] contentFields = structuredContent.getContentFields();
 
 		Value value = contentFields[0].getValue();
 
-		String expectedStructuredContentRenderedContent =
-			"<div>" + value.getData() + "</div>";
-
 		Assert.assertEquals(
-			expectedStructuredContentRenderedContent,
-			structuredContentRenderedContent);
+			"<div>" + value.getData() + "</div>",
+			structuredContentResource.
+				getStructuredContentRenderedContentTemplate(
+					structuredContent.getId(), _ddmTemplate.getTemplateId()));
 	}
 
 	@Override
