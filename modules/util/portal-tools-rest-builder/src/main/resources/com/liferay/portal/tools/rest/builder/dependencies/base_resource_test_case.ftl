@@ -1431,28 +1431,6 @@ public abstract class Base${schemaName}ResourceTestCase {
 		}
 	</#if>
 
-	<#list relatedSchemaNames as relatedSchemaName>
-		protected ${relatedSchemaName} random${relatedSchemaName}() throws Exception {
-			return new ${relatedSchemaName}() {
-				{
-					<#assign
-						randomDataTypes = ["Boolean", "Double", "Long", "String"]
-						relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
-					/>
-
-					<#list relatedSchemaProperties?keys as propertyName>
-						<#if randomDataTypes?seq_contains(relatedSchemaProperties[propertyName])>
-							${propertyName} = RandomTestUtil.random${relatedSchemaProperties[propertyName]}();
-						<#elseif stringUtil.equals(relatedSchemaProperties[propertyName], "Date")>
-							${propertyName} = RandomTestUtil.nextDate();
-						</#if>
-					</#list>
-				}
-			};
-		}
-
-	</#list>
-
 	protected ${schemaName} random${schemaName}() throws Exception {
 		return new ${schemaName}() {
 			{
@@ -1484,6 +1462,24 @@ public abstract class Base${schemaName}ResourceTestCase {
 	protected ${schemaName} randomPatch${schemaName}() throws Exception {
 		return random${schemaName}();
 	}
+
+	<#list relatedSchemaNames as relatedSchemaName>
+		protected ${relatedSchemaName} random${relatedSchemaName}() throws Exception {
+			return new ${relatedSchemaName}() {
+				{
+					<#assign relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName) />
+
+					<#list relatedSchemaProperties?keys as propertyName>
+						<#if randomDataTypes?seq_contains(relatedSchemaProperties[propertyName])>
+							${propertyName} = RandomTestUtil.random${relatedSchemaProperties[propertyName]}();
+						<#elseif stringUtil.equals(relatedSchemaProperties[propertyName], "Date")>
+							${propertyName} = RandomTestUtil.nextDate();
+						</#if>
+					</#list>
+				}
+			};
+		}
+	</#list>
 
 	protected ${schemaName}Resource ${schemaVarName}Resource;
 	protected Group irrelevantGroup;
