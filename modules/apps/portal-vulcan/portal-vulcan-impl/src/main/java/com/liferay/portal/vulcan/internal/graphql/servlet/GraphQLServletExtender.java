@@ -374,7 +374,7 @@ public class GraphQLServletExtender {
 			DataFetchingEnvironment dataFetchingEnvironment, Method method)
 		throws Exception {
 
-		Object instance;
+		Object instance = null;
 
 		if (dataFetchingEnvironment.getRoot() ==
 				dataFetchingEnvironment.getSource()) {
