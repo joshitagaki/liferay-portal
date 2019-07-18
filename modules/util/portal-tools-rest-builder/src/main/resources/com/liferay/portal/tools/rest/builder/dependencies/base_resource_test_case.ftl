@@ -1008,9 +1008,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 				public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 					${schemaName} post${schemaName} = testGet${schemaName}_add${schemaName}();
 
-					${relatedSchemaName} random${relatedSchemaName} = random${relatedSchemaName}();
-
-					${relatedSchemaName} post${relatedSchemaName} = test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName});
+					${relatedSchemaName} post${relatedSchemaName} = test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName}());
 
 					${relatedSchemaName} get${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(post${schemaName}.getId());
 
@@ -1018,10 +1016,8 @@ public abstract class Base${schemaName}ResourceTestCase {
 					assertValid(get${relatedSchemaName});
 				}
 
-				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(
-					long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
-
-					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("get","post")}(${schemaVarName}Id, ${relatedSchemaVarName});
+				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
+					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("get", "post")}(${schemaVarName}Id, ${relatedSchemaVarName});
 				}
 			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "post") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
 				@Test
@@ -1043,10 +1039,8 @@ public abstract class Base${schemaName}ResourceTestCase {
 					assertValid(put${relatedSchemaName});
 				}
 
-				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(
-					long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
-
-					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("put","post")}(${schemaVarName}Id, ${relatedSchemaVarName});
+				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
+					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("put", "post")}(${schemaVarName}Id, ${relatedSchemaVarName});
 				}
 			</#if>
 		</#list>
