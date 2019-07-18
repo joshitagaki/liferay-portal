@@ -77,12 +77,7 @@ public class Query {
 		}
 	</#list>
 
-	<#assign
-		javaMethodSignatures = freeMarkerTool.getGraphQLRelationJavaMethodSignatures(configYAML, "query", openAPIYAML)
-	/>
-
-	<#list javaMethodSignatures as javaMethodSignature>
-
+	<#list freeMarkerTool.getGraphQLRelationJavaMethodSignatures(configYAML, "query", openAPIYAML) as javaMethodSignature>
 		@GraphQLTypeExtension(${javaMethodSignature.parentSchemaName}.class)
 		public class ${javaMethodSignature.methodName?cap_first}TypeExtension {
 
