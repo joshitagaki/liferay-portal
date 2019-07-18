@@ -167,7 +167,7 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 		}
 
 		throw new IllegalArgumentException(
-			"Invalid roleTypeLabel " + roleTypeLabel);
+			"Invalid role type label " + roleTypeLabel);
 	}
 
 	private List<Role> _roles = new ArrayList<>();
