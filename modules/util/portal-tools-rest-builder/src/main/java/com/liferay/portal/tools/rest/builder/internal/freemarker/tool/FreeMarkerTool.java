@@ -402,17 +402,16 @@ public class FreeMarkerTool {
 	}
 
 	public boolean isReturnTypeRelatedSchema(
-		JavaMethodSignature javaMethodSignature, List<String> relatedSchemas) {
+		JavaMethodSignature javaMethodSignature,
+		List<String> relatedSchemaNames) {
 
 		String returnType = javaMethodSignature.getReturnType();
 
 		String[] returnTypeParts = returnType.split("\\.");
 
 		if (returnTypeParts.length > 0) {
-			String returnTypeSingleName =
-				returnTypeParts[returnTypeParts.length - 1];
-
-			return relatedSchemas.contains(returnTypeSingleName);
+			String string = returnTypeParts[returnTypeParts.length - 1];
+			return relatedSchemaNames.contains(string);
 		}
 
 		return false;

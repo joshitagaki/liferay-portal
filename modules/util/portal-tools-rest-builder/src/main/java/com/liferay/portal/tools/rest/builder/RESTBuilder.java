@@ -235,7 +235,7 @@ public class RESTBuilder {
 
 				_putSchema(
 					context, schema, schemaName,
-					_getRelatedSchemas(allSchemas, javaMethodSignatures));
+					_getRelatedSchemaNames(allSchemas, javaMethodSignatures));
 
 				_createBaseResourceImplFile(
 					context, escapedVersion, schemaName);
@@ -1392,11 +1392,11 @@ public class RESTBuilder {
 		return operations;
 	}
 
-	private Set<String> _getRelatedSchemas(
+	private Set<String> _getRelatedSchemaNames(
 		Map<String, Schema> schemas,
 		List<JavaMethodSignature> javaMethodSignatures) {
 
-		Set<String> relatedSchemas = new HashSet<>();
+		Set<String> relatedSchemaNames = new HashSet<>();
 
 		for (JavaMethodSignature javaMethodSignature : javaMethodSignatures) {
 			String returnType = javaMethodSignature.getReturnType();
@@ -1404,24 +1404,22 @@ public class RESTBuilder {
 			String[] returnTypeParts = returnType.split("\\.");
 
 			if (returnTypeParts.length > 0) {
-				String returnTypeSingleName =
-					returnTypeParts[returnTypeParts.length - 1];
+				String string = returnTypeParts[returnTypeParts.length - 1];
 
-				if (!returnTypeSingleName.equals(
-						javaMethodSignature.getSchemaName()) &&
-					schemas.containsKey(returnTypeSingleName)) {
+				if (!string.equals(javaMethodSignature.getSchemaName()) &&
+					schemas.containsKey(string)) {
 
-					relatedSchemas.add(returnTypeSingleName);
+					relatedSchemaNames.add(string);
 				}
 			}
 		}
 
-		return relatedSchemas;
+		return relatedSchemaNames;
 	}
 
 	private void _putSchema(
 		Map<String, Object> context, Schema schema, String schemaName,
-		Set<String> relatedSchemas) {
+		Set<String> relatedSchemaNames) {
 
 		context.put("schema", schema);
 		context.put("schemaName", schemaName);
@@ -1435,11 +1433,11 @@ public class RESTBuilder {
 		context.put(
 			"schemaVarNames", TextFormatter.formatPlural(schemaVarName));
 
-		context.put("relatedSchemas", relatedSchemas);
+		context.put("relatedSchemaNames", relatedSchemaNames);
 	}
 
-	private void _validate(String s) {
-		OpenAPIYAML openAPIYAML = YAMLUtil.loadOpenAPIYAML(s);
+	private void _validate(String string) {
+		OpenAPIYAML openAPIYAML = YAMLUtil.loadOpenAPIYAML(string);
 
 		Components components = openAPIYAML.getComponents();
 

@@ -988,7 +988,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 					</#if>
 				}
 			</#if>
-		<#elseif !freeMarkerTool.isReturnTypeRelatedSchema(javaMethodSignature, relatedSchemas)>
+		<#elseif !freeMarkerTool.isReturnTypeRelatedSchema(javaMethodSignature, relatedSchemaNames)>
 			@Test
 			public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 				Assert.assertTrue(true);
@@ -996,7 +996,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		</#if>
 	</#list>
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		<#assign
 			relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
 			relatedSchemaVarName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
@@ -1090,7 +1090,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		}
 	}
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		<#assign
 			relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
 			relatedSchemaVarName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
@@ -1199,7 +1199,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		Assert.assertTrue(valid);
 	}
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		<#assign
 			relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
 			relatedSchemaVarName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
@@ -1268,7 +1268,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		return new String[0];
 	}
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		protected String[] getAdditional${relatedSchemaName}AssertFieldNames() {
 			return new String[0];
 		}
@@ -1316,7 +1316,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		return true;
 	}
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		<#assign
 			relatedSchemaProperties = freeMarkerTool.getDTOProperties(configYAML, openAPIYAML, relatedSchemaName)
 			relatedSchemaVarName = freeMarkerTool.getSchemaVarName(relatedSchemaName)
@@ -1436,7 +1436,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 		}
 	</#if>
 
-	<#list relatedSchemas as relatedSchemaName>
+	<#list relatedSchemaNames as relatedSchemaName>
 		protected ${relatedSchemaName} random${relatedSchemaName}() throws Exception {
 			return new ${relatedSchemaName}() {
 				{
