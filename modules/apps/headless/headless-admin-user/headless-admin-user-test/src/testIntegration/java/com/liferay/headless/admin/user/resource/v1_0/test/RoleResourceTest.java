@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
@@ -70,8 +71,7 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 	public void testGetRolesPage() throws Exception {
 		Page<Role> page = roleResource.getRolesPage(Pagination.of(1, 100));
 
-		Collection<Role> defaultRoles = page.getItems();
-
+		List<Role> roles = new ArrayList<>(page.getItems());
 		long totalCount = page.getTotalCount();
 
 		_addRole(randomRole());
@@ -82,13 +82,8 @@ public class RoleResourceTest extends BaseRoleResourceTestCase {
 
 		Assert.assertEquals(totalCount + _roles.size(), page.getTotalCount());
 
-		List<Role> allRoles = new ArrayList<>();
-
-		allRoles.addAll(defaultRoles);
-		allRoles.addAll(_roles);
-
-		assertEqualsIgnoringOrder(allRoles, (List<Role>)page.getItems());
-
+		assertEqualsIgnoringOrder(
+			ListUtil.concat(roles, _roles), (List<Role>)page.getItems());
 		assertValid(page);
 	}
 
