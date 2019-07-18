@@ -1008,16 +1008,13 @@ public abstract class Base${schemaName}ResourceTestCase {
 
 				@Test
 				public void test${methodName}() throws Exception {
-
 					${schemaName} post${schemaName} = testGet${schemaName}_add${schemaName}();
 
 					${relatedSchemaName} random${relatedSchemaName} = random${relatedSchemaName}();
 
-					${relatedSchemaName} post${relatedSchemaName} = test${methodName}_add${relatedSchemaName}(
-						post${schemaName}.getId(), random${relatedSchemaName});
+					${relatedSchemaName} post${relatedSchemaName} = test${methodName}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName});
 
-					${relatedSchemaName} get${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(
-						post${schemaName}.getId());
+					${relatedSchemaName} get${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(post${schemaName}.getId());
 
 					assertEquals(post${relatedSchemaName}, get${relatedSchemaName});
 					assertValid(get${relatedSchemaName});
@@ -1026,33 +1023,25 @@ public abstract class Base${schemaName}ResourceTestCase {
 				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(
 					long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
 
-					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("get","post")}(
-						${schemaVarName}Id, ${relatedSchemaVarName});
+					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("get","post")}(${schemaVarName}Id, ${relatedSchemaVarName});
 				}
-
 			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "post") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
-
 				@Test
 				public void test${javaMethodSignature.methodName?cap_first}() throws Exception {
 					Assert.assertTrue(true);
 				}
-
 			<#elseif freeMarkerTool.hasHTTPMethod(javaMethodSignature, "put") && javaMethodSignature.returnType?ends_with("." + relatedSchemaName)>
-
 				<#assign methodName = javaMethodSignature.methodName?cap_first />
 
 				@Test
 				public void test${methodName}() throws Exception {
-
 					${schemaName} post${schemaName} = testPut${schemaName}_add${schemaName}();
 
-					test${methodName}_add${relatedSchemaName}(
-						post${schemaName}.getId(), random${relatedSchemaName}());
+					test${methodName}_add${relatedSchemaName}(post${schemaName}.getId(), random${relatedSchemaName}());
 
 					${relatedSchemaName} random${relatedSchemaName} = random${relatedSchemaName}();
 
-					${relatedSchemaName} put${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(
-						post${schemaName}.getId(), random${relatedSchemaName});
+					${relatedSchemaName} put${relatedSchemaName} = ${schemaVarName}Resource.${javaMethodSignature.methodName}(post${schemaName}.getId(), random${relatedSchemaName});
 
 					assertEquals(random${relatedSchemaName}, put${relatedSchemaName});
 					assertValid(put${relatedSchemaName});
@@ -1061,8 +1050,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 				protected ${relatedSchemaName} test${javaMethodSignature.methodName?cap_first}_add${relatedSchemaName}(
 					long ${schemaVarName}Id, ${relatedSchemaName} ${relatedSchemaVarName}) throws Exception {
 
-					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("put","post")}(
-						${schemaVarName}Id, ${relatedSchemaVarName});
+					return ${schemaVarName}Resource.${javaMethodSignature.methodName?replace("put","post")}(${schemaVarName}Id, ${relatedSchemaVarName});
 				}
 			</#if>
 		</#list>
