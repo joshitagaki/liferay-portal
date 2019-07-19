@@ -73,6 +73,11 @@ public class Query {
 			taxonomyVocabularyResourceComponentServiceObjects;
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {keyword(keywordId: ___){creator, dateCreated, dateModified, id, keywordUsageCount, name, siteId}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Keyword keyword(@GraphQLName("keywordId") Long keywordId)
 		throws Exception {
@@ -83,6 +88,11 @@ public class Query {
 			keywordResource -> keywordResource.getKeyword(keywordId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {keywords(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KeywordPage keywords(
 			@GraphQLName("siteId") Long siteId,
@@ -104,6 +114,11 @@ public class Query {
 					_sortsBiFunction.apply(keywordResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {taxonomyCategoryTaxonomyCategories(parentTaxonomyCategoryId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public TaxonomyCategoryPage taxonomyCategoryTaxonomyCategories(
 			@GraphQLName("parentTaxonomyCategoryId") Long
@@ -129,6 +144,11 @@ public class Query {
 							taxonomyCategoryResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {taxonomyCategory(taxonomyCategoryId: ___){availableLanguages, creator, dateCreated, dateModified, description, id, name, numberOfTaxonomyCategories, parentTaxonomyCategory, parentTaxonomyVocabulary, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public TaxonomyCategory taxonomyCategory(
 			@GraphQLName("taxonomyCategoryId") Long taxonomyCategoryId)
@@ -142,6 +162,11 @@ public class Query {
 					taxonomyCategoryId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {taxonomyVocabularyTaxonomyCategories(taxonomyVocabularyId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public TaxonomyCategoryPage taxonomyVocabularyTaxonomyCategories(
 			@GraphQLName("taxonomyVocabularyId") Long taxonomyVocabularyId,
@@ -166,6 +191,11 @@ public class Query {
 							taxonomyCategoryResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {taxonomyVocabularies(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public TaxonomyVocabularyPage taxonomyVocabularies(
 			@GraphQLName("siteId") Long siteId,
@@ -189,6 +219,11 @@ public class Query {
 						taxonomyVocabularyResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {taxonomyVocabulary(taxonomyVocabularyId: ___){assetTypes, availableLanguages, creator, dateCreated, dateModified, description, id, name, numberOfTaxonomyCategories, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public TaxonomyVocabulary taxonomyVocabulary(
 			@GraphQLName("taxonomyVocabularyId") Long taxonomyVocabularyId)

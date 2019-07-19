@@ -226,6 +226,11 @@ public class Query {
 			wikiPageResourceComponentServiceObjects;
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPosting(blogPostingId: ___){aggregateRating, alternativeHeadline, articleBody, creator, customFields, dateCreated, dateModified, datePublished, description, encodingFormat, friendlyUrlPath, headline, id, image, keywords, numberOfComments, relatedContents, siteId, taxonomyCategories, taxonomyCategoryIds, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public BlogPosting blogPosting(
 			@GraphQLName("blogPostingId") Long blogPostingId)
@@ -238,6 +243,11 @@ public class Query {
 				blogPostingId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPostingMyRating(blogPostingId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating blogPostingMyRating(
 			@GraphQLName("blogPostingId") Long blogPostingId)
@@ -250,6 +260,11 @@ public class Query {
 				blogPostingId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPostings(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public BlogPostingPage blogPostings(
 			@GraphQLName("siteId") Long siteId,
@@ -271,6 +286,11 @@ public class Query {
 					_sortsBiFunction.apply(blogPostingResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPostingImage(blogPostingImageId: ___){contentUrl, encodingFormat, fileExtension, id, sizeInBytes, title, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public BlogPostingImage blogPostingImage(
 			@GraphQLName("blogPostingImageId") Long blogPostingImageId)
@@ -284,6 +304,11 @@ public class Query {
 					blogPostingImageId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPostingImages(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public BlogPostingImagePage blogPostingImages(
 			@GraphQLName("siteId") Long siteId,
@@ -307,6 +332,11 @@ public class Query {
 						blogPostingImageResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {blogPostingComments(blogPostingId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public CommentPage blogPostingComments(
 			@GraphQLName("blogPostingId") Long blogPostingId,
@@ -328,6 +358,11 @@ public class Query {
 					_sortsBiFunction.apply(commentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {comment(commentId: ___){creator, dateCreated, dateModified, id, numberOfComments, text}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Comment comment(@GraphQLName("commentId") Long commentId)
 		throws Exception {
@@ -338,6 +373,11 @@ public class Query {
 			commentResource -> commentResource.getComment(commentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {commentComments(parentCommentId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public CommentPage commentComments(
 			@GraphQLName("parentCommentId") Long parentCommentId,
@@ -359,6 +399,11 @@ public class Query {
 					_sortsBiFunction.apply(commentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentComments(documentId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public CommentPage documentComments(
 			@GraphQLName("documentId") Long documentId,
@@ -380,6 +425,11 @@ public class Query {
 					_sortsBiFunction.apply(commentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentComments(structuredContentId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public CommentPage structuredContentComments(
 			@GraphQLName("structuredContentId") Long structuredContentId,
@@ -401,6 +451,11 @@ public class Query {
 					_sortsBiFunction.apply(commentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentSetContentSetElements(contentSetId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ContentSetElementPage contentSetContentSetElements(
 			@GraphQLName("contentSetId") Long contentSetId,
@@ -416,6 +471,11 @@ public class Query {
 					contentSetId, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentSetByKeyContentSetElements(siteId: ___, key: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ContentSetElementPage contentSetByKeyContentSetElements(
 			@GraphQLName("siteId") Long siteId, @GraphQLName("key") String key,
@@ -432,6 +492,11 @@ public class Query {
 						siteId, key, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentSetByUuidContentSetElements(siteId: ___, uuid: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ContentSetElementPage contentSetByUuidContentSetElements(
 			@GraphQLName("siteId") Long siteId,
@@ -449,6 +514,11 @@ public class Query {
 						siteId, uuid, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentStructure(contentStructureId: ___){availableLanguages, contentStructureFields, creator, dateCreated, dateModified, description, id, name, siteId}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ContentStructure contentStructure(
 			@GraphQLName("contentStructureId") Long contentStructureId)
@@ -462,6 +532,11 @@ public class Query {
 					contentStructureId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentStructures(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ContentStructurePage contentStructures(
 			@GraphQLName("siteId") Long siteId,
@@ -485,6 +560,11 @@ public class Query {
 						contentStructureResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentFolderDocuments(documentFolderId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public DocumentPage documentFolderDocuments(
 			@GraphQLName("documentFolderId") Long documentFolderId,
@@ -506,6 +586,11 @@ public class Query {
 					_sortsBiFunction.apply(documentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {document(documentId: ___){adaptedImages, aggregateRating, contentUrl, creator, customFields, dateCreated, dateModified, description, documentFolderId, encodingFormat, fileExtension, id, keywords, numberOfComments, relatedContents, sizeInBytes, taxonomyCategories, taxonomyCategoryIds, title, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Document document(@GraphQLName("documentId") Long documentId)
 		throws Exception {
@@ -516,6 +601,11 @@ public class Query {
 			documentResource -> documentResource.getDocument(documentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentMyRating(documentId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating documentMyRating(@GraphQLName("documentId") Long documentId)
 		throws Exception {
@@ -527,6 +617,11 @@ public class Query {
 				documentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documents(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public DocumentPage documents(
 			@GraphQLName("siteId") Long siteId,
@@ -549,6 +644,11 @@ public class Query {
 					_sortsBiFunction.apply(documentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentFolder(documentFolderId: ___){creator, customFields, dateCreated, dateModified, description, id, name, numberOfDocumentFolders, numberOfDocuments, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public DocumentFolder documentFolder(
 			@GraphQLName("documentFolderId") Long documentFolderId)
@@ -561,6 +661,11 @@ public class Query {
 				documentFolderId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentFolderDocumentFolders(parentDocumentFolderId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public DocumentFolderPage documentFolderDocumentFolders(
 			@GraphQLName("parentDocumentFolderId") Long parentDocumentFolderId,
@@ -584,6 +689,11 @@ public class Query {
 						documentFolderResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {documentFolders(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public DocumentFolderPage documentFolders(
 			@GraphQLName("siteId") Long siteId,
@@ -608,6 +718,11 @@ public class Query {
 						documentFolderResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseArticle(knowledgeBaseArticleId: ___){aggregateRating, articleBody, creator, customFields, dateCreated, dateModified, description, encodingFormat, friendlyUrlPath, id, keywords, numberOfAttachments, numberOfKnowledgeBaseArticles, parentKnowledgeBaseFolder, parentKnowledgeBaseFolderId, relatedContents, siteId, taxonomyCategories, taxonomyCategoryIds, title, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseArticle knowledgeBaseArticle(
 			@GraphQLName("knowledgeBaseArticleId") Long knowledgeBaseArticleId)
@@ -621,6 +736,11 @@ public class Query {
 					knowledgeBaseArticleId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseArticleMyRating(knowledgeBaseArticleId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating knowledgeBaseArticleMyRating(
 			@GraphQLName("knowledgeBaseArticleId") Long knowledgeBaseArticleId)
@@ -634,6 +754,11 @@ public class Query {
 					knowledgeBaseArticleId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseArticleKnowledgeBaseArticles(parentKnowledgeBaseArticleId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseArticlePage knowledgeBaseArticleKnowledgeBaseArticles(
 			@GraphQLName("parentKnowledgeBaseArticleId") Long
@@ -659,6 +784,11 @@ public class Query {
 							knowledgeBaseArticleResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseFolderKnowledgeBaseArticles(knowledgeBaseFolderId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseArticlePage knowledgeBaseFolderKnowledgeBaseArticles(
 			@GraphQLName("knowledgeBaseFolderId") Long knowledgeBaseFolderId,
@@ -684,6 +814,11 @@ public class Query {
 							knowledgeBaseArticleResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseArticles(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseArticlePage knowledgeBaseArticles(
 			@GraphQLName("siteId") Long siteId,
@@ -708,6 +843,11 @@ public class Query {
 						knowledgeBaseArticleResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseArticleKnowledgeBaseAttachments(knowledgeBaseArticleId: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseAttachmentPage
 			knowledgeBaseArticleKnowledgeBaseAttachments(
@@ -724,6 +864,11 @@ public class Query {
 						knowledgeBaseArticleId)));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseAttachment(knowledgeBaseAttachmentId: ___){contentUrl, encodingFormat, fileExtension, id, sizeInBytes, title}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseAttachment knowledgeBaseAttachment(
 			@GraphQLName("knowledgeBaseAttachmentId") Long
@@ -738,6 +883,11 @@ public class Query {
 					knowledgeBaseAttachmentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseFolder(knowledgeBaseFolderId: ___){creator, customFields, dateCreated, dateModified, description, id, name, numberOfKnowledgeBaseArticles, numberOfKnowledgeBaseFolders, parentKnowledgeBaseFolder, parentKnowledgeBaseFolderId, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseFolder knowledgeBaseFolder(
 			@GraphQLName("knowledgeBaseFolderId") Long knowledgeBaseFolderId)
@@ -751,6 +901,11 @@ public class Query {
 					knowledgeBaseFolderId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseFolderKnowledgeBaseFolders(parentKnowledgeBaseFolderId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseFolderPage knowledgeBaseFolderKnowledgeBaseFolders(
 			@GraphQLName("parentKnowledgeBaseFolderId") Long
@@ -769,6 +924,11 @@ public class Query {
 						Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {knowledgeBaseFolders(siteId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public KnowledgeBaseFolderPage knowledgeBaseFolders(
 			@GraphQLName("siteId") Long siteId,
@@ -784,6 +944,11 @@ public class Query {
 					siteId, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardAttachment(messageBoardAttachmentId: ___){contentUrl, encodingFormat, fileExtension, id, sizeInBytes, title}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardAttachment messageBoardAttachment(
 			@GraphQLName("messageBoardAttachmentId") Long
@@ -798,6 +963,11 @@ public class Query {
 					messageBoardAttachmentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardMessageMessageBoardAttachments(messageBoardMessageId: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardAttachmentPage
 			messageBoardMessageMessageBoardAttachments(
@@ -814,6 +984,11 @@ public class Query {
 						messageBoardMessageId)));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardThreadMessageBoardAttachments(messageBoardThreadId: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardAttachmentPage messageBoardThreadMessageBoardAttachments(
 			@GraphQLName("messageBoardThreadId") Long messageBoardThreadId)
@@ -828,6 +1003,11 @@ public class Query {
 						messageBoardThreadId)));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardMessage(messageBoardMessageId: ___){aggregateRating, anonymous, articleBody, creator, customFields, dateCreated, dateModified, encodingFormat, headline, id, keywords, messageBoardThreadId, numberOfMessageBoardAttachments, numberOfMessageBoardMessages, relatedContents, showAsAnswer, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardMessage messageBoardMessage(
 			@GraphQLName("messageBoardMessageId") Long messageBoardMessageId)
@@ -841,6 +1021,11 @@ public class Query {
 					messageBoardMessageId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardMessageMyRating(messageBoardMessageId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating messageBoardMessageMyRating(
 			@GraphQLName("messageBoardMessageId") Long messageBoardMessageId)
@@ -854,6 +1039,11 @@ public class Query {
 					messageBoardMessageId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardMessageMessageBoardMessages(parentMessageBoardMessageId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardMessagePage messageBoardMessageMessageBoardMessages(
 			@GraphQLName("parentMessageBoardMessageId") Long
@@ -879,6 +1069,11 @@ public class Query {
 							messageBoardMessageResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardThreadMessageBoardMessages(messageBoardThreadId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardMessagePage messageBoardThreadMessageBoardMessages(
 			@GraphQLName("messageBoardThreadId") Long messageBoardThreadId,
@@ -903,6 +1098,11 @@ public class Query {
 							messageBoardMessageResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardSection(messageBoardSectionId: ___){creator, customFields, dateCreated, dateModified, description, id, numberOfMessageBoardSections, numberOfMessageBoardThreads, siteId, title, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardSection messageBoardSection(
 			@GraphQLName("messageBoardSectionId") Long messageBoardSectionId)
@@ -916,6 +1116,11 @@ public class Query {
 					messageBoardSectionId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardSectionMessageBoardSections(parentMessageBoardSectionId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardSectionPage messageBoardSectionMessageBoardSections(
 			@GraphQLName("parentMessageBoardSectionId") Long
@@ -941,6 +1146,11 @@ public class Query {
 							messageBoardSectionResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardSections(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardSectionPage messageBoardSections(
 			@GraphQLName("siteId") Long siteId,
@@ -965,6 +1175,11 @@ public class Query {
 						messageBoardSectionResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardSectionMessageBoardThreads(messageBoardSectionId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardThreadPage messageBoardSectionMessageBoardThreads(
 			@GraphQLName("messageBoardSectionId") Long messageBoardSectionId,
@@ -989,6 +1204,11 @@ public class Query {
 							messageBoardThreadResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardThread(messageBoardThreadId: ___){aggregateRating, articleBody, creator, customFields, dateCreated, dateModified, encodingFormat, headline, id, keywords, numberOfMessageBoardAttachments, numberOfMessageBoardMessages, relatedContents, showAsQuestion, siteId, threadType, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardThread messageBoardThread(
 			@GraphQLName("messageBoardThreadId") Long messageBoardThreadId)
@@ -1002,6 +1222,11 @@ public class Query {
 					messageBoardThreadId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardThreadMyRating(messageBoardThreadId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating messageBoardThreadMyRating(
 			@GraphQLName("messageBoardThreadId") Long messageBoardThreadId)
@@ -1015,6 +1240,11 @@ public class Query {
 					messageBoardThreadId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {messageBoardThreads(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public MessageBoardThreadPage messageBoardThreads(
 			@GraphQLName("siteId") Long siteId,
@@ -1039,6 +1269,11 @@ public class Query {
 						messageBoardThreadResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {contentStructureStructuredContents(contentStructureId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentPage contentStructureStructuredContents(
 			@GraphQLName("contentStructureId") Long contentStructureId,
@@ -1063,6 +1298,11 @@ public class Query {
 							structuredContentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContents(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentPage structuredContents(
 			@GraphQLName("siteId") Long siteId,
@@ -1087,6 +1327,11 @@ public class Query {
 						structuredContentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentByKey(siteId: ___, key: ___){aggregateRating, availableLanguages, contentFields, contentStructureId, creator, customFields, dateCreated, dateModified, datePublished, description, friendlyUrlPath, id, key, keywords, numberOfComments, relatedContents, renderedContents, siteId, taxonomyCategories, taxonomyCategoryIds, title, uuid, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContent structuredContentByKey(
 			@GraphQLName("siteId") Long siteId, @GraphQLName("key") String key)
@@ -1100,6 +1345,11 @@ public class Query {
 					siteId, key));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentByUuid(siteId: ___, uuid: ___){aggregateRating, availableLanguages, contentFields, contentStructureId, creator, customFields, dateCreated, dateModified, datePublished, description, friendlyUrlPath, id, key, keywords, numberOfComments, relatedContents, renderedContents, siteId, taxonomyCategories, taxonomyCategoryIds, title, uuid, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContent structuredContentByUuid(
 			@GraphQLName("siteId") Long siteId,
@@ -1114,6 +1364,11 @@ public class Query {
 					siteId, uuid));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentFolderStructuredContents(structuredContentFolderId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentPage structuredContentFolderStructuredContents(
 			@GraphQLName("structuredContentFolderId") Long
@@ -1139,6 +1394,11 @@ public class Query {
 							structuredContentResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContent(structuredContentId: ___){aggregateRating, availableLanguages, contentFields, contentStructureId, creator, customFields, dateCreated, dateModified, datePublished, description, friendlyUrlPath, id, key, keywords, numberOfComments, relatedContents, renderedContents, siteId, taxonomyCategories, taxonomyCategoryIds, title, uuid, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContent structuredContent(
 			@GraphQLName("structuredContentId") Long structuredContentId)
@@ -1152,6 +1412,11 @@ public class Query {
 					structuredContentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentMyRating(structuredContentId: ___){bestRating, creator, dateCreated, dateModified, id, ratingValue, worstRating}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Rating structuredContentMyRating(
 			@GraphQLName("structuredContentId") Long structuredContentId)
@@ -1165,6 +1430,11 @@ public class Query {
 					structuredContentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentRenderedContentTemplate(structuredContentId: ___, templateId: ___){}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public String structuredContentRenderedContentTemplate(
 			@GraphQLName("structuredContentId") Long structuredContentId,
@@ -1180,6 +1450,11 @@ public class Query {
 						structuredContentId, templateId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentFolders(siteId: ___, flatten: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentFolderPage structuredContentFolders(
 			@GraphQLName("siteId") Long siteId,
@@ -1205,6 +1480,11 @@ public class Query {
 							structuredContentFolderResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentFolderStructuredContentFolders(parentStructuredContentFolderId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentFolderPage
 			structuredContentFolderStructuredContentFolders(
@@ -1231,6 +1511,11 @@ public class Query {
 							structuredContentFolderResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {structuredContentFolder(structuredContentFolderId: ___){creator, customFields, dateCreated, dateModified, description, id, name, numberOfStructuredContentFolders, numberOfStructuredContents, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public StructuredContentFolder structuredContentFolder(
 			@GraphQLName("structuredContentFolderId") Long
@@ -1245,6 +1530,11 @@ public class Query {
 					structuredContentFolderId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {wikiNodes(siteId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public WikiNodePage wikiNodes(
 			@GraphQLName("siteId") Long siteId,
@@ -1266,6 +1556,11 @@ public class Query {
 					_sortsBiFunction.apply(wikiNodeResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {wikiNode(wikiNodeId: ___){creator, dateCreated, dateModified, description, id, name, siteId, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public WikiNode wikiNode(@GraphQLName("wikiNodeId") Long wikiNodeId)
 		throws Exception {
@@ -1276,6 +1571,11 @@ public class Query {
 			wikiNodeResource -> wikiNodeResource.getWikiNode(wikiNodeId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {wikiNodeWikiPages(wikiNodeId: ___, search: ___, filter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public WikiPagePage wikiNodeWikiPages(
 			@GraphQLName("wikiNodeId") Long wikiNodeId,
@@ -1297,6 +1597,11 @@ public class Query {
 					_sortsBiFunction.apply(wikiPageResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {wiki(wikiPageId: ___){alternativeHeadline, content, creator, customFields, dateCreated, dateModified, encodingFormat, headline, id, keywords, relatedContents, siteId, taxonomyCategories, taxonomyCategoryIds, viewableBy}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public WikiPage wiki(@GraphQLName("wikiPageId") Long wikiPageId)
 		throws Exception {

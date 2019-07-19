@@ -51,6 +51,11 @@ public class Query {
 			statusResourceComponentServiceObjects;
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {status{actionInProgress}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Status status() throws Exception {
 		return _applyComponentServiceObjects(

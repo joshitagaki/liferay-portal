@@ -102,6 +102,11 @@ public class Query {
 			settingsResourceComponentServiceObjects;
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {collectionEntryAffectedEntries(collectionId: ___, entryId: ___, keywords: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public AffectedEntryPage collectionEntryAffectedEntries(
 			@GraphQLName("collectionId") Long collectionId,
@@ -120,6 +125,11 @@ public class Query {
 					Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {collections(collectionType: ___, companyId: ___, userId: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public CollectionPage collections(
 			@GraphQLName("collectionType")
@@ -142,6 +152,11 @@ public class Query {
 					_sortsBiFunction.apply(collectionResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {collection(collectionId: ___, companyId: ___){additionCount, companyId, dateStatus, deletionCount, description, id, modificationCount, name, statusByUserName}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Collection collection(
 			@GraphQLName("collectionId") Long collectionId,
@@ -155,6 +170,11 @@ public class Query {
 				collectionId, companyId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {collectionEntries(collectionId: ___, changeTypesFilter: ___, classNameIdsFilter: ___, collision: ___, groupIdsFilter: ___, status: ___, userIdsFilter: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public EntryPage collectionEntries(
 			@GraphQLName("collectionId") Long collectionId,
@@ -180,6 +200,11 @@ public class Query {
 					_sortsBiFunction.apply(entryResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {entry(entryId: ___){affectedByEntriesCount, changeType, classNameId, classPK, collision, contentType, dateModified, id, key, siteName, title, userName, version}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Entry entry(@GraphQLName("entryId") Long entryId) throws Exception {
 		return _applyComponentServiceObjects(
@@ -188,6 +213,11 @@ public class Query {
 			entryResource -> entryResource.getEntry(entryId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {processes(companyId: ___, keywords: ___, processType: ___, userId: ___, pageSize: ___, page: ___, sorts: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ProcessPage processes(
 			@GraphQLName("companyId") Long companyId,
@@ -211,6 +241,11 @@ public class Query {
 					_sortsBiFunction.apply(processResource, sortsString))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {process(processId: ___){collection, companyId, dateCreated, id, percentage, processUser, status}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Process process(@GraphQLName("processId") Long processId)
 		throws Exception {
@@ -221,6 +256,11 @@ public class Query {
 			processResource -> processResource.getProcess(processId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {processUsers(companyId: ___, keywords: ___, processType: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public ProcessUserPage processUsers(
 			@GraphQLName("companyId") Long companyId,
@@ -241,6 +281,11 @@ public class Query {
 					Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {settings(companyId: ___, userId: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public SettingsPage settings(
 			@GraphQLName("companyId") Long companyId,

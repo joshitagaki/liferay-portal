@@ -84,6 +84,11 @@ public class Query {
 			formStructureResourceComponentServiceObjects;
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {form(formId: ___){availableLanguages, creator, dateCreated, dateModified, datePublished, defaultLanguage, description, formRecords, formRecordsIds, id, name, siteId, structure, structureId}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public Form form(@GraphQLName("formId") Long formId) throws Exception {
 		return _applyComponentServiceObjects(
@@ -92,6 +97,11 @@ public class Query {
 			formResource -> formResource.getForm(formId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {forms(siteId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormPage forms(
 			@GraphQLName("siteId") Long siteId,
@@ -107,6 +117,11 @@ public class Query {
 					siteId, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formDocument(formDocumentId: ___){contentUrl, description, encodingFormat, fileExtension, folderId, id, siteId, sizeInBytes, title}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormDocument formDocument(
 			@GraphQLName("formDocumentId") Long formDocumentId)
@@ -119,6 +134,11 @@ public class Query {
 				formDocumentId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formRecord(formRecordId: ___){creator, dateCreated, dateModified, datePublished, draft, formFieldValues, formId, id}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormRecord formRecord(@GraphQLName("formRecordId") Long formRecordId)
 		throws Exception {
@@ -130,6 +150,11 @@ public class Query {
 				formRecordId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formFormRecords(formId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormRecordPage formFormRecords(
 			@GraphQLName("formId") Long formId,
@@ -145,6 +170,11 @@ public class Query {
 					formId, Pagination.of(page, pageSize))));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formFormRecordByLatestDraft(formId: ___){creator, dateCreated, dateModified, datePublished, draft, formFieldValues, formId, id}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormRecord formFormRecordByLatestDraft(
 			@GraphQLName("formId") Long formId)
@@ -157,6 +187,11 @@ public class Query {
 				formRecordResource.getFormFormRecordByLatestDraft(formId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formStructure(formStructureId: ___){availableLanguages, creator, dateCreated, dateModified, description, formPages, formSuccessPage, id, name, siteId}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormStructure formStructure(
 			@GraphQLName("formStructureId") Long formStructureId)
@@ -169,6 +204,11 @@ public class Query {
 				formStructureId));
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {formStructures(siteId: ___, pageSize: ___, page: ___){page, pageSize, totalCount, items {__}}}"}' -u 'test@liferay.com:test'
+	 */
 	@GraphQLField
 	public FormStructurePage formStructures(
 			@GraphQLName("siteId") Long siteId,
