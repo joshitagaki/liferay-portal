@@ -61,11 +61,11 @@ public class SegmentsExperiencePortletUtil {
 			return false;
 		}
 
-		long currentSegmentsExperience = GetterUtil.getLong(
+		long currentSegmentsExperienceId = GetterUtil.getLong(
 			portletId.substring(
 				index + _SEGMENTS_EXPERIENCE_SEPARATOR.length()));
 
-		if (segmentsExperienceId == currentSegmentsExperience) {
+		if (segmentsExperienceId == currentSegmentsExperienceId) {
 			return true;
 		}
 
