@@ -207,11 +207,9 @@ public abstract class BaseFragmentCollectionContributor
 		Map<Locale, String> names = _fragmentEntryNames.getOrDefault(
 			fragmentEntryKey, new HashMap<>());
 
-		ResourceBundleLoader resourceBundleLoader = getResourceBundleLoader();
-
 		String name = jsonObject.getString("name");
 
-		_setLocalizedNames(name, names, resourceBundleLoader);
+		_setLocalizedNames(name, names, getResourceBundleLoader());
 
 		_fragmentEntryNames.put(fragmentEntryKey, names);
 
