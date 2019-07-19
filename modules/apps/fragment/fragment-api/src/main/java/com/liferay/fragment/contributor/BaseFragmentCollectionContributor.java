@@ -187,13 +187,11 @@ public abstract class BaseFragmentCollectionContributor
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(json);
 
-		Map<Locale, String> names = new HashMap<>();
-
-		ResourceBundleLoader resourceBundleLoader = getResourceBundleLoader();
-
 		String name = jsonObject.getString("name");
 
-		_setLocalizedNames(name, names, resourceBundleLoader);
+		Map<Locale, String> names = new HashMap<>();
+
+		_setLocalizedNames(name, names, getResourceBundleLoader());
 
 		return names;
 	}
