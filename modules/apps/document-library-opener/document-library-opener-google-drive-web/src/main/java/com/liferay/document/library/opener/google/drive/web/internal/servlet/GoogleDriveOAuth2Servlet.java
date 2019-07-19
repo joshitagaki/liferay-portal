@@ -66,6 +66,7 @@ public class GoogleDriveOAuth2Servlet extends HttpServlet {
 
 		if (!OAuth2StateUtil.isValid(oAuth2State, httpServletRequest)) {
 			OAuth2StateUtil.cleanUp(httpServletRequest);
+
 			httpServletResponse.sendRedirect(oAuth2State.getFailureURL());
 		}
 		else {
@@ -106,6 +107,7 @@ public class GoogleDriveOAuth2Servlet extends HttpServlet {
 			}
 
 			OAuth2StateUtil.cleanUp(httpServletRequest);
+
 			httpServletResponse.sendRedirect(oAuth2State.getSuccessURL());
 		}
 	}
