@@ -15,6 +15,7 @@
 import {
 	addFragmentEntryLinkReducer,
 	clearFragmentEditorReducer,
+	deleteFragmentEntryLinkCommentReducer,
 	disableFragmentEditorReducer,
 	enableFragmentEditorReducer,
 	moveFragmentEntryLinkReducer,
@@ -67,6 +68,7 @@ const reducers = [
 	addPortletReducer,
 	addRowReducer,
 	clearFragmentEditorReducer,
+	deleteFragmentEntryLinkCommentReducer,
 	disableFragmentEditorReducer,
 	enableFragmentEditorReducer,
 	hideMappingDialogReducer,
