@@ -857,7 +857,7 @@
     "@clayui/shared" "^3.0.0-milestone.1"
     classnames "^2.2.6"
 
-"@clayui/navigation-bar@3.0.0-milestone.1":
+"@clayui/navigation-bar@3.0.0-milestone.1", "@clayui/navigation-bar@^3.0.0-milestone.1":
   version "3.0.0-milestone.1"
   resolved "https://registry.yarnpkg.com/@clayui/navigation-bar/-/navigation-bar-3.0.0-milestone.1.tgz#f54c83f6bd37c84bd17dba667bd24784c9ff6a7f"
   integrity sha512-bYkUfjJZTHpX1dMa2H51sjVOC7g+006b40gt+COsySAzhmkYEFV26aW0CPhhfciSiLSj66CfhIbnyy+tVpqoww==

@@ -17,6 +17,49 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 import React from 'react';
 
+export const APPS = {
+	ACTIONS: [
+		{
+			name: Liferay.Language.get('delete'),
+			callback: row => deleteItem(`/o/app-builder/v1.0/apps/${row.id}`)
+		}
+	],
+	COLUMNS: [
+		{
+			name: Liferay.Language.get('name')
+		},
+		{
+			type: Liferay.Language.get('deployed-as')
+		},
+		{
+			dateCreated: Liferay.Language.get('create-date')
+		},
+		{
+			dateModified: Liferay.Language.get('modified-date')
+		},
+		{
+			status: Liferay.Language.get('status')
+		}
+	],
+	EMPTY_STATE: {
+		title: Liferay.Language.get('no-deployments-yet'),
+		description: Liferay.Language.get(
+			'select-the-form-and-table-view-you-want-and-deploy-your-app-as-a-widget-standalone-or-place-it-in-the-product-menu'
+		)
+	},
+	ENDPOINT: dataDefinitionId =>
+		`/o/app-builder/v1.0/data-definitions/${dataDefinitionId}/apps`,
+	FORMATTER: items =>
+		items.map(item => ({
+			dateCreated: moment(item.dateCreated).fromNow(),
+			dateModified: moment(item.dateModified).fromNow(),
+			id: item.id,
+			name: item.name.en_US,
+			status: item.settings.status,
+			type: item.settings.type
+		}))
+};
+
 export const CUSTOM_OBJECTS = {
 	ACTIONS: [
 		{
@@ -49,8 +92,46 @@ export const CUSTOM_OBJECTS = {
 			dateModified: moment(item.dateModified).fromNow(),
 			id: item.id,
 			name: (
-				<Link to={`/custom-object/${item.id}`}>{item.name.en_US}</Link>
+				<Link to={`/custom-object/${item.id}/form-views`}>
+					{item.name.en_US}
+				</Link>
 			)
+		}))
+};
+
+export const TABLE_VIEWS = {
+	ACTIONS: [
+		{
+			name: Liferay.Language.get('delete'),
+			callback: row =>
+				deleteItem(`/o/data-engine/v1.0/data-layouts-views/${row.id}`)
+		}
+	],
+	COLUMNS: [
+		{
+			name: Liferay.Language.get('name')
+		},
+		{
+			dateCreated: Liferay.Language.get('create-date')
+		},
+		{
+			dateModified: Liferay.Language.get('modified-date')
+		}
+	],
+	EMPTY_STATE: {
+		title: Liferay.Language.get('no-table-views-yet'),
+		description: Liferay.Language.get(
+			'create-one-or-more-tables-to-display-the-data-held-in-your-data-object'
+		)
+	},
+	ENDPOINT: dataDefinitionId =>
+		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-layouts-views`,
+	FORMATTER: items =>
+		items.map(item => ({
+			dateCreated: moment(item.dateCreated).fromNow(),
+			dateModified: moment(item.dateModified).fromNow(),
+			id: item.id,
+			name: item.name.en_US
 		}))
 };
 
