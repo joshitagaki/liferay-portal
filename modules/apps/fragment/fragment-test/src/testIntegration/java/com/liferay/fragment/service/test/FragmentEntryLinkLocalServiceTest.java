@@ -161,7 +161,7 @@ public class FragmentEntryLinkLocalServiceTest {
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				fragmentCollection.getFragmentCollectionId(), null,
 				"Fragment Name", StringPool.BLANK, "<div>test</div>",
-				StringPool.BLANK, "{fieldSets:[]}", 0,
+				StringPool.BLANK, "{fieldSets: []}", 0,
 				FragmentConstants.TYPE_SECTION,
 				WorkflowConstants.STATUS_APPROVED, serviceContext);
 
@@ -213,7 +213,7 @@ public class FragmentEntryLinkLocalServiceTest {
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				fragmentCollection.getFragmentCollectionId(), null,
 				"Fragment Name", StringPool.BLANK, "<div>test</div>",
-				StringPool.BLANK, "{fieldSets:[]}", 0,
+				StringPool.BLANK, "{fieldSets: []}", 0,
 				FragmentConstants.TYPE_SECTION,
 				WorkflowConstants.STATUS_APPROVED, serviceContext);
 
@@ -252,7 +252,7 @@ public class FragmentEntryLinkLocalServiceTest {
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				fragmentCollection.getFragmentCollectionId(), null,
 				"Fragment Name", StringPool.BLANK, "<div>test</div>",
-				StringPool.BLANK, "{fieldSets:[]}", 0,
+				StringPool.BLANK, "{fieldSets: []}", 0,
 				FragmentConstants.TYPE_SECTION,
 				WorkflowConstants.STATUS_APPROVED, serviceContext);
 
@@ -302,7 +302,7 @@ public class FragmentEntryLinkLocalServiceTest {
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				fragmentCollection.getFragmentCollectionId(), null,
 				"Fragment Name", StringPool.BLANK, "<div>test</div>",
-				StringPool.BLANK, "{fieldSets:[]}", 0,
+				StringPool.BLANK, "{fieldSets: []}", 0,
 				FragmentConstants.TYPE_SECTION,
 				WorkflowConstants.STATUS_APPROVED, serviceContext);
 

@@ -101,7 +101,7 @@ public class FragmentEntryLinkServiceTest {
 		String css = "div {\\ncolor: red;\\n}";
 		String html = "<div>test</div>";
 		String js = "alert(\"test\");";
-		String configuration = "{fieldSets:[]}";
+		String configuration = "{fieldSets: []}";
 
 		_addSiteMemberUpdatePermission();
 
