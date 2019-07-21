@@ -42,7 +42,7 @@ export const APPS = {
 		}
 	],
 	EMPTY_STATE: {
-		title: Liferay.Language.get('no-deployments-yet'),
+		title: Liferay.Language.get('there-are-no-deployments-yet'),
 		description: Liferay.Language.get(
 			'select-the-form-and-table-view-you-want-and-deploy-your-app-as-a-widget-standalone-or-place-it-in-the-product-menu'
 		)
@@ -80,7 +80,7 @@ export const CUSTOM_OBJECTS = {
 		}
 	],
 	EMPTY_STATE: {
-		title: Liferay.Language.get('no-custom-objects-yet'),
+		title: Liferay.Language.get('there-are-no-custom-objects-yet'),
 		description: Liferay.Language.get(
 			'custom-objects-define-the-types-of-data-your-business-application-needs'
 		)
@@ -119,7 +119,7 @@ export const TABLE_VIEWS = {
 		}
 	],
 	EMPTY_STATE: {
-		title: Liferay.Language.get('no-table-views-yet'),
+		title: Liferay.Language.get('there-are-no-table-views-yet'),
 		description: Liferay.Language.get(
 			'create-one-or-more-tables-to-display-the-data-held-in-your-data-object'
 		)
@@ -155,7 +155,7 @@ export const FORM_VIEWS = {
 		}
 	],
 	EMPTY_STATE: {
-		title: Liferay.Language.get('no-form-views-yet'),
+		title: Liferay.Language.get('there-are-no-form-views-yet'),
 		description: Liferay.Language.get(
 			'create-one-or-more-forms-to-display-the-data-held-in-your-data-object'
 		)
