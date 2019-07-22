@@ -20,6 +20,7 @@ const {Item} = ClayDropDown;
 export default function DropDownAction({action, row, setActive}) {
 	return (
 		<Item
+			href="javascript:;"
 			onClick={() => {
 				setActive(false);
 				action.callback(row);
