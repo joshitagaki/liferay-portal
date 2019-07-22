@@ -17,22 +17,11 @@ package com.liferay.app.builder.model.impl;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
- * The extended model implementation for the AppBuilderApp service. Represents a row in the &quot;AppBuilderApp&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.app.builder.model.AppBuilderApp</code> interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 @ProviderType
 public class AppBuilderAppImpl extends AppBuilderAppBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a app builder app model instance should use the {@link com.liferay.app.builder.model.AppBuilderApp} interface instead.
-	 */
 	public AppBuilderAppImpl() {
 	}
 

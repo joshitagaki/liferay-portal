@@ -20,17 +20,7 @@ import com.liferay.portal.aop.AopService;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * The implementation of the app builder app local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.app.builder.service.AppBuilderAppLocalService</code> interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see AppBuilderAppLocalServiceBaseImpl
  */
 @Component(
 	property = "model.class.name=com.liferay.app.builder.model.AppBuilderApp",
@@ -38,11 +28,4 @@ import org.osgi.service.component.annotations.Component;
 )
 public class AppBuilderAppLocalServiceImpl
 	extends AppBuilderAppLocalServiceBaseImpl {
-
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>com.liferay.app.builder.service.AppBuilderAppLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.app.builder.service.AppBuilderAppLocalServiceUtil</code>.
-	 */
-
 }
