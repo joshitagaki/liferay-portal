@@ -108,11 +108,11 @@ public class LayoutPageTemplateEntryServiceTest {
 
 	@Test
 	public void testAddLayoutPageTemplateEntry() throws PortalException {
+		String name = RandomTestUtil.randomString();
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
-
-		String name = RandomTestUtil.randomString();
 
 		LayoutPageTemplateEntry layoutPageTemplateEntry =
 			_layoutPageTemplateEntryService.addLayoutPageTemplateEntry(
@@ -132,11 +132,11 @@ public class LayoutPageTemplateEntryServiceTest {
 	public void testAddLayoutPageTemplateEntryByTypeAndStatus()
 		throws PortalException {
 
+		String name = RandomTestUtil.randomString();
+
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
-
-		String name = RandomTestUtil.randomString();
 
 		LayoutPageTemplateEntry layoutPageTemplateEntry =
 			_layoutPageTemplateEntryService.addLayoutPageTemplateEntry(
