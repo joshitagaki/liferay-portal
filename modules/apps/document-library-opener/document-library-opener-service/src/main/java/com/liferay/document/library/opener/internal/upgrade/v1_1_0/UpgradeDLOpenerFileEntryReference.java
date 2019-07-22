@@ -15,7 +15,6 @@
 package com.liferay.document.library.opener.internal.upgrade.v1_1_0;
 
 import com.liferay.document.library.opener.internal.upgrade.v1_1_0.util.DLOpenerFileEntryReferenceTable;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
@@ -29,17 +28,9 @@ public class UpgradeDLOpenerFileEntryReference extends UpgradeProcess {
 			DLOpenerFileEntryReferenceTable.class,
 			new AlterTableAddColumn("referenceType STRING null"));
 
-		_addReferenceTypeColumnGoogleValue();
-	}
-
-	private void _addReferenceTypeColumnGoogleValue() throws Exception {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append("update ");
-		sb.append(DLOpenerFileEntryReferenceTable.TABLE_NAME);
-		sb.append(" set referenceType = 'Google'");
-
-		runSQL(sb.toString());
+		runSQL(
+			"update " + DLOpenerFileEntryReferenceTable.TABLE_NAME +
+				" set referenceType = 'Google'");
 	}
 
 }
