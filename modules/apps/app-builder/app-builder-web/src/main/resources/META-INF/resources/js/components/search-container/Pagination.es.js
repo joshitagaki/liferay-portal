@@ -15,14 +15,14 @@
 import ClayPagination from '@clayui/pagination';
 import React from 'react';
 
-export default function Pagination(props) {
+export default function Pagination({onPageChange, page, totalPages}) {
 	return (
 		<ClayPagination
-			activePage={props.page}
+			activePage={page}
 			ellipsisBuffer={0}
-			onPageChange={props.onPageChange}
+			onPageChange={onPageChange}
 			spritemap={`${Liferay.ThemeDisplay.getPathThemeImages()}/lexicon/icons.svg`}
-			totalPages={props.totalPages}
+			totalPages={totalPages}
 		/>
 	);
 }

@@ -19,8 +19,13 @@ import lang from '../../utils/lang.es';
 
 const {Item, ItemList} = ClayDropDown;
 
-export default function PageSize(props) {
-	const {itemsCount, onPageSizeChange, page, pageSize, totalCount} = props;
+export default function PageSize({
+	itemsCount,
+	onPageSizeChange,
+	page,
+	pageSize,
+	totalCount
+}) {
 	const [active, setActive] = useState(false);
 
 	const options = [5, 10, 20, 30, 50, 75];

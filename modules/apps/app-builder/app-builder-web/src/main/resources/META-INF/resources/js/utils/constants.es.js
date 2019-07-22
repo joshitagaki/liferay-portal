@@ -12,10 +12,10 @@
  * details.
  */
 
-import {deleteItem} from './client.es';
-import {Link} from 'react-router-dom';
 import moment from 'moment';
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {deleteItem} from './client.es';
 
 export const APPS = {
 	ACTIONS: [
@@ -99,42 +99,6 @@ export const CUSTOM_OBJECTS = {
 		}))
 };
 
-export const TABLE_VIEWS = {
-	ACTIONS: [
-		{
-			name: Liferay.Language.get('delete'),
-			callback: row =>
-				deleteItem(`/o/data-engine/v1.0/data-layouts-views/${row.id}`)
-		}
-	],
-	COLUMNS: [
-		{
-			name: Liferay.Language.get('name')
-		},
-		{
-			dateCreated: Liferay.Language.get('create-date')
-		},
-		{
-			dateModified: Liferay.Language.get('modified-date')
-		}
-	],
-	EMPTY_STATE: {
-		title: Liferay.Language.get('there-are-no-table-views-yet'),
-		description: Liferay.Language.get(
-			'create-one-or-more-tables-to-display-the-data-held-in-your-data-object'
-		)
-	},
-	ENDPOINT: dataDefinitionId =>
-		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-layouts-views`,
-	FORMATTER: items =>
-		items.map(item => ({
-			dateCreated: moment(item.dateCreated).fromNow(),
-			dateModified: moment(item.dateModified).fromNow(),
-			id: item.id,
-			name: item.name.en_US
-		}))
-};
-
 export const FORM_VIEWS = {
 	ACTIONS: [
 		{
@@ -155,13 +119,49 @@ export const FORM_VIEWS = {
 		}
 	],
 	EMPTY_STATE: {
-		title: Liferay.Language.get('there-are-no-form-views-yet'),
+		title: Liferay.Language.get('there-are-no-table-views-yet'),
 		description: Liferay.Language.get(
 			'create-one-or-more-forms-to-display-the-data-held-in-your-data-object'
 		)
 	},
 	ENDPOINT: dataDefinitionId =>
 		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-layouts`,
+	FORMATTER: items =>
+		items.map(item => ({
+			dateCreated: moment(item.dateCreated).fromNow(),
+			dateModified: moment(item.dateModified).fromNow(),
+			id: item.id,
+			name: item.name.en_US
+		}))
+};
+
+export const TABLE_VIEWS = {
+	ACTIONS: [
+		{
+			name: Liferay.Language.get('delete'),
+			callback: row =>
+				deleteItem(`/o/data-engine/v1.0/data-layouts-views/${row.id}`)
+		}
+	],
+	COLUMNS: [
+		{
+			name: Liferay.Language.get('name')
+		},
+		{
+			dateCreated: Liferay.Language.get('create-date')
+		},
+		{
+			dateModified: Liferay.Language.get('modified-date')
+		}
+	],
+	EMPTY_STATE: {
+		title: Liferay.Language.get('there-are-no-form-views-yet'),
+		description: Liferay.Language.get(
+			'create-one-or-more-tables-to-display-the-data-held-in-your-data-object'
+		)
+	},
+	ENDPOINT: dataDefinitionId =>
+		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-layouts-views`,
 	FORMATTER: items =>
 		items.map(item => ({
 			dateCreated: moment(item.dateCreated).fromNow(),

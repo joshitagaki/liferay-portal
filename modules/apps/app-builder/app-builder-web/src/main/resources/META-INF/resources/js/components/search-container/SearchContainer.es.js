@@ -20,9 +20,13 @@ import React, {Fragment, useState} from 'react';
 import Table from './Table.es';
 import {useResource} from '@clayui/data-provider';
 
-export default function SearchContainer(props) {
-	const {columns, emptyState, endpoint, formatter} = props;
-
+export default function SearchContainer({
+	actions,
+	columns,
+	emptyState,
+	endpoint,
+	formatter
+}) {
 	const [loading, setLoading] = useState(true);
 
 	const [state, setState] = useState({
@@ -61,19 +65,20 @@ export default function SearchContainer(props) {
 		}));
 	};
 
-	const actions = props.actions.map(action => ({
-		...action,
-		callback: row => {
-			action.callback(row).then(() => {
-				if (page > 1 && items.length === 1) {
-					goBackPage();
-					return;
-				}
+	const refetchOnDelete = actions =>
+		actions.map(action => ({
+			...action,
+			callback: row => {
+				action.callback(row).then(() => {
+					if (page > 1 && items.length === 1) {
+						goBackPage();
+						return;
+					}
 
-				refetch();
-			});
-		}
-	}));
+					refetch();
+				});
+			}
+		}));
 
 	if (!items || items.length === 0) {
 		return <EmptyState {...emptyState} />;
@@ -82,7 +87,7 @@ export default function SearchContainer(props) {
 	return (
 		<Fragment>
 			<Table
-				actions={actions}
+				actions={refetchOnDelete(actions)}
 				columns={columns}
 				rows={formatter(items)}
 			/>

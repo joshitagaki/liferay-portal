@@ -14,9 +14,7 @@
 
 import React from 'react';
 
-export default function EmptyState(props) {
-	const {description, title} = props;
-
+export default function EmptyState({description, title}) {
 	return (
 		<div className="taglib-empty-result-message">
 			<div className="text-center">

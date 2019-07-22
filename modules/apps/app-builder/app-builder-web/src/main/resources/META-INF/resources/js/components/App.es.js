@@ -12,11 +12,11 @@
  * details.
  */
 
-import CustomObject from './custom-object/CustomObject.es';
-import {CUSTOM_OBJECTS} from '../utils/constants.es';
 import React from 'react';
 import {Route, HashRouter as Router, Switch} from 'react-router-dom';
+import CustomObject from './custom-object/CustomObject.es';
 import SearchContainer from './search-container/SearchContainer.es';
+import {CUSTOM_OBJECTS} from '../utils/constants.es';
 
 export default function App() {
 	return (

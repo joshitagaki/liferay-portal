@@ -17,9 +17,7 @@ import React from 'react';
 
 const {Item} = ClayDropDown;
 
-export default function DropDownAction(props) {
-	const {action, row, setActive} = props;
-
+export default function DropDownAction({action, row, setActive}) {
 	return (
 		<Item
 			onClick={() => {

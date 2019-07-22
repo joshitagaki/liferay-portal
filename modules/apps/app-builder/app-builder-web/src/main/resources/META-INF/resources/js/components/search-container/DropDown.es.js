@@ -14,13 +14,12 @@
 
 import ClayDropDown, {Align} from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
-import DropDownAction from './DropDownAction.es';
 import React, {useState} from 'react';
+import DropDownAction from './DropDownAction.es';
 
 const {ItemList} = ClayDropDown;
 
-export default function DropDown(props) {
-	const {actions, row} = props;
+export default function DropDown({actions, row}) {
 	const [active, setActive] = useState(false);
 
 	return (

@@ -13,14 +13,12 @@
  */
 
 import ClayTable from '@clayui/table';
-import DropDown from './DropDown.es';
 import React from 'react';
+import DropDown from './DropDown.es';
 
 const {Body, Cell, Head, Row} = ClayTable;
 
-export default function Table(props) {
-	const {actions, columns, rows} = props;
-
+export default function Table({actions, columns, rows}) {
 	return (
 		<div className="table-responsive">
 			<ClayTable hover={false} responsive={false}>
