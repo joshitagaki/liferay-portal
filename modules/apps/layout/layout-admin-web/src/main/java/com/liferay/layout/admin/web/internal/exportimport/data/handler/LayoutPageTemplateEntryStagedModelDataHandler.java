@@ -270,12 +270,12 @@ public class LayoutPageTemplateEntryStagedModelDataHandler
 		importedLayoutPageTemplateEntry.setClassTypeId(classTypeId);
 		importedLayoutPageTemplateEntry.setPlid(plid);
 
+		LayoutPrototype layoutPrototype = null;
+
 		Element layoutPrototypeElement =
 			portletDataContext.getReferenceDataElement(
 				layoutPageTemplateEntry, LayoutPrototype.class,
 				layoutPageTemplateEntry.getLayoutPrototypeId());
-
-		LayoutPrototype layoutPrototype = null;
 
 		if (layoutPrototypeElement != null) {
 			String layoutPrototypePath = layoutPrototypeElement.attributeValue(
