@@ -69,7 +69,11 @@ export default function SearchContainer({
 		actions.map(action => ({
 			...action,
 			callback: row => {
-				action.callback(row).then(() => {
+				action.callback(row).then(confirmed => {
+					if (!confirmed) {
+						return;
+					}
+
 					if (page > 1 && items.length === 1) {
 						goBackPage();
 						return;

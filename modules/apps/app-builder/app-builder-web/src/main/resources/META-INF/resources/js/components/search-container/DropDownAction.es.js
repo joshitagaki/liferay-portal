@@ -22,16 +22,7 @@ export default function DropDownAction({action, row, setActive}) {
 		<Item
 			onClick={() => {
 				setActive(false);
-
-				const confirmed = confirm(
-					Liferay.Language.get(
-						'are-you-sure-you-want-to-delete-it-permanently'
-					)
-				);
-
-				if (confirmed) {
-					action.callback(row);
-				}
+				action.callback(row);
 			}}
 		>
 			{action.name}

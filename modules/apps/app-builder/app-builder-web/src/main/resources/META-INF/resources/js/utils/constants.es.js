@@ -17,11 +17,26 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {deleteItem} from './client.es';
 
+const confirmDelete = endpoint => row =>
+	new Promise((resolve, reject) => {
+		const confirmed = confirm(
+			Liferay.Language.get('are-you-sure-you-want-to-delete-this')
+		);
+
+		if (confirmed) {
+			deleteItem(endpoint + row.id)
+				.then(() => resolve(true))
+				.catch(error => reject(error));
+		} else {
+			resolve(false);
+		}
+	});
+
 export const APPS = {
 	ACTIONS: [
 		{
 			name: Liferay.Language.get('delete'),
-			callback: row => deleteItem(`/o/app-builder/v1.0/apps/${row.id}`)
+			callback: confirmDelete('/o/app-builder/v1.0/apps/')
 		}
 	],
 	COLUMNS: [
@@ -64,8 +79,7 @@ export const CUSTOM_OBJECTS = {
 	ACTIONS: [
 		{
 			name: Liferay.Language.get('delete'),
-			callback: row =>
-				deleteItem(`/o/data-engine/v1.0/data-definitions/${row.id}`)
+			callback: confirmDelete('/o/data-engine/v1.0/data-definitions/')
 		}
 	],
 	COLUMNS: [
@@ -103,8 +117,7 @@ export const FORM_VIEWS = {
 	ACTIONS: [
 		{
 			name: Liferay.Language.get('delete'),
-			callback: row =>
-				deleteItem(`/o/data-engine/v1.0/data-layouts/${row.id}`)
+			callback: confirmDelete('/o/data-engine/v1.0/data-layouts/')
 		}
 	],
 	COLUMNS: [
@@ -139,8 +152,7 @@ export const TABLE_VIEWS = {
 	ACTIONS: [
 		{
 			name: Liferay.Language.get('delete'),
-			callback: row =>
-				deleteItem(`/o/data-engine/v1.0/data-layouts-views/${row.id}`)
+			callback: confirmDelete('/o/data-engine/v1.0/data-layouts-views/')
 		}
 	],
 	COLUMNS: [
