@@ -65,7 +65,7 @@ public class SegmentsExperienceModelListener
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to update segments experience" +
+					"Unable to update segments experience " +
 						segmentsExperience.getSegmentsExperienceId(),
 					e);
 			}

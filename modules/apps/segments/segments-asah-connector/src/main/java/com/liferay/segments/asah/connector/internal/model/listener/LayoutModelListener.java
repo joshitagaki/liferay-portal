@@ -62,7 +62,7 @@ public class LayoutModelListener extends BaseModelListener<Layout> {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to update layout" + layout.getLayoutId(), e);
+				_log.warn("Unable to update layout " + layout.getLayoutId(), e);
 			}
 		}
 	}

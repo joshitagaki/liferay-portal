@@ -52,7 +52,7 @@ public class SegmentsExperimentModelListener
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to update segments experiment" +
+					"Unable to update segments experiment " +
 						segmentsExperiment.getSegmentsExperimentId(),
 					e);
 			}
@@ -70,7 +70,7 @@ public class SegmentsExperimentModelListener
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to add segments experiment" +
+					"Unable to add segments experiment " +
 						segmentsExperiment.getSegmentsExperimentId(),
 					e);
 			}
