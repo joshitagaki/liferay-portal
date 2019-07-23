@@ -141,7 +141,6 @@ public class FragmentCollectionServicePermissionTest {
 
 		FragmentCollection fragmentCollection1 =
 			FragmentTestUtil.addFragmentCollection(_group.getGroupId());
-
 		FragmentCollection fragmentCollection2 =
 			FragmentTestUtil.addFragmentCollection(_group.getGroupId());
 
@@ -162,7 +161,6 @@ public class FragmentCollectionServicePermissionTest {
 
 		FragmentCollection fragmentCollection1 =
 			FragmentTestUtil.addFragmentCollection(_group.getGroupId());
-
 		FragmentCollection fragmentCollection2 =
 			FragmentTestUtil.addFragmentCollection(_group.getGroupId());
 
