@@ -23,6 +23,7 @@
 
 		<!-- Other fields -->
 
+		<column name="ddmStructureId" type="long" />
 		<column name="deDataLayoutId" type="long" />
 		<column name="deDataListViewId" type="long" />
 		<column localized="true" name="name" type="String" />
@@ -32,6 +33,11 @@
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_C_D" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="companyId" />
+			<finder-column name="ddmStructureId" />
 		</finder>
 	</entity>
 </service-builder>
