@@ -1041,24 +1041,6 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.model.LayoutSoap updateLayoutType(
-			long plid, String type)
-		throws RemoteException {
-
-		try {
-			com.liferay.portal.kernel.model.Layout returnValue =
-				LayoutServiceUtil.updateLayoutType(plid, type);
-
-			return com.liferay.portal.kernel.model.LayoutSoap.toSoapModel(
-				returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	/**
 	 * Updates the look and feel of the layout.
 	 *
@@ -1322,6 +1304,24 @@ public class LayoutServiceSoap {
 		try {
 			com.liferay.portal.kernel.model.Layout returnValue =
 				LayoutServiceUtil.updatePriority(plid, priority);
+
+			return com.liferay.portal.kernel.model.LayoutSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.model.LayoutSoap updateType(
+			long plid, String type)
+		throws RemoteException {
+
+		try {
+			com.liferay.portal.kernel.model.Layout returnValue =
+				LayoutServiceUtil.updateType(plid, type);
 
 			return com.liferay.portal.kernel.model.LayoutSoap.toSoapModel(
 				returnValue);
