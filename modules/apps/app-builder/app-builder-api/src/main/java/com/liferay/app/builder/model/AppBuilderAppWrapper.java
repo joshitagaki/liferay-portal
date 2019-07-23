@@ -54,6 +54,7 @@ public class AppBuilderAppWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("ddmStructureId", getDdmStructureId());
 		attributes.put("deDataLayoutId", getDeDataLayoutId());
 		attributes.put("deDataListViewId", getDeDataListViewId());
 		attributes.put("name", getName());
@@ -110,6 +111,12 @@ public class AppBuilderAppWrapper
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Long ddmStructureId = (Long)attributes.get("ddmStructureId");
+
+		if (ddmStructureId != null) {
+			setDdmStructureId(ddmStructureId);
 		}
 
 		Long deDataLayoutId = (Long)attributes.get("deDataLayoutId");
@@ -170,6 +177,16 @@ public class AppBuilderAppWrapper
 	@Override
 	public Date getCreateDate() {
 		return model.getCreateDate();
+	}
+
+	/**
+	 * Returns the ddm structure ID of this app builder app.
+	 *
+	 * @return the ddm structure ID of this app builder app
+	 */
+	@Override
+	public long getDdmStructureId() {
+		return model.getDdmStructureId();
 	}
 
 	/**
@@ -401,6 +418,16 @@ public class AppBuilderAppWrapper
 	@Override
 	public void setCreateDate(Date createDate) {
 		model.setCreateDate(createDate);
+	}
+
+	/**
+	 * Sets the ddm structure ID of this app builder app.
+	 *
+	 * @param ddmStructureId the ddm structure ID of this app builder app
+	 */
+	@Override
+	public void setDdmStructureId(long ddmStructureId) {
+		model.setDdmStructureId(ddmStructureId);
 	}
 
 	/**

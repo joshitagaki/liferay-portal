@@ -209,6 +209,20 @@ public interface AppBuilderAppModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Returns the ddm structure ID of this app builder app.
+	 *
+	 * @return the ddm structure ID of this app builder app
+	 */
+	public long getDdmStructureId();
+
+	/**
+	 * Sets the ddm structure ID of this app builder app.
+	 *
+	 * @param ddmStructureId the ddm structure ID of this app builder app
+	 */
+	public void setDdmStructureId(long ddmStructureId);
+
+	/**
 	 * Returns the de data layout ID of this app builder app.
 	 *
 	 * @return the de data layout ID of this app builder app

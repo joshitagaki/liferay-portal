@@ -7,6 +7,7 @@ create table AppBuilderApp (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	ddmStructureId LONG,
 	deDataLayoutId LONG,
 	deDataListViewId LONG,
 	name STRING null,

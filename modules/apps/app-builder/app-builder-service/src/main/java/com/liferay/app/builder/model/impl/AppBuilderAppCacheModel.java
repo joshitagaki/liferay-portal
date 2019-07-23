@@ -65,7 +65,7 @@ public class AppBuilderAppCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -83,6 +83,8 @@ public class AppBuilderAppCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", ddmStructureId=");
+		sb.append(ddmStructureId);
 		sb.append(", deDataLayoutId=");
 		sb.append(deDataLayoutId);
 		sb.append(", deDataListViewId=");
@@ -133,6 +135,7 @@ public class AppBuilderAppCacheModel
 			appBuilderAppImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		appBuilderAppImpl.setDdmStructureId(ddmStructureId);
 		appBuilderAppImpl.setDeDataLayoutId(deDataLayoutId);
 		appBuilderAppImpl.setDeDataListViewId(deDataListViewId);
 
@@ -170,6 +173,8 @@ public class AppBuilderAppCacheModel
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
+		ddmStructureId = objectInput.readLong();
+
 		deDataLayoutId = objectInput.readLong();
 
 		deDataListViewId = objectInput.readLong();
@@ -204,6 +209,8 @@ public class AppBuilderAppCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
+		objectOutput.writeLong(ddmStructureId);
+
 		objectOutput.writeLong(deDataLayoutId);
 
 		objectOutput.writeLong(deDataListViewId);
@@ -231,6 +238,7 @@ public class AppBuilderAppCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long ddmStructureId;
 	public long deDataLayoutId;
 	public long deDataListViewId;
 	public String name;

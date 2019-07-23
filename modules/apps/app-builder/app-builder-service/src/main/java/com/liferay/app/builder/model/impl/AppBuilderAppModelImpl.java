@@ -84,8 +84,9 @@ public class AppBuilderAppModelImpl
 		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
 		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
 		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"deDataLayoutId", Types.BIGINT}, {"deDataListViewId", Types.BIGINT},
-		{"name", Types.VARCHAR}, {"settings_", Types.VARCHAR}
+		{"ddmStructureId", Types.BIGINT}, {"deDataLayoutId", Types.BIGINT},
+		{"deDataListViewId", Types.BIGINT}, {"name", Types.VARCHAR},
+		{"settings_", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -100,6 +101,7 @@ public class AppBuilderAppModelImpl
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("ddmStructureId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("deDataLayoutId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("deDataListViewId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
@@ -107,7 +109,7 @@ public class AppBuilderAppModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AppBuilderApp (uuid_ VARCHAR(75) null,appBuilderAppId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,deDataLayoutId LONG,deDataListViewId LONG,name STRING null,settings_ VARCHAR(75) null)";
+		"create table AppBuilderApp (uuid_ VARCHAR(75) null,appBuilderAppId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,ddmStructureId LONG,deDataLayoutId LONG,deDataListViewId LONG,name STRING null,settings_ VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table AppBuilderApp";
 
@@ -125,11 +127,13 @@ public class AppBuilderAppModelImpl
 
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
+	public static final long DDMSTRUCTUREID_COLUMN_BITMASK = 2L;
 
-	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long GROUPID_COLUMN_BITMASK = 4L;
 
-	public static final long APPBUILDERAPPID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+
+	public static final long APPBUILDERAPPID_COLUMN_BITMASK = 16L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -299,6 +303,11 @@ public class AppBuilderAppModelImpl
 			"modifiedDate",
 			(BiConsumer<AppBuilderApp, Date>)AppBuilderApp::setModifiedDate);
 		attributeGetterFunctions.put(
+			"ddmStructureId", AppBuilderApp::getDdmStructureId);
+		attributeSetterBiConsumers.put(
+			"ddmStructureId",
+			(BiConsumer<AppBuilderApp, Long>)AppBuilderApp::setDdmStructureId);
+		attributeGetterFunctions.put(
 			"deDataLayoutId", AppBuilderApp::getDeDataLayoutId);
 		attributeSetterBiConsumers.put(
 			"deDataLayoutId",
@@ -467,6 +476,28 @@ public class AppBuilderAppModelImpl
 		_setModifiedDate = true;
 
 		_modifiedDate = modifiedDate;
+	}
+
+	@Override
+	public long getDdmStructureId() {
+		return _ddmStructureId;
+	}
+
+	@Override
+	public void setDdmStructureId(long ddmStructureId) {
+		_columnBitmask |= DDMSTRUCTUREID_COLUMN_BITMASK;
+
+		if (!_setOriginalDdmStructureId) {
+			_setOriginalDdmStructureId = true;
+
+			_originalDdmStructureId = _ddmStructureId;
+		}
+
+		_ddmStructureId = ddmStructureId;
+	}
+
+	public long getOriginalDdmStructureId() {
+		return _originalDdmStructureId;
 	}
 
 	@Override
@@ -722,6 +753,7 @@ public class AppBuilderAppModelImpl
 		appBuilderAppImpl.setUserName(getUserName());
 		appBuilderAppImpl.setCreateDate(getCreateDate());
 		appBuilderAppImpl.setModifiedDate(getModifiedDate());
+		appBuilderAppImpl.setDdmStructureId(getDdmStructureId());
 		appBuilderAppImpl.setDeDataLayoutId(getDeDataLayoutId());
 		appBuilderAppImpl.setDeDataListViewId(getDeDataListViewId());
 		appBuilderAppImpl.setName(getName());
@@ -802,6 +834,11 @@ public class AppBuilderAppModelImpl
 
 		appBuilderAppModelImpl._setModifiedDate = false;
 
+		appBuilderAppModelImpl._originalDdmStructureId =
+			appBuilderAppModelImpl._ddmStructureId;
+
+		appBuilderAppModelImpl._setOriginalDdmStructureId = false;
+
 		appBuilderAppModelImpl._columnBitmask = 0;
 	}
 
@@ -851,6 +888,8 @@ public class AppBuilderAppModelImpl
 		else {
 			appBuilderAppCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
+
+		appBuilderAppCacheModel.ddmStructureId = getDdmStructureId();
 
 		appBuilderAppCacheModel.deDataLayoutId = getDeDataLayoutId();
 
@@ -962,6 +1001,9 @@ public class AppBuilderAppModelImpl
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
+	private long _ddmStructureId;
+	private long _originalDdmStructureId;
+	private boolean _setOriginalDdmStructureId;
 	private long _deDataLayoutId;
 	private long _deDataListViewId;
 	private String _name;
