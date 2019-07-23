@@ -52,7 +52,8 @@ public class ConfigurationIndexingExtender {
 		if (_clusterMasterExecutor.isMaster()) {
 			Bundle[] bundles = bundleContext.getBundles();
 
-			List<ConfigurationModel> configurationModelList = new ArrayList<>();
+			List<ConfigurationModel> configurationModelsList =
+				new ArrayList<>();
 
 			for (Bundle bundle : bundles) {
 				if (bundle.getState() != Bundle.ACTIVE) {
@@ -64,13 +65,13 @@ public class ConfigurationIndexingExtender {
 						bundle, ExtendedObjectClassDefinition.Scope.SYSTEM,
 						null);
 
-				configurationModelList.addAll(configurationModels.values());
+				configurationModelsList.addAll(configurationModels.values());
 
 				_configurationModelsMap.put(
 					bundle.getSymbolicName(), configurationModels.values());
 			}
 
-			_configurationModelIndexer.reindex(configurationModelList);
+			_configurationModelIndexer.reindex(configurationModelsList);
 
 			commit(_configurationModelIndexer);
 		}
@@ -142,20 +143,20 @@ public class ConfigurationIndexingExtender {
 				return new ConfigurationModelIterator(configurationModels);
 			}
 
-			Map<String, ConfigurationModel> configurationModelMap =
+			Map<String, ConfigurationModel> configurationModelsMap =
 				_configurationModelRetriever.getConfigurationModels(
 					bundle, ExtendedObjectClassDefinition.Scope.SYSTEM, null);
 
-			if (configurationModelMap.isEmpty()) {
+			if (configurationModelsMap.isEmpty()) {
 				return null;
 			}
 
-			_configurationModelIndexer.reindex(configurationModelMap.values());
+			_configurationModelIndexer.reindex(configurationModelsMap.values());
 
 			commit(_configurationModelIndexer);
 
 			return new ConfigurationModelIterator(
-				configurationModelMap.values());
+				configurationModelsMap.values());
 		}
 
 		@Override
