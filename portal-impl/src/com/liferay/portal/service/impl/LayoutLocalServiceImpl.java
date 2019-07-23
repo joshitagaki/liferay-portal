@@ -2560,7 +2560,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	@Override
-	public Layout updateLayoutType(long plid, String type)
+	public Layout updateType(long plid, String type)
 		throws PortalException {
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
