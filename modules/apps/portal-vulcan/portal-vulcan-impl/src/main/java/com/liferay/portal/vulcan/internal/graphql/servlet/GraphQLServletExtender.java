@@ -180,10 +180,9 @@ public class GraphQLServletExtender {
 
 			GraphQLSchema graphQLSchema = typeResolutionEnvironment.getSchema();
 
-			Map<String, GraphQLType> graphQLTypeMap =
-				graphQLSchema.getTypeMap();
+			Map<String, GraphQLType> graphQLTypes = graphQLSchema.getTypeMap();
 
-			GraphQLType graphQLType = graphQLTypeMap.get(
+			GraphQLType graphQLType = graphQLTypes.get(
 				_getClassName(typeResolutionEnvironment.getObject()));
 
 			return (GraphQLObjectType)graphQLType;
@@ -831,13 +830,13 @@ public class GraphQLServletExtender {
 		GraphQLSchema.Builder schemaBuilder) {
 
 		try {
-			Map<String, GraphQLType> graphQLTypeMap =
+			Map<String, GraphQLType> graphQLTypes =
 				processingElementsContainer.getTypeRegistry();
 
 			GraphQLInterfaceType graphQLInterfaceType =
 				_getNodeGraphQLInterfaceType();
 
-			graphQLTypeMap.put("GraphQLNode", graphQLInterfaceType);
+			graphQLTypes.put("GraphQLNode", graphQLInterfaceType);
 
 			queryBuilder.field(
 				_getNodeGraphQLFieldDefinition(graphQLInterfaceType));
@@ -854,7 +853,7 @@ public class GraphQLServletExtender {
 				).build());
 
 			for (Map.Entry<String, GraphQLType> entry :
-					graphQLTypeMap.entrySet()) {
+					graphQLTypes.entrySet()) {
 
 				GraphQLType graphQLType = entry.getValue();
 
@@ -1376,10 +1375,9 @@ public class GraphQLServletExtender {
 			DataFetchingEnvironment dataFetchingEnvironment,
 			GraphQLSchema graphQLSchema) {
 
-			Map<String, GraphQLType> graphQLTypeMap =
-				graphQLSchema.getTypeMap();
+			Map<String, GraphQLType> graphQLTypes = graphQLSchema.getTypeMap();
 
-			GraphQLType graphQLType = graphQLTypeMap.get(
+			GraphQLType graphQLType = graphQLTypes.get(
 				dataFetchingEnvironment.getArgument("dataType"));
 
 			return StringUtil.lowerCaseFirstLetter(graphQLType.getName());
