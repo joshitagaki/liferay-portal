@@ -57,7 +57,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Collection postCollection(
+	public Collection createCollection(
 			@GraphQLName("companyId") Long companyId,
 			@GraphQLName("userId") Long userId,
 			@GraphQLName("collectionUpdate") CollectionUpdate collectionUpdate)
@@ -84,7 +84,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Response postCollectionCheckout(
+	public Response createCollectionCheckout(
 			@GraphQLName("collectionId") Long collectionId,
 			@GraphQLName("userId") Long userId)
 		throws Exception {
@@ -97,7 +97,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Response postCollectionPublish(
+	public Response createCollectionPublish(
 			@GraphQLName("collectionId") Long collectionId,
 			@GraphQLName("ignoreCollision") Boolean ignoreCollision,
 			@GraphQLName("userId") Long userId)
@@ -111,7 +111,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Settings putSettings(
+	public Settings updateSettings(
 			@GraphQLName("companyId") Long companyId,
 			@GraphQLName("userId") Long userId,
 			@GraphQLName("settingsUpdate") SettingsUpdate settingsUpdate)

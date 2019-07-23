@@ -90,7 +90,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataDefinition putDataDefinition(
+	public DataDefinition updateDataDefinition(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("dataDefinition") DataDefinition dataDefinition)
 		throws Exception {
@@ -103,7 +103,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postDataDefinitionDataDefinitionPermission(
+	public boolean createDataDefinitionDataDefinitionPermission(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataDefinitionPermission") DataDefinitionPermission
@@ -122,7 +122,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postSiteDataDefinitionPermission(
+	public boolean createSiteDataDefinitionPermission(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataDefinitionPermission") DataDefinitionPermission
@@ -140,7 +140,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataDefinition postSiteDataDefinition(
+	public DataDefinition createSiteDataDefinition(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("dataDefinition") DataDefinition dataDefinition)
 		throws Exception {
@@ -154,7 +154,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataLayout postDataDefinitionDataLayout(
+	public DataLayout createDataDefinitionDataLayout(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("dataLayout") DataLayout dataLayout)
 		throws Exception {
@@ -168,7 +168,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postDataLayoutDataLayoutPermission(
+	public boolean createDataLayoutDataLayoutPermission(
 			@GraphQLName("dataLayoutId") Long dataLayoutId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataLayoutPermission") DataLayoutPermission
@@ -200,7 +200,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataLayout putDataLayout(
+	public DataLayout updateDataLayout(
 			@GraphQLName("dataLayoutId") Long dataLayoutId,
 			@GraphQLName("dataLayout") DataLayout dataLayout)
 		throws Exception {
@@ -213,7 +213,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postSiteDataLayoutPermission(
+	public boolean createSiteDataLayoutPermission(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataLayoutPermission") DataLayoutPermission
@@ -231,7 +231,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataRecord postDataDefinitionDataRecord(
+	public DataRecord createDataDefinitionDataRecord(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("dataRecord") DataRecord dataRecord)
 		throws Exception {
@@ -245,7 +245,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataRecord postDataRecordCollectionDataRecord(
+	public DataRecord createDataRecordCollectionDataRecord(
 			@GraphQLName("dataRecordCollectionId") Long dataRecordCollectionId,
 			@GraphQLName("dataRecord") DataRecord dataRecord)
 		throws Exception {
@@ -273,7 +273,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataRecord putDataRecord(
+	public DataRecord updateDataRecord(
 			@GraphQLName("dataRecordId") Long dataRecordId,
 			@GraphQLName("dataRecord") DataRecord dataRecord)
 		throws Exception {
@@ -286,7 +286,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataRecordCollection postDataDefinitionDataRecordCollection(
+	public DataRecordCollection createDataDefinitionDataRecordCollection(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("dataRecordCollection") DataRecordCollection
 				dataRecordCollection)
@@ -317,7 +317,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public DataRecordCollection putDataRecordCollection(
+	public DataRecordCollection updateDataRecordCollection(
 			@GraphQLName("dataRecordCollectionId") Long dataRecordCollectionId,
 			@GraphQLName("dataRecordCollection") DataRecordCollection
 				dataRecordCollection)
@@ -332,7 +332,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postDataRecordCollectionDataRecordCollectionPermission(
+	public boolean createDataRecordCollectionDataRecordCollectionPermission(
 			@GraphQLName("dataRecordCollectionId") Long dataRecordCollectionId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataRecordCollectionPermission")
@@ -352,7 +352,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean postSiteDataRecordCollectionPermission(
+	public boolean createSiteDataRecordCollectionPermission(
 			@GraphQLName("siteId") Long siteId,
 			@GraphQLName("operation") String operation,
 			@GraphQLName("dataRecordCollectionPermission")

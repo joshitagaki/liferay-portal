@@ -91,7 +91,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean putKeywordBatch(
+	public boolean updateKeywordBatch(
 			@GraphQLName("keywordBulkSelection") KeywordBulkSelection
 				keywordBulkSelection)
 		throws Exception {
@@ -106,7 +106,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public java.util.Collection<Keyword> postKeywordsCommonPage(
+	public java.util.Collection<Keyword> createKeywordsCommonPage(
 			@GraphQLName("documentBulkSelection") DocumentBulkSelection
 				documentBulkSelection)
 		throws Exception {
@@ -123,7 +123,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public Selection postBulkSelection(
+	public Selection createBulkSelection(
 			@GraphQLName("documentBulkSelection") DocumentBulkSelection
 				documentBulkSelection)
 		throws Exception {
@@ -152,7 +152,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean putTaxonomyCategoryBatch(
+	public boolean updateTaxonomyCategoryBatch(
 			@GraphQLName("taxonomyCategoryBulkSelection")
 				TaxonomyCategoryBulkSelection taxonomyCategoryBulkSelection)
 		throws Exception {
@@ -169,7 +169,7 @@ public class Mutation {
 
 	@GraphQLField
 	public java.util.Collection<TaxonomyVocabulary>
-			postSiteTaxonomyVocabulariesCommonPage(
+			createSiteTaxonomyVocabulariesCommonPage(
 				@GraphQLName("siteId") Long siteId,
 				@GraphQLName("documentBulkSelection") DocumentBulkSelection
 					documentBulkSelection)
