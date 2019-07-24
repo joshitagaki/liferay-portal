@@ -43,13 +43,13 @@ public class FragmentEntryConfigUtil {
 	public static JSONObject getConfigurationDefaultValuesJSONObject(
 		String configuration) {
 
-		List<FragmentConfigurationField> configurationFields =
+		List<FragmentConfigurationField> fragmentConfigurationFields =
 			getFragmentConfigurationFields(configuration);
 
 		JSONObject defaultValuesJSONObject = JSONFactoryUtil.createJSONObject();
 
 		for (FragmentConfigurationField configurationField :
-				configurationFields) {
+				fragmentConfigurationFields) {
 
 			defaultValuesJSONObject.put(
 				configurationField.getName(),
@@ -133,7 +133,7 @@ public class FragmentEntryConfigUtil {
 			return Collections.emptyList();
 		}
 
-		List<FragmentConfigurationField> configurationFields =
+		List<FragmentConfigurationField> fragmentConfigurationFields =
 			new ArrayList<>();
 
 		Iterator<JSONObject> iteratorFieldSet = fieldSetsJSONArray.iterator();
@@ -147,12 +147,12 @@ public class FragmentEntryConfigUtil {
 					fieldSetFieldsJSONArray.iterator();
 
 				iteratorFieldSetFields.forEachRemaining(
-					fieldSetFieldsJSONObject -> configurationFields.add(
+					fieldSetFieldsJSONObject -> fragmentConfigurationFields.add(
 						new FragmentConfigurationField(
 							fieldSetFieldsJSONObject)));
 			});
 
-		return configurationFields;
+		return fragmentConfigurationFields;
 	}
 
 	private static Object _getAssetEntry(String value) {
