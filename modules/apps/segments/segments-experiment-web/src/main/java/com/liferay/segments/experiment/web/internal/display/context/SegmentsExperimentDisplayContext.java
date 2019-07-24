@@ -75,10 +75,10 @@ public class SegmentsExperimentDisplayContext {
 
 			segmentsExperiencesJSONArray.put(
 				JSONUtil.put(
+					"name", segmentsExperience.getName(locale)
+				).put(
 					"segmentsExperienceId",
 					String.valueOf(segmentsExperience.getSegmentsExperienceId())
-				).put(
-					"name", segmentsExperience.getName(locale)
 				).put(
 					"segmentsExperiment",
 					_getSegmentsExperimentJSONObject(segmentsExperimentOptional)
@@ -91,11 +91,11 @@ public class SegmentsExperimentDisplayContext {
 
 		segmentsExperiencesJSONArray.put(
 			JSONUtil.put(
-				"segmentsExperienceId",
-				String.valueOf(SegmentsConstants.SEGMENTS_EXPERIENCE_ID_DEFAULT)
-			).put(
 				"name",
 				SegmentsConstants.getDefaultSegmentsExperienceName(locale)
+			).put(
+				"segmentsExperienceId",
+				String.valueOf(SegmentsConstants.SEGMENTS_EXPERIENCE_ID_DEFAULT)
 			).put(
 				"segmentsExperiment",
 				_getSegmentsExperimentJSONObject(segmentsExperimentOptional)
@@ -151,15 +151,15 @@ public class SegmentsExperimentDisplayContext {
 			segmentsExperimentOptional.get();
 
 		return JSONUtil.put(
-			"segmentsExperimentId",
-			String.valueOf(segmentsExperiment.getSegmentsExperimentId())
+			"description", segmentsExperiment.getDescription()
 		).put(
 			"name", segmentsExperiment.getName()
 		).put(
-			"description", segmentsExperiment.getDescription()
-		).put(
 			"segmentsExperienceId",
 			String.valueOf(segmentsExperiment.getSegmentsExperienceId())
+		).put(
+			"segmentsExperimentId",
+			String.valueOf(segmentsExperiment.getSegmentsExperimentId())
 		);
 	}
 
