@@ -78,7 +78,7 @@ public class SPICommentResource<T> {
 
 		if (comment == null) {
 			throw new NoSuchModelException(
-				"No Comment exists with the primary key " + commentId);
+				"No comment exists with comment ID " + commentId);
 		}
 
 		_checkViewPermission(comment);
