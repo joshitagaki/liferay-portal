@@ -131,9 +131,9 @@ public class BrowserModulesResolution {
 		new HashMap<>();
 	private int _explainIndentation;
 	private List<String> _explanation;
+	private final Map<String, JSONObject> _flagsJSONObjects = new HashMap<>();
 	private final JSONFactory _jsonFactory;
 	private final Map<String, Object> _mappedModuleNamesMap = new HashMap<>();
-	private final Map<String, JSONObject> _flagsJSONObjects = new HashMap<>();
 	private final Map<String, String> _pathsMap = new HashMap<>();
 	private final Set<String> _processedModuleNames = new HashSet<>();
 	private final List<String> _resolvedModuleNames = new ArrayList<>();
