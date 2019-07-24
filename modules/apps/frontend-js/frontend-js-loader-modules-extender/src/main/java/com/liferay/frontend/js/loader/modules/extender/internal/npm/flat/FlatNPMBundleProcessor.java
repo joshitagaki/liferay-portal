@@ -83,13 +83,12 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 			_log.info("Processing NPM bundle: " + flatJSBundle);
 		}
 
-		List<Future<Map.Entry<URL, JSONObject>>> jsonObjectFutures =
-			new ArrayList<>();
+		List<Future<Map.Entry<URL, JSONObject>>> futures = new ArrayList<>();
 
 		URL manifestJSONURL = bundle.getEntry(
 			"META-INF/resources/manifest.json");
 
-		jsonObjectFutures.add(
+		futures.add(
 			_executorService.submit(
 				() -> {
 					String content = StringUtil.read(
@@ -113,7 +112,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		while (enumeration.hasMoreElements()) {
 			URL packageJSONURL = enumeration.nextElement();
 
-			jsonObjectFutures.add(
+			futures.add(
 				_executorService.submit(
 					() -> new AbstractMap.SimpleImmutableEntry<>(
 						packageJSONURL,
@@ -151,31 +150,31 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 			}
 		}
 
-		Map<URL, JSONObject> jsonObjectMap = new HashMap<>();
+		Map<URL, JSONObject> jsonObjects = new HashMap<>();
 
-		for (Future<Map.Entry<URL, JSONObject>> future : jsonObjectFutures) {
+		for (Future<Map.Entry<URL, JSONObject>> future : futures) {
 			try {
 				Map.Entry<URL, JSONObject> entry = future.get();
 
-				jsonObjectMap.put(entry.getKey(), entry.getValue());
+				jsonObjects.put(entry.getKey(), entry.getValue());
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
-		JSONObject packagesJSONObject = jsonObjectMap.remove(manifestJSONURL);
+		JSONObject packagesJSONObject = jsonObjects.remove(manifestJSONURL);
 
 		Manifest manifest = new Manifest(packagesJSONObject);
 
-		JSONObject packageJSONObject = jsonObjectMap.remove(url);
+		JSONObject packageJSONObject = jsonObjects.remove(url);
 
 		_processPackage(
-			flatJSBundle, manifest, packageJSONObject, jsonObjectMap,
+			flatJSBundle, manifest, packageJSONObject, jsonObjects,
 			moduleDependenciesMap, "/META-INF/resources", true);
 
 		_processNodePackages(
-			flatJSBundle, manifest, jsonObjectMap, moduleDependenciesMap);
+			flatJSBundle, manifest, jsonObjects, moduleDependenciesMap);
 
 		return flatJSBundle;
 	}
@@ -360,12 +359,12 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 	private void _processModuleAliases(
 		FlatJSPackage flatJSPackage, String location,
-		Map<URL, JSONObject> jsonObjectMap,
+		Map<URL, JSONObject> jsonObjects,
 		Map<URL, Collection<String>> moduleDependenciesMap) {
 
 		Set<String> processedFolderPaths = new HashSet<>();
 
-		for (Map.Entry<URL, JSONObject> entry : jsonObjectMap.entrySet()) {
+		for (Map.Entry<URL, JSONObject> entry : jsonObjects.entrySet()) {
 			URL url = entry.getKey();
 
 			String filePath = url.getPath();
@@ -491,10 +490,10 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 	 */
 	private void _processNodePackages(
 		FlatJSBundle flatJSBundle, Manifest manifest,
-		Map<URL, JSONObject> jsonObjectMap,
+		Map<URL, JSONObject> jsonObjects,
 		Map<URL, Collection<String>> moduleDependenciesMap) {
 
-		for (Map.Entry<URL, JSONObject> entry : jsonObjectMap.entrySet()) {
+		for (Map.Entry<URL, JSONObject> entry : jsonObjects.entrySet()) {
 			URL url = entry.getKey();
 
 			String path = url.getPath();
@@ -507,7 +506,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 			if (lastFolderPath.equals("node_modules")) {
 				_processPackage(
-					flatJSBundle, manifest, entry.getValue(), jsonObjectMap,
+					flatJSBundle, manifest, entry.getValue(), jsonObjects,
 					moduleDependenciesMap, StringPool.SLASH.concat(location),
 					false);
 			}
@@ -524,7 +523,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 	 */
 	private void _processPackage(
 		FlatJSBundle flatJSBundle, Manifest manifest,
-		JSONObject packageJSONObject, Map<URL, JSONObject> jsonObjectMap,
+		JSONObject packageJSONObject, Map<URL, JSONObject> jsonObjects,
 		Map<URL, Collection<String>> moduleDependenciesMap, String location,
 		boolean root) {
 
@@ -561,7 +560,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 		if (!root) {
 			_processModuleAliases(
-				flatJSPackage, location, jsonObjectMap, moduleDependenciesMap);
+				flatJSPackage, location, jsonObjects, moduleDependenciesMap);
 		}
 
 		flatJSBundle.addJSPackage(flatJSPackage);
