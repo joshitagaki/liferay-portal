@@ -165,7 +165,6 @@ public class FragmentEntryConfigUtil {
 
 			String className = GetterUtil.getString(
 				jsonObject.getString("className"));
-
 			long classPK = GetterUtil.getLong(jsonObject.getString("classPK"));
 
 			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
