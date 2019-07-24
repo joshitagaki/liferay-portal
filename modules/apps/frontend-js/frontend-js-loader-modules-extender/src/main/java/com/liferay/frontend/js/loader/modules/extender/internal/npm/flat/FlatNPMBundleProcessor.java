@@ -165,9 +165,10 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		}
 
 		JSONObject packagesJSONObject = jsonObjectMap.remove(manifestJSONURL);
-		JSONObject packageJSONObject = jsonObjectMap.remove(url);
 
 		Manifest manifest = new Manifest(packagesJSONObject);
+
+		JSONObject packageJSONObject = jsonObjectMap.remove(url);
 
 		_processPackage(
 			flatJSBundle, manifest, packageJSONObject, jsonObjectMap,
