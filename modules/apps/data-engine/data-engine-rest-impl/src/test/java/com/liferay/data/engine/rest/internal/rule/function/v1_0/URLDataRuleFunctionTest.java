@@ -22,18 +22,12 @@ import com.liferay.data.engine.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Marcelo Mello
  */
 public class URLDataRuleFunctionTest {
-
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
 
 	@Test
 	public void testInvalidURL() {
@@ -92,7 +86,7 @@ public class URLDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "text";
 
-	private DataRecord _dataRecord;
+	private final DataRecord _dataRecord = new DataRecord();
 	private final DataRuleFunction _dataRuleFunction =
 		new URLDataRuleFunction();
 

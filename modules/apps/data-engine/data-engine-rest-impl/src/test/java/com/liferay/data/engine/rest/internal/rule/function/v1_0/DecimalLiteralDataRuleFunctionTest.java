@@ -22,18 +22,12 @@ import com.liferay.data.engine.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Marcelo Mello
  */
 public class DecimalLiteralDataRuleFunctionTest {
-
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
 
 	@Test
 	public void testInvalidDecimal() {
@@ -107,7 +101,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "numeric";
 
-	private DataRecord _dataRecord;
+	private final DataRecord _dataRecord = new DataRecord();
 	private final DataRuleFunction _dataRuleFunction =
 		new DecimalLiteralDataRuleFunction();
 

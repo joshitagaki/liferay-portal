@@ -23,18 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Marcelo Mello
  */
 public class MatchExpressionDataRuleFunctionTest {
-
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
 
 	@Test
 	public void testInvalidMatch() {
@@ -116,7 +110,7 @@ public class MatchExpressionDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "text";
 
-	private DataRecord _dataRecord;
+	private final DataRecord _dataRecord = new DataRecord();
 	private final DataRuleFunction _dataRuleFunction =
 		new MatchExpressionDataRuleFunction();
 

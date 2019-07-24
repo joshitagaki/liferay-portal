@@ -22,18 +22,12 @@ import com.liferay.data.engine.rule.function.DataRuleFunctionResult;
 import java.util.HashMap;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Marcelo Mello
  */
 public class IntegerLiteralDataRuleFunctionTest {
-
-	@Before
-	public void setUp() {
-		_dataRecord = new DataRecord();
-	}
 
 	@Test
 	public void testInvalidInteger() {
@@ -109,7 +103,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "numeric";
 
-	private DataRecord _dataRecord;
+	private final DataRecord _dataRecord = new DataRecord();
 	private final DataRuleFunction _dataRuleFunction =
 		new IntegerLiteralDataRuleFunction();
 
