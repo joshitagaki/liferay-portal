@@ -102,8 +102,8 @@ public class BrowserModulesResolution {
 		_mappedModuleNamesMap.put(moduleName, value);
 	}
 
-	public void putModuleFlags(String moduleName, JSONObject flags) {
-		_moduleFlags.put(moduleName, flags);
+	public void putModuleFlags(String moduleName, JSONObject flagsJSONObject) {
+		_flagsJSONObjects.put(moduleName, flagsJSONObject);
 	}
 
 	public void putPath(String moduleName, String path) {
@@ -119,7 +119,7 @@ public class BrowserModulesResolution {
 			map.put("explanation", _resolvedModuleNames);
 		}
 
-		map.put("moduleFlags", _moduleFlags);
+		map.put("moduleFlags", _flagsJSONObjects);
 		map.put("moduleMap", _dependenciesMap);
 		map.put("pathMap", _pathsMap);
 		map.put("resolvedModules", _resolvedModuleNames);
@@ -133,7 +133,7 @@ public class BrowserModulesResolution {
 	private List<String> _explanation;
 	private final JSONFactory _jsonFactory;
 	private final Map<String, Object> _mappedModuleNamesMap = new HashMap<>();
-	private final Map<String, JSONObject> _moduleFlags = new HashMap<>();
+	private final Map<String, JSONObject> _flagsJSONObjects = new HashMap<>();
 	private final Map<String, String> _pathsMap = new HashMap<>();
 	private final Set<String> _processedModuleNames = new HashSet<>();
 	private final List<String> _resolvedModuleNames = new ArrayList<>();
