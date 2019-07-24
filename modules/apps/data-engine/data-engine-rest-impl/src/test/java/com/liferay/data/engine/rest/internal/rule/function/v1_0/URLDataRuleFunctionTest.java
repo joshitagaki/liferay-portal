@@ -50,7 +50,7 @@ public class URLDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_URL_IS_INVALID, dataRuleFunctionResult.getErrorCode());
+			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class URLDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_URL_IS_INVALID, dataRuleFunctionResult.getErrorCode());
+			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class URLDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "text";
 
-	private static final String _URL_IS_INVALID = "url-is-invalid";
+	private static final String _ERROR_CODE = "url-is-invalid";
 
 	private DataRecord _dataRecord;
 	private final DataRuleFunction _dataRuleFunction =

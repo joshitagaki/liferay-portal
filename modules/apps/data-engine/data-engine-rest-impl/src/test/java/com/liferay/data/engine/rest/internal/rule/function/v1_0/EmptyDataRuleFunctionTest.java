@@ -50,7 +50,7 @@ public class EmptyDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_NOT_BE_EMPTY, dataRuleFunctionResult.getErrorCode());
+			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class EmptyDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_NOT_BE_EMPTY, dataRuleFunctionResult.getErrorCode());
+			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -122,12 +122,12 @@ public class EmptyDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_NOT_BE_EMPTY, dataRuleFunctionResult.getErrorCode());
+			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	private static final String _FIELD_TYPE = "text";
 
-	private static final String _VALUE_MUST_NOT_BE_EMPTY =
+	private static final String _ERROR_CODE =
 		"value-must-not-be-empty";
 
 	private DataRecord _dataRecord;

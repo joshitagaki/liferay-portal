@@ -50,7 +50,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_BE_A_DECIMAL_VALUE,
+			_ERROR_CODE,
 			dataRuleFunctionResult.getErrorCode());
 	}
 
@@ -69,7 +69,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_BE_A_DECIMAL_VALUE,
+			_ERROR_CODE,
 			dataRuleFunctionResult.getErrorCode());
 	}
 
@@ -109,7 +109,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "numeric";
 
-	private static final String _VALUE_MUST_BE_A_DECIMAL_VALUE =
+	private static final String _ERROR_CODE =
 		"value-must-be-a-decimal-value";
 
 	private DataRecord _dataRecord;

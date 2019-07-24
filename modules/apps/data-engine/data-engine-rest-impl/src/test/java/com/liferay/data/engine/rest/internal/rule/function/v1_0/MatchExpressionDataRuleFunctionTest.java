@@ -58,7 +58,7 @@ public class MatchExpressionDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_MATCH_EXPRESSION,
+			_ERROR_CODE,
 			dataRuleFunctionResult.getErrorCode());
 	}
 
@@ -84,7 +84,7 @@ public class MatchExpressionDataRuleFunctionTest {
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
 		Assert.assertEquals(
-			_VALUE_MUST_MATCH_EXPRESSION,
+			_ERROR_CODE,
 			dataRuleFunctionResult.getErrorCode());
 	}
 
@@ -118,7 +118,7 @@ public class MatchExpressionDataRuleFunctionTest {
 
 	private static final String _FIELD_TYPE = "text";
 
-	private static final String _VALUE_MUST_MATCH_EXPRESSION =
+	private static final String _ERROR_CODE =
 		"value-must-match-expression";
 
 	private DataRecord _dataRecord;
