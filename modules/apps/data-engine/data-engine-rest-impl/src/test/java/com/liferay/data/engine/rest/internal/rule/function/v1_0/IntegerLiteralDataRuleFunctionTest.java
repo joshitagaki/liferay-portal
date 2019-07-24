@@ -49,9 +49,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE,
-			dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -68,9 +66,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE,
-			dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -89,9 +85,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE,
-			dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -111,10 +105,9 @@ public class IntegerLiteralDataRuleFunctionTest {
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
-	private static final String _FIELD_TYPE = "numeric";
+	private static final String _ERROR_CODE = "value-must-be-an-integer-value";
 
-	private static final String _ERROR_CODE =
-		"value-must-be-an-integer-value";
+	private static final String _FIELD_TYPE = "numeric";
 
 	private DataRecord _dataRecord;
 	private final DataRuleFunction _dataRuleFunction =

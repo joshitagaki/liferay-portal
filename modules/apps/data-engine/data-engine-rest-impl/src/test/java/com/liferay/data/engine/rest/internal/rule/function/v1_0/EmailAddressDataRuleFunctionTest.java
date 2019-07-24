@@ -49,8 +49,7 @@ public class EmailAddressDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -69,8 +68,7 @@ public class EmailAddressDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -106,8 +104,7 @@ public class EmailAddressDataRuleFunctionTest {
 				_dataRecord, _dataRuleFunction, _FIELD_TYPE);
 
 		Assert.assertFalse(dataRuleFunctionResult.isValid());
-		Assert.assertEquals(
-			_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
+		Assert.assertEquals(_ERROR_CODE, dataRuleFunctionResult.getErrorCode());
 	}
 
 	@Test
@@ -129,8 +126,7 @@ public class EmailAddressDataRuleFunctionTest {
 		Assert.assertNull(dataRuleFunctionResult.getErrorCode());
 	}
 
-	private static final String _ERROR_CODE =
-		"email-address-is-invalid";
+	private static final String _ERROR_CODE = "email-address-is-invalid";
 
 	private static final String _FIELD_TYPE = "text";
 
