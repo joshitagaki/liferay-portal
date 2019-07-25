@@ -818,7 +818,7 @@ public class GraphQLServletExtender {
 			schemaBuilder.mutation(mutationBuilder.build());
 			schemaBuilder.query(queryBuilder.build());
 
-			GraphQLConfiguration.Builder servletBuilder =
+			GraphQLConfiguration.Builder graphQLConfigurationBuilder =
 				GraphQLConfiguration.with(schemaBuilder.build());
 
 			GraphQLObjectMapper.Builder objectMapperBuilder =
@@ -827,9 +827,10 @@ public class GraphQLServletExtender {
 			objectMapperBuilder.withGraphQLErrorHandler(
 				new LiferayGraphQLErrorHandler());
 
-			servletBuilder.with(objectMapperBuilder.build());
+			graphQLConfigurationBuilder.with(objectMapperBuilder.build());
 
-			_servlet = GraphQLHttpServlet.with(servletBuilder.build());
+			_servlet = GraphQLHttpServlet.with(
+				graphQLConfigurationBuilder.build());
 
 			return _servlet;
 		}
