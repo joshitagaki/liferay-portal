@@ -77,7 +77,8 @@ public class SoyTemplateResourceBundleTrackerCustomizer
 
 		try {
 			SoyTemplateResourcesCollectorUtil.collectBundleTemplateResources(
-				bundle, StringPool.SLASH, templateResources, _resourceCache);
+				bundle, StringPool.SLASH, templateResources,
+				_collectionURLsMap);
 
 			_soyProviderCapabilityBundleRegister.register(bundle);
 		}
@@ -99,7 +100,7 @@ public class SoyTemplateResourceBundleTrackerCustomizer
 				SoyTemplateResourcesCollectorUtil.
 					collectBundleTemplateResources(
 						providerBundle, StringPool.SLASH, templateResources,
-						_resourceCache);
+						_collectionURLsMap);
 
 				_soyProviderCapabilityBundleRegister.register(providerBundle);
 			}
@@ -165,7 +166,7 @@ public class SoyTemplateResourceBundleTrackerCustomizer
 
 		_soyProviderCapabilityBundleRegister.unregister(bundle);
 
-		_resourceCache.remove(bundle);
+		_collectionURLsMap.remove(bundle);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -174,7 +175,7 @@ public class SoyTemplateResourceBundleTrackerCustomizer
 	private static final Set<TemplateResource> _templateResources =
 		new CopyOnWriteArraySet<>();
 
-	private final Map<Bundle, Collection<URL>> _resourceCache =
+	private final Map<Bundle, Collection<URL>> _collectionURLsMap =
 		new ConcurrentHashMap<>();
 	private final SoyProviderCapabilityBundleRegister
 		_soyProviderCapabilityBundleRegister;

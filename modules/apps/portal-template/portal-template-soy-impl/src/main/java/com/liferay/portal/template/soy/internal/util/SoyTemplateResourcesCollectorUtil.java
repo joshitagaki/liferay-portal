@@ -46,11 +46,11 @@ public class SoyTemplateResourcesCollectorUtil {
 	public static void collectBundleTemplateResources(
 			Bundle bundle, String templatePath,
 			List<TemplateResource> templateResources,
-			Map<Bundle, Collection<URL>> resourceCache)
+			Map<Bundle, Collection<URL>> collectionURLsMap)
 		throws TemplateException {
 
 		Enumeration<URL> enumeration = _findEntries(
-			bundle, templatePath, resourceCache);
+			bundle, templatePath, collectionURLsMap);
 
 		if (enumeration == null) {
 			return;
@@ -103,10 +103,10 @@ public class SoyTemplateResourcesCollectorUtil {
 
 	private static Enumeration<URL> _findEntries(
 		Bundle bundle, String templatePath,
-		Map<Bundle, Collection<URL>> resourceCache) {
+		Map<Bundle, Collection<URL>> collectionURLsMap) {
 
-		if (resourceCache != null) {
-			Collection<URL> collection = resourceCache.get(bundle);
+		if (collectionURLsMap != null) {
+			Collection<URL> collection = collectionURLsMap.get(bundle);
 
 			if (collection != null) {
 				return Collections.enumeration(collection);
@@ -117,17 +117,17 @@ public class SoyTemplateResourcesCollectorUtil {
 			templatePath, _SOY_FILE_EXTENSION, true);
 
 		if (enumeration == null) {
-			if (resourceCache != null) {
-				resourceCache.put(bundle, Collections.emptySet());
+			if (collectionURLsMap != null) {
+				collectionURLsMap.put(bundle, Collections.emptySet());
 			}
 
 			return null;
 		}
 
-		if (resourceCache != null) {
+		if (collectionURLsMap != null) {
 			Collection<URL> collection = SetUtil.fromEnumeration(enumeration);
 
-			resourceCache.put(bundle, collection);
+			collectionURLsMap.put(bundle, collection);
 
 			return Collections.enumeration(collection);
 		}
