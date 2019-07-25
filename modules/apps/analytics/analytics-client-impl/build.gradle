@@ -8,7 +8,7 @@ dependencies {
 
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.9"
 	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.9"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.9"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.9.1"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 	compileOnly project(":apps:analytics:analytics-api")
 	compileOnly project(":apps:analytics:analytics-data-binding-impl")
