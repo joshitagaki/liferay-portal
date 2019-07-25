@@ -168,7 +168,7 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 		threadLocalMap.putEntry(this, value);
 	}
 
-	public SafeClosable setWithClosable(T value) {
+	public SafeClosable setWithSafeClosable(T value) {
 		ThreadLocalMap threadLocalMap = _getThreadLocalMap();
 
 		Entry entry = threadLocalMap.getEntry(this);
