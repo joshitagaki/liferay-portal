@@ -48,12 +48,12 @@ public class FragmentEntryConfigUtil {
 
 		JSONObject defaultValuesJSONObject = JSONFactoryUtil.createJSONObject();
 
-		for (FragmentConfigurationField configurationField :
+		for (FragmentConfigurationField fragmentConfigurationField :
 				fragmentConfigurationFields) {
 
 			defaultValuesJSONObject.put(
-				configurationField.getName(),
-				getFieldValue(configurationField, null));
+				fragmentConfigurationField.getName(),
+				getFieldValue(fragmentConfigurationField, null));
 		}
 
 		return defaultValuesJSONObject;
@@ -86,34 +86,35 @@ public class FragmentEntryConfigUtil {
 	}
 
 	public static Object getFieldValue(
-		FragmentConfigurationField configurationField, String value) {
+		FragmentConfigurationField fragmentConfigurationField, String value) {
 
 		value = GetterUtil.getString(
-			value, configurationField.getDefaultValue());
+			value, fragmentConfigurationField.getDefaultValue());
 
 		if (StringUtil.equalsIgnoreCase(
-				configurationField.getType(), "checkbox")) {
+				fragmentConfigurationField.getType(), "checkbox")) {
 
 			return _getFieldValue("bool", value);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					configurationField.getType(), "colorPalette")) {
+					fragmentConfigurationField.getType(), "colorPalette")) {
 
 			return _getFieldValue("object", value);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					configurationField.getType(), "itemSelector")) {
+					fragmentConfigurationField.getType(), "itemSelector")) {
 
 			return _getAssetEntryJSONObject(value);
 		}
 		else if (StringUtil.equalsIgnoreCase(
-					configurationField.getType(), "select")) {
+					fragmentConfigurationField.getType(), "select")) {
 
-			String dataType = configurationField.getDataType();
+			String dataType = fragmentConfigurationField.getDataType();
 
 			if (Validator.isNull(dataType)) {
 				_log.error(
-					configurationField.getName() + "field has a null dataType");
+					fragmentConfigurationField.getName() +
+						" field has an invalid data type");
 
 				return null;
 			}
