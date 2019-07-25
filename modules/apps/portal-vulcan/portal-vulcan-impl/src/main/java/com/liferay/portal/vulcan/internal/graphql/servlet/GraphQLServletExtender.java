@@ -1233,7 +1233,10 @@ public class GraphQLServletExtender {
 			).map(
 				parameter -> {
 					if (_isMultipartBody(parameter)) {
-						return new GraphQLArgument.Builder().type(
+						GraphQLArgument.Builder builder =
+							new GraphQLArgument.Builder();
+
+						return builder.type(
 							new GraphQLList(ApolloScalars.Upload)
 						).name(
 							"multipartBody"
