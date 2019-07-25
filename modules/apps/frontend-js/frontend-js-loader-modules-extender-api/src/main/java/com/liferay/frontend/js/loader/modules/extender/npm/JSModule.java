@@ -21,6 +21,8 @@ import java.io.InputStream;
 
 import java.util.Collection;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * Represents an NPM module inside a {@link JSBundle}.
  *
@@ -78,6 +80,7 @@ import java.util.Collection;
  *
  * @author Iván Zaera
  */
+@ProviderType
 public interface JSModule extends JSResolvableBundleAsset {
 
 	/**
