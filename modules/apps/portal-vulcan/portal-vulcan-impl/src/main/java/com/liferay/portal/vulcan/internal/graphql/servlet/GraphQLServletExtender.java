@@ -792,34 +792,36 @@ public class GraphQLServletExtender {
 				}
 			}
 
-			GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
+			GraphQLSchema.Builder graphQLSchemaBuilder =
+				GraphQLSchema.newSchema();
 
 			GraphQLObjectType.Builder mutationBuilder =
 				GraphQLObjectType.newObject();
 
 			mutationBuilder.name("mutation");
 
-			GraphQLObjectType.Builder queryBuilder =
+			GraphQLObjectType.Builder graphQLObjectTypeBuilder =
 				GraphQLObjectType.newObject();
 
-			queryBuilder.name("query");
+			graphQLObjectTypeBuilder.name("query");
 
 			_collectObjectFields(
 				mutationBuilder, ServletData::getMutation,
 				processingElementsContainer);
 
 			_collectObjectFields(
-				queryBuilder, ServletData::getQuery,
+				graphQLObjectTypeBuilder, ServletData::getQuery,
 				processingElementsContainer);
 
 			_registerInterfaces(
-				processingElementsContainer, queryBuilder, schemaBuilder);
+				processingElementsContainer, graphQLObjectTypeBuilder,
+				graphQLSchemaBuilder);
 
-			schemaBuilder.mutation(mutationBuilder.build());
-			schemaBuilder.query(queryBuilder.build());
+			graphQLSchemaBuilder.mutation(mutationBuilder.build());
+			graphQLSchemaBuilder.query(graphQLObjectTypeBuilder.build());
 
 			GraphQLConfiguration.Builder graphQLConfigurationBuilder =
-				GraphQLConfiguration.with(schemaBuilder.build());
+				GraphQLConfiguration.with(graphQLSchemaBuilder.build());
 
 			GraphQLObjectMapper.Builder objectMapperBuilder =
 				GraphQLObjectMapper.newBuilder();
@@ -860,8 +862,8 @@ public class GraphQLServletExtender {
 
 	private void _registerInterfaces(
 		ProcessingElementsContainer processingElementsContainer,
-		GraphQLObjectType.Builder queryBuilder,
-		GraphQLSchema.Builder schemaBuilder) {
+		GraphQLObjectType.Builder graphQLObjectTypeBuilder,
+		GraphQLSchema.Builder graphQLSchemaBuilder) {
 
 		try {
 			Map<String, GraphQLType> graphQLTypes =
@@ -872,13 +874,13 @@ public class GraphQLServletExtender {
 
 			graphQLTypes.put("GraphQLNode", graphQLInterfaceType);
 
-			queryBuilder.field(
+			graphQLObjectTypeBuilder.field(
 				_getNodeGraphQLFieldDefinition(graphQLInterfaceType));
 
 			GraphQLCodeRegistry.Builder builder =
 				processingElementsContainer.getCodeRegistryBuilder();
 
-			schemaBuilder.codeRegistry(
+			graphQLSchemaBuilder.codeRegistry(
 				builder.dataFetcher(
 					FieldCoordinates.coordinates("query", "graphQLNode"),
 					new NodeDataFetcher()
