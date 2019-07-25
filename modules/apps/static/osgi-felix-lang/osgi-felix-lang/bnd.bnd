@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Apache Felix Lang
-Bundle-SymbolicName: com.liferay.apache.felix.lang
+Bundle-Name: Liferay OSGi Felix Lang
+Bundle-SymbolicName: com.liferay.osgi.felix.lang
 Bundle-Version: 1.0.0
 Provide-Capability:\
 	liferay.resource.bundle;\
