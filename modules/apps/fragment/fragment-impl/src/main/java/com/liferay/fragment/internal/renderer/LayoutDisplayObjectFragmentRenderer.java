@@ -154,6 +154,8 @@ public class LayoutDisplayObjectFragmentRenderer implements FragmentRenderer {
 		HttpServletResponse httpServletResponse, String message) {
 
 		try {
+			PrintWriter printWriter = httpServletResponse.getWriter();
+
 			StringBundler sb = new StringBundler(3);
 
 			sb.append("<div class=\"portlet-msg-info\">");
@@ -168,8 +170,6 @@ public class LayoutDisplayObjectFragmentRenderer implements FragmentRenderer {
 			sb.append(LanguageUtil.get(resourceBundle, message));
 
 			sb.append("</div>");
-
-			PrintWriter printWriter = httpServletResponse.getWriter();
 
 			printWriter.write(sb.toString());
 		}
