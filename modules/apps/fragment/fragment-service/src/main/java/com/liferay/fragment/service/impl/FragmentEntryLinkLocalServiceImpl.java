@@ -155,9 +155,9 @@ public class FragmentEntryLinkLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_classNameLocalService.getClassName(classNameId);
-
 		User user = userLocalService.getUser(userId);
+
+		_classNameLocalService.getClassName(classNameId);
 
 		long fragmentEntryLinkId = counterLocalService.increment();
 
@@ -473,9 +473,9 @@ public class FragmentEntryLinkLocalServiceImpl
 			int position, ServiceContext serviceContext)
 		throws PortalException {
 
-		_classNameLocalService.getClassName(classNameId);
-
 		User user = userLocalService.getUser(userId);
+
+		_classNameLocalService.getClassName(classNameId);
 
 		FragmentEntryLink fragmentEntryLink = fetchFragmentEntryLink(
 			fragmentEntryLinkId);
