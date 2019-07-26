@@ -56,7 +56,7 @@ public class UserModelListener extends BaseModelListener<User> {
 			if (Objects.equals(name, user.getFullName())) {
 				return;
 			}
-			
+
 			Map<Locale, String> nameMap = new HashMap<>();
 
 			nameMap.put(LocaleUtil.getSiteDefault(), user.getFullName());
