@@ -164,7 +164,7 @@ export const TABLE_VIEWS = {
 	ACTIONS: [
 		{
 			name: Liferay.Language.get('delete'),
-			callback: confirmDelete('/o/data-engine/v1.0/data-layouts-views/')
+			callback: confirmDelete('/o/data-engine/v1.0/data-list-views/')
 		}
 	],
 	COLUMNS: [
@@ -185,7 +185,7 @@ export const TABLE_VIEWS = {
 		)
 	},
 	ENDPOINT: dataDefinitionId =>
-		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-layouts-views`,
+		`/o/data-engine/v1.0/data-definitions/${dataDefinitionId}/data-list-views`,
 	FORMATTER: items =>
 		items.map(item => ({
 			dateCreated: moment(item.dateCreated).fromNow(),
