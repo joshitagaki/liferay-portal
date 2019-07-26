@@ -15,7 +15,6 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -156,12 +155,7 @@ public interface ${schemaName}Resource {
 					</#if>
 				</#if>
 
-				Map<String, String> headers = _builder._headers;
-
-				Set<Map.Entry<String, String>> headerEntries =
-					headers.entrySet();
-
-				for (Map.Entry<String, String> entry : headerEntries) {
+				for (Map.Entry<String, String> entry : _builder._headers.entrySet()) {
 					httpInvoker.header(entry.getKey(), entry.getValue());
 				}
 
@@ -169,12 +163,7 @@ public interface ${schemaName}Resource {
 					httpInvoker.header("Accept-Language", _builder._locale.toLanguageTag());
 				}
 
-				Map<String, String> parameters = _builder._parameters;
-
-				Set<Map.Entry<String, String>> parameterEntries =
-					parameters.entrySet();
-
-				for (Map.Entry<String, String> entry : parameterEntries) {
+				for (Map.Entry<String, String> entry : _builder._parameters.entrySet()) {
 					httpInvoker.parameter(entry.getKey(), entry.getValue());
 				}
 
