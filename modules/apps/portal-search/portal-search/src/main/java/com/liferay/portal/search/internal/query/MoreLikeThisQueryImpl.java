@@ -34,6 +34,7 @@ public class MoreLikeThisQueryImpl
 
 	public MoreLikeThisQueryImpl(List<String> fields, String... likeTexts) {
 		_fields.addAll(fields);
+
 		Collections.addAll(_likeTexts, likeTexts);
 	}
 
