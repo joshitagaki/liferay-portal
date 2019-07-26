@@ -43,7 +43,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public App postDataDefinitionApp(
+	public App createDataDefinitionApp(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId,
 			@GraphQLName("app") App app)
 		throws Exception {
