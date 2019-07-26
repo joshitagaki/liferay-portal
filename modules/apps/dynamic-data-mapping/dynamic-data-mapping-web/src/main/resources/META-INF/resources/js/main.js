@@ -65,7 +65,7 @@ AUI.add(
 			return /^[\w\-]+$/.test(value);
 		};
 
-		// Updates icons to produce lexicon svg markup instead of default glyphicon
+		// Updates icons to produce lexicon SVG markup instead of default glyphicon
 
 		A.PropertyBuilderAvailableField.prototype.FIELD_ITEM_TEMPLATE = A.PropertyBuilderAvailableField.prototype.FIELD_ITEM_TEMPLATE.replace(
 			/<\s*span[^>]*>(.*?)<\s*\/\s*span>/,
