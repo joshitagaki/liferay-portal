@@ -34,7 +34,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "number");
+					put("fieldName", "number");
 				}
 			});
 
@@ -51,7 +51,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, null);
+					put("fieldName", null);
 				}
 			});
 
@@ -69,7 +69,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 			new HashMap() {
 				{
 					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
+						"fieldName",
 						"2312321243423432423424234233234324324242");
 				}
 			});
@@ -87,7 +87,7 @@ public class IntegerLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "132512");
+					put("fieldName", "132512");
 				}
 			});
 

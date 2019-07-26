@@ -51,7 +51,7 @@ public class EmptyDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, " ");
+					put("fieldName", " ");
 				}
 			});
 
@@ -68,9 +68,9 @@ public class EmptyDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "text1");
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "text2");
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "text3");
+					put("fieldName", "text1");
+					put("fieldName", "text2");
+					put("fieldName", "text3");
 				}
 			});
 
@@ -87,7 +87,7 @@ public class EmptyDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "text");
+					put("fieldName", "text");
 				}
 			});
 
@@ -104,7 +104,7 @@ public class EmptyDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, null);
+					put("fieldName", null);
 				}
 			});
 

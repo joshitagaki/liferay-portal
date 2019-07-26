@@ -34,7 +34,7 @@ public class URLDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "INVALID");
+					put("fieldName", "INVALID");
 				}
 			});
 
@@ -51,7 +51,7 @@ public class URLDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, null);
+					put("fieldName", null);
 				}
 			});
 
@@ -68,9 +68,7 @@ public class URLDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
-						"http://www.liferay.com");
+					put("fieldName", "http://www.liferay.com");
 				}
 			});
 

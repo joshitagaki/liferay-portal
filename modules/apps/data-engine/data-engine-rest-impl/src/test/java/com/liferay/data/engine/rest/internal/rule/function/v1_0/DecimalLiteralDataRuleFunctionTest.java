@@ -34,7 +34,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "NUMBER");
+					put("fieldName", "NUMBER");
 				}
 			});
 
@@ -51,7 +51,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, null);
+					put("fieldName", null);
 				}
 			});
 
@@ -68,7 +68,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "1.2");
+					put("fieldName", "1.2");
 				}
 			});
 
@@ -85,7 +85,7 @@ public class DecimalLiteralDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "1");
+					put("fieldName", "1");
 				}
 			});
 

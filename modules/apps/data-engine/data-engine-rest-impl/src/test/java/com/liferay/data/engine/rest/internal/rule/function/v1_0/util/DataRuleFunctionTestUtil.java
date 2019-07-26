@@ -29,8 +29,6 @@ import java.util.Map;
  */
 public class DataRuleFunctionTestUtil {
 
-	public static final String FIELD_NAME = "fieldName";
-
 	public static DataRuleFunctionResult validateDataRuleFunction(
 		DataRecord dataRecord, DataRuleFunction dataRuleFunction,
 		String fieldType) {
@@ -65,7 +63,7 @@ public class DataRuleFunctionTestUtil {
 				indexable = false;
 				label = new HashMap();
 				localizable = false;
-				name = FIELD_NAME;
+				name = "fieldName";
 				repeatable = false;
 				tip = new HashMap();
 			}

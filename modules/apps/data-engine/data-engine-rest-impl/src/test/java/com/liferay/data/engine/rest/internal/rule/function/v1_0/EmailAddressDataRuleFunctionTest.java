@@ -34,7 +34,7 @@ public class EmailAddressDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "TEXT");
+					put("fieldName", "TEXT");
 				}
 			});
 
@@ -51,9 +51,7 @@ public class EmailAddressDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
-						"TEXT,test@liferay.com");
+					put("fieldName", "TEXT,test@liferay.com");
 				}
 			});
 
@@ -70,9 +68,7 @@ public class EmailAddressDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
-						"test1@liferay.com,test2@liferay.com");
+					put("fieldName", "test1@liferay.com,test2@liferay.com");
 				}
 			});
 
@@ -89,7 +85,7 @@ public class EmailAddressDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, null);
+					put("fieldName", null);
 				}
 			});
 
@@ -106,9 +102,7 @@ public class EmailAddressDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
-						"test@liferay.com");
+					put("fieldName", "test@liferay.com");
 				}
 			});
 

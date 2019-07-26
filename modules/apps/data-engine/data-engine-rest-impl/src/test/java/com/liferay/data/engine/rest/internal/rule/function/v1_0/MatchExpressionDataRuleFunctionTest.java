@@ -41,7 +41,7 @@ public class MatchExpressionDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "test@liferay");
+					put("fieldName", "test@liferay");
 				}
 			});
 
@@ -65,7 +65,7 @@ public class MatchExpressionDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(DataRuleFunctionTestUtil.FIELD_NAME, "test@liferay");
+					put("fieldName", "test@liferay");
 				}
 			});
 
@@ -89,9 +89,7 @@ public class MatchExpressionDataRuleFunctionTest {
 		_dataRecord.setDataRecordValues(
 			new HashMap() {
 				{
-					put(
-						DataRuleFunctionTestUtil.FIELD_NAME,
-						"test@liferay.com");
+					put("fieldName", "test@liferay.com");
 				}
 			});
 
