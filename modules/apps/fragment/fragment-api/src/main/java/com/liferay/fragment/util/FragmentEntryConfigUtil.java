@@ -125,6 +125,17 @@ public class FragmentEntryConfigUtil {
 		return _getFieldValue("string", value);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link
+	 *             #getFieldValue(FragmentConfigurationField, String)}
+	 */
+	@Deprecated
+	public static Object getFieldValue(
+		String configuration, String fieldName, String value) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public static List<FragmentConfigurationField>
 		getFragmentConfigurationFields(String configuration) {
 
