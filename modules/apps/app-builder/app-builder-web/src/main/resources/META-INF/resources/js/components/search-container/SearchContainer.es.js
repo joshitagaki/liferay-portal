@@ -101,12 +101,14 @@ export default function SearchContainer({
 			<Search
 				keywords={keywords}
 				onSearch={keywords => {
+					setLoading(true);
 					setState(prevState => ({
 						...prevState,
 						keywords,
 						page: 1
 					}));
 				}}
+				totalCount={totalCount}
 			/>
 
 			<div className="container-fluid container-fluid-max-xl">
