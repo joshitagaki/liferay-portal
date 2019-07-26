@@ -47,20 +47,23 @@ public class DataLayoutRendererTag extends BaseDataLayoutRendererTag {
 				new DataLayoutRendererContext();
 
 			dataLayoutRendererContext.setContainerId(getContainerId());
-			dataLayoutRendererContext.setDataRecordValues(
-				getDataRecordValues());
-			dataLayoutRendererContext.setHttpServletRequest(request);
-			dataLayoutRendererContext.setHttpServletResponse(
-				PortalUtil.getHttpServletResponse(
-					(RenderResponse)request.getAttribute(
-						JavaConstants.JAVAX_PORTLET_RESPONSE)));
-			dataLayoutRendererContext.setPortletNamespace(getNamespace());
 
 			if (getDataRecordId() != null) {
 				dataLayoutRendererContext.setDataRecordValues(
 					DataLayoutTaglibUtil.getDataRecordValues(
 						getDataRecordId(), request));
 			}
+			else {
+				dataLayoutRendererContext.setDataRecordValues(
+					getDataRecordValues());
+			}
+
+			dataLayoutRendererContext.setHttpServletRequest(request);
+			dataLayoutRendererContext.setHttpServletResponse(
+				PortalUtil.getHttpServletResponse(
+					(RenderResponse)request.getAttribute(
+						JavaConstants.JAVAX_PORTLET_RESPONSE)));
+			dataLayoutRendererContext.setPortletNamespace(getNamespace());
 
 			content = DataLayoutTaglibUtil.renderDataLayout(
 				getDataLayoutId(), dataLayoutRendererContext);
