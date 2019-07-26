@@ -274,12 +274,12 @@ public class FreeMarkerFragmentEntryProcessor
 		String message = LanguageUtil.get(
 			resourceBundle, "freemarker-syntax-is-invalid");
 
-		Throwable cause = te.getCause();
+		Throwable causeThrowable = te.getCause();
 
-		String causeMessage = cause.getLocalizedMessage();
+		String causeThrowableMessage = causeThrowable.getLocalizedMessage();
 
-		if (Validator.isNotNull(causeMessage)) {
-			message = message + "\n\n" + causeMessage;
+		if (Validator.isNotNull(causeThrowableMessage)) {
+			message = message + "\n\n" + causeThrowableMessage;
 		}
 
 		return message;
