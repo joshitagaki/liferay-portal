@@ -153,9 +153,9 @@ public abstract class BaseFragmentCollectionContributor
 				return;
 			}
 
-			_names = names;
 			_fragmentEntries = new HashMap<>();
 			_fragmentEntryNames = new HashMap<>();
+			_names = names;
 
 			while (enumeration.hasMoreElements()) {
 				URL url = enumeration.nextElement();
