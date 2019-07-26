@@ -29,17 +29,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * The implementation of the de data list view local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the <code>com.liferay.data.engine.service.DEDataListViewLocalService</code> interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see DEDataListViewLocalServiceBaseImpl
  */
 @Component(
 	property = "model.class.name=com.liferay.data.engine.model.DEDataListView",
@@ -48,11 +38,6 @@ import org.osgi.service.component.annotations.Reference;
 public class DEDataListViewLocalServiceImpl
 	extends DEDataListViewLocalServiceBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>com.liferay.data.engine.service.DEDataListViewLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.data.engine.service.DEDataListViewLocalServiceUtil</code>.
-	 */
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public DEDataListView addDEDataListView(
@@ -61,15 +46,17 @@ public class DEDataListViewLocalServiceImpl
 			String sortField)
 		throws Exception {
 
-		User user = _userLocalService.getUser(userId);
-
 		DEDataListView deDataListView = deDataListViewPersistence.create(
 			counterLocalService.increment());
 
 		deDataListView.setGroupId(groupId);
 		deDataListView.setCompanyId(companyId);
 		deDataListView.setUserId(userId);
+
+		User user = _userLocalService.getUser(userId);
+
 		deDataListView.setUserName(user.getFullName());
+
 		deDataListView.setAppliedFilters(appliedFilters);
 		deDataListView.setDdmStructureId(ddmStructureId);
 		deDataListView.setFieldNames(fieldNames);
