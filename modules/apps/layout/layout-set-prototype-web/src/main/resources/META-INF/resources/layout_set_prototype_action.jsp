@@ -61,8 +61,8 @@ Group group = layoutSetPrototype.getGroup();
 			<c:when test="<%= layoutSetPrototype.isActive() && !group.isGuest() %>">
 				<portlet:actionURL name="activateDeactivateLayoutSetPrototype" var="deactivateURL">
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="active" value="<%= Boolean.FALSE.toString() %>" />
 					<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototypeId) %>" />
+					<portlet:param name="active" value="<%= Boolean.FALSE.toString() %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon-deactivate
@@ -72,8 +72,8 @@ Group group = layoutSetPrototype.getGroup();
 			<c:when test="<%= !layoutSetPrototype.isActive() %>">
 				<portlet:actionURL name="activateDeactivateLayoutSetPrototype" var="activateURL">
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="active" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(layoutSetPrototypeId) %>" />
+					<portlet:param name="active" value="<%= Boolean.TRUE.toString() %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
