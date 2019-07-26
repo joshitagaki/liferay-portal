@@ -27,53 +27,50 @@ export default function CustomObject({
 	return (
 		<Fragment>
 			<NavigationBar />
-			<div className="container-fluid container-fluid-max-xl main-content-body">
-				<Switch>
-					<Route
-						path={`${path}/form-views`}
-						render={() => (
-							<SearchContainer
-								actions={FORM_VIEWS.ACTIONS}
-								columns={FORM_VIEWS.COLUMNS}
-								emptyState={FORM_VIEWS.EMPTY_STATE}
-								endpoint={FORM_VIEWS.ENDPOINT(dataDefinitionId)}
-								formatter={FORM_VIEWS.FORMATTER}
-								key="0"
-							/>
-						)}
-					/>
 
-					<Route
-						path={`${path}/table-views`}
-						render={() => (
-							<SearchContainer
-								actions={TABLE_VIEWS.ACTIONS}
-								columns={TABLE_VIEWS.COLUMNS}
-								emptyState={TABLE_VIEWS.EMPTY_STATE}
-								endpoint={TABLE_VIEWS.ENDPOINT(
-									dataDefinitionId
-								)}
-								formatter={TABLE_VIEWS.FORMATTER}
-								key="1"
-							/>
-						)}
-					/>
+			<Switch>
+				<Route
+					path={`${path}/form-views`}
+					render={() => (
+						<SearchContainer
+							actions={FORM_VIEWS.ACTIONS}
+							columns={FORM_VIEWS.COLUMNS}
+							emptyState={FORM_VIEWS.EMPTY_STATE}
+							endpoint={FORM_VIEWS.ENDPOINT(dataDefinitionId)}
+							formatter={FORM_VIEWS.FORMATTER}
+							key="0"
+						/>
+					)}
+				/>
 
-					<Route
-						path={`${path}/deployments`}
-						render={() => (
-							<SearchContainer
-								actions={APPS.ACTIONS}
-								columns={APPS.COLUMNS}
-								emptyState={APPS.EMPTY_STATE}
-								endpoint={APPS.ENDPOINT(dataDefinitionId)}
-								formatter={APPS.FORMATTER}
-								key="2"
-							/>
-						)}
-					/>
-				</Switch>
-			</div>
+				<Route
+					path={`${path}/table-views`}
+					render={() => (
+						<SearchContainer
+							actions={TABLE_VIEWS.ACTIONS}
+							columns={TABLE_VIEWS.COLUMNS}
+							emptyState={TABLE_VIEWS.EMPTY_STATE}
+							endpoint={TABLE_VIEWS.ENDPOINT(dataDefinitionId)}
+							formatter={TABLE_VIEWS.FORMATTER}
+							key="1"
+						/>
+					)}
+				/>
+
+				<Route
+					path={`${path}/deployments`}
+					render={() => (
+						<SearchContainer
+							actions={APPS.ACTIONS}
+							columns={APPS.COLUMNS}
+							emptyState={APPS.EMPTY_STATE}
+							endpoint={APPS.ENDPOINT(dataDefinitionId)}
+							formatter={APPS.FORMATTER}
+							key="2"
+						/>
+					)}
+				/>
+			</Switch>
 		</Fragment>
 	);
 }

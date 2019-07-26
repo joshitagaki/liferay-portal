@@ -31,15 +31,13 @@ export default function App() {
 					exact
 					path="/"
 					render={() => (
-						<div className="container-fluid container-fluid-max-xl main-content-body">
-							<SearchContainer
-								actions={CUSTOM_OBJECTS.ACTIONS}
-								columns={CUSTOM_OBJECTS.COLUMNS}
-								emptyState={CUSTOM_OBJECTS.EMPTY_STATE}
-								endpoint={CUSTOM_OBJECTS.ENDPOINT}
-								formatter={CUSTOM_OBJECTS.FORMATTER}
-							/>
-						</div>
+						<SearchContainer
+							actions={CUSTOM_OBJECTS.ACTIONS}
+							columns={CUSTOM_OBJECTS.COLUMNS}
+							emptyState={CUSTOM_OBJECTS.EMPTY_STATE}
+							endpoint={CUSTOM_OBJECTS.ENDPOINT}
+							formatter={CUSTOM_OBJECTS.FORMATTER}
+						/>
 					)}
 				/>
 			</Switch>

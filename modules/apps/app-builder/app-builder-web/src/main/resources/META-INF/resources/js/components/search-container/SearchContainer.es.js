@@ -18,6 +18,7 @@ import React, {Fragment, useState} from 'react';
 import EmptyState from './EmptyState.es';
 import PageSize from './PageSize.es';
 import Pagination from './Pagination.es';
+import Search from './Search.es';
 import Table from './Table.es';
 import {getURL} from '../../utils/client.es';
 
@@ -96,48 +97,52 @@ export default function SearchContainer({
 
 	return (
 		<Fragment>
-			<Table
-				actions={refetchOnDelete(actions)}
-				columns={columns}
-				items={formatter(items)}
-			/>
+			<Search />
 
-			<div className="taglib-search-iterator-page-iterator-bottom">
-				<div className="pagination-bar">
-					<PageSize
-						itemsCount={items.length}
-						onPageSizeChange={pageSize => {
-							if (state.pageSize === pageSize) {
-								return;
-							}
+			<div className="container-fluid container-fluid-max-xl">
+				<Table
+					actions={refetchOnDelete(actions)}
+					columns={columns}
+					items={formatter(items)}
+				/>
 
-							setLoading(true);
-							setState(prevState => ({
-								...prevState,
-								page: 1,
-								pageSize
-							}));
-						}}
-						page={page}
-						pageSize={pageSize}
-						totalCount={totalCount}
-					/>
+				<div className="taglib-search-iterator-page-iterator-bottom">
+					<div className="pagination-bar">
+						<PageSize
+							itemsCount={items.length}
+							onPageSizeChange={pageSize => {
+								if (state.pageSize === pageSize) {
+									return;
+								}
 
-					<Pagination
-						onPageChange={page => {
-							if (state.page === page) {
-								return;
-							}
+								setLoading(true);
+								setState(prevState => ({
+									...prevState,
+									page: 1,
+									pageSize
+								}));
+							}}
+							page={page}
+							pageSize={pageSize}
+							totalCount={totalCount}
+						/>
 
-							setLoading(true);
-							setState(prevState => ({
-								...prevState,
-								page
-							}));
-						}}
-						page={page}
-						totalPages={totalPages}
-					/>
+						<Pagination
+							onPageChange={page => {
+								if (state.page === page) {
+									return;
+								}
+
+								setLoading(true);
+								setState(prevState => ({
+									...prevState,
+									page
+								}));
+							}}
+							page={page}
+							totalPages={totalPages}
+						/>
+					</div>
 				</div>
 			</div>
 		</Fragment>
