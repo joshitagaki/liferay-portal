@@ -155,12 +155,12 @@ public interface ${schemaName}Resource {
 					</#if>
 				</#if>
 
-				for (Map.Entry<String, String> entry : _builder._headers.entrySet()) {
-					httpInvoker.header(entry.getKey(), entry.getValue());
-				}
-
 				if (_builder._locale != null) {
 					httpInvoker.header("Accept-Language", _builder._locale.toLanguageTag());
+				}
+
+				for (Map.Entry<String, String> entry : _builder._headers.entrySet()) {
+					httpInvoker.header(entry.getKey(), entry.getValue());
 				}
 
 				for (Map.Entry<String, String> entry : _builder._parameters.entrySet()) {
