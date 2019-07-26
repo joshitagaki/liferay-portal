@@ -23,7 +23,6 @@ import com.liferay.headless.delivery.client.serdes.v1_0.MessageBoardMessageSerDe
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -231,25 +230,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -300,25 +294,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -375,25 +364,20 @@ public interface MessageBoardMessageResource {
 			httpInvoker.body(
 				messageBoardMessage.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -450,25 +434,20 @@ public interface MessageBoardMessageResource {
 			httpInvoker.body(
 				messageBoardMessage.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -510,25 +489,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -582,25 +556,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -659,25 +628,20 @@ public interface MessageBoardMessageResource {
 
 			httpInvoker.body(rating.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -736,25 +700,20 @@ public interface MessageBoardMessageResource {
 
 			httpInvoker.body(rating.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -804,25 +763,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -899,25 +853,20 @@ public interface MessageBoardMessageResource {
 			httpInvoker.body(
 				messageBoardMessage.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -967,25 +916,20 @@ public interface MessageBoardMessageResource {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
@@ -1062,25 +1006,20 @@ public interface MessageBoardMessageResource {
 			httpInvoker.body(
 				messageBoardMessage.toString(), "application/json");
 
-			Map<String, String> headers = _builder._headers;
-
-			Set<Map.Entry<String, String>> headerEntries = headers.entrySet();
-
-			for (Map.Entry<String, String> entry : headerEntries) {
-				httpInvoker.header(entry.getKey(), entry.getValue());
-			}
-
 			if (_builder._locale != null) {
 				httpInvoker.header(
 					"Accept-Language", _builder._locale.toLanguageTag());
 			}
 
-			Map<String, String> parameters = _builder._parameters;
+			for (Map.Entry<String, String> entry :
+					_builder._headers.entrySet()) {
 
-			Set<Map.Entry<String, String>> parameterEntries =
-				parameters.entrySet();
+				httpInvoker.header(entry.getKey(), entry.getValue());
+			}
 
-			for (Map.Entry<String, String> entry : parameterEntries) {
+			for (Map.Entry<String, String> entry :
+					_builder._parameters.entrySet()) {
+
 				httpInvoker.parameter(entry.getKey(), entry.getValue());
 			}
 
