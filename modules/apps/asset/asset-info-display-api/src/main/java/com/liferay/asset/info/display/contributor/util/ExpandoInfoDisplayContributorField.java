@@ -15,6 +15,10 @@
 package com.liferay.asset.info.display.contributor.util;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.info.display.contributor.field.InfoDisplayContributorField;
+import com.liferay.info.display.contributor.field.InfoDisplayContributorFieldType;
+
+import java.util.Locale;
 
 /**
  * @author Pavel Savinov
@@ -24,12 +28,33 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 @Deprecated
 public class ExpandoInfoDisplayContributorField
 	extends com.liferay.info.display.contributor.field.
-				ExpandoInfoDisplayContributorField {
+				ExpandoInfoDisplayContributorField
+	implements InfoDisplayContributorField {
 
 	public ExpandoInfoDisplayContributorField(
 		String attributeName, ExpandoBridge expandoBridge) {
 
 		super(attributeName, expandoBridge);
+	}
+
+	@Override
+	public String getKey() {
+		return super.getKey();
+	}
+
+	@Override
+	public String getLabel(Locale locale) {
+		return super.getLabel(locale);
+	}
+
+	@Override
+	public InfoDisplayContributorFieldType getType() {
+		return super.getType();
+	}
+
+	@Override
+	public Object getValue(Object model, Locale locale) {
+		return super.getValue(model, locale);
 	}
 
 }
