@@ -32,6 +32,7 @@ export default function SearchContainer({
 	const [loading, setLoading] = useState(true);
 
 	const [state, setState] = useState({
+		keywords: '',
 		page: 1,
 		pageSize: 20
 	});
@@ -56,7 +57,7 @@ export default function SearchContainer({
 		({items, totalCount, lastPage: totalPages} = resource);
 	}
 
-	const {page, pageSize} = state;
+	const {keywords, page, pageSize} = state;
 
 	const goBackPage = () => {
 		setLoading(true);
@@ -97,7 +98,16 @@ export default function SearchContainer({
 
 	return (
 		<Fragment>
-			<Search />
+			<Search
+				keywords={keywords}
+				onSearch={keywords => {
+					setState(prevState => ({
+						...prevState,
+						keywords,
+						page: 1
+					}));
+				}}
+			/>
 
 			<div className="container-fluid container-fluid-max-xl">
 				<Table

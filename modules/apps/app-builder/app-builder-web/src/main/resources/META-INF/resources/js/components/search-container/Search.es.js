@@ -13,9 +13,19 @@
  */
 
 import ClayIcon from '@clayui/icon';
-import React from 'react';
+import React, {useState} from 'react';
 
-export default function Search() {
+export default function Search({keywords, onSearch}) {
+	const [value, setValue] = useState(keywords);
+
+	const search = () => {
+		const trimmed = value.trim();
+
+		if (trimmed !== '') {
+			onSearch(trimmed);
+		}
+	};
+
 	return (
 		<nav className="management-bar management-bar-light navbar navbar-expand-md">
 			<div className="container-fluid container-fluid-max-xl">
@@ -26,12 +36,21 @@ export default function Search() {
 								<input
 									aria-label="Search for"
 									className="form-control input-group-inset input-group-inset-after"
+									onChange={event =>
+										setValue(event.target.value)
+									}
+									onKeyDown={event =>
+										event.key === 'Enter' && search()
+									}
 									placeholder="Search for"
 									type="text"
+									value={value}
 								/>
+
 								<div className="input-group-inset-item input-group-inset-item-after">
 									<button
 										className="btn btn-unstyled"
+										onClick={search}
 										type="button"
 									>
 										<ClayIcon
