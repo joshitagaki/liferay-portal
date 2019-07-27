@@ -76,8 +76,7 @@ public class UpgradeContentImages extends UpgradeProcess {
 
 				String id = dynamicContentElement.attributeValue("id");
 
-				boolean emptyField = false;
-
+				boolean emptyDynamicContentElement = false;
 				FileEntry fileEntry = null;
 
 				if (Validator.isNotNull(id)) {
@@ -92,7 +91,7 @@ public class UpgradeContentImages extends UpgradeProcess {
 						dynamicContentElement.getData());
 
 					if (Validator.isNull(data)) {
-						emptyField = true;
+						emptyDynamicContentElement = true;
 					}
 					else {
 						fileEntry =
@@ -104,7 +103,7 @@ public class UpgradeContentImages extends UpgradeProcess {
 				dynamicContentElement.clearContent();
 
 				if (fileEntry == null) {
-					if (!emptyField && _log.isWarnEnabled()) {
+					if (!emptyDynamicContentElement && _log.isWarnEnabled()) {
 						_log.warn(
 							"Deleted dynamic content because the file entry " +
 								"does not exist");
