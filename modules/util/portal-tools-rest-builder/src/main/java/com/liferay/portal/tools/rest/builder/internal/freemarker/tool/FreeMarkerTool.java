@@ -153,26 +153,14 @@ public class FreeMarkerTool {
 	public String getGraphQLMethodJavadoc(
 		JavaMethodSignature javaMethodSignature, OpenAPIYAML openAPIYAML) {
 
-		StringBuilder sb = new StringBuilder(
-			"Can be queried by doing a POST request to ");
+		StringBuilder sb = new StringBuilder();
 
-		sb.append("http://localhost:8080/o/graphql");
-		sb.append("\n * with a basic Authentication header and this body:");
-		sb.append("\n * ");
-
-		String graphQLBody = _getGraphQLBody(javaMethodSignature, openAPIYAML);
-
-		sb.append(graphQLBody);
-
-		sb.append("\n * ");
-		sb.append("\n * or a CURL request like:");
-		sb.append("\n * ");
-
+		sb.append("Invoke this method with the command line:\n*\n* ");
 		sb.append("curl -H 'Content-Type: text/plain; charset=utf-8' ");
 		sb.append("-X 'POST' 'http://localhost:8080/o/graphql' ");
 		sb.append("-d $'");
-		sb.append(graphQLBody);
-		sb.append("' -u 'test@liferay.com:test' ");
+		sb.append(_getGraphQLBody(javaMethodSignature, openAPIYAML));
+		sb.append("' -u 'test@liferay.com:test'");
 
 		return sb.toString();
 	}
