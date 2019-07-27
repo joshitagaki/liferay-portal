@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.account.model.AccountEntry">
+		<field name="accountEntryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="parentAccountEntryId" type="long" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="logoId" type="long" />
+		<field name="status" type="int" />
+	</model>
+</model-hints>
