@@ -22,7 +22,7 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="logoId" type="long" />
-		<column name="parentAccountId" type="long" />
+		<column name="parentAccountEntryId" type="long" />
 		<column name="active" type="boolean" />
 
 		<!-- Order -->
