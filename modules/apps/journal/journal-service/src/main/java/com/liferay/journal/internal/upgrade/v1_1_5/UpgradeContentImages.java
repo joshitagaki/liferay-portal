@@ -106,8 +106,8 @@ public class UpgradeContentImages extends UpgradeProcess {
 				if (fileEntry == null) {
 					if (!emptyField && _log.isWarnEnabled()) {
 						_log.warn(
-							"Deleted dynamic content due to file entry does " +
-								"not exist");
+							"Deleted dynamic content because the file entry " +
+								"does not exist");
 					}
 
 					continue;
