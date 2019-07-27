@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -557,20 +558,22 @@ public class FreeMarkerTool {
 
 		sb.append(getGraphQLPropertyName(javaMethodSignature.getMethodName()));
 
-		List<JavaMethodParameter> javaMethodParameters =
-			javaMethodSignature.getJavaMethodParameters();
+		Set<String> javaMethodParameterNames = new TreeSet<>();
 
-		if (!javaMethodParameters.isEmpty()) {
+		for (JavaMethodParameter javaMethodParameter :
+				javaMethodSignature.getJavaMethodParameters()) {
+
+			javaMethodParameterNames.add(
+				javaMethodParameter.getParameterName());
+		}
+
+		if (!javaMethodParameterNames.isEmpty()) {
 			sb.append("(");
 
-			Iterator<JavaMethodParameter> iterator =
-				javaMethodParameters.iterator();
+			Iterator<String> iterator = javaMethodParameterNames.iterator();
 
 			while (iterator.hasNext()) {
-				JavaMethodParameter javaMethodParameter = iterator.next();
-
-				sb.append(javaMethodParameter.getParameterName());
-
+				sb.append(iterator.next());
 				sb.append(": ___");
 
 				if (iterator.hasNext()) {
@@ -586,10 +589,10 @@ public class FreeMarkerTool {
 		String returnType = javaMethodSignature.getReturnType();
 
 		if (returnType.startsWith("java.util.Collection<")) {
+			sb.append("items {__}, ");
 			sb.append("page, ");
 			sb.append("pageSize, ");
-			sb.append("totalCount, ");
-			sb.append("items {__}");
+			sb.append("totalCount");
 		}
 		else {
 			Components components = openAPIYAML.getComponents();
