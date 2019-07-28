@@ -52,15 +52,14 @@ public class WikiPageAttachmentResourceTest
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(testGroup.getGroupId());
 
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-			testGroup.getCompanyId());
-
 		WikiNode wikiNode = WikiNodeLocalServiceUtil.addNode(
-			defaultUserId, RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), serviceContext);
+			UserLocalServiceUtil.getDefaultUserId(testGroup.getCompanyId()),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			serviceContext);
 
 		_wikiPage = WikiPageLocalServiceUtil.addPage(
-			defaultUserId, wikiNode.getNodeId(), RandomTestUtil.randomString(),
+			UserLocalServiceUtil.getDefaultUserId(testGroup.getCompanyId()),
+			wikiNode.getNodeId(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 	}
