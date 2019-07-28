@@ -67,6 +67,9 @@ public abstract class Base${schemaName}ResourceImpl implements ${schemaName}Reso
 	/>
 
 	<#list javaMethodSignatures as javaMethodSignature>
+		/**
+		* ${freeMarkerTool.getRESTMethodJavadoc(configYAML, javaMethodSignature, openAPIYAML)}
+		*/
 		@Override
 		${freeMarkerTool.getResourceMethodAnnotations(javaMethodSignature)}
 		public ${javaMethodSignature.returnType} ${javaMethodSignature.methodName}(${freeMarkerTool.getResourceParameters(javaMethodSignature.javaMethodParameters, openAPIYAML, javaMethodSignature.operation, true)}) throws Exception {
