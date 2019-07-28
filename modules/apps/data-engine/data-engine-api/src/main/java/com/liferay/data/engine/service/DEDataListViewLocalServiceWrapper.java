@@ -49,11 +49,6 @@ public class DEDataListViewLocalServiceWrapper
 		return _deDataListViewLocalService.addDEDataListView(deDataListView);
 	}
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>DEDataListViewLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>DEDataListViewLocalServiceUtil</code>.
-	 */
 	@Override
 	public com.liferay.data.engine.model.DEDataListView addDEDataListView(
 			long groupId, long companyId, long userId, String appliedFilters,

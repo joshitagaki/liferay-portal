@@ -53,11 +53,6 @@ public class DEDataListViewLocalServiceUtil {
 		return getService().addDEDataListView(deDataListView);
 	}
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>DEDataListViewLocalService</code> via injection or a <code>ServiceTracker</code> or use <code>DEDataListViewLocalServiceUtil</code>.
-	 */
 	public static com.liferay.data.engine.model.DEDataListView
 			addDEDataListView(
 				long groupId, long companyId, long userId,

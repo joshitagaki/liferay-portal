@@ -74,11 +74,6 @@ public interface DEDataListViewLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public DEDataListView addDEDataListView(DEDataListView deDataListView);
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>DEDataListViewLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>DEDataListViewLocalServiceUtil</code>.
-	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public DEDataListView addDEDataListView(
 			long groupId, long companyId, long userId, String appliedFilters,
