@@ -63,6 +63,11 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseCollectionResourceImpl implements CollectionResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/collections'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(
@@ -91,6 +96,11 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		return Page.of(Collections.emptyList());
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/change-tracking/v1.0/collections' -d $'{"description": ___, "name": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
@@ -114,6 +124,11 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		return new Collection();
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'DELETE' 'http://localhost:8080/o/change-tracking/v1.0/collections/{collectionId}'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@DELETE
 	@Parameters(
@@ -137,6 +152,11 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		return responseBuilder.build();
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/collections/{collectionId}'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(
@@ -158,6 +178,11 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		return new Collection();
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/change-tracking/v1.0/collections/{collectionId}/checkout'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@POST
 	@Parameters(
@@ -180,6 +205,11 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		return responseBuilder.build();
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/change-tracking/v1.0/collections/{collectionId}/publish'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@POST
 	@Parameters(

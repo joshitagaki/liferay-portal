@@ -58,6 +58,11 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseProcessUserResourceImpl
 	implements ProcessUserResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/processes/users'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(

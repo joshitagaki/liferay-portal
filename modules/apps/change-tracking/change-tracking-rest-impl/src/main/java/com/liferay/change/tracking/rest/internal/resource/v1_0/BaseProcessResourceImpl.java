@@ -59,6 +59,11 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseProcessResourceImpl implements ProcessResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/processes'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(
@@ -90,6 +95,11 @@ public abstract class BaseProcessResourceImpl implements ProcessResource {
 		return Page.of(Collections.emptyList());
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/processes/{processId}'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "processId")})

@@ -59,6 +59,11 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseAppResourceImpl implements AppResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/app-builder/v1.0/data-definitions/{dataDefinitionId}/apps'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(
@@ -83,6 +88,11 @@ public abstract class BaseAppResourceImpl implements AppResource {
 		return Page.of(Collections.emptyList());
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/app-builder/v1.0/data-definitions/{dataDefinitionId}/apps' -d $'{"dataDefinitionId": ___, "dataLayoutId": ___, "dataListViewId": ___, "dateCreated": ___, "dateModified": ___, "id": ___, "name": ___, "settings": ___, "siteId": ___, "userId": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
@@ -101,6 +111,11 @@ public abstract class BaseAppResourceImpl implements AppResource {
 		return new App();
 	}
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/app-builder/v1.0/sites/{siteId}/apps'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(

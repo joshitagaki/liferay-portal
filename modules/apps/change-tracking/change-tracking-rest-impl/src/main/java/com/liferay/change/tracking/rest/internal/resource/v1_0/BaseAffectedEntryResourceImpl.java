@@ -58,6 +58,11 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseAffectedEntryResourceImpl
 	implements AffectedEntryResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/change-tracking/v1.0/collections/{collectionId}/entries/{entryId}/affected-entries'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Parameters(

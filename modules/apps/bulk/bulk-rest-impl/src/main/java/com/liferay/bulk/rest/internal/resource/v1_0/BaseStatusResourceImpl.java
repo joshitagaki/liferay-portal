@@ -45,6 +45,11 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseStatusResourceImpl implements StatusResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'GET' 'http://localhost:8080/o/bulk/v1.0/status'  -u 'test@liferay.com:test'
+	 */
 	@Override
 	@GET
 	@Path("/status")

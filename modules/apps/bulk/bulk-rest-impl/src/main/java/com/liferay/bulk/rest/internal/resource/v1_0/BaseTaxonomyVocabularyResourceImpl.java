@@ -56,6 +56,11 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseTaxonomyVocabularyResourceImpl
 	implements TaxonomyVocabularyResource {
 
+	/**
+	 * Invoke this method with the command line:
+	 *
+	 * curl -X 'POST' 'http://localhost:8080/o/bulk/v1.0/sites/{siteId}/taxonomy-vocabularies/common' -d $'{"documentIds": ___, "selectionScope": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
+	 */
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
