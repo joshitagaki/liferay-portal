@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.vulcan.internal.jaxrs.util;
+package com.liferay.portal.vulcan.internal.multipart;
 
 import javax.servlet.http.Part;
 
