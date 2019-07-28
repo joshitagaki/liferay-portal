@@ -76,8 +76,8 @@ public class MultipartBodyMessageBodyReader
 				ObjectMapper.class, MediaType.MULTIPART_FORM_DATA_TYPE);
 
 		try {
-			Map<String, String> values = new HashMap<>();
 			Map<String, BinaryFile> binaryFiles = new HashMap<>();
+			Map<String, String> values = new HashMap<>();
 
 			Collection<Part> parts = _httpServletRequest.getParts();
 
