@@ -99,8 +99,9 @@ public class WikiPageResourceTest extends BaseWikiPageResourceTestCase {
 		return _addWikiPage(testGetWikiNodeWikiPagesPage_getWikiNodeId());
 	}
 
-	private WikiPage _addWikiPage(Long nodeId) throws Exception {
-		return wikiPageResource.postWikiNodeWikiPage(nodeId, randomWikiPage());
+	private WikiPage _addWikiPage(Long wikiNodeId) throws Exception {
+		return wikiPageResource.postWikiNodeWikiPage(
+			wikiNodeId, randomWikiPage());
 	}
 
 	@DeleteAfterTestRun
