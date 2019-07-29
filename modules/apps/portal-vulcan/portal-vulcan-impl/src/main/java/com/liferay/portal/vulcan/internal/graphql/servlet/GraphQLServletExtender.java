@@ -620,12 +620,12 @@ public class GraphQLServletExtender {
 
 		String requestURI = httpServletRequest.getRequestURI();
 
+		message.put(Message.ENDPOINT_ADDRESS, requestURL);
+		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
 		message.put("Accept", httpServletRequest.getHeader("Accept"));
 		message.put("Content-Type", httpServletRequest.getContentType());
 		message.put("HTTP.REQUEST", httpServletRequest);
 		message.put("HTTP.RESPONSE", httpServletResponse);
-		message.put(Message.ENDPOINT_ADDRESS, requestURL);
-		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
 		message.put("org.apache.cxf.async.post.response.dispatch", true);
 		message.put(
 			"org.apache.cxf.request.method", httpServletRequest.getMethod());
