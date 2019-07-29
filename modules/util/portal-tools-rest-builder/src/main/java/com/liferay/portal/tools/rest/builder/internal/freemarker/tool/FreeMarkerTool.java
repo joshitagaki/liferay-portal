@@ -761,6 +761,10 @@ public class FreeMarkerTool {
 				Map<String, Schema> propertySchemas =
 					schema.getPropertySchemas();
 
+				if (propertySchemas == null) {
+					continue;
+				}
+
 				for (Map.Entry<String, Schema> entry :
 						propertySchemas.entrySet()) {
 
