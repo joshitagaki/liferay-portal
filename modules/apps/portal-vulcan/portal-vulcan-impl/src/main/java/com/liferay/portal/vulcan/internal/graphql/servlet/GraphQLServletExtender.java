@@ -615,23 +615,9 @@ public class GraphQLServletExtender {
 
 		Message message = new MessageImpl();
 
-		StringBuffer sb = httpServletRequest.getRequestURL();
-
-		String requestURL = sb.toString();
-
-		String requestURI = httpServletRequest.getRequestURI();
+		String requestURL = String.valueOf(httpServletRequest.getRequestURL());
 
 		message.put(Message.ENDPOINT_ADDRESS, requestURL);
-		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
-		message.put("Accept", httpServletRequest.getHeader("Accept"));
-		message.put("Content-Type", httpServletRequest.getContentType());
-		message.put("HTTP.REQUEST", httpServletRequest);
-		message.put("HTTP.RESPONSE", httpServletResponse);
-		message.put("org.apache.cxf.async.post.response.dispatch", true);
-		message.put(
-			"org.apache.cxf.request.method", httpServletRequest.getMethod());
-		message.put("org.apache.cxf.request.uri", requestURI);
-		message.put("org.apache.cxf.request.url", requestURL);
 
 		String contextPath = GetterUtil.getString(
 			httpServletRequest.getContextPath());
@@ -641,9 +627,23 @@ public class GraphQLServletExtender {
 		message.put(
 			Message.PATH_INFO,
 			contextPath + servletPath + httpServletRequest.getPathInfo());
+
+		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
+		message.put("Accept", httpServletRequest.getHeader("Accept"));
+		message.put("Content-Type", httpServletRequest.getContentType());
+		message.put("HTTP.REQUEST", httpServletRequest);
+		message.put("HTTP.RESPONSE", httpServletResponse);
+		message.put("org.apache.cxf.async.post.response.dispatch", true);
+		message.put(
+			"org.apache.cxf.request.method", httpServletRequest.getMethod());
+		message.put(
+			"org.apache.cxf.request.uri", httpServletRequest.getRequestURI());
+		message.put("org.apache.cxf.request.url", requestURL);
 		message.put(
 			"http.base.path",
-			_getBasePath(contextPath, requestURI, requestURL, servletPath));
+			_getBasePath(
+				contextPath, httpServletRequest.getRequestURI(), requestURL,
+				servletPath));
 
 		message.setExchange(new ExchangeImpl());
 
