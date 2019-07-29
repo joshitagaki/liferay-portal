@@ -36,23 +36,23 @@ public class TwoTwoColumnsLayoutConverter implements LayoutConverter {
 			layout,
 			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> {
-					layoutColumn.addPortletsByColumnId(
+					layoutColumn.addPortlets(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 1);
 					layoutColumn.setSize(8);
 				},
 				layoutColumn -> {
-					layoutColumn.addPortletsByColumnId(
+					layoutColumn.addPortlets(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 2);
 					layoutColumn.setSize(4);
 				}),
 			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> {
-					layoutColumn.addPortletsByColumnId(
+					layoutColumn.addPortlets(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 3);
 					layoutColumn.setSize(4);
 				},
 				layoutColumn -> {
-					layoutColumn.addPortletsByColumnId(
+					layoutColumn.addPortlets(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 4);
 					layoutColumn.setSize(8);
 				}));

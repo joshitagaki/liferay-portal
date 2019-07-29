@@ -39,7 +39,7 @@ public class LayoutColumn {
 		_layout = layout;
 	}
 
-	public void addPortletsByColumnId(String columnId) {
+	public void addPortlets(String columnId) {
 		List<String> portletIds = LayoutTypeSettingsInspectorUtil.getPortletIds(
 			_layout.getTypeSettingsProperties(), columnId);
 
