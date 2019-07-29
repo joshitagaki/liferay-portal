@@ -647,11 +647,9 @@ public class GraphQLServletExtender {
 		message.put(
 			Message.PATH_INFO,
 			contextPath + servletPath + httpServletRequest.getPathInfo());
-
 		message.put(
 			"http.base.path",
 			_getBasePath(contextPath, requestURI, requestURL, servletPath));
-
 		message.setExchange(new ExchangeImpl());
 
 		return message;
