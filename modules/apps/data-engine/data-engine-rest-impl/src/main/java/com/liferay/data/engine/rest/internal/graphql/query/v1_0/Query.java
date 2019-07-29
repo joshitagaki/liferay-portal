@@ -589,6 +589,27 @@ public class Query {
 
 	}
 
+	@GraphQLTypeExtension(DataRecord.class)
+	public class GetDataRecordCollectionTypeExtension {
+
+		public GetDataRecordCollectionTypeExtension(DataRecord dataRecord) {
+			_dataRecord = dataRecord;
+		}
+
+		@GraphQLField
+		public DataRecordCollection collection() throws Exception {
+			return _applyComponentServiceObjects(
+				_dataRecordCollectionResourceComponentServiceObjects,
+				Query.this::_populateResourceContext,
+				dataRecordCollectionResource ->
+					dataRecordCollectionResource.getDataRecordCollection(
+						_dataRecord.getId()));
+		}
+
+		private DataRecord _dataRecord;
+
+	}
+
 	@GraphQLTypeExtension(DataRecordCollection.class)
 	public class GetDataRecordCollectionDataRecordExportTypeExtension {
 
@@ -614,27 +635,6 @@ public class Query {
 		}
 
 		private DataRecordCollection _dataRecordCollection;
-
-	}
-
-	@GraphQLTypeExtension(DataRecord.class)
-	public class GetDataRecordCollectionTypeExtension {
-
-		public GetDataRecordCollectionTypeExtension(DataRecord dataRecord) {
-			_dataRecord = dataRecord;
-		}
-
-		@GraphQLField
-		public DataRecordCollection collection() throws Exception {
-			return _applyComponentServiceObjects(
-				_dataRecordCollectionResourceComponentServiceObjects,
-				Query.this::_populateResourceContext,
-				dataRecordCollectionResource ->
-					dataRecordCollectionResource.getDataRecordCollection(
-						_dataRecord.getId()));
-		}
-
-		private DataRecord _dataRecord;
 
 	}
 
