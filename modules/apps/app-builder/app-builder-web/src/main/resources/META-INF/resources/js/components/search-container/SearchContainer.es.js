@@ -15,11 +15,11 @@
 import {useResource} from '@clayui/data-provider';
 import ClayLoadingIndicator from '@clayui/loading-indicator';
 import React, {Fragment, useState} from 'react';
-import EmptyState from './EmptyState.es';
-import PageSize from './PageSize.es';
-import Pagination from './Pagination.es';
-import Search from './Search.es';
-import Table from './Table.es';
+import PageSize from './pagination/PageSize.es';
+import Pagination from './pagination/Pagination.es';
+import Search from './search/Search.es';
+import EmptyState from './table/EmptyState.es';
+import Table from './table/Table.es';
 import {getURL} from '../../utils/client.es';
 
 export default function SearchContainer({

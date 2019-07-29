@@ -12,7 +12,7 @@
  * details.
  */
 
-import EmptyState from '../../../../src/main/resources/META-INF/resources/js/components/search-container/EmptyState.es';
+import EmptyState from '../../../../../src/main/resources/META-INF/resources/js/components/search-container/table/EmptyState.es';
 import React from 'react';
 import {cleanup, render} from '@testing-library/react';
 

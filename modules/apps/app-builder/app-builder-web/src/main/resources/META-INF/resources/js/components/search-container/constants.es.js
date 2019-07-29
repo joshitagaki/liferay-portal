@@ -13,7 +13,7 @@
  */
 
 import moment from 'moment';
-import {deleteItem} from './client.es';
+import {deleteItem} from '../../utils/client.es';
 
 const confirmDelete = endpoint => item =>
 	new Promise((resolve, reject) => {

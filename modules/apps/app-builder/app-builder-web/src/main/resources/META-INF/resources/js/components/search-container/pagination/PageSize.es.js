@@ -15,7 +15,7 @@
 import ClayDropDown, {Align} from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import React, {Fragment, useState} from 'react';
-import lang from '../../utils/lang.es';
+import lang from '../../../utils/lang.es';
 
 const {Item, ItemList} = ClayDropDown;
 

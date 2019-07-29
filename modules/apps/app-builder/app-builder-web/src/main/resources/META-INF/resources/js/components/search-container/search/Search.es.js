@@ -14,7 +14,7 @@
 
 import ClayIcon from '@clayui/icon';
 import React, {Fragment, useState} from 'react';
-import lang from '../../utils/lang.es';
+import lang from '../../../utils/lang.es';
 
 export default function Search({keywords, onSearch, totalCount}) {
 	const [value, setValue] = useState(keywords);
