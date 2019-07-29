@@ -29,22 +29,18 @@ public class LayoutRow {
 		_layout = layout;
 	}
 
-	public void addLayoutColumn(Consumer<LayoutColumn> consumer) {
-		LayoutColumn layoutColumn = new LayoutColumn(_layout);
-
-		try {
-			consumer.accept(layoutColumn);
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-
-		_layoutColumns.add(layoutColumn);
-	}
-
 	public void addLayoutColumn(Consumer<LayoutColumn>... consumers) {
 		for (Consumer<LayoutColumn> consumer : consumers) {
-			addLayoutColumn(consumer);
+			LayoutColumn layoutColumn = new LayoutColumn(_layout);
+
+			try {
+				consumer.accept(layoutColumn);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+
+			_layoutColumns.add(layoutColumn);
 		}
 	}
 
