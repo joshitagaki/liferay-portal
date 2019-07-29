@@ -45,6 +45,8 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.ws.rs.core.UriInfo;
+
 import org.osgi.service.component.ComponentServiceObjects;
 
 /**
@@ -787,6 +789,7 @@ public class Query {
 			_httpServletRequest);
 		dataDefinitionResource.setContextHttpServletResponse(
 			_httpServletResponse);
+		dataDefinitionResource.setContextUriInfo(_uriInfo);
 		dataDefinitionResource.setContextUser(_user);
 	}
 
@@ -797,6 +800,7 @@ public class Query {
 		dataLayoutResource.setContextCompany(_company);
 		dataLayoutResource.setContextHttpServletRequest(_httpServletRequest);
 		dataLayoutResource.setContextHttpServletResponse(_httpServletResponse);
+		dataLayoutResource.setContextUriInfo(_uriInfo);
 		dataLayoutResource.setContextUser(_user);
 	}
 
@@ -809,6 +813,7 @@ public class Query {
 		dataListViewResource.setContextHttpServletRequest(_httpServletRequest);
 		dataListViewResource.setContextHttpServletResponse(
 			_httpServletResponse);
+		dataListViewResource.setContextUriInfo(_uriInfo);
 		dataListViewResource.setContextUser(_user);
 	}
 
@@ -819,6 +824,7 @@ public class Query {
 		dataRecordResource.setContextCompany(_company);
 		dataRecordResource.setContextHttpServletRequest(_httpServletRequest);
 		dataRecordResource.setContextHttpServletResponse(_httpServletResponse);
+		dataRecordResource.setContextUriInfo(_uriInfo);
 		dataRecordResource.setContextUser(_user);
 	}
 
@@ -832,6 +838,7 @@ public class Query {
 			_httpServletRequest);
 		dataRecordCollectionResource.setContextHttpServletResponse(
 			_httpServletResponse);
+		dataRecordCollectionResource.setContextUriInfo(_uriInfo);
 		dataRecordCollectionResource.setContextUser(_user);
 	}
 
@@ -852,6 +859,7 @@ public class Query {
 	private Company _company;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
+	private UriInfo _uriInfo;
 	private User _user;
 
 }

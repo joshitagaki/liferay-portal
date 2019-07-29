@@ -45,6 +45,8 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.ws.rs.core.UriInfo;
+
 import org.osgi.service.component.ComponentServiceObjects;
 
 /**
@@ -471,6 +473,7 @@ public class Query {
 		affectedEntryResource.setContextHttpServletRequest(_httpServletRequest);
 		affectedEntryResource.setContextHttpServletResponse(
 			_httpServletResponse);
+		affectedEntryResource.setContextUriInfo(_uriInfo);
 		affectedEntryResource.setContextUser(_user);
 	}
 
@@ -481,6 +484,7 @@ public class Query {
 		collectionResource.setContextCompany(_company);
 		collectionResource.setContextHttpServletRequest(_httpServletRequest);
 		collectionResource.setContextHttpServletResponse(_httpServletResponse);
+		collectionResource.setContextUriInfo(_uriInfo);
 		collectionResource.setContextUser(_user);
 	}
 
@@ -491,6 +495,7 @@ public class Query {
 		entryResource.setContextCompany(_company);
 		entryResource.setContextHttpServletRequest(_httpServletRequest);
 		entryResource.setContextHttpServletResponse(_httpServletResponse);
+		entryResource.setContextUriInfo(_uriInfo);
 		entryResource.setContextUser(_user);
 	}
 
@@ -501,6 +506,7 @@ public class Query {
 		processResource.setContextCompany(_company);
 		processResource.setContextHttpServletRequest(_httpServletRequest);
 		processResource.setContextHttpServletResponse(_httpServletResponse);
+		processResource.setContextUriInfo(_uriInfo);
 		processResource.setContextUser(_user);
 	}
 
@@ -512,6 +518,7 @@ public class Query {
 		processUserResource.setContextCompany(_company);
 		processUserResource.setContextHttpServletRequest(_httpServletRequest);
 		processUserResource.setContextHttpServletResponse(_httpServletResponse);
+		processUserResource.setContextUriInfo(_uriInfo);
 		processUserResource.setContextUser(_user);
 	}
 
@@ -522,6 +529,7 @@ public class Query {
 		settingsResource.setContextCompany(_company);
 		settingsResource.setContextHttpServletRequest(_httpServletRequest);
 		settingsResource.setContextHttpServletResponse(_httpServletResponse);
+		settingsResource.setContextUriInfo(_uriInfo);
 		settingsResource.setContextUser(_user);
 	}
 
@@ -544,6 +552,7 @@ public class Query {
 	private Company _company;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
+	private UriInfo _uriInfo;
 	private User _user;
 
 }

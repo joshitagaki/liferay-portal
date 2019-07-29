@@ -35,6 +35,8 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.ws.rs.core.UriInfo;
+
 import org.osgi.service.component.ComponentServiceObjects;
 
 /**
@@ -146,6 +148,7 @@ public class Query {
 		appResource.setContextCompany(_company);
 		appResource.setContextHttpServletRequest(_httpServletRequest);
 		appResource.setContextHttpServletResponse(_httpServletResponse);
+		appResource.setContextUriInfo(_uriInfo);
 		appResource.setContextUser(_user);
 	}
 
@@ -158,6 +161,7 @@ public class Query {
 	private Company _company;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
+	private UriInfo _uriInfo;
 	private User _user;
 
 }
