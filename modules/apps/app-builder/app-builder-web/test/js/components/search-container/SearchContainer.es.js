@@ -12,12 +12,12 @@
  * details.
  */
 
+import {waitForElementToBeRemoved} from '@testing-library/dom';
 import {cleanup, render} from '@testing-library/react';
+import React from 'react';
 import {disableActWarnings, restoreConsole} from '../../utils.es';
 import SearchContainer from '../../../../src/main/resources/META-INF/resources/js/components/search-container/SearchContainer.es';
 import lang from '../../../../src/main/resources/META-INF/resources/js/utils/lang.es';
-import React from 'react';
-import {waitForElementToBeRemoved} from '@testing-library/dom';
 
 import {
 	ACTIONS,

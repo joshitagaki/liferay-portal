@@ -44,10 +44,6 @@ export default function SearchContainer({
 		}
 	});
 
-	if (loading) {
-		return <ClayLoadingIndicator />;
-	}
-
 	let items = [];
 	let totalCount = 0;
 	let totalPages = 1;
@@ -56,10 +52,14 @@ export default function SearchContainer({
 		({items, totalCount, lastPage: totalPages} = resource);
 	}
 
-	const {keywords, page, pageSize} = state;
+	let LoadingIndicator;
 
 	if (!items || items.length === 0) {
-		return <EmptyState {...emptyState} />;
+		LoadingIndicator = <EmptyState {...emptyState} />;
+	}
+
+	if (loading) {
+		LoadingIndicator = <ClayLoadingIndicator />;
 	}
 
 	const fetchItems = nextState => {
@@ -104,8 +104,8 @@ export default function SearchContainer({
 							return;
 						}
 
-						if (page > 1 && items.length === 1) {
-							onPageChange(page - 1);
+						if (state.page > 1 && items.length === 1) {
+							onPageChange(state.page - 1);
 							return;
 						}
 
@@ -114,6 +114,8 @@ export default function SearchContainer({
 				}
 			};
 		});
+
+	const {keywords, page, pageSize} = state;
 
 	return (
 		<Fragment>
@@ -124,23 +126,27 @@ export default function SearchContainer({
 			/>
 
 			<div className="container-fluid container-fluid-max-xl">
-				<Table
-					actions={refetchOnDelete(actions)}
-					columns={columns}
-					items={formatter(items)}
-				/>
+				{LoadingIndicator || (
+					<Fragment>
+						<Table
+							actions={refetchOnDelete(actions)}
+							columns={columns}
+							items={formatter(items)}
+						/>
 
-				<div className="taglib-search-iterator-page-iterator-bottom">
-					<PaginationBar
-						itemsCount={items.length}
-						onPageChange={onPageChange}
-						onPageSizeChange={onPageSizeChange}
-						page={page}
-						pageSize={pageSize}
-						totalCount={totalCount}
-						totalPages={totalPages}
-					/>
-				</div>
+						<div className="taglib-search-iterator-page-iterator-bottom">
+							<PaginationBar
+								itemsCount={items.length}
+								onPageChange={onPageChange}
+								onPageSizeChange={onPageSizeChange}
+								page={page}
+								pageSize={pageSize}
+								totalCount={totalCount}
+								totalPages={totalPages}
+							/>
+						</div>
+					</Fragment>
+				)}
 			</div>
 		</Fragment>
 	);

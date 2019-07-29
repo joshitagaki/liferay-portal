@@ -12,9 +12,9 @@
  * details.
  */
 
-import EmptyState from '../../../../../src/main/resources/META-INF/resources/js/components/search-container/table/EmptyState.es';
-import React from 'react';
 import {cleanup, render} from '@testing-library/react';
+import React from 'react';
+import EmptyState from '../../../../../src/main/resources/META-INF/resources/js/components/search-container/table/EmptyState.es';
 
 describe('EmptyState', () => {
 	afterEach(cleanup);
