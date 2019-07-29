@@ -395,6 +395,47 @@ public class GraphQLServletExtender {
 		}
 	}
 
+	private Message _createMessage(
+		HttpServletRequest httpServletRequest,
+		HttpServletResponse httpServletResponse) {
+
+		Message message = new MessageImpl();
+
+		String requestURL = String.valueOf(httpServletRequest.getRequestURL());
+
+		message.put(Message.ENDPOINT_ADDRESS, requestURL);
+
+		String contextPath = GetterUtil.getString(
+			httpServletRequest.getContextPath());
+		String servletPath = GetterUtil.getString(
+			httpServletRequest.getServletPath());
+
+		message.put(
+			Message.PATH_INFO,
+			contextPath + servletPath + httpServletRequest.getPathInfo());
+
+		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
+		message.put("Accept", httpServletRequest.getHeader("Accept"));
+		message.put("Content-Type", httpServletRequest.getContentType());
+		message.put("HTTP.REQUEST", httpServletRequest);
+		message.put("HTTP.RESPONSE", httpServletResponse);
+		message.put("org.apache.cxf.async.post.response.dispatch", true);
+		message.put(
+			"org.apache.cxf.request.method", httpServletRequest.getMethod());
+		message.put(
+			"org.apache.cxf.request.uri", httpServletRequest.getRequestURI());
+		message.put("org.apache.cxf.request.url", requestURL);
+		message.put(
+			"http.base.path",
+			_getBasePath(
+				contextPath, httpServletRequest.getRequestURI(), requestURL,
+				servletPath));
+
+		message.setExchange(new ExchangeImpl());
+
+		return message;
+	}
+
 	private Object _get(
 			DataFetchingEnvironment dataFetchingEnvironment, Method method)
 		throws Exception {
@@ -609,47 +650,6 @@ public class GraphQLServletExtender {
 		return (String)value;
 	}
 
-	private Message _createMessage(
-		HttpServletRequest httpServletRequest,
-		HttpServletResponse httpServletResponse) {
-
-		Message message = new MessageImpl();
-
-		String requestURL = String.valueOf(httpServletRequest.getRequestURL());
-
-		message.put(Message.ENDPOINT_ADDRESS, requestURL);
-
-		String contextPath = GetterUtil.getString(
-			httpServletRequest.getContextPath());
-		String servletPath = GetterUtil.getString(
-			httpServletRequest.getServletPath());
-
-		message.put(
-			Message.PATH_INFO,
-			contextPath + servletPath + httpServletRequest.getPathInfo());
-
-		message.put(Message.QUERY_STRING, httpServletRequest.getQueryString());
-		message.put("Accept", httpServletRequest.getHeader("Accept"));
-		message.put("Content-Type", httpServletRequest.getContentType());
-		message.put("HTTP.REQUEST", httpServletRequest);
-		message.put("HTTP.RESPONSE", httpServletResponse);
-		message.put("org.apache.cxf.async.post.response.dispatch", true);
-		message.put(
-			"org.apache.cxf.request.method", httpServletRequest.getMethod());
-		message.put(
-			"org.apache.cxf.request.uri", httpServletRequest.getRequestURI());
-		message.put("org.apache.cxf.request.url", requestURL);
-		message.put(
-			"http.base.path",
-			_getBasePath(
-				contextPath, httpServletRequest.getRequestURI(), requestURL,
-				servletPath));
-
-		message.setExchange(new ExchangeImpl());
-
-		return message;
-	}
-
 	private GraphQLFieldDefinition _getNodeGraphQLFieldDefinition(
 		GraphQLOutputType graphQLOutputType) {
 
@@ -756,7 +756,8 @@ public class GraphQLServletExtender {
 				field.set(
 					instance,
 					new UriInfoImpl(
-						_createMessage(httpServletRequest, httpServletResponse)));
+						_createMessage(
+							httpServletRequest, httpServletResponse)));
 			}
 			else if (fieldClass.isAssignableFrom(User.class)) {
 				field.setAccessible(true);
