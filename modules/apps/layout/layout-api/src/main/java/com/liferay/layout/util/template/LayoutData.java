@@ -38,8 +38,8 @@ public class LayoutData {
 	}
 
 	public JSONObject getLayoutDataJSONObject() {
-		int rowId = 0;
 		int columnId = 0;
+		int rowId = 0;
 
 		JSONArray layoutRowJSONArray = JSONFactoryUtil.createJSONArray();
 
