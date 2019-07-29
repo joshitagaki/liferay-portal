@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -632,17 +633,10 @@ public class GraphQLServletExtender {
 		message.put("org.apache.cxf.request.uri", requestURI);
 		message.put("org.apache.cxf.request.url", requestURL);
 
-		String contextPath = httpServletRequest.getContextPath();
-
-		if (contextPath == null) {
-			contextPath = "";
-		}
-
-		String servletPath = httpServletRequest.getServletPath();
-
-		if (servletPath == null) {
-			servletPath = "";
-		}
+		String contextPath = GetterUtil.getString(
+			httpServletRequest.getContextPath());
+		String servletPath = GetterUtil.getString(
+			httpServletRequest.getServletPath());
 
 		message.put(
 			Message.PATH_INFO,
@@ -650,6 +644,7 @@ public class GraphQLServletExtender {
 		message.put(
 			"http.base.path",
 			_getBasePath(contextPath, requestURI, requestURL, servletPath));
+
 		message.setExchange(new ExchangeImpl());
 
 		return message;
