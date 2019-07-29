@@ -58,12 +58,36 @@ export default function SearchContainer({
 
 	const {keywords, page, pageSize} = state;
 
-	const goBackPage = () => {
+	if (!items || items.length === 0) {
+		return <EmptyState {...emptyState} />;
+	}
+
+	const fetchItems = nextState => {
 		setLoading(true);
 		setState(prevState => ({
 			...prevState,
-			page: prevState.page - 1
+			...nextState
 		}));
+	};
+
+	const onSearch = keywords => {
+		fetchItems({keywords, page: 1});
+	};
+
+	const onPageChange = page => {
+		if (state.page === page) {
+			return;
+		}
+
+		fetchItems({page});
+	};
+
+	const onPageSizeChange = pageSize => {
+		if (state.pageSize === pageSize) {
+			return;
+		}
+
+		fetchItems({page: 1, pageSize});
 	};
 
 	const refetchOnDelete = actions =>
@@ -81,7 +105,7 @@ export default function SearchContainer({
 						}
 
 						if (page > 1 && items.length === 1) {
-							goBackPage();
+							onPageChange(page - 1);
 							return;
 						}
 
@@ -90,44 +114,6 @@ export default function SearchContainer({
 				}
 			};
 		});
-
-	if (!items || items.length === 0) {
-		return <EmptyState {...emptyState} />;
-	}
-
-	const onSearch = keywords => {
-		setLoading(true);
-		setState(prevState => ({
-			...prevState,
-			keywords,
-			page: 1
-		}));
-	};
-
-	const onPageChange = page => {
-		if (state.page === page) {
-			return;
-		}
-
-		setLoading(true);
-		setState(prevState => ({
-			...prevState,
-			page
-		}));
-	};
-
-	const onPageSizeChange = pageSize => {
-		if (state.pageSize === pageSize) {
-			return;
-		}
-
-		setLoading(true);
-		setState(prevState => ({
-			...prevState,
-			page: 1,
-			pageSize
-		}));
-	};
 
 	return (
 		<Fragment>
