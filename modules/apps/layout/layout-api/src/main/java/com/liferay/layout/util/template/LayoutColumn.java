@@ -18,10 +18,9 @@ import com.liferay.fragment.model.FragmentEntryLink;
 import com.liferay.fragment.service.FragmentEntryLinkLocalServiceUtil;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.PortletIdCodec;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -51,7 +50,7 @@ public class LayoutColumn {
 		return layoutColumn;
 	}
 
-	public void addPortlets(String columnId) {
+	public void addPortlets(String columnId) throws PortalException {
 		List<String> portletIds = LayoutTypeSettingsInspectorUtil.getPortletIds(
 			_layout.getTypeSettingsProperties(), columnId);
 
@@ -59,29 +58,23 @@ public class LayoutColumn {
 			ServiceContextThreadLocal.getServiceContext();
 
 		for (String portletId : portletIds) {
-			try {
-				JSONObject editableValueJSONObject = JSONUtil.put(
-					"instanceId", PortletIdCodec.decodeInstanceId(portletId)
-				).put(
-					"portletId", PortletIdCodec.decodePortletName(portletId)
-				);
+			JSONObject editableValueJSONObject = JSONUtil.put(
+				"instanceId", PortletIdCodec.decodeInstanceId(portletId)
+			).put(
+				"portletId", PortletIdCodec.decodePortletName(portletId)
+			);
 
-				FragmentEntryLink fragmentEntryLink =
-					FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
-						serviceContext.getUserId(),
-						serviceContext.getScopeGroupId(), 0, 0,
-						PortalUtil.getClassNameId(Layout.class),
-						_layout.getPlid(), StringPool.BLANK, StringPool.BLANK,
-						StringPool.BLANK, StringPool.BLANK,
-						editableValueJSONObject.toString(), StringPool.BLANK, 0,
-						null, serviceContext);
+			FragmentEntryLink fragmentEntryLink =
+				FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), 0, 0,
+					PortalUtil.getClassNameId(Layout.class), _layout.getPlid(),
+					StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
+					StringPool.BLANK, editableValueJSONObject.toString(),
+					StringPool.BLANK, 0, null, serviceContext);
 
-				_fragmentEntryLinkIds.add(
-					fragmentEntryLink.getFragmentEntryLinkId());
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			_fragmentEntryLinkIds.add(
+				fragmentEntryLink.getFragmentEntryLinkId());
 		}
 	}
 
@@ -100,8 +93,6 @@ public class LayoutColumn {
 	private LayoutColumn(Layout layout) {
 		_layout = layout;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(LayoutColumn.class);
 
 	private final List<Long> _fragmentEntryLinkIds = new ArrayList<>();
 	private final Layout _layout;
