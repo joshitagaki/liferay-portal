@@ -12,98 +12,20 @@
  * details.
  */
 
-import ClayIcon from '@clayui/icon';
-import React, {Fragment, useState} from 'react';
-import lang from '../../../utils/lang.es';
+import React, {Fragment} from 'react';
+import SearchInput from './SearchInput.es';
+import SearchSubnavigationBar from './SearchSubnavigationBar.es';
 
 export default function Search({keywords, onSearch, totalCount}) {
-	const [value, setValue] = useState(keywords);
-
-	const search = () => {
-		const trimmed = value.trim();
-
-		if (trimmed !== '') {
-			onSearch(trimmed);
-		}
-	};
-
-	const clear = () => {
-		onSearch('');
-	};
-
 	return (
 		<Fragment>
-			<nav className="management-bar management-bar-light navbar navbar-expand-md">
-				<div className="container-fluid container-fluid-max-xl">
-					<div className="navbar-form navbar-form-autofit navbar-overlay navbar-overlay-sm-down">
-						<div className="container-fluid container-fluid-max-xl">
-							<div className="input-group">
-								<div className="input-group-item">
-									<input
-										aria-label="Search for"
-										className="form-control input-group-inset input-group-inset-after"
-										onChange={event =>
-											setValue(event.target.value)
-										}
-										onKeyDown={event =>
-											event.key === 'Enter' && search()
-										}
-										placeholder="Search for"
-										type="text"
-										value={value}
-									/>
+			<SearchInput keywords={keywords} onSearch={onSearch} />
 
-									<div className="input-group-inset-item input-group-inset-item-after">
-										<button
-											className="btn btn-unstyled"
-											onClick={search}
-											type="button"
-										>
-											<ClayIcon
-												spritemap={`${Liferay.ThemeDisplay.getPathThemeImages()}/lexicon/icons.svg`}
-												symbol="search"
-											/>
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</nav>
-			{keywords !== '' && (
-				<nav className="tbar tbar-inline-xs-down subnav-tbar subnav-tbar-primary">
-					<div className="container-fluid container-fluid-max-xl">
-						<ul className="tbar-nav tbar-nav-wrap">
-							<li className="tbar-item tbar-item-expand">
-								<div className="tbar-section">
-									<span className="component-text text-truncate-inline">
-										<span className="text-truncate">
-											{lang.sub(
-												Liferay.Language.get(
-													'x-results-for-x'
-												),
-												[totalCount, keywords]
-											)}
-										</span>
-									</span>
-								</div>
-							</li>
-							<li className="tbar-item">
-								<div className="tbar-section">
-									<a
-										className=" component-link tbar-link"
-										href="javascript:;"
-										onClick={clear}
-									>
-										Clear
-									</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			)}
+			<SearchSubnavigationBar
+				keywords={keywords}
+				onSearch={onSearch}
+				totalCount={totalCount}
+			/>
 		</Fragment>
 	);
 }
