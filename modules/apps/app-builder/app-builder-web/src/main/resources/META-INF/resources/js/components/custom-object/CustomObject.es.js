@@ -14,7 +14,7 @@
 
 import React, {Fragment} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import NavigationBar from './NavigationBar.es';
+import CustomObjectNavigationBar from './CustomObjectNavigationBar.es';
 import {APPS, FORM_VIEWS, TABLE_VIEWS} from '../search-container/constants.es';
 import SearchContainer from '../search-container/SearchContainer.es';
 
@@ -26,7 +26,7 @@ export default function CustomObject({
 }) {
 	return (
 		<Fragment>
-			<NavigationBar />
+			<CustomObjectNavigationBar />
 
 			<Switch>
 				<Route

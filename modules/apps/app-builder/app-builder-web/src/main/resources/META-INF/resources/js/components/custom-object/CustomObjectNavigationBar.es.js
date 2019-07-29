@@ -18,7 +18,7 @@ import {NavLink, withRouter} from 'react-router-dom';
 
 const {Item} = ClayNavigationBar;
 
-function NavigationBar({match: {url}}) {
+function CustomObjectNavigationBar({match: {url}}) {
 	const blur = event => {
 		event.target.blur();
 	};
@@ -63,4 +63,4 @@ function NavigationBar({match: {url}}) {
 	);
 }
 
-export default withRouter(NavigationBar);
+export default withRouter(CustomObjectNavigationBar);
