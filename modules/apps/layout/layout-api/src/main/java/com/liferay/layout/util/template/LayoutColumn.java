@@ -58,19 +58,18 @@ public class LayoutColumn {
 			ServiceContextThreadLocal.getServiceContext();
 
 		for (String portletId : portletIds) {
-			JSONObject editableValueJSONObject = JSONUtil.put(
-				"instanceId", PortletIdCodec.decodeInstanceId(portletId)
-			).put(
-				"portletId", PortletIdCodec.decodePortletName(portletId)
-			);
-
 			FragmentEntryLink fragmentEntryLink =
 				FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
 					serviceContext.getUserId(),
 					serviceContext.getScopeGroupId(), 0, 0,
 					PortalUtil.getClassNameId(Layout.class), _layout.getPlid(),
 					StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
-					StringPool.BLANK, editableValueJSONObject.toString(),
+					StringPool.BLANK,
+					JSONUtil.put(
+						"instanceId", PortletIdCodec.decodeInstanceId(portletId)
+					).put(
+						"portletId", PortletIdCodec.decodePortletName(portletId)
+					).toString(),
 					StringPool.BLANK, 0, null, serviceContext);
 
 			_fragmentEntryLinkIds.add(
