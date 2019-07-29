@@ -19,7 +19,6 @@ import com.liferay.fragment.service.FragmentEntryLinkLocalServiceUtil;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.PortletIdCodec;
@@ -54,26 +53,8 @@ public class LayoutColumn {
 		List<String> portletIds = LayoutTypeSettingsInspectorUtil.getPortletIds(
 			_layout.getTypeSettingsProperties(), columnId);
 
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
 		for (String portletId : portletIds) {
-			FragmentEntryLink fragmentEntryLink =
-				FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
-					serviceContext.getUserId(),
-					serviceContext.getScopeGroupId(), 0, 0,
-					PortalUtil.getClassNameId(Layout.class), _layout.getPlid(),
-					StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
-					StringPool.BLANK,
-					JSONUtil.put(
-						"instanceId", PortletIdCodec.decodeInstanceId(portletId)
-					).put(
-						"portletId", PortletIdCodec.decodePortletName(portletId)
-					).toString(),
-					StringPool.BLANK, 0, null, serviceContext);
-
-			_fragmentEntryLinkIds.add(
-				fragmentEntryLink.getFragmentEntryLinkId());
+			_addPortlet(portletId);
 		}
 	}
 
@@ -91,6 +72,27 @@ public class LayoutColumn {
 
 	private LayoutColumn(Layout layout) {
 		_layout = layout;
+	}
+
+	private void _addPortlet(String portletId) throws PortalException {
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		FragmentEntryLink fragmentEntryLink =
+			FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
+				serviceContext.getUserId(), serviceContext.getScopeGroupId(), 0,
+				0, PortalUtil.getClassNameId(Layout.class), _layout.getPlid(),
+				StringPool.BLANK, StringPool.BLANK, StringPool.BLANK,
+				StringPool.BLANK,
+				JSONUtil.put(
+					"instanceId", PortletIdCodec.decodeInstanceId(portletId)
+				).put(
+					"portletId", PortletIdCodec.decodePortletName(portletId)
+				).toString(),
+				StringPool.BLANK, 0, null,
+				ServiceContextThreadLocal.getServiceContext());
+
+		_fragmentEntryLinkIds.add(fragmentEntryLink.getFragmentEntryLinkId());
 	}
 
 	private final List<Long> _fragmentEntryLinkIds = new ArrayList<>();
