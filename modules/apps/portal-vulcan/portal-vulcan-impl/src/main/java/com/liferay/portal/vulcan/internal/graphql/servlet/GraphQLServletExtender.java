@@ -609,7 +609,7 @@ public class GraphQLServletExtender {
 		return (String)value;
 	}
 
-	private Message _getMessage(
+	private Message _createMessage(
 		HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse) {
 
@@ -756,7 +756,7 @@ public class GraphQLServletExtender {
 				field.set(
 					instance,
 					new UriInfoImpl(
-						_getMessage(httpServletRequest, httpServletResponse)));
+						_createMessage(httpServletRequest, httpServletResponse)));
 			}
 			else if (fieldClass.isAssignableFrom(User.class)) {
 				field.setAccessible(true);
