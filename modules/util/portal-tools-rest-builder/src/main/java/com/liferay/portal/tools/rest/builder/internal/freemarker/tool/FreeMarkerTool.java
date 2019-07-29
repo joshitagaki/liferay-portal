@@ -435,7 +435,7 @@ public class FreeMarkerTool {
 		sb.append(javaMethodSignature.getPath());
 		sb.append("' ");
 		sb.append(_getRESTBody(javaMethodSignature, openAPIYAML));
-		sb.append("-u 'test@liferay.com:test'");
+		sb.append(" -u 'test@liferay.com:test'");
 
 		return sb.toString();
 	}
@@ -788,7 +788,7 @@ public class FreeMarkerTool {
 				}
 			}
 
-			sb.append("}' --header 'Content-Type: application/json' ");
+			sb.append("}' --header 'Content-Type: application/json'");
 		}
 
 		return sb.toString();
