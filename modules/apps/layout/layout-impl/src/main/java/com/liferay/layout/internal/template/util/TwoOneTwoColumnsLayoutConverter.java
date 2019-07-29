@@ -35,24 +35,24 @@ public class TwoOneTwoColumnsLayoutConverter implements LayoutConverter {
 		return LayoutData.of(
 			layout,
 			layoutRow -> {
-				layoutRow.addLayoutColumn(
+				layoutRow.addLayoutColumns(
 					layoutColumn -> {
 						layoutColumn.addPortletsByColumnId(
 							LayoutTypePortletConstants.COLUMN_PREFIX + 1);
 						layoutColumn.setSize(6);
 					});
 
-				layoutRow.addLayoutColumn(
+				layoutRow.addLayoutColumns(
 					layoutColumn -> {
 						layoutColumn.addPortletsByColumnId(
 							LayoutTypePortletConstants.COLUMN_PREFIX + 2);
 						layoutColumn.setSize(6);
 					});
 			},
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> layoutColumn.addPortletsByColumnId(
 					LayoutTypePortletConstants.COLUMN_PREFIX + 3)),
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> {
 					layoutColumn.addPortletsByColumnId(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 4);

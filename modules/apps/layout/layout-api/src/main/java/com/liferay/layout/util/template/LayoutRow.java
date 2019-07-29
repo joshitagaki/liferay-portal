@@ -29,7 +29,7 @@ public class LayoutRow {
 		_layout = layout;
 	}
 
-	public void addLayoutColumn(Consumer<LayoutColumn>... consumers) {
+	public void addLayoutColumns(Consumer<LayoutColumn>... consumers) {
 		for (Consumer<LayoutColumn> consumer : consumers) {
 			LayoutColumn layoutColumn = new LayoutColumn(_layout);
 

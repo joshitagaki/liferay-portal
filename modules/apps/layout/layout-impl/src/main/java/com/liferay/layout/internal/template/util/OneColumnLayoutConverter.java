@@ -34,7 +34,7 @@ public class OneColumnLayoutConverter implements LayoutConverter {
 	public LayoutData convert(Layout layout) {
 		return LayoutData.of(
 			layout,
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> layoutColumn.addPortletsByColumnId(
 					LayoutTypePortletConstants.COLUMN_PREFIX + 1)));
 	}

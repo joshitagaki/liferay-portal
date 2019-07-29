@@ -34,10 +34,10 @@ public class OneThreeOneColumnsLayoutConverter implements LayoutConverter {
 	public LayoutData convert(Layout layout) {
 		return LayoutData.of(
 			layout,
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> layoutColumn.addPortletsByColumnId(
 					LayoutTypePortletConstants.COLUMN_PREFIX + 1)),
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> {
 					layoutColumn.addPortletsByColumnId(
 						LayoutTypePortletConstants.COLUMN_PREFIX + 2);
@@ -53,7 +53,7 @@ public class OneThreeOneColumnsLayoutConverter implements LayoutConverter {
 						LayoutTypePortletConstants.COLUMN_PREFIX + 4);
 					layoutColumn.setSize(4);
 				}),
-			layoutRow -> layoutRow.addLayoutColumn(
+			layoutRow -> layoutRow.addLayoutColumns(
 				layoutColumn -> layoutColumn.addPortletsByColumnId(
 					LayoutTypePortletConstants.COLUMN_PREFIX + 5)));
 	}
