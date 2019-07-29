@@ -16,6 +16,7 @@ package com.liferay.layout.util.template;
 
 import com.liferay.fragment.model.FragmentEntryLink;
 import com.liferay.fragment.service.FragmentEntryLinkLocalServiceUtil;
+import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author Eudaldo Alonso
@@ -37,12 +37,12 @@ import java.util.function.Consumer;
 public class LayoutColumn {
 
 	public static LayoutColumn of(
-		Layout layout, Consumer<LayoutColumn> consumer) {
+		Layout layout, UnsafeConsumer<LayoutColumn, Exception> unsafeConsumer) {
 
 		LayoutColumn layoutColumn = new LayoutColumn(layout);
 
 		try {
-			consumer.accept(layoutColumn);
+			unsafeConsumer.accept(layoutColumn);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);

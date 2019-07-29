@@ -15,6 +15,7 @@
 package com.liferay.layout.util.template;
 
 import com.liferay.fragment.constants.FragmentConstants;
+import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -23,7 +24,6 @@ import com.liferay.portal.kernel.model.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author Eudaldo Alonso
@@ -31,9 +31,10 @@ import java.util.function.Consumer;
 public class LayoutData {
 
 	public static LayoutData of(
-		Layout layout, Consumer<LayoutRow>... consumers) {
+		Layout layout,
+		UnsafeConsumer<LayoutRow, Exception>... unsafeConsumers) {
 
-		return new LayoutData(layout, consumers);
+		return new LayoutData(layout, unsafeConsumers);
 	}
 
 	public JSONObject getLayoutDataJSONObject() {
@@ -86,11 +87,16 @@ public class LayoutData {
 		);
 	}
 
-	private LayoutData(Layout layout, Consumer<LayoutRow>... consumers) {
+	private LayoutData(
+		Layout layout,
+		UnsafeConsumer<LayoutRow, Exception>... unsafeConsumers) {
+
 		_layout = layout;
 
-		for (Consumer<LayoutRow> consumer : consumers) {
-			_layoutRows.add(LayoutRow.of(_layout, consumer));
+		for (UnsafeConsumer<LayoutRow, Exception> unsafeConsumer :
+				unsafeConsumers) {
+
+			_layoutRows.add(LayoutRow.of(_layout, unsafeConsumer));
 		}
 	}
 

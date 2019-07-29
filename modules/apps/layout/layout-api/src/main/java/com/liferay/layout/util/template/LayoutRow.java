@@ -14,22 +14,24 @@
 
 package com.liferay.layout.util.template;
 
+import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.portal.kernel.model.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author Eudaldo Alonso
  */
 public class LayoutRow {
 
-	public static LayoutRow of(Layout layout, Consumer<LayoutRow> consumer) {
+	public static LayoutRow of(
+		Layout layout, UnsafeConsumer<LayoutRow, Exception> unsafeConsumer) {
+
 		LayoutRow layoutRow = new LayoutRow(layout);
 
 		try {
-			consumer.accept(layoutRow);
+			unsafeConsumer.accept(layoutRow);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -38,9 +40,13 @@ public class LayoutRow {
 		return layoutRow;
 	}
 
-	public void addLayoutColumns(Consumer<LayoutColumn>... consumers) {
-		for (Consumer<LayoutColumn> consumer : consumers) {
-			_layoutColumns.add(LayoutColumn.of(_layout, consumer));
+	public void addLayoutColumns(
+		UnsafeConsumer<LayoutColumn, Exception>... unsafeConsumers) {
+
+		for (UnsafeConsumer<LayoutColumn, Exception> unsafeConsumer :
+				unsafeConsumers) {
+
+			_layoutColumns.add(LayoutColumn.of(_layout, unsafeConsumer));
 		}
 	}
 
