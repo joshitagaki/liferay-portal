@@ -424,16 +424,16 @@ public class FreeMarkerTool {
 
 		Application application = configYAML.getApplication();
 
-		String baseURI = application.getBaseURI();
+		sb.append(application.getBaseURI());
+
+		sb.append("/");
 
 		Info info = openAPIYAML.getInfo();
 
-		sb.append(baseURI);
-		sb.append("/");
 		sb.append(info.getVersion());
+
 		sb.append(javaMethodSignature.getPath());
 		sb.append("' ");
-
 		sb.append(_getRESTBody(javaMethodSignature, openAPIYAML));
 		sb.append("-u 'test@liferay.com:test'");
 
@@ -738,14 +738,16 @@ public class FreeMarkerTool {
 	private String _getRESTBody(
 		JavaMethodSignature javaMethodSignature, OpenAPIYAML openAPIYAML) {
 
+		StringBuilder sb = new StringBuilder();
+
+		Set<String> properties = new TreeSet<>();
+
 		Components components = openAPIYAML.getComponents();
 
 		Map<String, Schema> schemas = components.getSchemas();
 
 		List<JavaMethodParameter> javaMethodParameters =
 			javaMethodSignature.getJavaMethodParameters();
-
-		Set<String> properties = new TreeSet<>();
 
 		for (JavaMethodParameter javaMethodParameter : javaMethodParameters) {
 			String parameterType = javaMethodParameter.getParameterType();
@@ -770,8 +772,6 @@ public class FreeMarkerTool {
 				}
 			}
 		}
-
-		StringBuilder sb = new StringBuilder();
 
 		if (!properties.isEmpty()) {
 			sb.append("-d $'{");
