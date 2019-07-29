@@ -33,26 +33,7 @@ public class LayoutData {
 	public static LayoutData of(
 		Layout layout, Consumer<LayoutRow>... consumers) {
 
-		LayoutData layoutData = new LayoutData(layout);
-
-		for (Consumer<LayoutRow> consumer : consumers) {
-			layoutData.addLayoutRow(consumer);
-		}
-
-		return layoutData;
-	}
-
-	public void addLayoutRow(Consumer<LayoutRow> consumer) {
-		LayoutRow layoutRow = new LayoutRow(_layout);
-
-		try {
-			consumer.accept(layoutRow);
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-
-		_layoutRows.add(layoutRow);
+		return new LayoutData(layout, consumers);
 	}
 
 	public JSONObject getLayoutDataJSONObject() {
@@ -105,8 +86,12 @@ public class LayoutData {
 		);
 	}
 
-	private LayoutData(Layout layout) {
+	private LayoutData(Layout layout, Consumer<LayoutRow>... consumers) {
 		_layout = layout;
+
+		for (Consumer<LayoutRow> consumer : consumers) {
+			_layoutRows.add(LayoutRow.of(_layout, consumer));
+		}
 	}
 
 	private final Layout _layout;

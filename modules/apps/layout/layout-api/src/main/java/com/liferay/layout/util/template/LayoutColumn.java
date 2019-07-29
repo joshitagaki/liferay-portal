@@ -29,14 +29,26 @@ import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author Eudaldo Alonso
  */
 public class LayoutColumn {
 
-	public LayoutColumn(Layout layout) {
-		_layout = layout;
+	public static LayoutColumn of(
+		Layout layout, Consumer<LayoutColumn> consumer) {
+
+		LayoutColumn layoutColumn = new LayoutColumn(layout);
+
+		try {
+			consumer.accept(layoutColumn);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+		return layoutColumn;
 	}
 
 	public void addPortlets(String columnId) {
@@ -83,6 +95,10 @@ public class LayoutColumn {
 
 	public void setSize(int size) {
 		_size = size;
+	}
+
+	private LayoutColumn(Layout layout) {
+		_layout = layout;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(LayoutColumn.class);

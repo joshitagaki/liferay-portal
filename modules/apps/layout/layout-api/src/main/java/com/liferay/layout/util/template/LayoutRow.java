@@ -25,27 +25,31 @@ import java.util.function.Consumer;
  */
 public class LayoutRow {
 
-	public LayoutRow(Layout layout) {
-		_layout = layout;
+	public static LayoutRow of(Layout layout, Consumer<LayoutRow> consumer) {
+		LayoutRow layoutRow = new LayoutRow(layout);
+
+		try {
+			consumer.accept(layoutRow);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+		return layoutRow;
 	}
 
 	public void addLayoutColumns(Consumer<LayoutColumn>... consumers) {
 		for (Consumer<LayoutColumn> consumer : consumers) {
-			LayoutColumn layoutColumn = new LayoutColumn(_layout);
-
-			try {
-				consumer.accept(layoutColumn);
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-
-			_layoutColumns.add(layoutColumn);
+			_layoutColumns.add(LayoutColumn.of(_layout, consumer));
 		}
 	}
 
 	public List<LayoutColumn> getLayoutColumns() {
 		return _layoutColumns;
+	}
+
+	private LayoutRow(Layout layout) {
+		_layout = layout;
 	}
 
 	private final Layout _layout;
