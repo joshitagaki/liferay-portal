@@ -12,17 +12,20 @@
  * details.
  */
 
-import ClayPagination from '@clayui/pagination';
-import React from 'react';
+import React, {Fragment} from 'react';
+import SearchInput from './SearchInput.es';
+import SearchSubnavigationBar from './SearchSubnavigationBar.es';
 
-export default function Pagination({onPageChange, page, totalPages}) {
+export default function SearchBar({keywords, onSearch, totalCount}) {
 	return (
-		<ClayPagination
-			activePage={page}
-			ellipsisBuffer={0}
-			onPageChange={onPageChange}
-			spritemap={`${Liferay.ThemeDisplay.getPathThemeImages()}/lexicon/icons.svg`}
-			totalPages={totalPages}
-		/>
+		<Fragment>
+			<SearchInput keywords={keywords} onSearch={onSearch} />
+
+			<SearchSubnavigationBar
+				keywords={keywords}
+				onSearch={onSearch}
+				totalCount={totalCount}
+			/>
+		</Fragment>
 	);
 }

@@ -15,9 +15,8 @@
 import {useResource} from '@clayui/data-provider';
 import ClayLoadingIndicator from '@clayui/loading-indicator';
 import React, {Fragment, useState} from 'react';
-import PageSize from './pagination/PageSize.es';
-import Pagination from './pagination/Pagination.es';
-import Search from './search/Search.es';
+import PaginationBar from './pagination/PaginationBar.es';
+import SearchBar from './search/SearchBar.es';
 import EmptyState from './table/EmptyState.es';
 import Table from './table/Table.es';
 import {getURL} from '../../utils/client.es';
@@ -96,18 +95,45 @@ export default function SearchContainer({
 		return <EmptyState {...emptyState} />;
 	}
 
+	const onSearch = keywords => {
+		setLoading(true);
+		setState(prevState => ({
+			...prevState,
+			keywords,
+			page: 1
+		}));
+	};
+
+	const onPageChange = page => {
+		if (state.page === page) {
+			return;
+		}
+
+		setLoading(true);
+		setState(prevState => ({
+			...prevState,
+			page
+		}));
+	};
+
+	const onPageSizeChange = pageSize => {
+		if (state.pageSize === pageSize) {
+			return;
+		}
+
+		setLoading(true);
+		setState(prevState => ({
+			...prevState,
+			page: 1,
+			pageSize
+		}));
+	};
+
 	return (
 		<Fragment>
-			<Search
+			<SearchBar
 				keywords={keywords}
-				onSearch={keywords => {
-					setLoading(true);
-					setState(prevState => ({
-						...prevState,
-						keywords,
-						page: 1
-					}));
-				}}
+				onSearch={onSearch}
 				totalCount={totalCount}
 			/>
 
@@ -119,42 +145,15 @@ export default function SearchContainer({
 				/>
 
 				<div className="taglib-search-iterator-page-iterator-bottom">
-					<div className="pagination-bar">
-						<PageSize
-							itemsCount={items.length}
-							onPageSizeChange={pageSize => {
-								if (state.pageSize === pageSize) {
-									return;
-								}
-
-								setLoading(true);
-								setState(prevState => ({
-									...prevState,
-									page: 1,
-									pageSize
-								}));
-							}}
-							page={page}
-							pageSize={pageSize}
-							totalCount={totalCount}
-						/>
-
-						<Pagination
-							onPageChange={page => {
-								if (state.page === page) {
-									return;
-								}
-
-								setLoading(true);
-								setState(prevState => ({
-									...prevState,
-									page
-								}));
-							}}
-							page={page}
-							totalPages={totalPages}
-						/>
-					</div>
+					<PaginationBar
+						itemsCount={items.length}
+						onPageChange={onPageChange}
+						onPageSizeChange={onPageSizeChange}
+						page={page}
+						pageSize={pageSize}
+						totalCount={totalCount}
+						totalPages={totalPages}
+					/>
 				</div>
 			</div>
 		</Fragment>

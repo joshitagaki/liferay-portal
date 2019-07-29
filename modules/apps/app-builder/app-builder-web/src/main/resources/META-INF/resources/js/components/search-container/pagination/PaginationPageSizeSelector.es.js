@@ -19,7 +19,7 @@ import lang from '../../../utils/lang.es';
 
 const {Item, ItemList} = ClayDropDown;
 
-export default function PageSize({
+export default function PaginationPageSizeSelector({
 	itemsCount,
 	onPageSizeChange,
 	page,
