@@ -549,11 +549,11 @@ public class ContentPageEditorDisplayContext {
 			String className = PortalUtil.getClassName(classNameId);
 
 			soyContext.put(
-				"href", _getAssetBrowserURL(className)
-			).put(
 				"className", className
 			).put(
 				"classNameId", classNameId
+			).put(
+				"href", _getAssetBrowserURL(className)
 			).put(
 				"typeName",
 				ResourceActionsUtil.getModelResource(
