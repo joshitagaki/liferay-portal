@@ -258,34 +258,34 @@ public class FragmentRendererControllerImpl
 
 						String type = fieldJSONObject.getString("type");
 
-						if (Objects.equals(type, "select")) {
-							JSONObject typeOptionsJSONObject =
-								fieldJSONObject.getJSONObject("typeOptions");
-
-							JSONArray validValuesJSONArray =
-								typeOptionsJSONObject.getJSONArray(
-									"validValues");
-
-							Iterator<JSONObject> validValuesIterator =
-								validValuesJSONArray.iterator();
-
-							validValuesIterator.forEachRemaining(
-								validValueJSONObject -> {
-									String value =
-										validValueJSONObject.getString("value");
-
-									String key = value;
-
-									String label =
-										validValueJSONObject.getString(
-											"label", key);
-
-									validValueJSONObject.put(
-										"label",
-										LanguageUtil.get(
-											resourceBundle, label, key));
-								});
+						if (!Objects.equals(type, "select")) {
+							return;
 						}
+
+						JSONObject typeOptionsJSONObject =
+							fieldJSONObject.getJSONObject("typeOptions");
+
+						JSONArray validValuesJSONArray =
+							typeOptionsJSONObject.getJSONArray("validValues");
+
+						Iterator<JSONObject> validValuesIterator =
+							validValuesJSONArray.iterator();
+
+						validValuesIterator.forEachRemaining(
+							validValueJSONObject -> {
+								String value = validValueJSONObject.getString(
+									"value");
+
+								String key = value;
+
+								String label = validValueJSONObject.getString(
+									"label", key);
+
+								validValueJSONObject.put(
+									"label",
+									LanguageUtil.get(
+										resourceBundle, label, key));
+							});
 					});
 			});
 
