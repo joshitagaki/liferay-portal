@@ -94,7 +94,7 @@ public class RenderFragmentEntryMVCActionCommand extends BaseMVCActionCommand {
 			jsonObject.put("content", content);
 
 			if (SessionErrors.contains(
-					httpServletRequest, "fragmentEntryInvalidContent")) {
+					httpServletRequest, "fragmentEntryContentInvalid")) {
 
 				jsonObject.put("error", true);
 

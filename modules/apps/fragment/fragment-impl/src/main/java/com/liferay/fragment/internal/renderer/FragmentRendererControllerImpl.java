@@ -101,7 +101,7 @@ public class FragmentRendererControllerImpl
 		}
 		catch (FragmentEntryConfigurationException fece) {
 			SessionErrors.add(
-				httpServletRequest, "fragmentEntryInvalidContent");
+				httpServletRequest, "fragmentEntryContentInvalid");
 
 			return _getFragmentEntryConfigurationExceptionMessage(
 				httpServletRequest, fece);
@@ -120,7 +120,7 @@ public class FragmentRendererControllerImpl
 		}
 		catch (IOException ioe) {
 			SessionErrors.add(
-				httpServletRequest, "fragmentEntryInvalidContent");
+				httpServletRequest, "fragmentEntryContentInvalid");
 
 			return _getFragmentEntryContentExceptionMessage(
 				httpServletRequest, ioe);

@@ -173,7 +173,7 @@ public class AddPortletMVCActionCommand extends BaseMVCActionCommand {
 			);
 
 			if (SessionErrors.contains(
-					actionRequest, "fragmentEntryInvalidContent")) {
+					actionRequest, "fragmentEntryContentInvalid")) {
 
 				jsonObject.put("error", true);
 			}
