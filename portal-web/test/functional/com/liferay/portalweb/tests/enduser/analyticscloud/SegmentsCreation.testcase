@@ -74,4 +74,30 @@ definition {
 			locator1 = "ACSegments#SEGMENT_MEMBERS");
 	}
 
+	@description = "Create a static segment with individual"
+	@priority = "5"
+	test CanCreateStaticSegmentWithIndividuals {
+		ACDXPSettings.connectDXPtoAnalyticsCloud();
+
+		Navigator.openURL();
+
+		Pause(locator1 = "5000");
+
+		ACUtils.launchAC();
+
+		ACProperties.switchProperty(propertyName = "Liferay DXP Combined Property");
+
+		ACNavigation.goToSegments();
+
+		ACSegments.createStaticSegment();
+
+		ACSegments.nameSegment(segmentName = "Static Segment Test");
+
+		ACSegments.addStaticMember(tableMember = "Test Test");
+
+		ACSegments.saveSegment();
+
+		ACNavigation.goToSegments();
+	}
+
 }
