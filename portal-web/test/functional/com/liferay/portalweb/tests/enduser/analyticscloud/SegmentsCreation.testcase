@@ -51,7 +51,7 @@ definition {
 
 		ACSegments.nameSegment(segmentName = "Dynamic Segment Test");
 
-		ACSegments.goToSidebarAttrributes(criterion = "Individual Attributes");
+		ACSegments.goToSidebarAttributes(criterion = "Individual Attributes");
 
 		ACSegments.addSegmentField(segmentField = "email");
 
