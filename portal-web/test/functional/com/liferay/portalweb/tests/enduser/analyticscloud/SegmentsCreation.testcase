@@ -82,7 +82,7 @@ definition {
 			userFirstName = "userfn",
 			userLastName = "userln",
 			userScreenName = "usersn");
-		
+
 		ACDXPSettings.connectDXPtoAnalyticsCloud();
 
 		Navigator.openURL();
