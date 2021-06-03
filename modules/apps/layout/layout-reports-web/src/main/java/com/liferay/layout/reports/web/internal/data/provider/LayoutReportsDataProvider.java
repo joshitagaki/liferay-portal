@@ -23,11 +23,13 @@ import com.google.api.services.pagespeedonline.v5.model.PagespeedApiPagespeedRes
 
 import com.liferay.layout.reports.web.internal.model.LayoutReportsIssue;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -40,11 +42,12 @@ public class LayoutReportsDataProvider {
 		_apiKey = apiKey;
 	}
 
-	public List<LayoutReportsIssue> getLayoutReportsIssues(String url)
+	public List<LayoutReportsIssue> getLayoutReportsIssues(
+			Locale locale, String url)
 		throws LayoutReportsDataProviderException {
 
 		try {
-			return _getLayoutReportsIssues(url);
+			return _getLayoutReportsIssues(locale, url);
 		}
 		catch (LayoutReportsDataProviderException
 					layoutReportsDataProviderException) {
@@ -103,14 +106,15 @@ public class LayoutReportsDataProvider {
 	}
 
 	private LayoutReportsIssue.Detail _getDetail(
-		String googlePageSpeedKey, LayoutReportsIssue.Detail.Key key,
-		Map<String, LighthouseAuditResultV5> lighthouseAuditResultV5s) {
+		LayoutReportsIssue.Detail.Key key,
+		LighthouseAuditResultV5 lighthouseAuditResultV5) {
 
 		return new LayoutReportsIssue.Detail(
-			key, _getCount(lighthouseAuditResultV5s.get(googlePageSpeedKey)));
+			key, _getCount(lighthouseAuditResultV5));
 	}
 
-	private List<LayoutReportsIssue> _getLayoutReportsIssues(String url)
+	private List<LayoutReportsIssue> _getLayoutReportsIssues(
+			Locale locale, String url)
 		throws Exception {
 
 		if (!isValidConnection()) {
@@ -135,6 +139,7 @@ public class LayoutReportsDataProvider {
 		runpagespeed.setCategory(
 			Arrays.asList("accessibility", "best-practices", "seo"));
 		runpagespeed.setKey(_apiKey);
+		runpagespeed.setLocale(LanguageUtil.getLanguageId(locale));
 
 		PagespeedApiPagespeedResponseV5 pagespeedApiPagespeedResponseV5 =
 			runpagespeed.execute();
@@ -149,68 +154,52 @@ public class LayoutReportsDataProvider {
 			new LayoutReportsIssue(
 				Arrays.asList(
 					_getDetail(
-						"color-contrast",
 						LayoutReportsIssue.Detail.Key.LOW_CONTRAST_RATIO,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("color-contrast")),
 					_getDetail(
-						"image-alt",
 						LayoutReportsIssue.Detail.Key.
 							MISSING_IMG_ALT_ATTRIBUTES,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("image-alt")),
 					_getDetail(
-						"input-image-alt",
 						LayoutReportsIssue.Detail.Key.
 							MISSING_INPUT_ALT_ATTRIBUTES,
-						lighthouseAuditResultV5s),
-					_getDetail(
-						"video-caption",
-						LayoutReportsIssue.Detail.Key.MISSING_VIDEO_CAPTION,
-						lighthouseAuditResultV5s)),
+						lighthouseAuditResultV5s.get("input-image-alt"))),
 				LayoutReportsIssue.Key.ACCESSIBILITY),
 			new LayoutReportsIssue(
 				Arrays.asList(
 					_getDetail(
-						"canonical",
 						LayoutReportsIssue.Detail.Key.INVALID_CANONICAL_URL,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("canonical")),
 					_getDetail(
-						"crawlable-anchors",
 						LayoutReportsIssue.Detail.Key.
 							NOT_ALL_LINKS_ARE_CRAWLABLE,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("crawlable-anchors")),
 					_getDetail(
-						"is-crawlable",
 						LayoutReportsIssue.Detail.Key.
 							PAGE_BLOCKED_FROM_INDEXING,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("is-crawlable")),
 					_getDetail(
-						"font-size",
 						LayoutReportsIssue.Detail.Key.ILLEGIBLE_FONT_SIZES,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("font-size")),
 					_getDetail(
-						"hreflang",
 						LayoutReportsIssue.Detail.Key.INVALID_HREFLANG,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("hreflang")),
 					_getDetail(
-						"image-aspect-ratio",
 						LayoutReportsIssue.Detail.Key.
 							INCORRECT_IMAGE_ASPECT_RATIOS,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("image-aspect-ratio")),
 					_getDetail(
-						"link-text", LayoutReportsIssue.Detail.Key.LINK_TEXTS,
-						lighthouseAuditResultV5s),
+						LayoutReportsIssue.Detail.Key.LINK_TEXTS,
+						lighthouseAuditResultV5s.get("link-text")),
 					_getDetail(
-						"meta-description",
 						LayoutReportsIssue.Detail.Key.MISSING_META_DESCRIPTION,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("meta-description")),
 					_getDetail(
-						"tap-targets",
 						LayoutReportsIssue.Detail.Key.SMALL_TAP_TARGETS,
-						lighthouseAuditResultV5s),
+						lighthouseAuditResultV5s.get("tap-targets")),
 					_getDetail(
-						"document-title",
 						LayoutReportsIssue.Detail.Key.MISSING_TITLE_ELEMENT,
-						lighthouseAuditResultV5s)),
+						lighthouseAuditResultV5s.get("document-title"))),
 				LayoutReportsIssue.Key.SEO));
 	}
 

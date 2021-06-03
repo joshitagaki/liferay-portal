@@ -111,7 +111,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1140,17 +1139,6 @@ public class JournalDisplayContext {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setAndSearch(false);
-		searchContext.setAttribute("head", !showVersions);
-		searchContext.setAttribute("latest", !showVersions);
-
-		LinkedHashMap<String, Object> params =
-			LinkedHashMapBuilder.<String, Object>put(
-				"expandoAttributes", getKeywords()
-			).put(
-				"keywords", getKeywords()
-			).build();
-
-		searchContext.setAttribute("params", params);
 		searchContext.setAttributes(
 			HashMapBuilder.<String, Serializable>put(
 				Field.ARTICLE_ID, getKeywords()
@@ -1168,19 +1156,25 @@ public class JournalDisplayContext {
 			).put(
 				"ddmStructureKey", getDDMStructureKey()
 			).put(
-				"params", params
+				"head", !showVersions
+			).put(
+				"latest", !showVersions
+			).put(
+				"params",
+				LinkedHashMapBuilder.<String, Object>put(
+					"expandoAttributes", getKeywords()
+				).put(
+					"keywords", getKeywords()
+				).build()
+			).put(
+				"showNonindexable", !showVersions
 			).build());
-
 		searchContext.setCompanyId(_themeDisplay.getCompanyId());
 		searchContext.setEnd(end);
 		searchContext.setFolderIds(_getFolderIds());
 		searchContext.setGroupIds(new long[] {_themeDisplay.getScopeGroupId()});
 		searchContext.setIncludeInternalAssetCategories(true);
 		searchContext.setKeywords(getKeywords());
-
-		if (!showVersions) {
-			searchContext.setAttribute("showNonindexable", Boolean.TRUE);
-		}
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 

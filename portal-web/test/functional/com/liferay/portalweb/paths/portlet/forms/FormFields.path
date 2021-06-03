@@ -482,6 +482,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_OPTIONS_FIELD_BY_ROW_PREVIEW</td>
+	<td>//button[contains(text(),'${key_fieldName}') and contains(@data-testid, '${key_rowPosition}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_OPTIONS_INLINE_IDENTIFIER</td>
+	<td>//div[@class='ddm-radio']//div[@class='custom-control custom-radio custom-control-inline']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE</td>
 	<td>//div[contains(@class,'ddm-field-options-container')]//div[contains(@class,'ddm-field-options')][${key_rowNumber}]//input | //div[@class='options']/div[${key_rowNumber}]//input</td>
 	<td></td>
@@ -547,6 +557,11 @@
 <tr>
 	<td>VALIDATION_INPUT</td>
 	<td>//div[contains(@class,'validation-input')]//input | //input[contains(@name,'parameter')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>VALIDATION_ERROR_ENTRIES</td>
+	<td>//div[contains(@class,'sheet')]/h1[contains(.,'${key_value}')]</td>
 	<td></td>
 </tr>
 <tr>

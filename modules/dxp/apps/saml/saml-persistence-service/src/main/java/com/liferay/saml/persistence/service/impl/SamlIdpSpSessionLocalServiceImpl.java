@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.saml.persistence.exception.DuplicateSamlIdpSpSessionException;
+import com.liferay.saml.persistence.exception.NoSuchIdpSpSessionException;
 import com.liferay.saml.persistence.model.SamlIdpSpSession;
 import com.liferay.saml.persistence.model.SamlPeerBinding;
 import com.liferay.saml.persistence.service.SamlPeerBindingLocalService;
@@ -51,7 +52,7 @@ public class SamlIdpSpSessionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		SamlIdpSpSession samlIdpSpSession = getSamlIdpSpSession(
+		SamlIdpSpSession samlIdpSpSession = _fetchSamlIdpSpSession(
 			samlIdpSsoSessionId, samlSpEntityId);
 
 		if (samlIdpSpSession != null) {
@@ -95,6 +96,44 @@ public class SamlIdpSpSessionLocalServiceImpl
 			long samlIdpSsoSessionId, String samlSpEntityId)
 		throws PortalException {
 
+		SamlIdpSpSession samlIdpSpSession = _fetchSamlIdpSpSession(
+			samlIdpSsoSessionId, samlSpEntityId);
+
+		if (samlIdpSpSession == null) {
+			throw new NoSuchIdpSpSessionException();
+		}
+
+		return samlIdpSpSession;
+	}
+
+	@Override
+	public List<SamlIdpSpSession> getSamlIdpSpSessions(
+		long samlIdpSsoSessionId) {
+
+		return samlIdpSpSessionPersistence.findBySamlIdpSsoSessionId(
+			samlIdpSsoSessionId);
+	}
+
+	@Override
+	public SamlIdpSpSession updateModifiedDate(
+			long samlIdpSsoSessionId, String samlSpEntityId)
+		throws PortalException {
+
+		SamlIdpSpSession samlIdpSpSession = _fetchSamlIdpSpSession(
+			samlIdpSsoSessionId, samlSpEntityId);
+
+		if (samlIdpSpSession == null) {
+			return null;
+		}
+
+		samlIdpSpSession.setModifiedDate(new Date());
+
+		return samlIdpSpSessionPersistence.update(samlIdpSpSession);
+	}
+
+	private SamlIdpSpSession _fetchSamlIdpSpSession(
+		long samlIdpSsoSessionId, String samlSpEntityId) {
+
 		List<SamlIdpSpSession> samlIdpSsoSessions =
 			samlIdpSpSessionPersistence.findBySamlIdpSsoSessionId(
 				samlIdpSsoSessionId);
@@ -114,27 +153,6 @@ public class SamlIdpSpSessionLocalServiceImpl
 		).orElse(
 			null
 		);
-	}
-
-	@Override
-	public List<SamlIdpSpSession> getSamlIdpSpSessions(
-		long samlIdpSsoSessionId) {
-
-		return samlIdpSpSessionPersistence.findBySamlIdpSsoSessionId(
-			samlIdpSsoSessionId);
-	}
-
-	@Override
-	public SamlIdpSpSession updateModifiedDate(
-			long samlIdpSsoSessionId, String samlSpEntityId)
-		throws PortalException {
-
-		SamlIdpSpSession samlIdpSpSession = getSamlIdpSpSession(
-			samlIdpSsoSessionId, samlSpEntityId);
-
-		samlIdpSpSession.setModifiedDate(new Date());
-
-		return samlIdpSpSessionPersistence.update(samlIdpSpSession);
 	}
 
 	@Reference

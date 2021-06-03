@@ -3,7 +3,7 @@ definition {
 
 	property portal.release = "true";
 	property portal.upstream = "true";
-	property testray.main.component.name = "Content Pages,Fragments";
+	property testray.main.component.name = "Fragments";
 
 	setUp {
 		TestCase.setUpPortalInstance();
@@ -379,6 +379,65 @@ definition {
 			value1 = "This content maps from blog content");
 	}
 
+	@description = "This is a test for LPS-131040. The category name should be shown when select a category in Content Display with Default Template."
+	@priority = "4"
+	test ViewSelectedCategoryInDisplayPageTemplate {
+		task ("Add a vocabulary") {
+			JSONCategory.addVocabulary(
+				groupName = "Test Site Name",
+				title = "Vocabulary Name");
+		}
+
+		task ("Add a category") {
+			JSONCategory.addCategory(
+				groupName = "Test Site Name",
+				title = "Category Name",
+				vocabularyName = "Vocabulary Name");
+		}
+
+		task ("Add a display page template for Category") {
+			JSONLayoutpagetemplate.addDisplayPageTemplateEntry(
+				contentType = "Category",
+				displayPageTemplateEntryName = "Display Page Name",
+				groupName = "Test Site Name");
+		}
+
+		task ("Add a Content Display fragment to the display Page Template") {
+			DisplayPageTemplatesAdmin.openDisplayPagesAdmin(siteURLKey = "test-site-name");
+
+			DisplayPageTemplatesAdmin.gotoDisplayPage(displayPageName = "Display Page Name");
+
+			PageEditor.addFragment(
+				collectionName = "Content Display",
+				fragmentName = "Content Display");
+		}
+
+		task ("Select the category in Content Display") {
+			PageEditor.editContentDisplay(
+				assetTitle = "Category Name",
+				categories = "true",
+				fragmentName = "Content Display");
+		}
+
+		task ("View category name shown in Content Display") {
+			AssertVisible(
+				key_contentName = "Category Name",
+				locator1 = "PageEditor#ITEM_SELECTOR_CONTENT_INPUT");
+		}
+
+		task ("Open the Preview modal") {
+			WaitForLiferayEvent.initializeLiferayEventLog();
+
+			Click(locator1 = "PageEditor#PREVIEW");
+		}
+
+		task ("View category name shown in modal") {
+			AssertTextEquals(
+				locator1 = "PageEditor#CONTENT_PAGE_TEXT_CONTENT",
+				value1 = "Category Name");
+		}
+	}
+
 	@description = "This case ensures that a user can map an image to a fragment via the content display."
 	@priority = "5"
 	test ViewSelectedDocument {
@@ -454,7 +513,7 @@ definition {
 	@description = "This case ensures that a user can select content via content display in content page template editor."
 	@priority = "4"
 	test ViewSelectedWebContentInContentPageTemplate {
-		property testray.main.component.name = "Fragments,Layout Page Templates";
+		property testray.main.component.name = "Layout Page Templates";
 
 		JSONWebcontent.addWebContent(
 			content = "WC WebContent Content",
@@ -506,7 +565,7 @@ definition {
 	@description = "This case ensures that a user can select content via content display in display page template editor."
 	@priority = "4"
 	test ViewSelectedWebContentInDisplayPageTemplate {
-		property testray.main.component.name = "Display Pages,Fragments";
+		property testray.main.component.name = "Display Pages";
 
 		JSONWebcontent.addWebContent(
 			content = "WC WebContent Content",

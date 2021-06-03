@@ -27,9 +27,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -118,7 +119,7 @@ public class DSEnvelopeManagerTest {
 	}
 
 	@Test
-	public void testGetDSEnvelopes() throws Exception {
+	public void testGetDSEnvelopesPage() throws Exception {
 		DSEnvelope dsEnvelope1 = _dsEnvelopeManager.addDSEnvelope(
 			TestPropsValues.getCompanyId(), TestPropsValues.getGroupId(),
 			new DSEnvelope() {
@@ -136,21 +137,15 @@ public class DSEnvelopeManagerTest {
 				}
 			});
 
-		List<DSEnvelope> dsEnvelopes = _dsEnvelopeManager.getDSEnvelopes(
+		Page<DSEnvelope> page = _dsEnvelopeManager.getDSEnvelopesPage(
 			TestPropsValues.getCompanyId(), TestPropsValues.getGroupId(),
-			"2021-01-01");
+			"2021-01-01", "desc", Pagination.of(1, 2));
 
-		Assert.assertTrue(dsEnvelopes.size() >= 2);
+		Assert.assertEquals(2, page.getPageSize());
 
 		String[] dsEnvelopeIds = {
 			dsEnvelope1.getDSEnvelopeId(), dsEnvelope2.getDSEnvelopeId()
 		};
-
-		dsEnvelopes = _dsEnvelopeManager.getDSEnvelopes(
-			TestPropsValues.getCompanyId(), TestPropsValues.getGroupId(),
-			dsEnvelopeIds);
-
-		Assert.assertTrue(dsEnvelopes.size() == 2);
 
 		_dsEnvelopeManager.deleteDSEnvelopes(
 			TestPropsValues.getCompanyId(), TestPropsValues.getGroupId(),

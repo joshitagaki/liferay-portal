@@ -102,10 +102,10 @@ export default withRouter(
 		const [error, setError] = useState({});
 		const [filter, setFilter] = useState();
 		const [loading, setLoading] = useState(true);
-		const [page, setPage] = useState(1);
-		const [pageSize, setPageSize] = useState(20);
+		const [page, setPage] = useState(null);
+		const [pageSize, setPageSize] = useState(null);
 		const [questions, setQuestions] = useState([]);
-		const [search, setSearch] = useState('');
+		const [search, setSearch] = useState(null);
 		const [section, setSection] = useState({});
 		const [totalCount, setTotalCount] = useState(0);
 
@@ -301,6 +301,10 @@ export default withRouter(
 		);
 
 		useEffect(() => {
+			if (!page || !pageSize || search == null) {
+				return;
+			}
+
 			if (section.id == null && !currentTag) {
 				return;
 			}
@@ -370,9 +374,7 @@ export default withRouter(
 		]);
 
 		function buildURL(search, page, pageSize) {
-			let url = !context.historyRouterBasePath
-				? '/#/questions'
-				: '/questions';
+			let url = (context.historyRouterBasePath || '#') + '/questions';
 
 			if (sectionTitle || sectionTitle === '0') {
 				url += `/${sectionTitle}`;
@@ -481,7 +483,7 @@ export default withRouter(
 							changeDelta={setPageSize}
 							data={questions}
 							emptyState={
-								!search && !filter ? (
+								sectionTitle && !search && !filter ? (
 									<ClayEmptyState
 										description={Liferay.Language.get(
 											'there-are-no-questions-inside-this-topic-be-the-first-to-ask-something'

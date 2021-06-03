@@ -224,11 +224,6 @@ definition {
 	@priority = "3"
 	test AddShippingOptionFlatRate {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#AddShippingOptionFlatRate";
-
-		// TODO Review
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
@@ -356,9 +351,6 @@ definition {
 	@priority = "3"
 	test AddShippingOptionVariableRate {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#AddShippingOptionVariableRate";
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
@@ -404,13 +396,83 @@ definition {
 	}
 
 	@description = "This is a test for COMMERCE-6120. AddTaxRateSettingsByAddressTaxCalculation"
-	@ignore = "true"
 	@priority = "3"
 	test AddTaxRateSettingsByAddressTaxCalculation {
 		property portal.acceptance = "false";
 
-		// TODO COMMERCE-6120 AddTaxRateSettingsByAddressTaxCalculation
+		// TODO Review
 
+		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
+
+		CommerceNavigator.gotoPortlet(
+			category = "Store Management",
+			portlet = "Channels");
+
+		CommerceNavigator.gotoEntry(entryName = "Minium Portal");
+
+		ScrollWebElementIntoView(
+			key_nameTableChannels = "Tax Calculations",
+			locator1 = "CommerceEntry#SEARCH_TABLES_CHANNELS");
+
+		Click(
+			key_entryName = "By Address",
+			key_table = "Tax Calculations",
+			locator1 = "CommerceEntry#TABLE_ENTRY_EDIT_BUTTON");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Check.checkToggleSwitch(
+			key_toggleSwitchLabel = "Active",
+			locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		CommerceEntry.gotoMenuTab(menuTab = "Tax Rate Settings");
+
+		WaitForElementPresent(locator1 = "Button#PLUS");
+
+		Click(locator1 = "Button#PLUS");
+
+		SelectFrameTop();
+
+		// TODO Iframe fix at COMMERCE-6481
+
+		SelectFrame.selectFrameNoLoading(locator1 = "//body/div[25]/div[2]/div[1]/div[1]/div[1]/iframe[1]");
+
+		Select(
+			key_fieldLabel = "Tax Category",
+			locator1 = "Select#GENERIC_SELECT_FIELD",
+			value1 = "Normal Product");
+
+		Type(
+			key_fieldLabel = "Amount",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "20");
+
+		Select(
+			key_fieldLabel = "Country",
+			locator1 = "Select#GENERIC_SELECT_FIELD",
+			value1 = "Italy");
+
+		Select(
+			key_fieldLabel = "Region",
+			locator1 = "Select#GENERIC_SELECT_FIELD",
+			value1 = "Roma");
+
+		Type(
+			key_fieldLabel = "Zip",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "0100");
+
+		Button.click(button = "Submit");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
 	}
 
 	@description = "This is a test for COMMERCE-6123. AddTaxRateSettingsFixedTaxRateTaxCalculation"
@@ -435,7 +497,6 @@ definition {
 
 	test CreateNewChannel {
 		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CPCommerceChannels#CreateNewChannel";
 
 		CommerceNavigator.gotoPortlet(
 			category = "Store Management",
@@ -588,7 +649,6 @@ definition {
 
 	test CreateNewNotificationTemplate {
 		property portal.acceptance = "quarantine";
-		property test.name.skip.portal.instance = "CPCommerceChannels#CreateNewNotificationTemplate";
 
 		CommerceNavigator.gotoPortlet(
 			category = "Store Management",
@@ -618,24 +678,72 @@ definition {
 	}
 
 	@description = "This is a test for COMMERCE-6197. CreateProductDisplayPage"
-	@ignore = "true"
 	@priority = "3"
 	test CreateProductDisplayPage {
 		property portal.acceptance = "false";
+		property test.name.skip.portal.instance = "CPCommerceChannels#CreateProductDisplayPage";
 
-		// TODO COMMERCE-6197 CreateProductDisplayPage
+		// TODO Review
 
+		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
+
+		CommerceNavigator.gotoPortlet(
+			category = "Store Management",
+			portlet = "Channels");
+
+		CommerceNavigator.gotoEntry(entryName = "Minium Portal");
+
+		CommerceEntry.gotoMenuTab(menuTab = "Product Display Pages");
+
+		Click(locator1 = "Button#PLUS");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Button.click(button = "Select Product");
+
+		SelectFrameTop();
+
+		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MODAL_BODY");
+
+		Click(locator1 = "Button#CHOOSE");
+
+		SelectFrameTop();
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Click(locator1 = "Button#CHOOSE");
+
+		SelectFrameTop();
+
+		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MODAL_BODY");
+
+		Click(
+			key_card = "Login",
+			locator1 = "Card#CARD_TITLE");
+
+		SelectFrameTop();
+
+		Click(locator1 = "Button#DONE");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+
+		Click(locator1 = "CommerceEntry#MODAL_BUTTON_CLOSE");
+
+		SelectFrameTop();
+
+		AssertElementPresent(
+			key_entryName = "ABS Sensor",
+			locator1 = "CommerceEntry#TABLE_LIST_TITLE");
 	}
 
 	@description = "This is a test for COMMERCE-6109. EditAuthorizePaymentMethod"
 	@priority = "3"
 	test EditAuthorizePaymentMethod {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#EditAuthorizePaymentMethod";
-
-		// TODO Review
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
@@ -686,13 +794,96 @@ definition {
 	}
 
 	@description = "This is a test for COMMERCE-6119. EditAvalaraTaxCalculation"
-	@ignore = "true"
 	@priority = "3"
 	test EditAvalaraTaxCalculation {
 		property portal.acceptance = "false";
+		property test.name.skip.portal.instance = "CPCommerceChannels#EditAvalaraTaxCalculation";
 
-		// TODO COMMERCE-6119 EditAvalaraTaxCalculation
+		// TODO Review
 
+		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
+
+		CommerceNavigator.gotoPortlet(
+			category = "Store Management",
+			portlet = "Channels");
+
+		CommerceNavigator.gotoEntry(entryName = "Minium Portal");
+
+		Click(
+			key_entryName = "Avalara",
+			locator1 = "CommerceEntry#CHANNELS_GENERAL_TAB_EDITS");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Uncheck.uncheckToggleSwitch(
+			key_toggleSwitchLabel = "Active",
+			locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		Check.checkToggleSwitch(
+			key_toggleSwitchLabel = "Active",
+			locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		CommerceEntry.gotoMenuTab(menuTab = "Settings");
+
+		Type(
+			key_fieldLabel = "Account Number",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		Type(
+			key_fieldLabel = "License Key",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		Type(
+			key_fieldLabel = "Service URL",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		Type(
+			key_fieldLabel = "Company Code",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		Button.clickSave();
+
+		Refresh();
+
+		Click(
+			key_entryName = "Avalara",
+			locator1 = "CommerceEntry#CHANNELS_GENERAL_TAB_EDITS");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		CommerceEntry.gotoMenuTab(menuTab = "Settings");
+
+		AssertTextEquals(
+			key_fieldLabel = "Account Number",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		AssertTextEquals(
+			key_fieldLabel = "License Key",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		AssertTextEquals(
+			key_fieldLabel = "Service URL",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
+
+		AssertTextEquals(
+			key_fieldLabel = "Company Code",
+			locator1 = "TextInput#GENERIC_TEXT_INPUT",
+			value1 = "Test");
 	}
 
 	@description = "This is a test for COMMERCE-6275. EditCategoryDisplayPage"
@@ -813,24 +1004,62 @@ definition {
 	}
 
 	@description = "This is a test for COMMERCE-6122. EditConfigurationRemoteTaxCalculation"
-	@ignore = "true"
 	@priority = "3"
 	test EditConfigurationRemoteTaxCalculation {
 		property portal.acceptance = "false";
 
-		// TODO COMMERCE-6122 EditConfigurationRemoteTaxCalculation
+		// TODO Review
 
+		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
+
+		CommerceNavigator.gotoPortlet(
+			category = "Store Management",
+			portlet = "Channels");
+
+		CommerceNavigator.gotoEntry(entryName = "Minium Portal");
+
+		ScrollWebElementIntoView(
+			key_nameTableChannels = "Tax Calculations",
+			locator1 = "CommerceEntry#SEARCH_TABLES_CHANNELS");
+
+		Click(
+			key_entryName = "Remote",
+			key_table = "Tax Calculations",
+			locator1 = "CommerceEntry#TABLE_ENTRY_EDIT_BUTTON");
+
+		SelectFrame.selectFrameNoLoading(locator1 = "CommerceEntry#IFRAME_SIDE_PANEL");
+
+		Check.checkToggleSwitch(
+			key_toggleSwitchLabel = "Active",
+			locator1 = "ToggleSwitch#ANY_TOGGLE_SWITCH");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+
+		CommerceEntry.gotoMenuTab(menuTab = "Configuration");
+
+		Type(
+			key_fieldName = "Tax Value Endpoint URL",
+			key_fieldValue = "",
+			locator1 = "FormViewBuilder#PREDEFINED_VALUE_AT_FORM",
+			value1 = "http://localhost:8080/web/test");
+
+		Type(
+			key_fieldName = "Tax Value Endpoint Authorization Token",
+			key_fieldValue = "",
+			locator1 = "FormViewBuilder#PREDEFINED_VALUE_AT_FORM",
+			value1 = "Test");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
 	}
 
 	@description = "This is a test for COMMERCE-6107. EditMercanetPaymentMethod"
 	@priority = "3"
 	test EditMercanetPaymentMethod {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#EditMercanetPaymentMethod";
-
-		// TODO Review
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
@@ -879,11 +1108,6 @@ definition {
 	@priority = "3"
 	test EditMoneyOrderPaymentMethod {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#EditMoneyOrderPaymentMethod";
-
-		// TODO Review
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
@@ -1411,11 +1635,6 @@ definition {
 	@priority = "3"
 	test UseSearchBar {
 		property portal.acceptance = "false";
-		property test.name.skip.portal.instance = "CPCommerceChannels#UseSearchBar";
-
-		// TODO Review
-
-		// TODO Fix Commerce tests that are skipping portal instances - COMMERCE-6586
 
 		CommerceNavigator.gotoPortlet(
 			category = "Store Management",

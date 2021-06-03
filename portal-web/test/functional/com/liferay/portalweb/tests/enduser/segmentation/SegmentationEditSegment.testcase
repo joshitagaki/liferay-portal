@@ -1,6 +1,7 @@
 @component-name = "portal-segmentation"
 definition {
 
+	property custom.properties = "jsonws.web.service.paths.excludes=";
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Segmentation";
@@ -66,7 +67,9 @@ definition {
 		task ("Assert segment edited") {
 			Segmentation.editSegment(entry = "EditSegmentUserByCountry Test");
 
-			Segmentation.viewSegment(propertyField = "China");
+			Segmentation.viewSegment(
+				criterion = "options",
+				value = "china");
 		}
 	}
 
@@ -83,17 +86,15 @@ definition {
 		task ("Edit the segment") {
 			Segmentation.editSegment(entry = "EditSegment Test");
 
-			Segmentation.fillTitle(titleField = "EditSegmentUserByRegion Test");
-
 			Segmentation.deleteProperties();
 
 			Segmentation.gotoSidebar(fieldType = "Organization");
 
 			Segmentation.addProperties(propertyOption = "Region");
 
-			Segmentation.changeCriterionInput(criterionInputOption = "Equals");
-
 			Segmentation.fillProperty(optionsValue = "Spain - Madrid");
+
+			Segmentation.fillTitle(titleField = "EditSegmentUserByRegion Test");
 
 			Button.clickSave();
 
@@ -136,9 +137,9 @@ definition {
 		}
 
 		task ("Assert segment edited") {
-			Segmentation.editSegment(entry = "EditSegmentUserByCountryAndRegion Test");
+			Segmentation.editSegment(entry = "EditSegmentUserBySessionURL Test");
 
-			Segmentation.viewSegment(propertyField = "China");
+			Segmentation.viewSegment(propertyField = "http://localhost:8080");
 		}
 	}
 
@@ -208,7 +209,7 @@ definition {
 		}
 
 		task ("Assert segment edited") {
-			Segmentation.editSegment(entry = "EditSegmentUserByUserTag Test");
+			Segmentation.editSegment(entry = "EditSegmentUserEmailAddressContainsToEquals Test");
 
 			Segmentation.viewSegment(criterionInputOption = "Equals");
 		}

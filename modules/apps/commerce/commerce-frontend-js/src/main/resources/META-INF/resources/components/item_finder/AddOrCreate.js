@@ -21,8 +21,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
+import {resolveRendererByType} from '../../utilities/dataRenderers';
 import {getValueFromItem} from '../../utilities/index';
-import {getDataRendererById} from '../data_renderers/index';
 import Expose from './Expose';
 
 function Item(props) {
@@ -30,7 +30,9 @@ function Item(props) {
 		<ClayTable.Row>
 			{props.fields.map((field, i) => {
 				const value = getValueFromItem(props.itemData, field.fieldName);
-				const DataRenderer = getDataRendererById(field.contentRenderer);
+				const DataRenderer = resolveRendererByType(
+					field.contentRenderer
+				);
 
 				return (
 					<ClayTable.Cell

@@ -21,14 +21,14 @@ import com.liferay.digital.signature.model.DSCustomField;
 import com.liferay.digital.signature.model.DSDocument;
 import com.liferay.digital.signature.model.DSEnvelope;
 import com.liferay.digital.signature.model.DSRecipient;
-import com.liferay.petra.string.StringPool;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,7 +56,7 @@ public class DSEnvelopeManagerImpl implements DSEnvelopeManager {
 
 		dsEnvelope = _toDSEnvelope(
 			_dsHttp.post(
-				companyId, groupId, "envelopes", _toJSONObject(dsEnvelope)));
+				companyId, groupId, "envelopes", dsEnvelope.toJSONObject()));
 
 		_dsCustomFieldManager.addDSCustomFields(
 			companyId, groupId, dsEnvelope.getDSEnvelopeId(),
@@ -104,34 +104,23 @@ public class DSEnvelopeManagerImpl implements DSEnvelopeManager {
 	}
 
 	@Override
-	public List<DSEnvelope> getDSEnvelopes(
-		long companyId, long groupId, String fromDateString) {
+	public Page<DSEnvelope> getDSEnvelopesPage(
+		long companyId, long groupId, String fromDateString, String order,
+		Pagination pagination) {
 
 		JSONObject jsonObject = _dsHttp.get(
 			companyId, groupId,
 			StringBundler.concat(
-				"envelopes?from_date=", fromDateString,
-				"&include=custom_fields,documents,recipients&order=desc"));
+				"envelopes?from_date=", fromDateString, "&count=",
+				pagination.getPageSize(), "&start_position=",
+				pagination.getStartPosition(), "&folder_types=sentitems",
+				"&include=custom_fields,documents,recipients&order=", order));
 
-		return JSONUtil.toList(
-			jsonObject.getJSONArray("envelopes"),
-			evenlopeJSONObject -> _toDSEnvelope(evenlopeJSONObject), _log);
-	}
-
-	@Override
-	public List<DSEnvelope> getDSEnvelopes(
-		long companyId, long groupId, String... dsEnvelopeIds) {
-
-		JSONObject jsonObject = _dsHttp.get(
-			companyId, groupId,
-			StringBundler.concat(
-				"envelopes/?envelope_ids=",
-				ArrayUtil.toString(dsEnvelopeIds, StringPool.BLANK),
-				"&include=custom_fields,documents,recipients"));
-
-		return JSONUtil.toList(
-			jsonObject.getJSONArray("envelopes"),
-			evenlopeJSONObject -> _toDSEnvelope(evenlopeJSONObject), _log);
+		return Page.of(
+			JSONUtil.toList(
+				jsonObject.getJSONArray("envelopes"),
+				envelopeJSONObject -> _toDSEnvelope(envelopeJSONObject), _log),
+			pagination, jsonObject.getInt("totalSetSize"));
 	}
 
 	private List<DSDocument> _getDSDocuments(JSONArray jsonArray) {
@@ -159,6 +148,7 @@ public class DSEnvelopeManagerImpl implements DSEnvelopeManager {
 					dsRecipientId = signerJSONObject.getString("recipientId");
 					emailAddress = signerJSONObject.getString("email");
 					name = signerJSONObject.getString("name");
+					status = signerJSONObject.getString("status");
 				}
 			},
 			_log);
@@ -208,9 +198,6 @@ public class DSEnvelopeManagerImpl implements DSEnvelopeManager {
 					jsonObject.getJSONObject("recipients"));
 				emailBlurb = jsonObject.getString("emailBlurb");
 				emailSubject = jsonObject.getString("emailSubject");
-				name = jsonObject.getString("envelopeName");
-				senderEmailAddress = jsonObject.getString(
-					"envelopeSenderEmailAddress");
 				status = jsonObject.getString("status");
 			}
 		};
@@ -219,44 +206,6 @@ public class DSEnvelopeManagerImpl implements DSEnvelopeManager {
 			dsEnvelope, jsonObject.getJSONObject("customFields"));
 
 		return dsEnvelope;
-	}
-
-	private JSONObject _toJSONObject(DSEnvelope dsEnvelope) {
-		return JSONUtil.put(
-			"documents",
-			JSONUtil.toJSONArray(
-				dsEnvelope.getDSDocuments(),
-				dsDocument -> JSONUtil.put(
-					"documentBase64", dsDocument.getData()
-				).put(
-					"documentId", dsDocument.getDSDocumentId()
-				).put(
-					"name", dsDocument.getName()
-				),
-				_log)
-		).put(
-			"emailBlurb", dsEnvelope.getEmailBlurb()
-		).put(
-			"emailSubject", dsEnvelope.getEmailSubject()
-		).put(
-			"envelopeId", dsEnvelope.getDSEnvelopeId()
-		).put(
-			"recipients",
-			JSONUtil.put(
-				"signers",
-				JSONUtil.toJSONArray(
-					dsEnvelope.getDSRecipients(),
-					dsRecipient -> JSONUtil.put(
-						"email", dsRecipient.getEmailAddress()
-					).put(
-						"name", dsRecipient.getName()
-					).put(
-						"recipientId", dsRecipient.getDSRecipientId()
-					),
-					_log))
-		).put(
-			"status", dsEnvelope.getStatus()
-		);
 	}
 
 	private LocalDateTime _toLocalDateTime(String localDateTimeString) {
