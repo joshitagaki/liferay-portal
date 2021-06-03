@@ -39,6 +39,11 @@
     <td>//div[@class='card card-root distribution-card-root']//li/button[text()='${key_breakdownTabName}']</td>
     <td></td>
 </tr>
+<tr>
+    <td>TOTAL_INDIVIDUALS</td>
+    <td>//h5[text()='Total Individuals']/parent::div/following-sibling::div/div[@class='total']</td>
+    <td></td>
+</tr>
 </tbody>
 </table>
 </body>
