@@ -24,4 +24,10 @@ definition {
 		Click(locator1 = "ACIndividualsDashboard#SAVE_BREAKDOWN_BUTTON");
 	}
 
+	macro viewTotalIndividualsCount {
+		AssertTextEquals(
+			locator1 = "ACIndividualsDashboard#TOTAL_INDIVIDUALS",
+			value1 = "1");
+	}
+
 }
