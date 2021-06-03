@@ -15,7 +15,6 @@ definition {
 		TestCase.setUpPortalInstance();
 
 		ACUtils.launchDXP();
-        
 	}
 
 	tearDown {
@@ -30,16 +29,16 @@ definition {
 		ACUtils.tearDownAC();
 	}
 
-    @description = "Total Individuals increase by one when a new individual is added via event"
+	@description = "Total Individuals increase by one when a new individual is added via event"
 	@priority = "5"
 	test CanViewTotalIndividualsIncreaseByOne {
-        ACDXPSettings.connectDXPtoAnalyticsCloud();
+		ACDXPSettings.connectDXPtoAnalyticsCloud();
 
 		Navigator.openURL();
 
 		Pause(locator1 = "5000");
 
-        JSONUser.addUser(
+		JSONUser.addUser(
 			userEmailAddress = "ac@liferay.com",
 			userFirstName = "ac",
 			userLastName = "ac",
@@ -49,16 +48,17 @@ definition {
 			userLoginEmailAddress = "ac@liferay.com",
 			userLoginFullName = "ac ac");
 
-        Navigator.openURL();
+		Navigator.openURL();
 
-        Pause(locator1 = "5000");
+		Pause(locator1 = "5000");
 
 		ACUtils.launchAC();
 
 		ACProperties.switchProperty(propertyName = "Liferay DXP Combined Property");
 
-        ACNavigation.goToIndividuals();
+		ACNavigation.goToIndividuals();
 
-        ACIndividualsDashboard.viewTotalIndividualsCount();
-    }
+		ACIndividualsDashboard.viewTotalIndividualsCount();
+	}
+
 }
