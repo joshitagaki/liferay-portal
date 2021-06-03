@@ -14,9 +14,12 @@
 
 package com.liferay.layout.reports.web.internal.model;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+import com.liferay.portal.language.LanguageImpl;
 import com.liferay.portal.test.rule.LiferayUnitTestRule;
 
 import java.util.Arrays;
@@ -24,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +41,13 @@ public class LayoutReportsIssueTest {
 	@Rule
 	public static final LiferayUnitTestRule liferayUnitTestRule =
 		LiferayUnitTestRule.INSTANCE;
+
+	@Before
+	public void setUp() {
+		LanguageUtil languageUtil = new LanguageUtil();
+
+		languageUtil.setLanguage(new LanguageImpl());
+	}
 
 	@Test
 	public void testEquals() {
@@ -98,7 +109,7 @@ public class LayoutReportsIssueTest {
 		LayoutReportsIssue layoutReportsIssue2 = new LayoutReportsIssue(
 			Arrays.asList(
 				new LayoutReportsIssue.Detail(
-					LayoutReportsIssue.Detail.Key.INVALID_HREFLANG, 50),
+					LayoutReportsIssue.Detail.Key.MISSING_TITLE_ELEMENT, 50),
 				new LayoutReportsIssue.Detail(
 					LayoutReportsIssue.Detail.Key.MISSING_TITLE_ELEMENT, 50)),
 			LayoutReportsIssue.Key.SEO);
@@ -156,7 +167,12 @@ public class LayoutReportsIssueTest {
 		JSONObject detailJSONObject = detailsJSONArray.getJSONObject(0);
 
 		Assert.assertEquals(
+			"detail-missing-title-element-description",
+			detailJSONObject.getString("description"));
+		Assert.assertEquals(
 			"missing-title-element", detailJSONObject.getString("key"));
+		Assert.assertEquals(
+			StringPool.BLANK, detailJSONObject.getString("tips"));
 		Assert.assertEquals(100, detailJSONObject.getLong("total"));
 
 		Assert.assertEquals(

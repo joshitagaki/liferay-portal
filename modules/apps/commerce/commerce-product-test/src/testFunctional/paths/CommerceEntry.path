@@ -469,6 +469,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>TABLE_CELL_BY_COLUMN_ORDER</td>
+	<td>//div[contains(@class,'title')]//*[text()='${key_entryName}']/../../../div[@class='dnd-td'][${key_columnNumber}]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>TABLE_ENTRY_EDIT_BUTTON</td>
 	<td>//h4[contains(.,'${key_table}')]//..//div/a[contains(.,'${key_entryName}')]//..//..//../div/a[contains(.,'Edit')]</td>
 	<td></td>
@@ -538,6 +543,11 @@
 	<td>//div/label[contains(.,'Price') and not(contains(.,'Promo'))]/..//input</td>
 	<td></td>
 </tr>
+<tr>
+	<td>ASSERT_PRICE_LIST_STATUS</td>
+	<td>//a[text()='${key_name}']//..//..//..//span[@class='workflow-status']//*[contains(.,'')]</td>
+	<td></td>
+</tr>
 <!--IMAGES-->
 <tr>
 	<td>IMAGES_PLUS_BUTTON</td>
@@ -559,6 +569,11 @@
 <tr>
 	<td>ACTIVE_ORDER_ID</td>
 	<td>//span[@class='order-id']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORDER_ID_FROM_ACCOUNT_SELECTOR</td>
+	<td>//table[contains(@class,'orders-table')]/tbody/tr[2]//a</td>
 	<td></td>
 </tr>
 <tr>

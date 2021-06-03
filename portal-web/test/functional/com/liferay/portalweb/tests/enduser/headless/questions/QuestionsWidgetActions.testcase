@@ -241,11 +241,9 @@ definition {
 			mimeType = "image/jpeg",
 			sourceFileName = "Document_2.jpeg");
 
-		var siteName = TestCase.getSiteName(siteName = "${siteName}");
-
 		JSONDepot.connectSite(
 			depotName = "Test Depot Name",
-			groupName = "${siteName}");
+			groupName = "Guest");
 
 		JSONMBMessage.addCategory(
 			categoryDescription = "Description",
@@ -261,11 +259,9 @@ definition {
 			titleField = "Title AddQuestionWithTheALImage",
 			topicName = "questions-test-category");
 
-		Questions.openToQuestionDetails(
-			layoutName = "questions-page",
-			questionsTitle = "title-addquestionwiththealimage",
-			siteURLKey = "guest",
-			topicName = "questions-test-category");
+		Questions.gotoDetails(
+			questionTabField = "Questions",
+			questionTitle = "Title AddQuestionWithTheALImage");
 
 		Questions.viewImageInQuestion(imageFileName = "Document_2.jpeg");
 	}
@@ -495,18 +491,13 @@ definition {
 			groupName = "Guest",
 			titleField = "Title AddQuestion");
 
-		JSONQuestions.addAnswer(
-			categoryName = "Questions Test Category",
-			groupName = "Guest",
-			replyBody = "This is my answer",
-			threadSubject = "Title AddQuestion",
-			titleField = "Title AddQuestion");
-
 		Questions.openToQuestionDetails(
 			layoutName = "questions-page",
 			questionsTitle = "title-addquestion",
 			siteURLKey = "guest",
 			topicName = "questions-test-category");
+
+		Questions.answerQuestion(contentField = "This is my answer");
 
 		Questions.editAnswer(contentField = "This is my edited answer");
 	}

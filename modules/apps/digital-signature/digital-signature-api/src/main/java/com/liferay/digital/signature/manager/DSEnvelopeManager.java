@@ -15,8 +15,8 @@
 package com.liferay.digital.signature.manager;
 
 import com.liferay.digital.signature.model.DSEnvelope;
-
-import java.util.List;
+import com.liferay.portal.vulcan.pagination.Page;
+import com.liferay.portal.vulcan.pagination.Pagination;
 
 import org.osgi.annotation.versioning.ProviderType;
 
@@ -35,10 +35,8 @@ public interface DSEnvelopeManager {
 	public DSEnvelope getDSEnvelope(
 		long companyId, long groupId, String dsEnvelopeId);
 
-	public List<DSEnvelope> getDSEnvelopes(
-		long companyId, long groupId, String fromDateString);
-
-	public List<DSEnvelope> getDSEnvelopes(
-		long companyId, long groupId, String... dsEnvelopeIds);
+	public Page<DSEnvelope> getDSEnvelopesPage(
+		long companyId, long groupId, String fromDateString, String order,
+		Pagination pagination);
 
 }

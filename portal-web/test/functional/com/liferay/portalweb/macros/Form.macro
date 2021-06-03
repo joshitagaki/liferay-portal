@@ -38,6 +38,26 @@ definition {
 		}
 	}
 
+	macro addTextFieldReference {
+		if (isSet(formPageNumber)) {
+			Form.gotoAddField(
+				fieldPositionNumber = "${fieldPositionNumber}",
+				fieldType = "Text",
+				formPageNumber = "${formPageNumber}");
+		}
+		else {
+			Form.gotoAddField(
+				fieldPositionNumber = "${fieldPositionNumber}",
+				fieldType = "Text");
+		}
+
+		Form.gotoAdvancedTab();
+
+		Type(
+			locator1 = "Form#FIELD_REFERENCE",
+			value1 = "${key_fieldReferenceText}");
+	}
+
 	macro addTranslation {
 		ScrollWebElementIntoView(locator1 = "Translation#ADD");
 
@@ -88,6 +108,12 @@ definition {
 		FormFields.editText(
 			fieldName = "emailSubject",
 			fieldValue = "${subject}");
+
+		Button.clickDone();
+	}
+
+	macro configureRequireAuthentication {
+		FormFields.enableSwitcher(fieldName = "requireAuthentication");
 
 		Button.clickDone();
 	}
@@ -661,6 +687,19 @@ definition {
 		AssertElementPresent(locator1 = "Form#ALT_PAGINATION_SUCCESS_PAGE");
 	}
 
+	macro viewFieldReferenceFromTextField {
+		Click(
+			key_fieldName = "Text",
+			key_fieldPositionNumber = "1",
+			locator1 = "Form#FIELD_BODY_IN_SPECIFIC_POSITION");
+
+		Form.gotoAdvancedTab();
+
+		AssertTextEquals(
+			locator1 = "Form#FIELD_REFERENCE",
+			value1 = "${key_fieldReferenceText}");
+	}
+
 	macro viewFormDescription {
 		AssertTextEquals(
 			locator1 = "Form#DESCRIPTION_FIELD",
@@ -719,6 +758,13 @@ definition {
 		AssertTextEquals.assertPartialText(
 			locator1 = "Form#SAVE_NOTIFICATION",
 			value1 = "Draft");
+	}
+
+	macro viewSelectFromListOnPreview {
+		AssertElementPresent(
+			key_fieldName = "${fieldName}",
+			key_rowPosition = "${rowPosition}",
+			locator1 = "FormFields#SELECT_OPTIONS_FIELD_BY_ROW_PREVIEW");
 	}
 
 	macro viewSubmitButtonText {
