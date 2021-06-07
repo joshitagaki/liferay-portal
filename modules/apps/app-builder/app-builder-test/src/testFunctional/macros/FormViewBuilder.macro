@@ -155,6 +155,13 @@ definition {
 			value1 = "${placeHolder}");
 	}
 
+	macro assertPlaceholderTextFormField {
+		AssertElementPresent(
+			key_fieldLabel = "${key_fieldLabel}",
+			key_placeHolder = "${placeHolder}",
+			locator1 = "FormViewBuilder#FIELD_PLACEHOLDER_TEXT");
+	}
+
 	macro assertPredefinedValueAtSidebar {
 		AssertTextEquals(
 			locator1 = "FormViewBuilder#SIDEBAR_ADVANCED_PREDEFINED_DATE",
@@ -968,7 +975,7 @@ definition {
 		}
 	}
 
-	macro validatePredefinedSelectList {
+	macro validatePredefinedSelectFromList {
 		var key_fieldName = "${fieldName}";
 		var key_fieldValue = "${fieldValue}";
 
@@ -1096,6 +1103,12 @@ definition {
 			locator1 = "FormViewBuilder#CHECKBOX_AT_FORM_BODY");
 	}
 
+	macro viewEntriesTitle {
+		AssertElementPresent(
+			key_text = "${key_entriesTitle}",
+			locator1 = "FormViewBuilder#ENTRIES_TITLE_CONTENT");
+	}
+
 	macro viewMultipleSelectionInline {
 		for (var selectOption : list "${selectOptionsList}") {
 			AssertElementPresent(
@@ -1160,6 +1173,12 @@ definition {
 			key_type = "Max",
 			key_value = "${key_maxValue}",
 			locator1 = "FormViewBuilder#ENTRY_NUMERIC");
+	}
+
+	macro viewTranslationLanguage {
+		AssertElementPresent(
+			changeAppLanguageTo = "${symbolName}",
+			locator1 = "FormViewBuilder#SELECT_LANGUAGE_AT_APP_DEPLOYED");
 	}
 
 }
