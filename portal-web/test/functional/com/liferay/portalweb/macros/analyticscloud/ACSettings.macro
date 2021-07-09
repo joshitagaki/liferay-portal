@@ -37,6 +37,12 @@ definition {
 	@summary = "Deletes all properties \
 	@param propertyList the list of properties you want to delete (optional)"
 	macro deleteAllProperties {
+		if (IsElementNotPresent(locator1 = "ACSettings#EXIT_SETTINGS_BUTTON")) {
+			ACNavigation.goToSettings();
+		}
+
+		ACSettings.goToProperties();
+		
 		Click(locator1 = "ACSettings#SELECT_ALL_CHECKBOX");
 
 		Click(locator1 = "ACSettings#GENERIC_DELETE_BUTTON");
