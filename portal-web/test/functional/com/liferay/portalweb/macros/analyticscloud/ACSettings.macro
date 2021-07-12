@@ -42,7 +42,7 @@ definition {
 		}
 
 		ACSettings.goToProperties();
-		
+
 		Click(locator1 = "ACSettings#SELECT_ALL_CHECKBOX");
 
 		Click(locator1 = "ACSettings#GENERIC_DELETE_BUTTON");
