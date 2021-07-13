@@ -34,7 +34,7 @@ definition {
 	@priority = "5"
 	test UsersListCanBeSearched {
 
-		// TODO LRAC-8142 Automate UserManagementSearch#UsersListCanBeSearched pending implementation
+		// TODO LRAC-8142 Automate UserManagement#UsersListCanBeSearched pending implementation
 
 	}
 
@@ -43,7 +43,7 @@ definition {
 	@priority = "5"
 	test ViewOwnerCanDeleteUser {
 
-		// TODO LRAC-8143 Automate UserManagementDelete#ViewOwnerCanDeleteUser pending implementation
+		// TODO LRAC-8143 Automate UserManagement#ViewOwnerCanDeleteUser pending implementation
 
 	}
 
