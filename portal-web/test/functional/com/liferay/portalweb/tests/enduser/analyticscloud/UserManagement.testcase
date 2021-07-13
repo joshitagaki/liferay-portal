@@ -29,21 +29,21 @@ definition {
 		ACUtils.tearDownAC();
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8144 | Test Summary: Properties management menu is present "
+    @description = "Feature ID: Legacy | Automation ID: LRAC-8142 | Test Summary: Users list can be searched"
 	@ignore = "true"
 	@priority = "5"
-	test CanNavigateToProperties {
+	test UsersListCanBeSearched {
 
-		// TODO LRAC-8144 Automate Properties#CanNavigateToProperties pending implementation
+		// TODO LRAC-8142 Automate UserManagement#UsersListCanBeSearched pending implementation
 
 	}
 
-	@description = "Feature ID: Legacy | Automation ID: LRAC-8159 | Test Summary: The properties list in settings shows a list of all properties in the workspace"
+    @description = "Feature ID: Legacy | Automation ID: LRAC-8143 | Test Summary: Owner can delete users"
 	@ignore = "true"
 	@priority = "5"
-	test PropertiesListInSettingsShowsListOfAllPropertiesInTheWorkspace {
+	test ViewOwnerCanDeleteUser {
 
-		// TODO LRAC-8159 PropertiesListInSettingsShowsListOfAllPropertiesInTheWorkspace pending implementation
+		// TODO LRAC-8143 Automate UserManagement#ViewOwnerCanDeleteUser pending implementation
 
 	}
 
