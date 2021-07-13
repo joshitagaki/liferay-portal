@@ -43,7 +43,7 @@ definition {
 	@priority = "5"
 	test ViewOwnerCanDeleteUser {
 
-		// TODO LRAC-8143 Automate UserManagementDelete#ViewOwnerCanDeleteUser
+		// TODO LRAC-8143 Automate UserManagementDelete#ViewOwnerCanDeleteUser pending implementation
 
 	}
 
