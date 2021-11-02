@@ -47,6 +47,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8805 | Test Summary: Check pageDepthReached triggers ([depth] = 25) and check its properties (see reference document in comments)"
 	@priority = "5"
 	test CheckPageDepthReachedTo25 {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Add a Blogs widget to page") {
@@ -129,6 +130,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8806 | Test Summary: Check pageDepthReached trigggers ([depth] = 50) and check its properties (see reference document in comments)"
 	@priority = "5"
 	test CheckPageDepthReachedTo50 {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Add a Blogs widget to page") {
