@@ -396,6 +396,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8935 | Test Summary: Check all page events can be sent again if the page is refreshed/hard refreshed"
 	@priority = "4"
 	test CheckPageEventsTriggeredAgainAfterHardRefresh {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Get site assigned property name") {
@@ -487,6 +488,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8802 | Test Summary: Check all page events are triggered over again after a page refresh"
 	@priority = "4"
 	test CheckPageEventsTriggeredAgainAfterRefresh {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Get site assigned property name") {
@@ -578,6 +580,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8799 | Test Summary: Check pageLoaded triggers when visiting a DXP page and check its properties (see reference document in comments)"
 	@priority = "5"
 	test CheckPageLoadedWhenViewPage {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Get site assigned property name") {
