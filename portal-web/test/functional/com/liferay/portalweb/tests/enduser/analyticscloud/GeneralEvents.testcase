@@ -175,7 +175,7 @@ definition {
 
 			TestUtils.isGreaterThan(
 				actual = "${pageLoadTime}",
-				expected = "1000");
+				expected = "200");
 		}
 
 		task ("View the WebContent events triggered for guest") {

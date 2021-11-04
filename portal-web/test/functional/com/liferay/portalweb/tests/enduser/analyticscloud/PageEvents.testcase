@@ -466,7 +466,7 @@ definition {
 				eventId = "pageViewed");
 		}
 
-		task ("View the pageLoadTime of pageLoaded event is greater than 1000ms") {
+		task ("View the pageLoadTime of pageLoaded event is greater than 200ms") {
 			var pageLoadTime = ACUtils.getEventPropertyValue(
 				applicationId = "Page",
 				eventId = "pageLoaded",
@@ -474,7 +474,7 @@ definition {
 
 			TestUtils.isGreaterThan(
 				actual = "${pageLoadTime}",
-				expected = "1000");
+				expected = "200");
 		}
 
 		task ("View the request common properties value") {
@@ -557,7 +557,7 @@ definition {
 				eventId = "pageViewed");
 		}
 
-		task ("View the pageLoadTime of pageLoaded event is greater than 1000ms") {
+		task ("View the pageLoadTime of pageLoaded event is greater than 200ms") {
 			var pageLoadTime = ACUtils.getEventPropertyValue(
 				applicationId = "Page",
 				eventId = "pageLoaded",
@@ -565,7 +565,7 @@ definition {
 
 			TestUtils.isGreaterThan(
 				actual = "${pageLoadTime}",
-				expected = "1000");
+				expected = "200");
 		}
 
 		task ("View the request common properties value") {
@@ -617,7 +617,7 @@ definition {
 			Pause(locator1 = "5000");
 		}
 
-		task ("View the pageLoadTime of pageLoaded event is greater than 1000ms") {
+		task ("View the pageLoadTime of pageLoaded event is greater than 200ms") {
 			var pageLoadTime = ACUtils.getEventPropertyValue(
 				applicationId = "Page",
 				eventId = "pageLoaded",
@@ -625,7 +625,7 @@ definition {
 
 			TestUtils.isGreaterThan(
 				actual = "${pageLoadTime}",
-				expected = "1000");
+				expected = "200");
 		}
 
 		task ("View the request common properties value") {
