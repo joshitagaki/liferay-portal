@@ -1,0 +1,46 @@
+@component-name = "portal-analytics-cloud"
+definition {
+
+	property portal.release = "false";
+	property portal.upstream = "true";
+	property property.group = "analytics.cloud.profile";
+	property testray.main.component.name = "Analytics Cloud";
+
+	setUp {
+		Navigator.openURL(baseURL = "https://osbasahdxpserver-ac-stagingdxps.lfr.cloud/");
+	}
+
+	tearDown {
+		
+	}
+
+    @description = "Feature ID: Legacy | Automation ID: LRAC-8534 | Test Summary: Sign out of AC"
+	@priority = "5"
+	test BrowsePortalPages {
+        ACUtils.navigateToSitePageWithUser(
+			emailList = "benny.browser@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+        Navigator.gotoSitePage(
+            pageName = "Blog",
+            siteName - "Brother Ocean Co.");    
+
+        Navigator.gotoSitePage(
+            pageName = "Trips",
+            siteName - "Brother Ocean Co.");
+
+        Navigator.gotoSitePage(
+            pageName = "Shop",
+            siteName - "Brother Ocean Co.");
+
+        Navigator.gotoSitePage(
+            pageName = "Order",
+            siteName - "Brother Ocean Co.");
+
+        Navigator.gotoSitePage(
+            pageName = "Tools",
+            siteName - "Brother Ocean Co.");
+    }
+
+}
