@@ -14,33 +14,23 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 	}
 
-    @description = "Test Summary: Browse portal pages as Benny Browser"
+	@description = "Test Summary: Browse portal pages as Benny Browser"
 	@priority = "5"
 	test BrowsePortalPages {
-        ACUtils.navigateToSitePageWithUser(
+		ACUtils.navigateToSitePageWithUser(
 			emailList = "benny.browser@liferay.com",
 			pageName = "Home",
 			siteName = "Brother Ocean Co.");
 
-        Navigator.gotoSitePage(
-            pageName = "Blog",
-            siteName - "Brother Ocean Co.");    
+		Navigator.gotoSitePage(pageName = "Blog");
 
-        Navigator.gotoSitePage(
-            pageName = "Trips",
-            siteName - "Brother Ocean Co.");
+		Navigator.gotoSitePage(pageName = "Trips");
 
-        Navigator.gotoSitePage(
-            pageName = "Shop",
-            siteName - "Brother Ocean Co.");
+		Navigator.gotoSitePage(pageName = "Shop");
 
-        Navigator.gotoSitePage(
-            pageName = "Order",
-            siteName - "Brother Ocean Co.");
+		Navigator.gotoSitePage(pageName = "Order");
 
-        Navigator.gotoSitePage(
-            pageName = "Tools",
-            siteName - "Brother Ocean Co.");
-    }
+		Navigator.gotoSitePage(pageName = "Tools");
+	}
 
 }
