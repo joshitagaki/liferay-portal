@@ -11,10 +11,10 @@ definition {
 	}
 
 	tearDown {
-		
+		ACUtils.closeAllSessionsAndWait();
 	}
 
-    @description = "Feature ID: Legacy | Automation ID: LRAC-8534 | Test Summary: Sign out of AC"
+    @description = "Test Summary: Browse portal pages as Benny Browser"
 	@priority = "5"
 	test BrowsePortalPages {
         ACUtils.navigateToSitePageWithUser(
