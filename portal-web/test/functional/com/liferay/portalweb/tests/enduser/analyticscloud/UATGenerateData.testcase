@@ -7,7 +7,7 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
-		Navigator.openURL(baseURL = "https://osbasahdxpserver-ac-stagingdxps.lfr.cloud/");
+		Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
 	}
 
 	tearDown {
