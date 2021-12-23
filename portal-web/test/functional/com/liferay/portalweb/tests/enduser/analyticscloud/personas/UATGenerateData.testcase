@@ -33,4 +33,29 @@ definition {
 		Navigator.gotoSitePage(pageName = "Tools");
 	}
 
+	@description = "Test Summary: Order Form portal as Otto Orderer"
+	@priority = "5"
+	test OrderFormPortal {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "otto.orderer@liferay.com",
+			pageName = "Order",
+			siteName = "Brother Ocean Co.");
+
+		FormFields.editText(
+			fieldName = "Full Name",
+			fieldValue = "Otto Orderer");
+
+		FormFields.editText(
+			fieldName = "Email",
+			fieldValue = "otto.orderer@liferay.com");
+
+		FormFields.editText(
+			fieldName = "Phone",
+			fieldValue = "123");
+
+		FormPortlet.clickNextPage();
+
+		FormPortlet.submit();
+	}
+
 }
