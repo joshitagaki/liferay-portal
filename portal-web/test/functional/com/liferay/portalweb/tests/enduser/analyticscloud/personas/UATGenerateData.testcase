@@ -1,0 +1,36 @@
+@component-name = "portal-analytics-cloud"
+definition {
+
+	property portal.release = "false";
+	property portal.upstream = "true";
+	property property.group = "analytics.cloud.profile";
+	property testray.main.component.name = "Analytics Cloud";
+
+	setUp {
+		Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
+	}
+
+	tearDown {
+		ACUtils.closeAllSessionsAndWait();
+	}
+
+	@description = "Test Summary: Browse portal pages as Benny Browser"
+	@priority = "5"
+	test BrowsePortalPages {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "benny.browser@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Blog");
+
+		Navigator.gotoSitePage(pageName = "Trips");
+
+		Navigator.gotoSitePage(pageName = "Shop");
+
+		Navigator.gotoSitePage(pageName = "Order");
+
+		Navigator.gotoSitePage(pageName = "Tools");
+	}
+
+}
