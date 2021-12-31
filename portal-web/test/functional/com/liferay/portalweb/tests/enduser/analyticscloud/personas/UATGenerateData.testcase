@@ -14,6 +14,24 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 	}
 
+	@description = "Test Summary: Browse portal pages as Anonymous"
+	@priority = "5"
+	test AnonymousBrowsePortalPages {
+		ACUtils.navigateToSitePage(
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		Navigator.gotoSitePage(pageName = "Blog");
+
+		Navigator.gotoSitePage(pageName = "Trips");
+
+		Navigator.gotoSitePage(pageName = "Shop");
+
+		Navigator.gotoSitePage(pageName = "Order");
+
+		Navigator.gotoSitePage(pageName = "Tools");
+	}
+
 	@description = "Test Summary: Browse portal pages as Benny Browser"
 	@priority = "5"
 	test BrowsePortalPages {
