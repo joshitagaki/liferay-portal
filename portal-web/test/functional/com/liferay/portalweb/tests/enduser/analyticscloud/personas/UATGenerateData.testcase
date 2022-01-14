@@ -51,6 +51,21 @@ definition {
 		Navigator.gotoSitePage(pageName = "Tools");
 	}
 
+	@description = "Test Summary: Download document and media as Danny Downloader"
+	@priority = "5"
+	test DownloadDMPortal {
+		ACUtils.navigateToSitePageWithUser(
+			emailList = "danny.downloader@liferay.com",
+			pageName = "Home",
+			siteName = "Brother Ocean Co.");
+
+		ACUtils.navigateToSitePage(
+				actionType = "Download DM",
+				documentTitleList = "matthew-hume-I9zW-9Qz7tU-unsplash.jpg",
+				pageName = "Home",
+				siteName = "Brother Ocean Co.");
+	}
+
 	@description = "Test Summary: Order Form portal as Otto Orderer"
 	@priority = "5"
 	test OrderFormPortal {
