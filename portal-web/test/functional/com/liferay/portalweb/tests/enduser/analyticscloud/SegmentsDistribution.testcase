@@ -104,11 +104,11 @@ definition {
 		task ("Filter Attribute") {
 			ACNavigation.switchTab(tabName = "Distribution");
 
-			ACSegments.selectDistributionByAttribute(attribute = "birthDate");
+			ACSegments.selectDistributionByAttribute(attribute = "createDate");
 		}
 
 		task ("View Chart Entry") {
-			ACSegments.viewBreakdownChartsEntry(key_entry = "1986-05-31T00:00:00.000Z - 100.0%");
+			ACSegments.viewBreakdownChartsEntry(key_entry = "100.0%");
 		}
 	}
 
