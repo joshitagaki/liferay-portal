@@ -107,8 +107,12 @@ definition {
 			ACSegments.selectDistributionByAttribute(attribute = "createDate");
 		}
 
+		task("Get current date") {
+			ACSegments.generateDayMonthAndYearValues(dateDifferenceFromCurrentDate = "0");
+		}
+		
 		task ("View Chart Entry") {
-			ACSegments.viewBreakdownChartsEntry(key_entry = "100.0%");
+			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${staticMonth}-${staticDay}.* - 100.0%");
 		}
 	}
 
