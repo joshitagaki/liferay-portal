@@ -114,7 +114,9 @@ definition {
 		}
 		
 		task ("View Chart Entry") {
-			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${staticMonth}-${staticDay}.* - 100.0%");
+			var regex = "(.*)";
+
+			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${staticMonth}-${staticDay}${regex} - 100.0%");
 		}
 	}
 
