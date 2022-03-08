@@ -114,9 +114,9 @@ definition {
 		}
 		
 		task ("View Chart Entry") {
-			var regex = "\[(.*)\]";
+			var monthNum = DateUtil.getCurrentMonth();
 
-			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${staticMonth}-${staticDay}${regex} - 100.0%");
+			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${monthNum}-${staticDay}");
 		}
 	}
 
