@@ -106,7 +106,7 @@ definition {
 		task ("Filter Attribute") {
 			ACNavigation.switchTab(tabName = "Distribution");
 
-			ACSegments.selectDistributionByAttribute(attribute = "birthDate");
+			ACSegments.selectDistributionByAttribute(attribute = "createDate");
 		}
 
 		task("Get current date") {
@@ -114,7 +114,7 @@ definition {
 		}
 		
 		task ("View Chart Entry") {
-			var regex = "(.*)";
+			var regex = "\[(.*)\]";
 
 			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${staticMonth}-${staticDay}${regex} - 100.0%");
 		}
