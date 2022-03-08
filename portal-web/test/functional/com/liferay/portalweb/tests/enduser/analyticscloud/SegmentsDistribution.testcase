@@ -116,7 +116,19 @@ definition {
 		task ("View Chart Entry") {
 			var monthNum = DateUtil.getCurrentMonth();
 
+			if (("${monthNum}" != "10") && ("${monthNum}" != "11") && ("${monthNum}" != "12")) {
+				var monthNum = "0${monthNum}";
+			}
+
+			var i = ${staticDay} / 10;
+
+			if ("${i}" == "0") {
+				var staticDay = "0${staticDay}";
+			}
+
 			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${monthNum}-${staticDay}");
+
+			ACSegments.viewBreakdownChartsEntry(key_entry = "100.0%");
 		}
 	}
 
