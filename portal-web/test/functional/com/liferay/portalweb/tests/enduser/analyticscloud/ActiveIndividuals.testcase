@@ -44,7 +44,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8913 | Test Summary: Assert Individual Activities Chart popover follows format"
 	@priority = "3"
 	test AssertIndividualActivitiesChartPopover {
-		property portal.upstream = "quarantine";
+		property portal.upstream = "josh";
 
 		// AC Refactor ticket: LRAC-9707
 
@@ -125,6 +125,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8916 | Test Summary: Selected individual activity point can clear date selection"
 	@priority = "3"
 	test AssertIndividualActivitiesOverviewClearDate {
+		property portal.upstream = "josh";
+
 		task ("Add DM to AC Page") {
 			ACUtils.createDMAndAddToPage();
 		}
