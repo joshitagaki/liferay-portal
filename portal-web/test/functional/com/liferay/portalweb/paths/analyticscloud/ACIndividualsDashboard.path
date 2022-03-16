@@ -166,12 +166,12 @@
 </tr>
 <tr>
 	<td>CHART_POPOVER</td>
-	<td>//div[contains(@class,'recharts-tooltip-wrapper')]</td>
+	<td>//div[contains(@class,'recharts-tooltip-wrapper')]/div[contains(@class,'bb-tooltip-container')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>CHART_POPOVER_ACTIVITIES_DATE</td>
-	<td>//div[contains(@class,'analytics-tooltip-chart-row')][1]//td[1]//div[contains(@class,'analytics-tooltip-chart-content')]</td>
+	<td>xpath=(//tr[contains(@class,'analytics-tooltip-chart-row')])[1]//td[1]//div[contains(@class,'analytics-tooltip-chart-content')]</td>
 	<td></td>
 </tr>
 <!-- OVERVIEW -->
