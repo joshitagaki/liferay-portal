@@ -224,9 +224,12 @@ public class OrderItemUtil {
 		long shippingAddressId = 0;
 
 		CommerceOrderItem commerceOrderItem =
-			commerceOrderItemService.fetchCommerceOrderItem(orderItem.getId());
+			commerceOrderItemService.fetchCommerceOrderItem(
+				GetterUtil.getLong(orderItem.getId()));
 
-		if (commerceOrderItem == null) {
+		if ((commerceOrderItem == null) &&
+			!Validator.isBlank(orderItem.getExternalReferenceCode())) {
+
 			commerceOrderItemService.fetchByExternalReferenceCode(
 				orderItem.getExternalReferenceCode(),
 				serviceContext.getCompanyId());
@@ -255,15 +258,16 @@ public class OrderItemUtil {
 		else {
 			decimalQuantity = (BigDecimal)GetterUtil.get(
 				orderItem.getDecimalQuantity(), decimalQuantity);
+			quantity = GetterUtil.get(orderItem.getQuantity(), quantity);
 
 			if (decimalQuantity == BigDecimal.ZERO) {
-				decimalQuantity = BigDecimal.valueOf(
-					GetterUtil.get(orderItem.getQuantity(), quantity));
+				decimalQuantity = BigDecimal.valueOf(quantity);
 			}
 
 			commerceOrderItem =
 				commerceOrderItemService.importCommerceOrderItem(
-					orderItem.getExternalReferenceCode(), orderItem.getId(),
+					orderItem.getExternalReferenceCode(),
+					GetterUtil.getLong(orderItem.getId()),
 					commerceOrder.getCommerceOrderId(),
 					cpInstance.getCPInstanceId(),
 					GetterUtil.getString(orderItem.getUnitOfMeasure()),

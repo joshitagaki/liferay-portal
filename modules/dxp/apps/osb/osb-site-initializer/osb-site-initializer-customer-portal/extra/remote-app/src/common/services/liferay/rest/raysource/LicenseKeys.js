@@ -54,14 +54,14 @@ export async function getDevelopmentLicenseKey(
 export async function getActivationLicenseKey(
 	accountKey,
 	licenseKeyDownloadURL,
-	licenseStatus,
+	filter,
 	page,
 	pageSize,
 	sessionId
 ) {
 	// eslint-disable-next-line @liferay/portal/no-global-fetch
 	const response = await fetch(
-		`${licenseKeyDownloadURL}/accounts/${accountKey}/license-keys?filter=${licenseStatus}&page=${page}&pageSize=${pageSize}`,
+		`${licenseKeyDownloadURL}/accounts/${accountKey}/license-keys?filter=${filter}&page=${page}&pageSize=${pageSize}`,
 		{
 			headers: {
 				'Okta-Session-ID': sessionId,
@@ -144,6 +144,27 @@ export async function associateContactRoleNameByEmailByProject(
 				'Okta-Session-ID': sessionId,
 			},
 			method: 'PUT',
+		}
+	);
+
+	return response;
+}
+
+export async function deleteContactRoleNameByEmailByProject(
+	accountKey,
+	licenseKeyDownloadURL,
+	sessionId,
+	emailURI,
+	rolesToDelete
+) {
+	// eslint-disable-next-line @liferay/portal/no-global-fetch
+	const response = await fetch(
+		`${licenseKeyDownloadURL}/accounts/${accountKey}/contacts/by-email-address/${emailURI}/roles?${rolesToDelete}`,
+		{
+			headers: {
+				'Okta-Session-ID': sessionId,
+			},
+			method: 'DELETE',
 		}
 	);
 

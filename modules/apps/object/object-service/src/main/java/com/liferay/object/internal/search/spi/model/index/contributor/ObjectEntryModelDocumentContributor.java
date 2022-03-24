@@ -115,6 +115,11 @@ public class ObjectEntryModelDocumentContributor
 			_log.debug("Object entry " + objectEntry);
 		}
 
+		document.add(
+			new Field(
+				Field.getSortableFieldName(Field.ENTRY_CLASS_PK),
+				document.get(Field.ENTRY_CLASS_PK)));
+
 		FieldArray fieldArray = (FieldArray)document.getField(
 			"nestedFieldArray");
 
@@ -155,8 +160,6 @@ public class ObjectEntryModelDocumentContributor
 
 		document.add(
 			new Field("objectEntryTitle", objectEntry.getTitleValue()));
-
-		document.remove(Field.USER_NAME);
 	}
 
 	private void _contribute(

@@ -16,12 +16,17 @@ import {useModal} from '@clayui/modal';
 import {Observer} from '@clayui/modal/src/types';
 import {Dispatch, useState} from 'react';
 
+import i18n from '../i18n';
+import {Liferay} from '../services/liferay/liferay';
+
 export type FormModalOptions = {
 	modalState: any;
 	observer: Observer;
+	onChange: (state: any) => (event: any) => void;
 	onClose: () => void;
+	onError: (error?: any) => void;
 	onSave: (param?: any) => void;
-	open: () => void;
+	open: (state?: any) => void;
 	setVisible: Dispatch<boolean>;
 	visible: boolean;
 };
@@ -39,7 +44,7 @@ type UseFormModal = {
 const useFormModal = ({
 	isVisible = false,
 	onSave: onSaveModal = () => {},
-}: UseFormModal): FormModal => {
+}: UseFormModal = {}): FormModal => {
 	const [modalState, setModalState] = useState();
 	const [visible, setVisible] = useState(isVisible);
 	const {observer, onClose} = useModal({
@@ -53,14 +58,52 @@ const useFormModal = ({
 		modal: {
 			modalState,
 			observer,
+			onChange: ({form, setForm}: any) => (event: any) => {
+				const {
+					target: {checked, name, type},
+				} = event;
+
+				let {value} = event.target;
+
+				if (type === 'checkbox') {
+					value = checked;
+				}
+
+				setForm({
+					...form,
+					[name]: value,
+				});
+			},
 			onClose,
+			onError: (error) => {
+				console.error(error);
+
+				Liferay.Util.openToast({
+					message: i18n.translate('an-unexpected-error-occurred'),
+					type: 'danger',
+				});
+			},
 			onSave: (state?: any) => {
+				Liferay.Util.openToast({
+					message: i18n.translate(
+						'your-request-completed-successfully'
+					),
+					type: 'success',
+				});
+
 				onClose();
 				setForceRefetch(new Date().getTime());
-				setModalState(state);
-				onSaveModal(state);
+
+				if (state) {
+					setModalState(state);
+					onSaveModal(state);
+				}
 			},
-			open: () => setVisible(true),
+			open: (state?: any) => {
+				setModalState(state);
+
+				setVisible(true);
+			},
 			setVisible,
 			visible,
 		},

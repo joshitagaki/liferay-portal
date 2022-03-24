@@ -20,36 +20,44 @@ import {useParams} from 'react-router-dom';
 import Container from '../../../components/Layout/Container';
 import ListView from '../../../components/ListView/ListView';
 import Loading from '../../../components/Loading';
+import MarkdownPreview from '../../../components/Markdown';
 import QATable from '../../../components/Table/QATable';
 import {
-	CType,
 	TestrayRequirement,
-	getTestrayCases,
-	getTestrayRequirement,
+	getCases,
+	getRequirement,
 } from '../../../graphql/queries';
 import useHeader from '../../../hooks/useHeader';
 import i18n from '../../../i18n';
+import {DescriptionType} from '../../../types';
 
 const Requirement = () => {
 	const {requirementId} = useParams();
 
-	const {setHeading} = useHeader({shouldUpdate: false});
+	const {setHeading, setTabs} = useHeader({shouldUpdate: false});
 
-	const {data, loading} = useQuery<
-		CType<'testrayRequirement', TestrayRequirement>
-	>(getTestrayRequirement, {
-		variables: {
-			testrayRequirementId: requirementId,
-		},
-	});
+	const {data, loading} = useQuery<{requirement: TestrayRequirement}>(
+		getRequirement,
+		{
+			variables: {
+				testrayRequirementId: requirementId,
+			},
+		}
+	);
 
-	const testrayRequirement = data?.c?.testrayRequirement;
+	const testrayRequirement = data?.requirement;
 
 	useEffect(() => {
 		if (testrayRequirement) {
-			setHeading([{title: testrayRequirement.key}], true);
+			setTimeout(() => {
+				setHeading([{title: testrayRequirement.key}], true);
+			}, 0);
 		}
 	}, [setHeading, testrayRequirement]);
+
+	useEffect(() => {
+		setTabs([]);
+	}, [setTabs]);
 
 	if (loading) {
 		return <Loading />;
@@ -87,11 +95,11 @@ const Requirement = () => {
 						},
 						{
 							title: 'team',
-							value: testrayRequirement.id,
+							value: testrayRequirement.component?.team?.name,
 						},
 						{
 							title: i18n.translate('component'),
-							value: testrayRequirement.components,
+							value: testrayRequirement.component?.name,
 						},
 						{
 							title: i18n.translate('jira-components'),
@@ -103,7 +111,20 @@ const Requirement = () => {
 						},
 						{
 							title: i18n.translate('description'),
-							value: testrayRequirement.description,
+							value: (
+								<>
+									{testrayRequirement.descriptionType ===
+									(DescriptionType.MARKDOWN as any) ? (
+										<MarkdownPreview
+											markdown={
+												testrayRequirement.description
+											}
+										/>
+									) : (
+										testrayRequirement.description
+									)}
+								</>
+							),
 						},
 					]}
 				/>
@@ -111,7 +132,7 @@ const Requirement = () => {
 
 			<Container className="mt-3" title="Cases">
 				<ListView
-					query={getTestrayCases}
+					query={getCases}
 					tableProps={{
 						columns: [
 							{
@@ -125,7 +146,7 @@ const Requirement = () => {
 							},
 						],
 					}}
-					transformData={(data) => data?.c?.testrayCases}
+					transformData={(data) => data?.cases}
 				/>
 			</Container>
 		</>

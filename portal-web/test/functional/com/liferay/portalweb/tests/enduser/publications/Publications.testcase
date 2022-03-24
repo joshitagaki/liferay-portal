@@ -1,6 +1,8 @@
 @component-name = "portal-publications"
 definition {
 
+	property app.server.types = "jboss,tomcat,weblogic,websphere,wildfly";
+	property database.types = "db2,hypersonic,mariadb,mysql,oracle,postgresql,sqlserver";
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Publications";
@@ -648,6 +650,7 @@ definition {
 	@priority = "4"
 	test IsBrowserHistoryPreserved {
 		property test.assert.warning.exceptions = "true";
+		property test.name.skip.portal.instance = "Publications#IsBrowserHistoryPreserved";
 
 		JSONPublications.addPublication(publicationName = "Publication Name");
 
@@ -779,8 +782,6 @@ definition {
 
 	@priority = "5"
 	test PublishParallelPublications {
-		property app.server.types = "jboss,tcserver,tomcat,weblogic,websphere,wildfly";
-		property database.types = "hypersonic,mariadb,mysql,oracle,postgresql,sqlserver,sybase";
 		property environment.acceptance = "true";
 		property portal.acceptance = "true";
 
@@ -1007,6 +1008,12 @@ definition {
 	@description = "Assert Publications change details on Display Data Parents and Children Tabs"
 	@priority = "4"
 	test ViewPublicationsChangeDetails {
+
+		// Workaround LPS-140997 and LPS-148148
+
+		property app.server.types = "jboss,tomcat,weblogic,wildfly";
+		property database.types = "hypersonic,mariadb,mysql,oracle,postgresql,sqlserver";
+
 		JSONWebcontent.addWebContent(
 			content = "WC WebContent Content",
 			groupName = "Guest",

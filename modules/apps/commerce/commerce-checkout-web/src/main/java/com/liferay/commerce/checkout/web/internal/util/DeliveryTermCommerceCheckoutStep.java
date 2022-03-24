@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -58,7 +59,7 @@ import org.osgi.service.component.annotations.Reference;
 	enabled = false, immediate = true,
 	property = {
 		"commerce.checkout.step.name=" + DeliveryTermCommerceCheckoutStep.NAME,
-		"commerce.checkout.step.order:Integer=50"
+		"commerce.checkout.step.order:Integer=25"
 	},
 	service = CommerceCheckoutStep.class
 )
@@ -85,7 +86,14 @@ public class DeliveryTermCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 			_commerceCheckoutStepHttpHelper.
 				isActiveDeliveryTermCommerceCheckoutStep(
 					httpServletRequest, commerceOrder,
-					LanguageUtil.getLanguageId(httpServletRequest.getLocale()));
+					LanguageUtil.getLanguageId(
+						_portal.getLocale(httpServletRequest)));
+
+		commerceOrder = _commerceOrderLocalService.getCommerceOrder(
+			commerceOrder.getCommerceOrderId());
+
+		httpServletRequest.setAttribute(
+			CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -104,12 +112,6 @@ public class DeliveryTermCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 			return false;
 		}
-
-		commerceOrder = _commerceOrderLocalService.getCommerceOrder(
-			commerceOrder.getCommerceOrderId());
-
-		httpServletRequest.setAttribute(
-			CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 
 		return activeDeliveryTermCommerceCheckoutStep;
 	}
@@ -196,6 +198,9 @@ public class DeliveryTermCommerceCheckoutStep extends BaseCommerceCheckoutStep {
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference(
 		target = "(resource.name=" + CommerceOrderConstants.RESOURCE_NAME + ")"

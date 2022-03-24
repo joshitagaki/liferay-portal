@@ -290,6 +290,13 @@ definition {
 				locator1 = "ACUsage#USAGE_SINCE",
 				value1 = "${usageSince}");
 		}
+
+		if (isSet(notEquals)) {
+			AssertTextNotEquals(
+				key_metricName = "${metricName}",
+				locator1 = "ACUsage#USAGE_CURRENT_NUMBER",
+				value1 = "${notEquals}");
+		}
 	}
 
 	@summary = "Asserts the page views usage value \  @param pageViewsUsageValue"
@@ -757,7 +764,7 @@ definition {
 			title = "${propertyName}");
 
 		var propertyId = selenium.getText("ACSettings#HEADER_DESCRIPTION");
-		var propertyId = StringUtil.extractDigits("${propertyId}");
+		var propertyId = StringUtil.extractLast("${propertyId}", " ");
 
 		return "${propertyId}";
 	}

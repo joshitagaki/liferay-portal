@@ -1805,6 +1805,11 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 	}
 
 	@Override
+	public void javaScriptMouseOver(String locator) {
+		executeJavaScriptEvent(locator, "MouseEvent", "mouseover");
+	}
+
+	@Override
 	public void javaScriptMouseUp(String locator) {
 		executeJavaScriptEvent(locator, "MouseEvent", "mouseup");
 	}
@@ -2031,7 +2036,8 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 	}
 
 	@Override
-	public void ocularAssertElementImage(String locator, String fileName)
+	public void ocularAssertElementImage(
+			String locator, String fileName, String match)
 		throws Exception {
 
 		File snapFile = new File(
@@ -2055,6 +2061,8 @@ public abstract class BaseWebDriverImpl implements LiferaySelenium, WebDriver {
 		OcularConfiguration ocularConfiguration = Ocular.config();
 
 		ocularConfiguration.resultPath(Paths.get(resultParentFile.getPath()));
+
+		ocularConfiguration.globalSimilarity(GetterUtil.getInteger(match));
 
 		WebElement webElement = getWebElement(locator);
 

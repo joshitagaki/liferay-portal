@@ -16,12 +16,14 @@ import {useOutletContext} from 'react-router-dom';
 
 import Container from '../../../components/Layout/Container';
 import ListView from '../../../components/ListView/ListView';
+import StatusBadge from '../../../components/StatusBadge';
 import QATable from '../../../components/Table/QATable';
-import {getTestrayCases} from '../../../graphql/queries/testrayCase';
+import {TestrayCase, getCaseResults} from '../../../graphql/queries';
 import i18n from '../../../i18n';
+import {getStatusLabel} from '../../../util/constants';
 
 const Case = () => {
-	const {testrayCase}: any = useOutletContext();
+	const {testrayCase}: {testrayCase: TestrayCase} = useOutletContext();
 
 	return (
 		<>
@@ -30,8 +32,7 @@ const Case = () => {
 					items={[
 						{
 							title: i18n.translate('type'),
-							value:
-								testrayCase.type || 'Automated Functional Test',
+							value: testrayCase.caseType?.name,
 						},
 						{
 							title: i18n.translate('priority'),
@@ -39,7 +40,7 @@ const Case = () => {
 						},
 						{
 							title: i18n.translate('main-component'),
-							value: testrayCase.component || 'A/B Test',
+							value: testrayCase.component?.name,
 						},
 						{
 							title: i18n.translate('description'),
@@ -55,11 +56,11 @@ const Case = () => {
 						},
 						{
 							title: i18n.translate('date-created'),
-							value: 'dez 13, 2021 12:00 PM',
+							value: testrayCase.dateCreated,
 						},
 						{
 							title: i18n.translate('date-modified'),
-							value: 'dez 13, 2021 12:00 PM',
+							value: testrayCase.dateModified,
 						},
 						{
 							title: i18n.translate('all-issues-found'),
@@ -71,21 +72,64 @@ const Case = () => {
 
 			<Container className="mt-3" title={i18n.translate('test-history')}>
 				<ListView
-					query={getTestrayCases}
+					query={getCaseResults}
 					tableProps={{
 						columns: [
 							{
-								key: 'priority',
-								value: i18n.translate('priority'),
+								key: 'dateCreated',
+								value: i18n.translate('create-date'),
 							},
-							{key: 'name', value: i18n.translate('case-name')},
 							{
-								key: 'component',
-								value: i18n.translate('component'),
+								key: 'build',
+								render: (build) => {
+									return build?.gitHash;
+								},
+								value: i18n.translate('git-hash'),
 							},
+							{
+								key: 'product-version',
+								render: (_, {build}) => {
+									return build?.productVersion?.name;
+								},
+								value: i18n.translate('product-version'),
+							},
+							{
+								key: 'run',
+								render: (run) => {
+									return run?.externalReferencePK;
+								},
+								size: 'lg',
+								value: i18n.translate('environment'),
+							},
+							{
+								key: 'routine',
+								render: (_, {build}) => build?.routine?.name,
+								value: i18n.translate('routine'),
+							},
+							{
+								key: 'dueStatus',
+								render: (dueStatus) => {
+									return (
+										<StatusBadge
+											type={getStatusLabel(
+												dueStatus
+											)?.toLowerCase()}
+										>
+											{getStatusLabel(dueStatus)}
+										</StatusBadge>
+									);
+								},
+								value: i18n.translate('status'),
+							},
+							{
+								key: 'warnings',
+								value: i18n.translate('warnings'),
+							},
+							{key: 'issues', value: i18n.translate('issues')},
+							{key: 'errors', value: i18n.translate('errors')},
 						],
 					}}
-					transformData={(data) => data?.c?.testrayCases}
+					transformData={(data) => data?.caseResults}
 				/>
 			</Container>
 		</>

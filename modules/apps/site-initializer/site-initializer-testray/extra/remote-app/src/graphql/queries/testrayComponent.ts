@@ -14,6 +14,9 @@
 
 import {gql} from '@apollo/client';
 
+import {testrayComponentFragment} from '../fragments';
+import {TestrayTeam} from './testrayTeam';
+
 export type TestrayComponent = {
 	dateCreated: string;
 	dateModified: string;
@@ -22,48 +25,29 @@ export type TestrayComponent = {
 	name: string;
 	originationKey: string;
 	status: string;
+	team?: TestrayTeam;
 };
 
-const testrayComponentFragment = gql`
-	fragment TestrayComponentFragment on C_TestrayComponent {
-		dateCreated
-		dateModified
-		externalReferenceCode
-		id: testrayComponentId
-		name
-		originationKey
-		status
-	}
-`;
-
-export const getTestrayComponent = gql`
+export const getComponent = gql`
 	${testrayComponentFragment}
 
-	query getTestrayComponent($testrayComponentId: Long!) {
+	query getComponent($componentId: Long!) {
 		c {
-			testrayComponent(testrayComponentId: $testrayComponentId) {
-				...TestrayComponentFragment
+			Component(componentId: $componentId) {
+				...ComponentFragment
 			}
 		}
 	}
 `;
 
-export const getTestrayComponents = gql`
+export const getComponents = gql`
 	${testrayComponentFragment}
 
-	query getTestrayComponents(
-		$filter: String
-		$page: Int = 1
-		$pageSize: Int = 20
-	) {
+	query getComponents($filter: String, $page: Int = 1, $pageSize: Int = 20) {
 		c {
-			testrayComponents(
-				filter: $filter
-				page: $page
-				pageSize: $pageSize
-			) {
+			components(filter: $filter, page: $page, pageSize: $pageSize) {
 				items {
-					...TestrayComponentFragment
+					...ComponentFragment
 				}
 				lastPage
 				page

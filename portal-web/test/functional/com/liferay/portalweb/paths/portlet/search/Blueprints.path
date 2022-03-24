@@ -101,8 +101,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>BLUEPRINTS_ADMIN_ENTRY_CHECKBOX</td>
+	<td>//div[contains(@class,'dnd-tr')][.//*[normalize-space(text())='${entryTitle}']]//input[@type='checkbox']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>BLUEPRINTS_ADMIN_ENTRY_DESCRIPTION</td>
-	<td>//div[contains(@class,'dnd-tr')][.//*[normalize-space(text())='${entryTitle}']]//div[contains(@class,'dnd-td')][2]</td>
+	<td>//div[contains(@class,'dnd-tr')][.//*[normalize-space(text())='${entryTitle}']]//div[contains(@class,'dnd-td')][3]</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,6 +303,11 @@
 <tr>
 	<td>CODE_MIRROR_EDITOR</td>
 	<td>//div[contains(@class,'CodeMirror cm-s-default')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ELEMENTS_EDIT_PAGE_PREDEFINED_VARIABLES_SIDEBAR_ITEM</td>
+	<td>//dl[contains(@class,'sidebar-dl')]//button[contains(.,'${item}')]</td>
 	<td></td>
 </tr>
 <tr>

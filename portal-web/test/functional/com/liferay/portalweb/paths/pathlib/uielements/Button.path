@@ -21,6 +21,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>DISABLED_BUTTON</td>
+	<td>//button[@disabled]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ADD_ADDRESS</td>
 	<td>//a[contains(@class,'add-address')]</td>
 	<td></td>
@@ -183,6 +188,11 @@
 <tr>
 	<td>CANCEL_CHECKOUT</td>
 	<td>//a[contains(@class,'btn') and contains(.,'Cancel Checkout')] | //button[contains(.,'Cancel Checkout')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_SPECIAL</td>
+	<td>//div[contains(text(),'Cancel')]</td>
 	<td></td>
 </tr>
 <tr>

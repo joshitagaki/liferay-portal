@@ -10,7 +10,6 @@
  */
 import DXPActivationKeysTable from '../../../containers/DXPActivationKeysTable';
 import DeveloperKeysLayouts from '../../../layouts/DeveloperKeysLayout';
-
 const DXP = ({project, sessionId}) => {
 	return (
 		<div className="mr-4">

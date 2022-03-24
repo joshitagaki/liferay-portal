@@ -104,11 +104,29 @@ definition {
 		task ("Filter Attribute") {
 			ACNavigation.switchTab(tabName = "Distribution");
 
-			ACSegments.selectDistributionByAttribute(attribute = "birthDate");
+			ACSegments.selectDistributionByAttribute(attribute = "createDate");
+		}
+
+		task ("Get current date") {
+			ACSegments.generateDayMonthAndYearValues(dateDifferenceFromCurrentDate = "0");
+
+			var monthNum = DateUtil.getCurrentMonth();
+
+			if (("${monthNum}" != "10") && ("${monthNum}" != "11") && ("${monthNum}" != "12")) {
+				var monthNum = "0${monthNum}";
+			}
+
+			var i = ${staticDay} / 10;
+
+			if ("${i}" == "0") {
+				var staticDay = "0${staticDay}";
+			}
 		}
 
 		task ("View Chart Entry") {
-			ACSegments.viewBreakdownChartsEntry(key_entry = "1986-05-31T00:00:00.000Z - 100.0%");
+			ACSegments.viewBreakdownChartsEntry(key_entry = "${staticYear}-${monthNum}-${staticDay}");
+
+			ACSegments.viewBreakdownChartsEntry(key_entry = "100.0%");
 		}
 	}
 
@@ -191,8 +209,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8628 | Test Summary: Segment distribution chart can be filtered by text property"
 	@priority = "3"
 	test CanDistributionChartFilteredText {
-		property portal.upstream = "quarantine";
-
 		task ("View AC Page as new user") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "userea@liferay.com",
@@ -247,8 +263,6 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8625 | Test Summary: Search the Segment Profile Distribution"
 	@priority = "3"
 	test CanSearchTheSegmentProfileDistribution {
-		property portal.upstream = "quarantine";
-
 		var userList = "ac,dxp";
 		var emailList = "ac@liferay.com,dxp@liferay.com,userea@liferay.com";
 		var nameList = "ac ac,dxp dxp,userfn userln";

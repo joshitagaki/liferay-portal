@@ -14,12 +14,14 @@
 
 import {gql} from '@apollo/client';
 
-import {testrayRequirementFragment} from '../fragments';
+import {DescriptionType} from '../../types';
+import {TestrayComponent} from './testrayComponent';
 
 export type TestrayRequirement = {
+	component?: TestrayComponent;
 	components: string;
 	description: string;
-	descriptionType: string;
+	descriptionType: keyof typeof DescriptionType;
 	id: number;
 	key: string;
 	linkTitle: string;
@@ -27,39 +29,61 @@ export type TestrayRequirement = {
 	summary: string;
 };
 
-export const getTestrayRequirements = gql`
-	${testrayRequirementFragment}
-
-	query getTestrayRequirements(
+export const getRequirements = gql`
+	query getRequirements(
 		$filter: String
 		$page: Int = 1
 		$pageSize: Int = 20
 	) {
-		c {
-			testrayRequirements(
-				filter: $filter
-				page: $page
-				pageSize: $pageSize
+		requirements(filter: $filter, page: $page, pageSize: $pageSize)
+			@rest(
+				type: "C_Requirement"
+				path: "requirements?page={args.page}&pageSize={args.pageSize}&nestedFields=Component,Team"
 			) {
-				items {
-					...TestrayRequirementFragment
+			items {
+				components
+				description
+				descriptionType
+				id
+				key
+				linkTitle
+				linkURL
+				summary
+				component: r_requirementComponent_c_Component {
+					name
+					team: r_componentTeam_c_Team {
+						name
+					}
 				}
-				lastPage
-				page
-				pageSize
-				totalCount
 			}
+			lastPage
+			page
+			pageSize
+			totalCount
 		}
 	}
 `;
 
-export const getTestrayRequirement = gql`
-	${testrayRequirementFragment}
-
-	query getTestrayRequirement($testrayRequirementId: Long!) {
-		c {
-			testrayRequirement(testrayRequirementId: $testrayRequirementId) {
-				...TestrayRequirementFragment
+export const getRequirement = gql`
+	query getRequirement($requirementId: Long!) {
+		requirement(requirementId: $requirementId)
+			@rest(
+				type: "C_Requirement"
+				path: "requirements/{args.requirementId}?nestedFields=Component,Team"
+			) {
+			components
+			description
+			descriptionType
+			id
+			key
+			linkTitle
+			linkURL
+			summary
+			component: r_requirementComponent_c_Component {
+				name
+				team: r_componentTeam_c_Team {
+					name
+				}
 			}
 		}
 	}

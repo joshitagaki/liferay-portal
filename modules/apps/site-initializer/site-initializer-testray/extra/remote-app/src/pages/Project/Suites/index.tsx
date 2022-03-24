@@ -14,22 +14,23 @@
 
 import Container from '../../../components/Layout/Container';
 import ListView from '../../../components/ListView/ListView';
-import {getTestraySuites} from '../../../graphql/queries';
-import useFormModal from '../../../hooks/useFormModal';
+import {getSuites} from '../../../graphql/queries';
 import i18n from '../../../i18n';
 import SuiteModal from './SuiteModal';
+import useSuiteActions from './useSuiteActions';
 
 const Suites = () => {
-	const {forceRefetch, modal} = useFormModal({isVisible: false});
+	const {actions, formModal} = useSuiteActions();
 
 	return (
 		<>
 			<Container title={i18n.translate('suites')}>
 				<ListView
-					forceRefetch={forceRefetch}
-					managementToolbarProps={{addButton: modal.open}}
-					query={getTestraySuites}
+					forceRefetch={formModal.forceRefetch}
+					managementToolbarProps={{addButton: formModal.modal.open}}
+					query={getSuites}
 					tableProps={{
+						actions,
 						columns: [
 							{
 								clickable: true,
@@ -51,11 +52,11 @@ const Suites = () => {
 						],
 						navigateTo: ({id}) => id?.toString(),
 					}}
-					transformData={(data) => data?.c?.testraySuites}
+					transformData={(data) => data?.c?.suites}
 				/>
 			</Container>
 
-			<SuiteModal modal={modal} />
+			<SuiteModal modal={formModal.modal} />
 		</>
 	);
 };

@@ -23,6 +23,7 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.asset.list.model.AssetListEntry;
 import com.liferay.asset.list.service.AssetListEntryLocalService;
+import com.liferay.commerce.initializer.util.PortletSettingsImporter;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
@@ -106,6 +107,7 @@ import com.liferay.portal.kernel.service.ResourceActionLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.ThemeLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
@@ -210,6 +212,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 		ObjectDefinitionResource.Factory objectDefinitionResourceFactory,
 		ObjectRelationshipResource.Factory objectRelationshipResourceFactory,
 		ObjectEntryLocalService objectEntryLocalService, Portal portal,
+		PortletSettingsImporter portletSettingsImporter,
 		RemoteAppEntryLocalService remoteAppEntryLocalService,
 		ResourceActionLocalService resourceActionLocalService,
 		ResourcePermissionLocalService resourcePermissionLocalService,
@@ -263,6 +266,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 		_objectRelationshipResourceFactory = objectRelationshipResourceFactory;
 		_objectEntryLocalService = objectEntryLocalService;
 		_portal = portal;
+		_portletSettingsImporter = portletSettingsImporter;
 		_remoteAppEntryLocalService = remoteAppEntryLocalService;
 		_resourceActionLocalService = resourceActionLocalService;
 		_resourcePermissionLocalService = resourcePermissionLocalService;
@@ -338,16 +342,18 @@ public class BundleSiteInitializer implements SiteInitializer {
 			User user = _userLocalService.getUser(
 				PrincipalThreadLocal.getUserId());
 
-			ServiceContext serviceContext = new ServiceContext() {
-				{
-					setAddGroupPermissions(true);
-					setAddGuestPermissions(true);
-					setCompanyId(user.getCompanyId());
-					setScopeGroupId(groupId);
-					setTimeZone(user.getTimeZone());
-					setUserId(user.getUserId());
-				}
-			};
+			ServiceContext serviceContextThreadLocal =
+				ServiceContextThreadLocal.getServiceContext();
+
+			ServiceContext serviceContext =
+				(ServiceContext)serviceContextThreadLocal.clone();
+
+			serviceContext.setAddGroupPermissions(true);
+			serviceContext.setAddGuestPermissions(true);
+			serviceContext.setCompanyId(user.getCompanyId());
+			serviceContext.setScopeGroupId(groupId);
+			serviceContext.setTimeZone(user.getTimeZone());
+			serviceContext.setUserId(user.getUserId());
 
 			SiteNavigationMenuItemSettingsBuilder
 				siteNavigationMenuItemSettingsBuilder =
@@ -375,7 +381,11 @@ public class BundleSiteInitializer implements SiteInitializer {
 			_invoke(
 				() -> _addTaxonomyVocabularies(
 					serviceContext, siteNavigationMenuItemSettingsBuilder));
-			_invoke(() -> _updateLayoutSets(serviceContext));
+
+			_invoke(() -> _addPortletSettings(serviceContext));
+			_invoke(
+				() -> _updateLayoutSets(
+					documentsStringUtilReplaceValues, serviceContext));
 
 			_invoke(
 				() -> _addDDMTemplates(
@@ -1386,8 +1396,11 @@ public class BundleSiteInitializer implements SiteInitializer {
 						String.valueOf(serviceContext.getScopeGroupId())
 					});
 
-				String css = SiteInitializerUtil.read(
-					FileUtil.getPath(urlPath) + "/css.css", _servletContext);
+				String css = StringUtil.replace(
+					SiteInitializerUtil.read(
+						FileUtil.getPath(urlPath) + "/css.css",
+						_servletContext),
+					"[$", "$]", documentsStringUtilReplaceValues);
 
 				if (Validator.isNotNull(css)) {
 					JSONObject jsonObject = _jsonFactory.createJSONObject(json);
@@ -1606,6 +1619,19 @@ public class BundleSiteInitializer implements SiteInitializer {
 			return objectDefinitionIdsStringUtilReplaceValues;
 		}
 
+		List<com.liferay.object.model.ObjectDefinition> objectDefinitions =
+			_objectDefinitionLocalService.getObjectDefinitions(
+				serviceContext.getCompanyId(), true,
+				WorkflowConstants.STATUS_APPROVED);
+
+		for (com.liferay.object.model.ObjectDefinition objectDefinition :
+				objectDefinitions) {
+
+			objectDefinitionIdsStringUtilReplaceValues.put(
+				"OBJECT_DEFINITION_ID:" + objectDefinition.getName(),
+				String.valueOf(objectDefinition.getObjectDefinitionId()));
+		}
+
 		for (String resourcePath : resourcePaths) {
 			if (resourcePath.endsWith(".object-entries.json")) {
 				continue;
@@ -1792,6 +1818,27 @@ public class BundleSiteInitializer implements SiteInitializer {
 		_addUserAccounts(serviceContext);
 
 		_addUserRoles(serviceContext);
+	}
+
+	private void _addPortletSettings(ServiceContext serviceContext)
+		throws Exception {
+
+		String resourcePath = "/site-initializer/portlet-settings.json";
+
+		String json = SiteInitializerUtil.read(resourcePath, _servletContext);
+
+		if (json == null) {
+			return;
+		}
+
+		Group group = _groupLocalService.getCompanyGroup(
+			serviceContext.getCompanyId());
+
+		_portletSettingsImporter.importPortletSettings(
+			JSONFactoryUtil.createJSONArray(json), _classLoader,
+			"/site-initializer/portlet-settings/",
+			serviceContext.getScopeGroupId(), group.getGroupId(),
+			serviceContext.getUserId());
 	}
 
 	private Map<String, String> _addRemoteAppEntries(
@@ -2538,6 +2585,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 		UserAccountResource userAccountResource =
 			userAccountResourceBuilder.user(
 				serviceContext.fetchUser()
+			).httpServletRequest(
+				serviceContext.getRequest()
 			).build();
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(json);
@@ -2654,12 +2703,13 @@ public class BundleSiteInitializer implements SiteInitializer {
 			JSONObject workflowDefinitionJSONObject =
 				JSONFactoryUtil.createJSONObject(
 					SiteInitializerUtil.read(
-						resourcePath + ".json", _servletContext));
+						resourcePath + "workflow-definition.json",
+						_servletContext));
 
 			workflowDefinitionJSONObject.put(
 				"content",
 				SiteInitializerUtil.read(
-					resourcePath + ".content.xml", _servletContext));
+					resourcePath + "workflow-definition.xml", _servletContext));
 
 			WorkflowDefinition workflowDefinition =
 				workflowDefinitionResource.postWorkflowDefinitionDeploy(
@@ -2667,7 +2717,8 @@ public class BundleSiteInitializer implements SiteInitializer {
 						workflowDefinitionJSONObject.toString()));
 
 			String propertiesJSON = SiteInitializerUtil.read(
-				resourcePath + ".properties.json", _servletContext);
+				resourcePath + "workflow-definition.properties.json",
+				_servletContext);
 
 			if (propertiesJSON == null) {
 				continue;
@@ -2716,10 +2767,25 @@ public class BundleSiteInitializer implements SiteInitializer {
 						className, "#", objectDefinition.getId());
 				}
 
+				long typePK = 0;
+
+				if ((_commerceSiteInitializer != null) &&
+					StringUtil.equals(
+						className,
+						_commerceSiteInitializer.getCommerceOrderClassName())) {
+
+					groupId =
+						_commerceSiteInitializer.getCommerceChannelGroupId(
+							groupId);
+
+					typePK = propertiesJSONObject.getLong("typePK");
+				}
+
 				_workflowDefinitionLinkLocalService.
 					updateWorkflowDefinitionLink(
 						serviceContext.getUserId(),
-						serviceContext.getCompanyId(), groupId, className, 0, 0,
+						serviceContext.getCompanyId(), groupId, className, 0,
+						typePK,
 						StringBundler.concat(
 							workflowDefinition.getName(), "@",
 							workflowDefinition.getVersion()));
@@ -2904,6 +2970,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 	}
 
 	private void _updateLayoutSet(
+			Map<String, String> documentsStringUtilReplaceValues,
 			boolean privateLayout, ServiceContext serviceContext)
 		throws Exception {
 
@@ -2925,9 +2992,10 @@ public class BundleSiteInitializer implements SiteInitializer {
 		JSONObject metadataJSONObject = JSONFactoryUtil.createJSONObject(
 			(metadataJSON == null) ? "{}" : metadataJSON);
 
-		String css = GetterUtil.getString(
+		String css = StringUtil.replace(
 			SiteInitializerUtil.read(
-				resourcePath + "/css.css", _servletContext));
+				resourcePath + "/css.css", _servletContext),
+			"[$", "$]", documentsStringUtilReplaceValues);
 
 		_layoutSetLocalService.updateLookAndFeel(
 			serviceContext.getScopeGroupId(), privateLayout,
@@ -2969,11 +3037,15 @@ public class BundleSiteInitializer implements SiteInitializer {
 			unicodeProperties.toString());
 	}
 
-	private void _updateLayoutSets(ServiceContext serviceContext)
+	private void _updateLayoutSets(
+			Map<String, String> documentsStringUtilReplaceValues,
+			ServiceContext serviceContext)
 		throws Exception {
 
-		_updateLayoutSet(false, serviceContext);
-		_updateLayoutSet(true, serviceContext);
+		_updateLayoutSet(
+			documentsStringUtilReplaceValues, false, serviceContext);
+		_updateLayoutSet(
+			documentsStringUtilReplaceValues, true, serviceContext);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -3019,6 +3091,7 @@ public class BundleSiteInitializer implements SiteInitializer {
 	private final ObjectRelationshipResource.Factory
 		_objectRelationshipResourceFactory;
 	private final Portal _portal;
+	private final PortletSettingsImporter _portletSettingsImporter;
 	private final RemoteAppEntryLocalService _remoteAppEntryLocalService;
 	private final ResourceActionLocalService _resourceActionLocalService;
 	private final ResourcePermissionLocalService

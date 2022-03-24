@@ -311,6 +311,18 @@ definition {
 				value1 = "${userComment}");
 		}
 
+		if (isSet(destination)) {
+			var origin = Geolocation.getMarkerPosition();
+
+			Geolocation.setMarkerPosition(destination = "${destination}");
+
+			var current = Geolocation.getMarkerPosition();
+
+			TestUtils.assertNotEquals(
+				actual = "${current}",
+				expected = "${origin}");
+		}
+
 		var browserType = PropsUtil.get("browser.type");
 
 		if ("${browserType}" == "safari") {
@@ -2019,6 +2031,12 @@ definition {
 			SignIn.agreeToTermsOfUse();
 		}
 
+		if (IsElementPresent(locator1 = "TextInput#PASSWORD_2")) {
+			User.resetPassword(
+				localizedSaveButton = "${localizedSaveButton}",
+				newPassword = "${newPassword}");
+		}
+
 		if (isSet(localizedAnswer)) {
 			User.answerPasswordReminderLocalized(
 				localizedAnswer = "${localizedAnswer}",
@@ -2441,9 +2459,14 @@ definition {
 					value1 = "test");
 			}
 
-			Button.clickSubmitButton();
+			if (isSet(localizedSaveButton)) {
+				Button.click(button = "${localizedSaveButton}");
+			}
+			else {
+				Button.clickSubmitButton();
 
-			AssertElementNotPresent(locator1 = "TextInput#ENTER_AGAIN");
+				AssertElementNotPresent(locator1 = "TextInput#ENTER_AGAIN");
+			}
 		}
 	}
 

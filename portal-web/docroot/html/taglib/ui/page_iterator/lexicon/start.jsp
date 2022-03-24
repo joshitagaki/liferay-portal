@@ -87,7 +87,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 	<div class="pagination-bar" data-qa-id="paginator" id="<%= namespace + id %>">
 		<c:if test="<%= deltaConfigurable %>">
 			<div class="dropdown pagination-items-per-page">
-				<a class="dropdown-toggle page-link" data-toggle="liferay-dropdown" href="javascript:;" role="button"><liferay-ui:message arguments="<%= delta %>" key="x-entries" />
+				<a class="dropdown-toggle page-link" data-toggle="liferay-dropdown" href="javascript:;"><liferay-ui:message arguments="<%= delta %>" key="x-entries" />
 					<span class="sr-only"><liferay-ui:message key="per-page" /></span>
 
 					<aui:icon image="caret-double-l" markupView="lexicon" />
@@ -270,8 +270,8 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					for (int i = 2; i < ((initialPages > (cur - 1)) ? cur - 1 : initialPages); i++) {
 					%>
 
-						<li>
-							<a class="dropdown-item" href="<%= _getHREF(formName, namespace + curParam, i, jsCall, url, urlAnchor) %>" onclick="<%= forcePost ? _getOnClick(namespace, curParam, i) : "" %>"><span class="sr-only"><liferay-ui:message key="page" /></span><%= i %></a>
+						<li class="<%= ((cur - 3) > 1) ? "" : "page-item" %>">
+							<a class="<%= ((cur - 3) > 1) ? "dropdown-item" : "dropdown-item page-link" %>" href="<%= _getHREF(formName, namespace + curParam, i, jsCall, url, urlAnchor) %>" onclick="<%= forcePost ? _getOnClick(namespace, curParam, i) : "" %>"><span class="sr-only"><liferay-ui:message key="page" /></span><%= i %></a>
 						</li>
 
 					<%
@@ -318,8 +318,8 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 					for (int i = cur + 2; i < ((cur + 2) + remainingPages); i++) {
 					%>
 
-						<li>
-							<a class="dropdown-item" href="<%= _getHREF(formName, namespace + curParam, i, jsCall, url, urlAnchor) %>" onclick="<%= forcePost ? _getOnClick(namespace, curParam, i) : "" %>"><span class="sr-only"><liferay-ui:message key="page" /></span><%= i %></a>
+						<li class="<%= ((cur + 3) < pages) ? "" : "page-item" %>">
+							<a class="<%= ((cur + 3) < pages) ? "dropdown-item" : "dropdown-item page-link" %>" href="<%= _getHREF(formName, namespace + curParam, i, jsCall, url, urlAnchor) %>" onclick="<%= forcePost ? _getOnClick(namespace, curParam, i) : "" %>"><span class="sr-only"><liferay-ui:message key="page" /></span><%= i %></a>
 						</li>
 
 					<%

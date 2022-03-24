@@ -156,7 +156,6 @@ JSPXSSVulnerabilitiesCheck | [Security](security_checks.markdown#security-checks
 JSStylingCheck | [Styling](styling_checks.markdown#styling-checks) | .js or .jsx | Applies rules to enforce consisteny in code style. |
 JSWhitespaceCheck | [Styling](styling_checks.markdown#styling-checks) | .js or .jsx | Finds missing and unnecessary whitespace in `.js` files. |
 Java2HTMLCheck | [Miscellaneous](miscellaneous_checks.markdown#miscellaneous-checks) | .java | Finds incorrect use of `.java.html` in `.jsp` files. |
-[JavaAPISignatureCheck](check/java_api_signature_check.markdown#javaapisignaturecheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks that types `HttpServletRequest`, `HttpServletResponse`, `ThemeDisplay`, and `ServiceContext` are not used in API method signatures. |
 JavaAbstractMethodCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds incorrect `abstract` methods in `interface`. |
 JavaAggregateTestRuleParameterOrderCheck | [Styling](styling_checks.markdown#styling-checks) | .java | Checks the order of parameters in `new AggregateTestRule` calls. |
 JavaAnnotationDefaultAttributeCheck | [Styling](styling_checks.markdown#styling-checks) | .java | Finds cases where the default value is passed to annotations in package `*.bnd.annotations` or `*.bind.annotations`. |
@@ -215,7 +214,6 @@ JavaModifiedServiceMethodCheck | [Bug Prevention](bug_prevention_checks.markdown
 JavaModuleIllegalImportsCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds cases of incorrect use of certain classes in modules. |
 JavaModuleInternalImportsCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds cases where a module imports an `internal` class from another class. |
 JavaModuleJavaxPortletInitParamTemplatePathCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Validates the value of `javax.portlet.init-param.template-path`. |
-JavaModuleServiceProxyFactoryCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds cases of `ServiceProxyFactory.newServiceTrackedInstance`. |
 JavaModuleServiceReferenceCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds cases where `@BeanReference` annotation should be used instead of `@ServiceReference` annotation. |
 [JavaModuleTestCheck](check/java_module_test_check.markdown#javamoduletestcheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Checks package names in tests. |
 [JavaMultiPlusConcatCheck](check/java_multi_plus_concat_check.markdown#javamultiplusconcatcheck) | [Performance](performance_checks.markdown#performance-checks) | .java | Checks that we do not concatenate more than 3 String objects. |
@@ -346,6 +344,7 @@ PropertiesPortalEnvironmentVariablesCheck | [Documentation](documentation_checks
 PropertiesPortalFileCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Performs several checks on `portal.properties` or `portal-*.properties` file. |
 PropertiesPortletFileCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Performs several checks on `portlet.properties` file. |
 PropertiesReleaseBuildCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Verifies that the information in `release.properties` matches the information in `ReleaseInfo.java`. |
+PropertiesSQLStylingCheck | [Styling](styling_checks.markdown#styling-checks) | .eslintignore, .prettierignore or .properties | Applies rules to enforce consisteny in code style. |
 PropertiesServiceKeysCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Finds usage of legacy properties in `service.properties`. |
 PropertiesSourceFormatterContentCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Performs several checks on `source-formatter.properties` file. |
 PropertiesSourceFormatterFileCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .eslintignore, .prettierignore or .properties | Performs several checks on `source-formatter.properties` file. |
@@ -366,6 +365,7 @@ SQLEmptyLinesCheck | [Styling](styling_checks.markdown#styling-checks) | .sql | 
 SQLStylingCheck | [Styling](styling_checks.markdown#styling-checks) | .sql | Applies rules to enforce consisteny in code style. |
 SelfReferenceCheck | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds cases of unnecessary reference to its own class. |
 SemiColonCheck | [Styling](styling_checks.markdown#styling-checks) | .java, .jsp, .jspf, .jspx, .tag, .tpl or .vm | Finds cases of unnecessary semicolon. |
+[ServiceProxyFactoryCheck](check/service_proxy_factory_check.markdown#serviceproxyfactorycheck) | [Bug Prevention](bug_prevention_checks.markdown#bug-prevention-checks) | .java | Finds incorrect parameter in method call. |
 SessionKeysCheck | [Naming Conventions](naming_conventions_checks.markdown#naming-conventions-checks) | .java | Checks that messages send to `SessionsErrors` or `SessionMessages` follow naming conventions. |
 SetUtilMethodsCheck | [Performance](performance_checks.markdown#performance-checks) | .java, .jsp, .jspf, .jspx, .tag, .tpl or .vm | Finds cases of inefficient SetUtil operations. |
 SingleStatementClauseCheck | [Styling](styling_checks.markdown#styling-checks) | .java | Verifies that `for`, `if` or `while` statement always uses curly braces. |

@@ -36,6 +36,10 @@ import CollectionPagination from './CollectionPagination';
 
 const COLLECTION_ID_DIVIDER = '$';
 
+function paginationIsEnabled(collectionConfig) {
+	return collectionConfig.paginationType !== 'none';
+}
+
 function collectionIsMapped(collectionConfig) {
 	return collectionConfig.collection;
 }
@@ -101,8 +105,14 @@ const Grid = ({
 			collectionLength,
 			getNumberOfItems(collection, collectionConfig)
 		) || 1;
+
+	const numberOfItemsToDisplay = Math.min(
+		maxNumberOfItems,
+		config.maxNumberOfItemsEditMode
+	);
+
 	const numberOfRows = Math.ceil(
-		maxNumberOfItems / collectionConfig.numberOfColumns
+		numberOfItemsToDisplay / collectionConfig.numberOfColumns
 	);
 
 	return (
@@ -124,7 +134,7 @@ const Grid = ({
 										][collectionConfig.numberOfColumns][j]
 									}
 								>
-									{index < maxNumberOfItems && (
+									{index < numberOfItemsToDisplay && (
 										<ColumnContext
 											collectionConfig={collectionConfig}
 											collectionId={collectionId}
@@ -390,21 +400,22 @@ const Collection = React.memo(
 					</>
 				)}
 
-				{collectionConfig.paginationType && (
-					<CollectionPagination
-						activePage={activePage}
-						collectionConfig={collectionConfig}
-						collectionId={item.itemId}
-						onPageChange={setActivePage}
-						totalNumberOfItems={
-							collection.fakeCollection ? 0 : numberOfItems
-						}
-						totalPages={getNumberOfPages(
-							collection,
-							collectionConfig
-						)}
-					/>
-				)}
+				{collectionIsMapped(collectionConfig) &&
+					paginationIsEnabled(collectionConfig) && (
+						<CollectionPagination
+							activePage={activePage}
+							collectionConfig={collectionConfig}
+							collectionId={item.itemId}
+							onPageChange={setActivePage}
+							totalNumberOfItems={
+								collection.fakeCollection ? 0 : numberOfItems
+							}
+							totalPages={getNumberOfPages(
+								collection,
+								collectionConfig
+							)}
+						/>
+					)}
 			</div>
 		);
 	})
@@ -413,7 +424,7 @@ const Collection = React.memo(
 Collection.displayName = 'Collection';
 
 function getNumberOfItems(collection, collectionConfig) {
-	if (collectionConfig.paginationType) {
+	if (paginationIsEnabled(collectionConfig)) {
 		const itemsPerPage = Math.min(
 			collectionConfig.numberOfItemsPerPage,
 			config.searchContainerPageMaxDelta

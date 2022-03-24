@@ -12,6 +12,8 @@ import ClayAlert from '@clayui/alert';
 import ClayModal from '@clayui/modal';
 import React, {useState} from 'react';
 import Button from '../../../../../../common/components/Button';
+import {useApplicationProvider} from '../../../../../../common/context/AppPropertiesProvider';
+import {useCustomerPortal} from '../../../../context';
 import {ALERT_DOWNLOAD_TYPE} from '../../../../utils/constants/alertDownloadType';
 import {AUTO_CLOSE_ALERT_TIME} from '../../../../utils/constants/autoCloseAlertTime';
 import {ALERT_ACTIVATION_AGGREGATED_KEYS_DOWNLOAD_TEXT} from '../../utils/constants/alertAggregateKeysDownloadText';
@@ -19,14 +21,15 @@ import {downloadActivationLicenseKey} from '../../utils/downloadActivationLicens
 import TableKeyDetails from '../TableKeyDetails';
 
 const ModalKeyDetails = ({
-	activationKeys,
-	assetsPath,
-	licenseKeyDownloadURL,
+	currentActivationKey,
 	observer,
 	onClose,
 	project,
 	sessionId,
 }) => {
+	const [{assetsPath}] = useCustomerPortal();
+	const {licenseKeyDownloadURL} = useApplicationProvider();
+
 	const [valueToCopyToClipboard, setValueToCopyToClipboard] = useState('');
 
 	const [
@@ -52,10 +55,10 @@ const ModalKeyDetails = ({
 						</h6>
 
 						<h2 className="text-neutral-10">
-							{activationKeys.name}
+							{currentActivationKey.name}
 						</h2>
 
-						<p>{activationKeys.description}</p>
+						<p>{currentActivationKey.description}</p>
 					</div>
 
 					<Button
@@ -68,8 +71,8 @@ const ModalKeyDetails = ({
 				</div>
 
 				<TableKeyDetails
-					activationKeys={activationKeys}
 					assetsPath={assetsPath}
+					currentActivationKey={currentActivationKey}
 					setValueToCopyToClipboard={setValueToCopyToClipboard}
 				/>
 
@@ -83,11 +86,11 @@ const ModalKeyDetails = ({
 						className="ml-2"
 						onClick={async () => {
 							const isAbleToDownloadKey = await downloadActivationLicenseKey(
-								activationKeys.id,
+								currentActivationKey.id,
 								licenseKeyDownloadURL,
 								sessionId,
-								activationKeys.productName,
-								activationKeys.productVersion,
+								currentActivationKey.productName,
+								currentActivationKey.productVersion,
 								project.name
 							);
 							handleAlertStatus(isAbleToDownloadKey);

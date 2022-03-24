@@ -15,7 +15,7 @@ definition {
 
 		User.firstLoginPG();
 
-		task ("Add Clay Sample Portlet") {
+		task ("Given a Clay Sample Portlet") {
 			JSONLayout.addPublicLayout(
 				groupName = "Guest",
 				layoutName = "Clay Sample Test Page");
@@ -32,6 +32,10 @@ definition {
 
 			Navigator.gotoPage(pageName = "Clay Sample Test Page");
 		}
+
+		task ("When navigate to Management Toolbars tab") {
+			Navigator.gotoNavTab(navTab = "Management Toolbars");
+		}
 	}
 
 	tearDown {
@@ -47,17 +51,89 @@ definition {
 		}
 	}
 
+	@description = "LPS-147404. Assert the more actions button is displayed"
+	@priority = "5"
+	test MoreActionsButtonCanRender {
+		task ("Assert the 'more actions' button is displayed") {
+			AssertElementPresent(locator1 = "ManagementBar#MORE_ACTIONS_ELLIPSIS");
+		}
+
+		task ("Assert all the actions are displayed as icon and text buttons") {
+			AssertElementPresent(
+				key_action = "Download",
+				key_icon = "download",
+				locator1 = "ManagementBar#ICON_AND_TEXT_ACTION_BUTTON");
+
+			AssertElementPresent(
+				key_action = "Delete",
+				key_icon = "trash",
+				locator1 = "ManagementBar#ICON_AND_TEXT_ACTION_BUTTON");
+		}
+	}
+
+	@description = "LPS-147832. Assert the more actions button can display quick actions"
+	@priority = "5"
+	test MoreActionsButtonRenderQuickActions {
+		task ("Click on 'more actions' button") {
+			Click(locator1 = "ManagementBar#MORE_ACTIONS_ELLIPSIS");
+		}
+
+		task ("Assert quick actions are displayed") {
+			AssertElementPresent(
+				key_item = "Edit",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
+
+			AssertElementPresent(
+				key_item = "Download",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
+
+			AssertElementPresent(
+				key_item = "Delete",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
+		}
+	}
+
 	@description = "LPS-147864. Assert the New button is displayed as a text button"
 	@priority = "5"
 	test NewButtonRender {
-		task ("Navigate to Management Toolbars tab") {
-			Navigator.gotoNavTab(navTab = "Management Toolbars");
-		}
-
 		task ("Assert the new button is displayed as a text button") {
 			AssertTextEquals(
 				locator1 = "ManagementBar#NEW_BUTTON",
 				value1 = "New");
+		}
+	}
+
+	@description = "LPS-147849. Assert the filter and order buttons are independent dropdowns"
+	@priority = "5"
+	test RendersIndependentFilterAndOrderButtons {
+		task ("Then 'filter' and 'order' button is not rendered together") {
+			AssertElementNotPresent(locator1 = "ManagementBar#FILTER_AND_ORDER");
+		}
+
+		task ("Then 'filter' button is an independent dropdown") {
+			AssertClick(
+				key_filter = "Show Filter Options",
+				locator1 = "ManagementBar#FILTER_OR_ORDER",
+				value1 = "Filter");
+
+			AssertElementPresent(
+				key_item = "Filter",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
+		}
+
+		task ("Then 'order' button is an independent dropdown") {
+			AssertClick(
+				key_filter = "Show Order Options",
+				locator1 = "ManagementBar#FILTER_OR_ORDER",
+				value1 = "Order");
+
+			AssertElementPresent(
+				key_item = "Order",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
+
+			AssertElementPresent(
+				key_item = "Ascending",
+				locator1 = "ManagementBar#ACTIVE_DROPDOWN_ITEM");
 		}
 	}
 
@@ -66,10 +142,6 @@ definition {
 	test ResponsiveModeNewButtonAsIconButton {
 		task ("Set window size to phone size") {
 			SetWindowSize(value1 = "360,720");
-		}
-
-		task ("Navigate to Management Toolbars tab") {
-			Navigator.gotoNavTab(navTab = "Management Toolbars");
 		}
 
 		task ("Assert the new button is displayed as an icon button") {
@@ -84,20 +156,18 @@ definition {
 	@description = "LPS-147866. Assert the tooltip message is displayed when hovered over the new button in responsive mode"
 	@priority = "3"
 	test ResponsiveModeNewButtonTooltip {
-		task ("Set window size to phone size") {
+		task ("When window size to phone size") {
 			SetWindowSize(value1 = "360,720");
 		}
 
-		task ("Navigate to Management Toolbars tab") {
-			Navigator.gotoNavTab(navTab = "Management Toolbars");
-		}
+		task ("And hovers over the new button") {
+			WaitForPageLoad();
 
-		task ("Hover over the new button") {
 			MouseOver(locator1 = "ManagementBar#NEW_BUTTON_MOBILE");
 		}
 
-		task ("Assert tooltip message is displayed") {
-			AssertTextEquals.assertPartialText(
+		task ("Then tooltip message is displayed") {
+			AssertTextEquals(
 				locator1 = "Message#TOOLTIP",
 				value1 = "New");
 		}
@@ -106,10 +176,6 @@ definition {
 	@description = "LPS-147844. Assert the tooltip message is displayed when hovered over the view button"
 	@priority = "3"
 	test ViewButtonCanDisplayTooltip {
-		task ("Navigate to Management Toolbars tab") {
-			Navigator.gotoNavTab(navTab = "Management Toolbars");
-		}
-
 		task ("Hover over the view button") {
 			MouseOver(
 				key_text = "caret-double",
@@ -126,10 +192,6 @@ definition {
 	@description = "LPS-147839. Assert the view button displays a double caret icon"
 	@priority = "5"
 	test ViewButtonCanRenderDoubleCaret {
-		task ("Navigate to Management Toolbars tab") {
-			Navigator.gotoNavTab(navTab = "Management Toolbars");
-		}
-
 		task ("Assert the view button also has a double caret icon") {
 			AssertElementPresent(
 				key_text = "cards",

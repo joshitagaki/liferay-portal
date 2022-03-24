@@ -213,6 +213,10 @@ public class PoshiContext {
 		return 0;
 	}
 
+	public static int getFunctionMaxArgumentCount() {
+		return _MAX_ARGUMENT_COUNT;
+	}
+
 	public static Element getFunctionRootElement(
 		String className, String namespace) {
 
@@ -710,13 +714,13 @@ public class PoshiContext {
 			FileSystem fileSystem, String[] includes, String baseDirName)
 		throws IOException {
 
-		File file = new File(baseDirName);
-
-		baseDirName = file.getCanonicalPath();
-
 		Set<URL> urls = new HashSet<>();
 
 		if (fileSystem == null) {
+			File file = new File(baseDirName);
+
+			baseDirName = file.getCanonicalPath();
+
 			urls.addAll(
 				FileUtil.getIncludedResourceURLs(includes, baseDirName));
 		}
@@ -1791,6 +1795,8 @@ public class PoshiContext {
 	}
 
 	private static final String _DEFAULT_NAMESPACE = "LocalFile";
+
+	private static final int _MAX_ARGUMENT_COUNT = 3;
 
 	private static final Map<String, Element> _commandElements =
 		Collections.synchronizedMap(new HashMap<>());

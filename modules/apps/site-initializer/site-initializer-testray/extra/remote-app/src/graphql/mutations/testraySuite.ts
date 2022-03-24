@@ -16,14 +16,22 @@ import {gql} from '@apollo/client';
 
 import {testraySuiteFragment} from '../fragments';
 
-export const CreateTestraySuite = gql`
+export const CreateSuite = gql`
 	${testraySuiteFragment}
 
-	mutation CreateTestraySuite($TestraySuite: InputC_TestraySuite!) {
+	mutation CreateSuite($Suite: InputC_Suite!) {
 		c {
-			createTestraySuite(TestraySuite: $TestraySuite) {
-				...TestraySuiteFragment
+			createSuite(Suite: $Suite) {
+				...SuiteFragment
 			}
+		}
+	}
+`;
+
+export const DeleteSuite = gql`
+	mutation deleteSuite($suiteId: Long) {
+		c {
+			deleteSuite(suiteId: $suiteId)
 		}
 	}
 `;

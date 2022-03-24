@@ -343,9 +343,6 @@ public class PoshiValidation {
 			}
 
 			if (primaryAttributeName.equals("function")) {
-				validateRequiredAttributeNames(
-					poshiElement, Arrays.asList("locator1"), filePath);
-
 				List<String> possibleAttributeNames = Arrays.asList(
 					"function", "line-number", "locator1", "value1");
 
@@ -1622,7 +1619,7 @@ public class PoshiValidation {
 
 		if (!PoshiContext.isRootElement("test-case", className, namespace)) {
 			_exceptions.add(
-				new PoshiElementException(
+				new ValidationException(
 					"Invalid test case class " + namespace + "." + className));
 		}
 		else if (testName.contains("#")) {
@@ -1638,7 +1635,7 @@ public class PoshiValidation {
 						getCommandNameFromNamespacedClassCommandName(testName);
 
 				_exceptions.add(
-					new PoshiElementException(
+					new ValidationException(
 						"Invalid test case command " + commandName));
 			}
 		}

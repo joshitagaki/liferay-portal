@@ -244,8 +244,7 @@ definition {
 
 	@priority = "4"
 	test AssertResultRankingsWithSynonyms {
-		property portal.suite.search.engine = "disable";
-		property portal.upstream = "quarantine";
+		property test.name.skip.portal.instance = "SearchTuningES7#AssertResultRankingsWithSynonyms";
 
 		JSONWebcontent.addWebContent(
 			content = "Article Article Article Article",
@@ -401,6 +400,8 @@ definition {
 		SearchTuning.configureAliases(addAlias = "Journal");
 
 		Button.clickSave();
+
+		SearchAdministration.executeReindex();
 
 		Navigator.openURL();
 

@@ -8,10 +8,205 @@ definition {
 			locator1 = "ImportExport#EXECUTION_ENTRY");
 	}
 
+	macro assertExecutionNotification {
+		var executionStatus = StringUtil.upperCase("${executionStatus}");
+
+		AssertElementPresent(
+			key_entityType = "${entityType}",
+			key_executionAction = "${executionAction}",
+			key_jobStatus = "${executionStatus}",
+			locator1 = "ImportExport#EXECUTION_NOTIFICATION");
+	}
+
+	macro assertExportTemplate {
+		WaitForElementPresent(
+			key_title = "Field Mapping",
+			locator1 = "Header#H4_TITLE");
+
+		AssertSelectedLabel(
+			key_selectFieldLabel = "Template",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${templateName}");
+
+		AssertSelectedLabel(
+			key_selectFieldLabel = "Headless Endpoint",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${headlessEndpoint}");
+
+		AssertSelectedLabel(
+			locator1 = "ImportExport#ENTITY_TYPE",
+			value1 = "${entityType}");
+
+		AssertSelectedLabel(
+			key_selectFieldLabel = "Export File Format",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${exportFileFormat}");
+
+		AssertNotChecked.assertNotCheckedNotVisible(
+			key_checkboxOption = "Attribute Code",
+			locator1 = "Checkbox#SPECIFIC_CHECKBOX_IN_TABLE");
+
+		for (var exportField : list "${exportFields}") {
+			AssertChecked.assertCheckedNotVisible(
+				key_checkboxOption = "${exportField}",
+				locator1 = "Checkbox#SPECIFIC_CHECKBOX_IN_TABLE");
+		}
+	}
+
+	macro assertImportMappings {
+		WaitForElementPresent(
+			key_title = "Import Mappings",
+			locator1 = "Header#H4_TITLE");
+
+		for (var fieldMapping : list "${fieldMappings}") {
+			var destinationField = StringUtil.extractFirst("${fieldMapping}", ":");
+			var sourceField = StringUtil.extractLast("${fieldMapping}", ":");
+
+			AssertSelectedLabel(
+				key_destinationField = "${destinationField}",
+				locator1 = "ImportExport#IMPORT_MAPPING_SELECT",
+				value1 = "${sourceField}");
+		}
+	}
+
+	macro assertImportPreviews {
+		WaitForElementPresent(
+			key_title = "Import Mappings",
+			locator1 = "Header#H4_TITLE");
+
+		for (var importPreview : list "${importPreviews}") {
+			var destinationField = StringUtil.extractFirst("${importPreview}", ":");
+			var previewField = StringUtil.extractLast("${importPreview}", ":");
+
+			AssertElementPresent(
+				key_destinationField = "${destinationField}",
+				key_previewField = "${previewField}",
+				locator1 = "ImportExport#IMPORT_PREVIEW");
+		}
+	}
+
+	macro assertImportTemplate {
+		AssertSelectedLabel(
+			key_selectFieldLabel = "Template",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${templateName}");
+
+		AssertSelectedLabel(
+			key_selectFieldLabel = "Headless Endpoint",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${headlessEndpoint}");
+
+		AssertSelectedLabel(
+			locator1 = "ImportExport#ENTITY_TYPE",
+			value1 = "${entityType}");
+	}
+
+	macro assertNoExecutionEntry {
+		AssertElementNotPresent(
+			key_entityType = "${entityType}",
+			key_executionAction = "${executionAction}",
+			key_executionStatus = "${executionStatus}",
+			locator1 = "ImportExport#EXECUTION_ENTRY");
+	}
+
+	macro exportFile {
+		Click(locator1 = "Button#PLUS");
+
+		MenuItem.click(menuItem = "Export File");
+
+		ImportExport.selectEntity(
+			entityType = "${entityType}",
+			headlessEndpoint = "${headlessEndpoint}");
+
+		Select(
+			key_selectFieldLabel = "Export File Format",
+			locator1 = "ImportExport#SELECT",
+			value1 = "${exportFileFormat}");
+
+		if ("${containsHeaders}" == "false") {
+			Uncheck.uncheckNotVisible(
+				checkboxName = "Headers",
+				locator1 = "Checkbox#ANY_CHECKBOX");
+		}
+
+		ImportExport.mapExport(exportFields = "${exportFields}");
+
+		Button.click(button = "Export");
+
+		WaitForElementPresent(locator1 = "ImportExport#EXECUTION_SUCCESS");
+
+		Button.click(button = "Download");
+
+		DownloadTempFile();
+
+		DMDocument.assertFileNameFromTempFolder(fileName = "Export.zip");
+
+		AntCommand(
+			locator1 = "build-test.xml",
+			value1 = "unzip-temp-file -DfileName=Export.zip");
+	}
+
+	macro gotoExport {
+		Click(locator1 = "Button#PLUS");
+
+		MenuItem.click(menuItem = "Export File");
+	}
+
 	macro gotoImport {
 		Click(locator1 = "Button#PLUS");
 
 		MenuItem.click(menuItem = "Import File");
+	}
+
+	macro importFile {
+		Click(locator1 = "Button#PLUS");
+
+		MenuItem.click(menuItem = "Import File");
+
+		UploadDependencyFile.uploadFile(fileName = "${fileName}");
+
+		if (isSet(csvSeparator)) {
+			Type(
+				key_text = "CSV Separator",
+				locator1 = "TextInput#ANY",
+				value1 = "${csvSeparator}");
+		}
+
+		if ("${containsHeaders}" == "false") {
+			Uncheck.uncheckNotVisible(
+				checkboxName = "Headers",
+				locator1 = "Checkbox#ANY_CHECKBOX");
+		}
+
+		ImportExport.selectEntity(
+			entityType = "${entityType}",
+			headlessEndpoint = "${headlessEndpoint}");
+
+		if ("${stopImportOnError}" == "false") {
+			Uncheck.uncheckNotVisible(
+				checkboxName = "Stop the Import on Error",
+				locator1 = "Checkbox#ANY_CHECKBOX");
+		}
+
+		ImportExport.mapImport(fieldMappings = "${fieldMappings}");
+
+		Button.click(button = "Import");
+
+		WaitForElementPresent(locator1 = "ImportExport#EXECUTION_SUCCESS");
+
+		Button.clickDone();
+	}
+
+	macro mapExport {
+		Uncheck.uncheckNotVisible(
+			key_checkboxOption = "Attribute Code",
+			locator1 = "Checkbox#SPECIFIC_CHECKBOX_IN_TABLE");
+
+		for (var exportField : list "${exportFields}") {
+			Click.clickAtNotVisible(
+				key_checkboxOption = "${exportField}",
+				locator1 = "Checkbox#SPECIFIC_CHECKBOX_IN_TABLE");
+		}
 	}
 
 	macro mapImport {
@@ -36,24 +231,33 @@ definition {
 		WaitForVisible(locator1 = "Button#PLUS");
 	}
 
+	macro saveAsTemplate {
+		WaitForElementPresent(
+			key_text = "Save as Template",
+			locator1 = "Button#ANY");
+
+		Button.click(button = "Save as Template");
+
+		Type(
+			locator1 = "TextInput#NAME",
+			value1 = "${templateName}");
+
+		Button.clickSave();
+
+		Alert.viewSuccessMessage();
+	}
+
 	macro selectEntity {
 		Select(
 			key_selectFieldLabel = "Headless Endpoint",
 			locator1 = "ImportExport#SELECT",
 			value1 = "${headlessEndpoint}");
 
-		if (IsElementPresent(key_selectFieldLabel = "Entity Type", locator1 = "Select#ANY")) {
-			Select(
-				key_selectFieldLabel = "Entity Type",
-				locator1 = "ImportExport#SELECT",
-				value1 = "${entityType}");
-		}
-		else {
-			Select(
-				key_selectFieldLabel = "Entity Name",
-				locator1 = "ImportExport#SELECT",
-				value1 = "${entityType}");
-		}
+		WaitForElementPresent(locator1 = "ImportExport#ENTITY_TYPE");
+
+		Select(
+			locator1 = "ImportExport#ENTITY_TYPE",
+			value1 = "${entityType}");
 	}
 
 }

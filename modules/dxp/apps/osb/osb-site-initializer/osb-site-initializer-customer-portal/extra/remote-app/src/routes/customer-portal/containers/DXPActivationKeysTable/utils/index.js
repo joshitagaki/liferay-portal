@@ -14,3 +14,7 @@ export * from './getProductDescription';
 export * from './getProductName';
 export * from './getStatusActivationTag';
 export * from './hasVirtualCluster';
+export * from './getEnvironmentType';
+export * from './getDoesNotExpire';
+export * from './getInstanceSize';
+export * from './getDropDownAvailableFields';

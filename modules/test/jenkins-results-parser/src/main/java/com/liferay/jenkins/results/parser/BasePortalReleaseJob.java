@@ -15,13 +15,9 @@
 package com.liferay.jenkins.results.parser;
 
 import com.liferay.jenkins.results.parser.job.property.JobProperty;
-import com.liferay.jenkins.results.parser.test.clazz.group.AxisTestClassGroup;
-import com.liferay.jenkins.results.parser.test.clazz.group.BatchTestClassGroup;
-import com.liferay.jenkins.results.parser.test.clazz.group.SegmentTestClassGroup;
 
 import java.io.File;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -32,42 +28,7 @@ import org.json.JSONObject;
  * @author Michael Hashimoto
  */
 public abstract class BasePortalReleaseJob
-	extends BaseJob
-	implements BatchDependentJob, PortalTestClassJob, TestSuiteJob {
-
-	@Override
-	public List<AxisTestClassGroup> getDependentAxisTestClassGroups() {
-		List<AxisTestClassGroup> axisTestClassGroups = new ArrayList<>();
-
-		for (BatchTestClassGroup batchTestClassGroup :
-				getDependentBatchTestClassGroups()) {
-
-			axisTestClassGroups.addAll(
-				batchTestClassGroup.getAxisTestClassGroups());
-		}
-
-		return axisTestClassGroups;
-	}
-
-	@Override
-	public Set<String> getDependentBatchNames() {
-		return getFilteredBatchNames(getRawDependentBatchNames());
-	}
-
-	@Override
-	public List<BatchTestClassGroup> getDependentBatchTestClassGroups() {
-		return getBatchTestClassGroups(getRawDependentBatchNames());
-	}
-
-	@Override
-	public Set<String> getDependentSegmentNames() {
-		return getFilteredSegmentNames(getRawDependentBatchNames());
-	}
-
-	@Override
-	public List<SegmentTestClassGroup> getDependentSegmentTestClassGroups() {
-		return getSegmentTestClassGroups(getRawDependentBatchNames());
-	}
+	extends BaseJob implements PortalTestClassJob, TestSuiteJob {
 
 	@Override
 	public Set<String> getDistTypes() {
@@ -78,7 +39,7 @@ public abstract class BasePortalReleaseJob
 	public List<String> getJobPropertyOptions() {
 		List<String> jobPropertyOptions = super.getJobPropertyOptions();
 
-		jobPropertyOptions.add(_portalUpstreamBranchName);
+		jobPropertyOptions.add(_upstreamBranchName);
 
 		jobPropertyOptions.removeAll(Collections.singleton(null));
 
@@ -93,9 +54,8 @@ public abstract class BasePortalReleaseJob
 
 		jsonObject = super.getJSONObject();
 
-		jsonObject.put(
-			"portal_upstream_branch_name", _portalUpstreamBranchName);
 		jsonObject.put("test_suite_name", _testSuiteName);
+		jsonObject.put("upstream_branch_name", _upstreamBranchName);
 
 		return jsonObject;
 	}
@@ -113,12 +73,12 @@ public abstract class BasePortalReleaseJob
 	protected BasePortalReleaseJob(
 		BuildProfile buildProfile, String jobName,
 		PortalGitWorkingDirectory portalGitWorkingDirectory,
-		String portalUpstreamBranchName, String testSuiteName) {
+		String testSuiteName, String upstreamBranchName) {
 
 		super(buildProfile, jobName);
 
-		_portalUpstreamBranchName = portalUpstreamBranchName;
 		_testSuiteName = testSuiteName;
+		_upstreamBranchName = upstreamBranchName;
 
 		_initialize(portalGitWorkingDirectory);
 	}
@@ -126,9 +86,8 @@ public abstract class BasePortalReleaseJob
 	protected BasePortalReleaseJob(JSONObject jsonObject) {
 		super(jsonObject);
 
-		_portalUpstreamBranchName = jsonObject.getString(
-			"portal_upstream_branch_name");
 		_testSuiteName = jsonObject.getString("test_suite_name");
+		_upstreamBranchName = jsonObject.getString("upstream_branch_name");
 
 		_initialize(null);
 	}
@@ -142,6 +101,7 @@ public abstract class BasePortalReleaseJob
 		return getSetFromString(jobProperty.getValue());
 	}
 
+	@Override
 	protected Set<String> getRawDependentBatchNames() {
 		JobProperty jobProperty = getJobProperty(
 			"test.batch.names.smoke", false);
@@ -160,7 +120,7 @@ public abstract class BasePortalReleaseJob
 		else {
 			_portalGitWorkingDirectory =
 				GitWorkingDirectoryFactory.newPortalGitWorkingDirectory(
-					_portalUpstreamBranchName);
+					_upstreamBranchName);
 		}
 
 		jobPropertiesFiles.add(
@@ -170,7 +130,7 @@ public abstract class BasePortalReleaseJob
 	}
 
 	private PortalGitWorkingDirectory _portalGitWorkingDirectory;
-	private final String _portalUpstreamBranchName;
 	private final String _testSuiteName;
+	private final String _upstreamBranchName;
 
 }

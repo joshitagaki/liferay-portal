@@ -344,10 +344,15 @@ public class CommerceOrderLocalServiceImpl
 				subtotalWithTaxAmount, shippingWithTaxAmount,
 				totalWithTaxAmount, advanceStatus, commerceContext);
 
-			commerceOrderLocalService.updateOrderDate(
-				commerceOrder.getCommerceOrderId(), orderDateMonth,
-				orderDateDay, orderDateYear, orderDateHour, orderDateMinute,
-				serviceContext);
+			Date orderDate = PortalUtil.getDate(
+				orderDateMonth, orderDateDay, orderDateYear);
+
+			if (orderDate != null) {
+				commerceOrderLocalService.updateOrderDate(
+					commerceOrder.getCommerceOrderId(), orderDateMonth,
+					orderDateDay, orderDateYear, orderDateHour, orderDateMinute,
+					serviceContext);
+			}
 
 			commerceOrderLocalService.updatePaymentStatus(
 				userId, commerceOrder.getCommerceOrderId(), paymentStatus);
@@ -1800,18 +1805,18 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder.setDeliveryCommerceTermEntryId(
 				deliveryCommerceTermEntry.getCommerceTermEntryId());
 			commerceOrder.setDeliveryCommerceTermEntryDescription(
-				deliveryCommerceTermEntry.getDescription(languageId));
+				deliveryCommerceTermEntry.getDescription(languageId, true));
 			commerceOrder.setDeliveryCommerceTermEntryName(
-				deliveryCommerceTermEntry.getLabel(languageId));
+				deliveryCommerceTermEntry.getLabel(languageId, true));
 		}
 
 		if (paymentCommerceTermEntry != null) {
 			commerceOrder.setPaymentCommerceTermEntryId(
 				paymentCommerceTermEntry.getCommerceTermEntryId());
 			commerceOrder.setPaymentCommerceTermEntryDescription(
-				paymentCommerceTermEntry.getDescription(languageId));
+				paymentCommerceTermEntry.getDescription(languageId, true));
 			commerceOrder.setPaymentCommerceTermEntryName(
-				paymentCommerceTermEntry.getLabel(languageId));
+				paymentCommerceTermEntry.getLabel(languageId, true));
 		}
 
 		return commerceOrderPersistence.update(commerceOrder);

@@ -33,24 +33,28 @@ import {
 } from '../../../util/fetchUtil';
 import {isObjectEmpty} from '../../../util/utils';
 
-export default function UpperToolbar({displayNames, languageIds, version}) {
+export default function UpperToolbar({displayNames, languageIds}) {
 	const {
 		active,
 		blockingErrors,
 		currentEditor,
 		definitionDescription,
 		definitionId,
+		definitionName,
 		definitionTitle,
 		elements,
 		selectedLanguageId,
+		setDefinitionId,
 		setDefinitionTitle,
 		setDeserialize,
 		setSelectedLanguageId,
 		setShowInvalidContentMessage,
 		setSourceView,
 		setTranslations,
+		setVersion,
 		sourceView,
 		translations,
+		version,
 	} = useContext(DefinitionBuilderContext);
 	const inputRef = useRef(null);
 	const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -86,7 +90,7 @@ export default function UpperToolbar({displayNames, languageIds, version}) {
 				xmlNamespace,
 				{
 					description: definitionDescription,
-					name: definitionTitle,
+					name: definitionName,
 					version,
 				},
 				elements.filter(isNode),
@@ -153,7 +157,10 @@ export default function UpperToolbar({displayNames, languageIds, version}) {
 				if (response.ok) {
 					setShowSuccessAlert(true);
 
-					window.history.back();
+					response.json().then(({name, version}) => {
+						setDefinitionId(name);
+						setVersion(`${version}.0`);
+					});
 				}
 			});
 		}
@@ -188,8 +195,13 @@ export default function UpperToolbar({displayNames, languageIds, version}) {
 			}).then((response) => {
 				if (response.ok) {
 					setAlertMessage(successMessage);
+
 					setShowSuccessAlert(true);
-					window.history.back();
+
+					response.json().then(({name, version}) => {
+						setDefinitionId(name);
+						setVersion(`${version}.0`);
+					});
 				}
 			});
 		}
