@@ -78,7 +78,7 @@ definition {
 			index = "${index}",
 			locator1 = "ACIndividualsDashboard#INDIVIDUALS_ACTIVITIES_CHART_RECHARTS_BAR");
 
-		SelectFrame.selectFrame(locator1 = "ACIndividualsDashboard#CHART_POPOVER");
+		SelectFrame(locator1 = "ACIndividualsDashboard#CHART_POPOVER");
 
 		var formattedDate = selenium.getText("ACIndividualsDashboard#CHART_POPOVER_ACTIVITIES_DATE");
 
@@ -88,7 +88,7 @@ definition {
 	macro getChartPopoverDateWithoutBar {
 		Click(locator1 = "ACIndividualsDashboard#CHARTS_WRAPPER");
 
-		SelectFrame.selectFrame(locator1 = "ACIndividualsDashboard#CHARTS_WRAPPER");
+		SelectFrame(locator1 = "ACIndividualsDashboard#CHARTS_WRAPPER");
 
 		var formattedDate = selenium.getText("ACIndividualsDashboard#CHART_POPOVER_ACTIVITIES_DATE");
 
