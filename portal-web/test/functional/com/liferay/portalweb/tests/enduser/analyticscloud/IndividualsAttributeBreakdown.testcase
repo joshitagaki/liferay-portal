@@ -62,6 +62,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8657 | Test Summary: Add a new breakdown by an attribute and assert that correct results appear"
 	@priority = "5"
 	test AddNewBreakdownByAttributeAndAssertCorrectResultsAppear {
+		property portal.upstream = "josh";
+		
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "ac@liferay.com",
@@ -219,6 +221,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9000 | Test Summary: As a Business User, I should be able to select different tabs in breakdown"
 	@priority = "3"
 	test SelectDifferentTabsInbreakdown {
+		property portal.upstream = "josh";
+
 		task ("Sign in as new user") {
 			User.logoutAndLoginPG(
 				userLoginEmailAddress = "ac@liferay.com",
