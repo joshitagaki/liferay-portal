@@ -112,6 +112,10 @@ definition {
 				fillColor = "#4B9BFF",
 				tick = "false");
 		}
+
+		task ("Remove the breakdowns") {
+			ACIndividualsDashboard.deleteBreakdown(breakdownName = "Segment Overview Test");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8505 | Test Summary: Segment Overview distribution filtered by date"

@@ -109,6 +109,10 @@ definition {
 				fillColor = "#4B9BFF",
 				tick = "farmer");
 		}
+
+		task ("Remove the breakdown") {
+			ACIndividualsDashboard.deleteBreakdown(breakdownName = "Breakdown by Job Title");
+		}
 	}
 
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8997 | Test Summary: Distribution page can be filtered by a specific string"
@@ -277,6 +281,12 @@ definition {
 			ACIndividualsDashboard.viewBreakdownRecharts(
 				fillColor = "#4B9BFF",
 				tick = "ac");
+		}
+
+		task ("Remove the breakdowns") {
+			ACIndividualsDashboard.deleteBreakdown(breakdownName = "Breakdown by Job Title");
+
+			ACIndividualsDashboard.deleteBreakdown(breakdownName = "Breakdown by Family Name");
 		}
 	}
 
