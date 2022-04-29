@@ -175,6 +175,8 @@ definition {
 
 	macro createNCustomEvents {
 		Click(locator1 = "ACCustomEvents#SEND_CUSTOM_EVENTS");
+
+		WaitForPageLoad();
 	}
 
 	macro createWCWithCustomEventAndAddToPage {
