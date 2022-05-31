@@ -45,7 +45,7 @@ definition {
 		var nameList = "user1 user1,user2 user2";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Add a new user") {
@@ -130,7 +130,7 @@ definition {
 		var nameList = "ac1 ac1,ac2 ac2";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Create two new users") {
@@ -320,7 +320,7 @@ definition {
 		}
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Add two new users") {

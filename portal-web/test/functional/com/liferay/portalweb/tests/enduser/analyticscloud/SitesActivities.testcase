@@ -312,7 +312,7 @@ definition {
 	@priority = "5"
 	test CanLoadDataProperlyWhenTimeFilterIsLast24Hours {
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Connect Analytics Cloud to DXP") {
@@ -354,7 +354,7 @@ definition {
 	@priority = "5"
 	test CanShownAnonAndKnownVisitorsLegend {
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Connect Analytics Cloud to DXP") {

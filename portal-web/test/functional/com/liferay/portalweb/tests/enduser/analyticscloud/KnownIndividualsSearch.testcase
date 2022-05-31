@@ -123,7 +123,7 @@ definition {
 		property test.name.skip.portal.instance = "KnownIndividualsSearch#AssertNoIndividualsAssociatedSegmentsResults";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -260,7 +260,7 @@ definition {
 		property analytics.cloud.upstream = "false";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -336,7 +336,7 @@ definition {
 		var emailList = "randy.smith@liferay.com,maria.rau@liferay.com";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -407,7 +407,7 @@ definition {
 		var nameList = "user1 user1,user2 user2";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -470,7 +470,7 @@ definition {
 		property analytics.cloud.upstream = "false";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -587,7 +587,7 @@ definition {
 		var emailList = "randy.smith@liferay.com,maria.rau@liferay.com";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -828,7 +828,7 @@ definition {
 		var emailList = "user1@liferay.com,user2@liferay.com,user3@liferay.com";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -891,7 +891,7 @@ definition {
 		var usernameList = "user1,user2,user3,user4,user5,user6,user7";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -974,7 +974,7 @@ definition {
 		var usernameList = "user1,user2,user3,user4,user5,user6";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {

@@ -360,7 +360,7 @@ definition {
 		var nameList = "ac ac,liferay liferay";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -412,7 +412,7 @@ definition {
 		property test.name.skip.portal.instance = "EditSegments#EditorShowsStaticSegmentLabel";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -468,7 +468,7 @@ definition {
 		var nameList = "ac2 ac2,ac3 ac3,ac4 ac4,ac5 ac5,ac6 ac6,ac7 ac7";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Conect DXP to AC") {
@@ -590,7 +590,7 @@ definition {
 		property test.name.skip.portal.instance = "EditSegments#SegmentListKebabMenuContainsEditAndDeleteButtons";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Create user and sincronize it") {
@@ -656,7 +656,7 @@ definition {
 		var emailList = "ac@liferay.com,liferay@liferay.com,dxp@liferay.com";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Add a new user in DXP") {
@@ -738,7 +738,7 @@ definition {
 		var emailList = "ac@liferay.com,liferay@liferay.com";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
@@ -897,7 +897,7 @@ definition {
 		var nameList = "ac ac,liferay liferay";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Create two new users") {
@@ -986,7 +986,7 @@ definition {
 		var nameList = "ac ac,ac2 ac2,ac3 ac3";
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Create user and sincronize it") {

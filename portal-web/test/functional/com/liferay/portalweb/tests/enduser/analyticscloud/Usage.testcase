@@ -279,7 +279,7 @@ definition {
 		}
 
 		task ("Add a Web Content Display to page and display a web content") {
-           ACUtils.createWCAndAddToPage();
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Get site assigned property name") {
