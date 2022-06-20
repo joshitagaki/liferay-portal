@@ -998,6 +998,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9223 | Test Summary: Create a Web Behavior Segment of Viewing a Blog"
 	@priority = "4"
 	test CanCreateWebBehaviorSegmentViewingBlog {
+		property portal.upstream = "josh";
 		property analytics.cloud.upstream = "false";
 		property test.name.skip.portal.instance = "SegmentsCreationWebBehavior#CanCreateWebBehaviorSegmentViewingBlog";
 
@@ -1026,6 +1027,8 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 
 		ACUtils.launchAC();
+
+		TestUtils.hardRefresh();
 
 		ACProperties.switchProperty(propertyName = "${propertyName}");
 
@@ -1072,6 +1075,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9224 | Test Summary: Create a Web Behavior Segment of Viewing Document & Media in a Topic"
 	@priority = "4"
 	test CanCreateWebBehaviorSegmentViewingDM {
+		property portal.upstream = "josh";
 		property analytics.cloud.upstream = "false";
 		property test.name.skip.portal.instance = "SegmentsCreationWebBehavior#CanCreateWebBehaviorSegmentViewingDM";
 
@@ -1102,6 +1106,8 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 
 		ACUtils.launchAC();
+
+		TestUtils.hardRefresh();
 
 		ACProperties.switchProperty(propertyName = "${propertyName}");
 
@@ -1304,6 +1310,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9226 | Test Summary: Create a Web Behavior Segment of Viewing a Web Content"
 	@priority = "4"
 	test CanCreateWebBehaviorSegmentViewingWC {
+		property portal.upstream = "josh";
 		property analytics.cloud.upstream = "false";
 		property test.name.skip.portal.instance = "SegmentsCreationWebBehavior#CanCreateWebBehaviorSegmentViewingWC";
 
@@ -1330,6 +1337,8 @@ definition {
 		ACUtils.closeAllSessionsAndWait();
 
 		ACUtils.launchAC();
+
+		TestUtils.hardRefresh();
 
 		ACProperties.switchProperty(propertyName = "${propertyName}");
 
