@@ -278,6 +278,10 @@ definition {
 			ACUtils.addSiteAndPage();
 		}
 
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
+
 		task ("Get site assigned property name") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}

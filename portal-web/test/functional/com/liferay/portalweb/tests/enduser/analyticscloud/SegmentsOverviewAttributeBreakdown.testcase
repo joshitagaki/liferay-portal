@@ -44,6 +44,10 @@ definition {
 		var emailList = "user1@liferay.com,user2@liferay.com";
 		var nameList = "user1 user1,user2 user2";
 
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
+
 		task ("Add a new user") {
 			for (var user : list "${users}") {
 				JSONUser.addUser(
@@ -124,6 +128,10 @@ definition {
 		var users = "ac1,ac2";
 		var emailList = "ac1@liferay.com,ac2@liferay.com";
 		var nameList = "ac1 ac1,ac2 ac2";
+
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
 
 		task ("Create two new users") {
 			JSONUser.addUser(
@@ -309,6 +317,10 @@ definition {
 
 		task ("Create page") {
 			ACUtils.addPage(layoutName = "AC Page");
+		}
+
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
 		}
 
 		task ("Add two new users") {

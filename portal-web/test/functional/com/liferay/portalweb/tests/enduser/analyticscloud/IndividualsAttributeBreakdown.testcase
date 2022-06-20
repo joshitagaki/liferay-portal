@@ -26,6 +26,10 @@ definition {
 			ACUtils.addSiteAndPage();
 		}
 
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
+
 		task ("Add a new user") {
 			JSONUser.addUser(
 				userEmailAddress = "ac@liferay.com",

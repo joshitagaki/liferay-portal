@@ -384,6 +384,10 @@ definition {
 	@description = "Bug ID: LRAC-7996 | Automation ID: LRAC-8110 | Test Summary: Assert Sites Activity loads activity data properly when the time filter is set to 'Last 24 hours'"
 	@priority = "5"
 	test CanLoadDataProperlyWhenTimeFilterIsLast24Hours {
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
+
 		task ("Connect Analytics Cloud to DXP") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -422,6 +426,10 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8280 | Test Summary: Anon and known visitors legend shown"
 	@priority = "5"
 	test CanShownAnonAndKnownVisitorsLegend {
+		task ("Add a Web Content Display to page and display a web content") {
+			ACUtils.createWCAndAddToPage();
+		}
+
 		task ("Connect Analytics Cloud to DXP") {
 			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
