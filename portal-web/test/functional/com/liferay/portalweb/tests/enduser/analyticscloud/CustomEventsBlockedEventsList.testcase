@@ -222,6 +222,7 @@ definition {
 	@description = "Feature ID: LRAC-6433 | Automation ID: LRAC-10164 | Test Summary: Check custom event list and blocked event list when more than 100 events are created"
 	@priority = "5"
 	test CheckBlockedEventsListWhenMore100EventsCreated {
+		property portal.upstream = "josh";
 		property test.name.skip.portal.instance = "CustomEventsBlockedEventsList#CheckBlockedEventsListWhenMore100EventsCreated";
 
 		task ("Add a Web Content Display to page and display the custom event") {

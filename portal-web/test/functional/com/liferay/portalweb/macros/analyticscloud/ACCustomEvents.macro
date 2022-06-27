@@ -180,6 +180,8 @@ definition {
 
 	macro createNCustomEvents {
 		Click(locator1 = "ACCustomEvents#SEND_CUSTOM_EVENTS");
+
+		WaitForPageLoad();
 	}
 
 	macro createWCWithCustomEventAndAddToPage {
@@ -293,9 +295,7 @@ definition {
 	}
 
 	macro viewAlertLimitReached {
-		while (IsElementNotPresent(locator1 = "ACCustomEvents#ALERT_LIMIT_REACHED") && (maxIterations = "50")) {
-			TestUtils.hardRefresh();
-		}
+		WaitForPageLoad();
 
 		AssertElementPresent(locator1 = "ACCustomEvents#ALERT_LIMIT_REACHED");
 	}
