@@ -1099,6 +1099,8 @@ definition {
 		while ("${code}" != "0") {
 			var code = JSONCurlUtil.get("${curl}", "$.count");
 		}
+
+		TestUtils.hardRefresh();
 	}
 
 }
