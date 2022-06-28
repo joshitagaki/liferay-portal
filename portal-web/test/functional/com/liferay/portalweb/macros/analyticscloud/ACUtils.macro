@@ -1083,4 +1083,22 @@ definition {
 		WaitForElementNotPresent(locator1 = "ACUtils#LOADING_ANIMATION");
 	}
 
+	macro waitForSegmentStatus {
+		var analyticsCloudURL = PropsUtil.get("analytics.cloud.url");
+
+		var analyticsCloudURL = StringUtil.replace("${analyticsCloudURL}", "http://", "");
+
+		var analyticsCloudURL = StringUtil.replace("${analyticsCloudURL}", "8081", "9201");
+
+		var curl = '''
+		${analyticsCloudURL}/osbasah_osbasahfaroinfo_osbasahtasks_alias/_count?pretty
+		''';
+
+		var code = JSONCurlUtil.get("${curl}", "$.count");
+
+		while ("${code}" != "0") {
+			var code = JSONCurlUtil.get("${curl}", "$.count");
+		}
+	}
+
 }

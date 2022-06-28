@@ -95,6 +95,10 @@ definition {
 				siteName = "Site Name");
 		}
 
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
+		}
+
 		task ("Switch to new property in AC") {
 			ACUtils.launchAC();
 
@@ -150,6 +154,8 @@ definition {
 		task ("View members of segment") {
 			ACNavigation.switchTab(tabName = "Membership");
 
+			ACUtils.waitForSegmentStatus();
+
 			for (var username : list "user1 user1,userfn userln") {
 				AssertVisible(
 					key_userName = "${username}",
@@ -173,6 +179,10 @@ definition {
 			ACUtils.navigateToSitePage(
 				pageName = "AC Page",
 				siteName = "Site Name");
+		}
+
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
 		}
 
 		task ("Switch to new property in AC") {
@@ -349,6 +359,8 @@ definition {
 
 		task ("Switch tab to membership and check the membership list") {
 			ACNavigation.switchTab(tabName = "Membership");
+
+			ACUtils.waitForSegmentStatus();
 
 			ACUtils.viewNameList(nameList = "${fullNameList}");
 		}
@@ -849,6 +861,8 @@ definition {
 		task ("Switch tab to membership and check the membership list") {
 			ACNavigation.switchTab(tabName = "Membership");
 
+			ACUtils.waitForSegmentStatus();
+
 			ACUtils.viewNameList(nameList = "${fullNameList}");
 		}
 	}
@@ -882,6 +896,10 @@ definition {
 				emailList = "${emailList}",
 				pageName = "AC Page",
 				siteName = "Site Name");
+		}
+
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
 		}
 
 		task ("Switch to new property in AC") {
@@ -1094,6 +1112,8 @@ definition {
 		ACSegments.accessSegment(segmentName = "Static Segment Test");
 
 		ACNavigation.switchTab(tabName = "Membership");
+
+		ACUtils.waitForSegmentStatus();
 
 		AssertTextEquals(
 			locator1 = "ACSegments#SEGMENT_LABEL",
@@ -1313,6 +1333,10 @@ definition {
 				siteName = "Site Name");
 		}
 
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
+		}
+
 		task ("Switch to new property in AC") {
 			ACUtils.launchAC();
 
@@ -1530,6 +1554,10 @@ definition {
 				siteName = "Site Name");
 		}
 
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
+		}
+
 		ACUtils.launchAC();
 
 		ACProperties.switchProperty(propertyName = "${assignedPropertyName}");
@@ -1579,6 +1607,10 @@ definition {
 			ACUtils.navigateToSitePage(
 				pageName = "AC Page",
 				siteName = "Site Name");
+		}
+
+		task ("Close all sessions") {
+			ACUtils.closeAllSessionsAndWait();
 		}
 
 		task ("Switch to new property in AC") {
