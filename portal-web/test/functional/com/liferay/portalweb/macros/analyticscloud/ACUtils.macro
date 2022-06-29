@@ -1094,10 +1094,10 @@ definition {
 		${analyticsCloudURL}/osbasah_osbasahfaroinfo_osbasahtasks_alias/_count?pretty
 		''';
 
-		var code = JSONCurlUtil.get("${curl}", "$.count");
+		var code = JSONCurlUtil.get("${curl}", "$['count']");
 
-		while ("${code}" != "0") {
-			var code = JSONCurlUtil.get("${curl}", "$.count");
+		while ("${code}" != 0) {
+			var code = JSONCurlUtil.get("${curl}", "$['count']");
 		}
 
 		TestUtils.hardRefresh();
