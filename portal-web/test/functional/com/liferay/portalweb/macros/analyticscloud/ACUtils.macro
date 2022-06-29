@@ -1096,7 +1096,7 @@ definition {
 
 		var code = JSONCurlUtil.get("${curl}", "$['count']");
 
-		while ("${code}" != 0) {
+		while ("${code}" != "0") {
 			var code = JSONCurlUtil.get("${curl}", "$['count']");
 		}
 
