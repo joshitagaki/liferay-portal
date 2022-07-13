@@ -21,9 +21,7 @@ definition {
 			ACUtils.launchDXP();
 		}
 
-		task ("Add a new site with a public widget page") {
-			ACUtils.addSiteAndPage();
-		}
+		
 	}
 
 	tearDown {
@@ -49,8 +47,14 @@ definition {
 		property analytics.cloud.upstream = "false";
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage(layoutName = "Page new user id");
+		}
+
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM new user id");
+			ACUtils.createDMAndAddToPage(
+				layoutName = "Page new user id",
+				dmDocumentTitle = "DM new user id");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -88,7 +92,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "View DM",
 				documentTitleList = "DM new user id",
-				pageName = "AC Page",
+				pageName = "Page new user id",
 				siteName = "Site Name");
 		}
 
@@ -124,7 +128,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "Download DM",
 				documentTitleList = "DM new user id",
-				pageName = "AC Page",
+				pageName = "Page new user id",
 				siteName = "Site Name");
 		}
 
@@ -204,6 +208,10 @@ definition {
 	test CheckIdentityTriggeredWhenLoginAfterASessionClose {
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
+
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -262,6 +270,10 @@ definition {
 	@priority = "3"
 	test CheckIdentityTriggeredWhenLogoutAndLoginAgain {
 		property proxy.server.enabled = "true";
+
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
 
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
@@ -334,6 +346,10 @@ definition {
 	test CheckIdentityUponLogin {
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
+
 		task ("Connect the DXP to AC") {
 			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
@@ -392,8 +408,14 @@ definition {
 		property analytics.cloud.upstream = "false";
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage(layoutName = "Page two new user id");
+		}
+
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM two new user id");
+			ACUtils.createDMAndAddToPage(
+				layoutName = "Page two new user id",
+				dmDocumentTitle = "DM two new user id");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -433,7 +455,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "View DM",
 				documentTitleList = "DM two new user id",
-				pageName = "AC Page",
+				pageName = "Page two new user id",
 				siteName = "Site Name");
 		}
 
@@ -467,7 +489,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "Download DM",
 				documentTitleList = "DM two new user id",
-				pageName = "AC Page",
+				pageName = "Page two new user id",
 				siteName = "Site Name");
 		}
 
@@ -540,8 +562,14 @@ definition {
 		property analytics.cloud.upstream = "false";
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage(layoutName = "Page same user");
+		}
+
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM same user");
+			ACUtils.createDMAndAddToPage(
+				layoutName = "Page same user",
+				dmDocumentTitle = "DM same user");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -579,7 +607,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "View DM",
 				documentTitleList = "DM same user",
-				pageName = "AC Page",
+				pageName = "Page same user",
 				siteName = "Site Name");
 		}
 
@@ -611,7 +639,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "Download DM",
 				documentTitleList = "DM same user",
-				pageName = "AC Page",
+				pageName = "Page same user",
 				siteName = "Site Name");
 		}
 
@@ -635,7 +663,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "Download DM",
 				documentTitleList = "DM same user",
-				pageName = "AC Page",
+				pageName = "Page same user",
 				siteName = "Site Name");
 		}
 
@@ -656,8 +684,14 @@ definition {
 		property analytics.cloud.upstream = "false";
 		property proxy.server.enabled = "true";
 
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage(layoutName = "Page logout track user");
+		}
+
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM logout track user");
+			ACUtils.createDMAndAddToPage(
+				layoutName = "Page logout track user",
+				dmDocumentTitle = "DM logout track user");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -695,7 +729,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "View DM",
 				documentTitleList = "DM logout track user",
-				pageName = "AC Page",
+				pageName = "Page logout track user",
 				siteName = "Site Name");
 		}
 
@@ -727,7 +761,7 @@ definition {
 			ACUtils.navigateToSitePage(
 				actionType = "Download DM",
 				documentTitleList = "DM logout track user",
-				pageName = "AC Page",
+				pageName = "Page logout track user",
 				siteName = "Site Name");
 		}
 
