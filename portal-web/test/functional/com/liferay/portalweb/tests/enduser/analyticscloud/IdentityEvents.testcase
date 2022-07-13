@@ -50,7 +50,7 @@ definition {
 		property proxy.server.enabled = "true";
 
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(layoutName = "DM new user id");
+			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM new user id");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -393,7 +393,7 @@ definition {
 		property proxy.server.enabled = "true";
 
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(layoutName = "DM two new user id");
+			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM two new user id");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -541,7 +541,7 @@ definition {
 		property proxy.server.enabled = "true";
 
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(layoutName = "DM same user");
+			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM same user");
 		}
 
 		task ("Connect the DXP to AC") {
@@ -657,7 +657,7 @@ definition {
 		property proxy.server.enabled = "true";
 
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage(layoutName = "DM logout track user");
+			ACUtils.createDMAndAddToPage(dmDocumentTitle = "DM logout track user");
 		}
 
 		task ("Connect the DXP to AC") {
