@@ -23,10 +23,16 @@ definition {
 
 		task ("Add a new site with a public widget page") {
 			ACUtils.addSiteAndPage();
+
+			ACUtils.navigateToSitePage(
+				pageName = "AC Page",
+				siteName = "Site Name");
 		}
 
 		task ("Create a Document And Media") {
-			ACUtils.createDMAndAddToPage();
+			if (IsElementNotPresent(key_portletTitleName = "Documents and Media", locator1 = "Portlet#SPECIFIC_TITLE")) {
+				ACUtils.createDMAndAddToPage();
+			}
 		}
 
 		task ("Connect the DXP to AC") {
