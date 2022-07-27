@@ -43,6 +43,16 @@ definition {
 			locator1 = "ACSegments#BREAKDOWN_NAME_INPUT",
 			value1 = "${breakdownName}");
 
+		if (IsElementPresent(key_textValue = "Tab name already exists.", locator1 = "ACUtils#GENERIC_TEXT")) {
+			Click(locator1 = "Button#CANCEL");
+
+			ACIndividualsDashboard.deleteBreakdown(breakdownName = "${breakdownName}");
+
+			ACSegments.addBreakdownByAttribute(
+				attribute = "${attribute}",
+				breakdownName = "${breakdownName}");
+		}
+
 		Click(locator1 = "Button#SAVE");
 	}
 
