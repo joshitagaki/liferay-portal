@@ -513,6 +513,10 @@ definition {
 			ACTimeFilter.clickTimeFilterButton(cardName = "Individual Events");
 
 			ACTimeFilter.setLast24Hours();
+
+			ACUtils.searchBar(
+				cardTitle = "Individual Events",
+				searchitem = "documentDownloaded");
 		}
 
 		task ("Check if events appear in user history") {
@@ -739,6 +743,10 @@ definition {
 
 		task ("Check if events appear in user history") {
 			for (var eventName : list "documentPreviewed,documentDownloaded") {
+				ACUtils.searchBar(
+					cardTitle = "Individual Events",
+					searchitem = "${eventName}");
+				
 				ACUtils.assertPageTitle(pageTitle = "${eventName}");
 			}
 		}
