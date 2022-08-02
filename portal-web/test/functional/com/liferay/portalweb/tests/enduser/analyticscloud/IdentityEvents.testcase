@@ -516,7 +516,7 @@ definition {
 
 			ACUtils.searchBar(
 				cardTitle = "Individual Events",
-				searchitem = "documentDownloaded");
+				searchItem = "documentDownloaded");
 		}
 
 		task ("Check if events appear in user history") {
@@ -745,7 +745,7 @@ definition {
 			for (var eventName : list "documentPreviewed,documentDownloaded") {
 				ACUtils.searchBar(
 					cardTitle = "Individual Events",
-					searchitem = "${eventName}");
+					searchItem = "${eventName}");
 				
 				ACUtils.assertPageTitle(pageTitle = "${eventName}");
 			}
