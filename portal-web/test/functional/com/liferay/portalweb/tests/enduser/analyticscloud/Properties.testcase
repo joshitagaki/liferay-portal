@@ -397,6 +397,8 @@ definition {
 			ACSettings.goToProperties();
 
 			ACProperties.addNewProperty(propertyName = "${acProperty}");
+
+			ACSettings.takeTokenFromAnalyticsCloud();
 		}
 
 		task ("Connect the DXP to Analytics Cloud") {
