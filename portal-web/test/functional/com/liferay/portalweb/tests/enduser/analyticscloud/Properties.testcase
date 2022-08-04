@@ -448,7 +448,9 @@ definition {
 		}
 
 		task ("Launch AC") {
-			ACUtils.launchAC();
+			ACUtils.launchAC(
+				emailList = "test@liferay.com",
+				workspaceName = "${acWorkspace}");
 
 			ACProperties.switchProperty(propertyName = "${acProperty}");
 
