@@ -392,13 +392,13 @@ definition {
 
 			ACUtils.dismissOnboardingModal();
 
+			ACSettings.takeTokenFromAnalyticsCloud();
+
 			ACNavigation.goToSettings();
 
 			ACSettings.goToProperties();
 
 			ACProperties.addNewProperty(propertyName = "${acProperty}");
-
-			ACSettings.takeTokenFromAnalyticsCloud();
 		}
 
 		task ("Connect the DXP to Analytics Cloud") {
