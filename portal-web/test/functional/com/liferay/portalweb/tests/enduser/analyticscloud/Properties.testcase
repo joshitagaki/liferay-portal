@@ -390,7 +390,7 @@ definition {
 				emailList = "test@liferay.com",
 				workspaceName = "${acWorkspace}");
 
-			ACUtils.dismissOnboardingModal();
+			ACUtils.closeModal();
 
 			ACSettings.takeTokenFromAnalyticsCloud();
 
