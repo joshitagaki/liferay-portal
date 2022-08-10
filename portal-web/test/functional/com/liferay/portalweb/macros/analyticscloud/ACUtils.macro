@@ -453,6 +453,38 @@ definition {
 		Click(locator1 = "ACUtils#MODAL_CLOSE_BUTTON");
 	}
 
+	macro createABTest {
+		if (IsElementNotPresent(locator1 = "ACUtils#CREATE_TEST_BUTTON")) {
+			Click(locator1 = "ACUtils#AB_TEST_ICON");
+		}
+
+		Click(locator1 = "ACUtils#CREATE_TEST_BUTTON");
+
+		Click(locator1 = "ACUtils#AB_TEST_NAME_FIELD");
+
+		Type(
+			locator1 = "ACUtils#AB_TEST_NAME_FIELD",
+			value1 = "${titleAB}");
+
+		Select(
+			locator1 = "ACUtils#AB_GOAL_SELECTION",
+			value1 = "${goalAB}");
+
+		Click(locator1 = "ACUtils#SAVE_AB_TEST_BUTTON");
+	}
+
+	macro createABVariant {
+		Click(locator1 = "ACUtils#CREATE_VARIANT_BUTTON");
+
+		Click(locator1 = "ACUtils#AB_TEST_NAME_FIELD");
+
+		Type(
+			locator1 = "ACUtils#AB_TEST_NAME_FIELD",
+			value1 = "${variantAB}");
+
+		Click(locator1 = "ACUtils#SAVE_AB_TEST_BUTTON");
+	}
+
 	macro createBlogsAndAddToPage {
 		if (!(isSet(layoutName))) {
 			var layoutName = "AC Page";
@@ -850,6 +882,12 @@ definition {
 			value1 = "restart-docker-container -Ddocker.container=${containerName}");
 	}
 
+	macro runABTest {
+		Click(locator1 = "ACUtils#REVIEW_RUN_AB_TEST_BUTTON");
+
+		Click(locator1 = "ACUtils#RUN_AB_TEST_BUTTON");
+	}
+
 	macro saveButton {
 		Click(locator1 = "Button#SAVE");
 
@@ -903,6 +941,14 @@ definition {
 		ACUtils.launchDXP();
 
 		ACDXPSettings.disconnectDXPFromAnalyticsCloud();
+	}
+
+	macro viewABTest {
+		var key_testName = "${testName}";
+
+		AssertTextEquals(
+			locator1 = "ACUtils#AB_TEST_LIST",
+			value1 = "${testName}");
 	}
 
 	macro viewActivePage {
