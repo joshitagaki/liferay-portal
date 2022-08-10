@@ -61,6 +61,62 @@
 	<td></td>
 </tr>
 
+<!-- AB Test -->
+
+<tr>
+	<td>AB_GOAL_SELECTION</td>
+	<td>//select[contains(@class,'form-control mt-1')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>AB_TEST_ICON</td>
+	<td>//*[contains(@class, 'lexicon-icon lexicon-icon-test')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>AB_TEST_LIST</td>
+	<td>//a[contains(@class,'table-title')][normalize-space()='${key_testName}']</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>AB_TEST_NAME_FIELD</td>
+	<td>//input[@class='form-control mt-1']</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>CREATE_TEST_BUTTON</td>
+	<td>//*[contains(@class, 'btn-secondary') and contains(text(),'Create Test')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>CREATE_VARIANT_BUTTON</td>
+	<td>//*[contains(@class,'btn btn-secondary') and contains(text(),'Create Variant')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>REVIEW_RUN_AB_TEST_BUTTON</td>
+	<td>//button[contains(@class,'btn-primary') and contains(text(),'Review and Run Test')]</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>RUN_AB_TEST_BUTTON</td>
+	<td>//*[contains(@class,'btn btn-primary') and text()='Run']</td>
+	<td></td>
+</tr>
+
+<tr>
+	<td>SAVE_AB_TEST_BUTTON</td>
+	<td>//*[contains(@class,'btn btn-primary') and contains(text(),'Save')]</td>
+	<td></td>
+</tr>
+
 <!-- CLOSE MODAL -->
 
 <tr>
