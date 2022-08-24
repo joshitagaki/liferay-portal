@@ -1410,7 +1410,7 @@ definition {
 			ACSegments.editWebBehaviorCriterion(
 				indexField = "1",
 				occurenceNumber = "4",
-				searchTerm = "Blogs AC Title - Site Name - Liferay DXP");
+				searchTerm = "Blogs AC Title - Site Name - ${dataSourceName}");
 		}
 
 		task ("Check for data source origin") {
