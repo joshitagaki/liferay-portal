@@ -1374,6 +1374,7 @@ definition {
 	@description = "Bug: LRAC-8233 | Automation ID: LRAC-11537 | Test Summary: Check web behavior shows which data source data came from"
 	@priority = "3"
 	test CheckWebBehaviorSegmentShowsWhichDataSourceDataCameFrom {
+		property portal.upstream = "josh";
 		task ("Create a blog page and view page") {
 			ACUtils.createBlogsAndAddToPage();
 
