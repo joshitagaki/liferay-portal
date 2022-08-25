@@ -1375,8 +1375,8 @@ definition {
 	@priority = "3"
 	test CheckWebBehaviorSegmentShowsWhichDataSourceDataCameFrom {
 		property portal.upstream = "josh";
-		task ("Create a blog page and view page") {
-			ACUtils.createBlogsAndAddToPage();
+		task ("Create a web content page and view page") {
+			ACUtils.createWCAndAddToPage();
 
 			ACDXPSettings.connectDXPtoAnalyticsCloud();
 
@@ -1397,8 +1397,6 @@ definition {
 				userLoginFullName = "ac ac");
 
 			ACUtils.navigateToSitePage(
-				actionType = "View Blog",
-				documentTitleList = "Blogs AC Title",
 				pageName = "AC Page",
 				siteName = "Site Name");
 
@@ -1418,12 +1416,12 @@ definition {
 
 			ACUtils.setItemName(itemName = "Dynamic Segment Test");
 
-			ACSegments.addSegmentField(segmentField = "Viewed Page");
+			ACSegments.addSegmentField(segmentField = "Viewed Web Content");
 
 			ACSegments.editWebBehaviorCriterion(
 				indexField = "1",
 				occurenceNumber = "4",
-				searchTerm = "Blogs AC Title - Site Name - ${dataSourceName}");
+				searchTerm = "Web Content AC Title");
 		}
 
 		task ("Check for data source origin") {
