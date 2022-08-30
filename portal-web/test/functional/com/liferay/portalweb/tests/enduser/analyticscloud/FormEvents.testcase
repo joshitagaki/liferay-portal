@@ -542,6 +542,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8690 | Test Summary: Check fieldFocused is triggered when navigating the form hitting the tab key"
 	@priority = "5"
 	test CheckFieldFocusedWhenNavigatingToFieldViaTabKey {
+		property portal.upstream = "josh";
 		property proxy.server.enabled = "true";
 
 		task ("Get formId of form") {
