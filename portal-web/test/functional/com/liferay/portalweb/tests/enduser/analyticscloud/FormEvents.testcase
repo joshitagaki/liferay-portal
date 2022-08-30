@@ -596,9 +596,7 @@ definition {
 		}
 
 		task ("Navigate to the form field via Tab key") {
-			KeyPress(
-				locator1 = "//body",
-				value1 = "\TAB");
+			FormPortlet.waitFormRenderer(text = "Submit");
 
 			KeyPress.keyPressNoError(
 				key_fieldLabel = "Text",
