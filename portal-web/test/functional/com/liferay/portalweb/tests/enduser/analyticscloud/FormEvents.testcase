@@ -599,7 +599,7 @@ definition {
 				locator1 = "//body",
 				value1 = "\TAB");
 
-			KeyPress(
+			KeyPress.keyPressNoError(
 				key_fieldLabel = "Text",
 				locator1 = "FormFields#LABEL",
 				value1 = "\TAB");
