@@ -190,7 +190,9 @@ definition {
 
 		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
 
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
+		KeyPress(
+			locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON",
+			value1 = "\ENTER");
 
 		WaitForElementPresent(locator1 = "Message#SUCCESS_DISMISSIBLE");
 
@@ -204,7 +206,9 @@ definition {
 
 		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
 
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
+		KeyPress(
+			locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON",
+			value1 = "\ENTER");
 
 		WaitForElementPresent(locator1 = "Message#SUCCESS_DISMISSIBLE");
 
@@ -226,7 +230,9 @@ definition {
 			key_text = "Save and Next",
 			locator1 = "Button#ANY");
 
-		Button.clickSave();
+		KeyPress(
+			locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON",
+			value1 = "\ENTER");
 
 		WaitForElementPresent(locator1 = "Message#SUCCESS_DISMISSIBLE");
 
@@ -260,7 +266,9 @@ definition {
 				locator1 = "ACDXPSettings#FIELD_NAME_CHECKBOX");
 		}
 
-		Click(locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON");
+		KeyPress(
+			locator1 = "ACDXPSettings#AC_GENERIC_ADD_OR_CONFIRMATION_BUTTON",
+			value1 = "\ENTER");
 
 		WaitForElementPresent(locator1 = "Message#SUCCESS_DISMISSIBLE");
 
