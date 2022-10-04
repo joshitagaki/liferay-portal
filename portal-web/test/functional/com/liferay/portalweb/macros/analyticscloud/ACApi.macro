@@ -8,7 +8,7 @@ definition {
 			-H "Authorization: Bearer ${token}"
 			''';
 
-		static var apiResponse = JSONCurlUtil.get("${curl}", "$");
+		static var apiResponse = JSONCurlUtil.get("${curl}");
 
 		return "${apiResponse}";
 	}
@@ -20,7 +20,7 @@ definition {
 			${analyticsCloudURL}/api/reports -H "Authorization: Bearer ${token}"
 			''';
 
-		static var apiResponse = JSONCurlUtil.get("${curl}", "$");
+		static var apiResponse = JSONCurlUtil.get("${curl}");
 
 		return "${apiResponse}";
 	}
