@@ -27,6 +27,7 @@ definition {
 	test DataSourceListShowsAllDataSources {
 		property portal.acceptance = "true";
 		property portal.release = "true";
+		property test.name.skip.portal.instance = "DataSourcesList#DataSourceListShowsAllDataSources";
 
 		var dataSourceList = "";
 
