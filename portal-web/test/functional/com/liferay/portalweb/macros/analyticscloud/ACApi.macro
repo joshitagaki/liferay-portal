@@ -4,11 +4,11 @@ definition {
 		var analyticsCloudURL = PropsUtil.get("analytics.cloud.url");
 
 		var curl = '''
-			${analyticsCloudURL}/api/reports/export/${type}\?fromDate=${startDate}T${startTime}Z\&toDate=${endDate}T${endTime}Z
+			${analyticsCloudURL}/api/reports/export/${type}?fromDate=${startDate}T${startTime}Z&toDate=${endDate}T${endTime}Z
 			-H "Authorization: Bearer ${token}"
 			''';
 
-		static var apiResponse = JSONCurlUtil.get("${curl}", "$");
+		static var apiResponse = JSONCurlUtil.get("${curl}");
 
 		return "${apiResponse}";
 	}
@@ -20,7 +20,7 @@ definition {
 			${analyticsCloudURL}/api/reports -H "Authorization: Bearer ${token}"
 			''';
 
-		static var apiResponse = JSONCurlUtil.get("${curl}", "$");
+		static var apiResponse = JSONCurlUtil.get("${curl}");
 
 		return "${apiResponse}";
 	}
@@ -61,7 +61,7 @@ definition {
 			echo("Correct error message - PASSED");
 		}
 		else {
-			fail("Wrong error message - ${apiResponse}");
+			fail("Wrong error message - ${apiResponse} -- Actual message - ${message}");
 		}
 
 		// Checks if the status value is ERROR
@@ -70,7 +70,7 @@ definition {
 			echo("Correct status - PASSED");
 		}
 		else {
-			fail("Wrong status - ${apiResponse}");
+			fail("Wrong status - ${apiResponse} -- Actual message - ${message}");
 		}
 	}
 
@@ -82,7 +82,7 @@ definition {
 			echo("Correct message - PASSED");
 		}
 		else {
-			fail("New export schedule was not created: Wrong message - ${apiResponse}");
+			fail("New export schedule was not created: Wrong message - ${apiResponse} -- Actual message - ${message}");
 		}
 
 		// Checks if the fromDate value is the same as the one used to create the schedule
@@ -91,7 +91,7 @@ definition {
 			echo("Correct fromDate - PASSED");
 		}
 		else {
-			fail("New export schedule was not created: Wrong fromDate - ${apiResponse}");
+			fail("New export schedule was not created: Wrong fromDate - ${apiResponse} -- Actual message - ${message}");
 		}
 
 		// Checks if the toDate value is the same as the one used to create the schedule
@@ -100,7 +100,7 @@ definition {
 			echo("Correct toDate - PASSED");
 		}
 		else {
-			fail("New export schedule was not created: Wrong toDate - ${apiResponse}");
+			fail("New export schedule was not created: Wrong toDate - ${apiResponse} -- Actual message - ${message}");
 		}
 
 		// Checks if the type value is the same as the one used to create the schedule
@@ -109,7 +109,7 @@ definition {
 			echo("Correct type - PASSED");
 		}
 		else {
-			fail("New export schedule was not created: Wrong type - ${apiResponse}");
+			fail("New export schedule was not created: Wrong type - ${apiResponse} -- Actual message - ${message}");
 		}
 
 		// Checks if the status value is the same as the one used to create the schedule
@@ -118,7 +118,7 @@ definition {
 			echo("Correct status - PASSED");
 		}
 		else {
-			fail("New export schedule was not created: Wrong status - ${apiResponse}");
+			fail("New export schedule was not created: Wrong status - ${apiResponse} -- Actual message - ${message}");
 		}
 	}
 
@@ -128,7 +128,7 @@ definition {
 				echo("${type} - PASSED");
 			}
 			else {
-				fail("${apiResponse}");
+				fail("${apiResponse} -- Actual message - ${message}");
 			}
 		}
 	}
