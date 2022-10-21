@@ -376,7 +376,7 @@ definition {
 
 			ProxyUtil.startHarRecording("blogDepthReached");
 
-			ACUtils.waitForSendingRequest();
+			ACUtils.waitForSendingRequest(time = "7000");
 		}
 
 		task ("Get entryId of blog entry") {
