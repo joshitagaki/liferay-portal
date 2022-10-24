@@ -54,6 +54,8 @@ definition {
 		var sort = "counts,desc";
 
 		task ("Go to Server Administration") {
+			ACUtils.launchDXP();
+
 			ServerAdministration.openServerAdmin();
 		}
 
