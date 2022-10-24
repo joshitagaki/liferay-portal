@@ -46,6 +46,8 @@ definition {
 	@description = "Feature ID: LRAC-12058 | Automation ID: LRAC-12141 | Test Summary: Request search keywords using all parameters"
 	@priority = "3"
 	test RequestKeywordsUsingAllParameters {
+		property portal.upstream = "josh";
+
 		var displayLanguageId = "en-US";
 		var groupId = JSONGroupSetter.setGroupId(groupName = "Guest");
 		var keyword = "all parameters";
