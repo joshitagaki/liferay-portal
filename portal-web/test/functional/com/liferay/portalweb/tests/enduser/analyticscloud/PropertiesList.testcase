@@ -30,6 +30,8 @@ definition {
 	@description = "Bug: LRAC-11360 | Automation ID: LRAC-11361 | Test Summary: Paginate property list"
 	@priority = "4"
 	test CanPaginatePropertyList {
+		property portal.upstream = "josh";
+
 		var propertyList = "Property Name 1,Property Name 2,Property Name 3,Property Name 4,Property Name 5,Property Name 6";
 
 		task ("go to property and add 6 properties") {
@@ -101,6 +103,8 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-9122 | Test Summary: Search for a property"
 	@priority = "5"
 	test CanSearchForProperty {
+		property portal.upstream = "josh";
+
 		var propertyList = "Property CanSearchForProperty 1,Property CanSearchForProperty 2,Property CanSearchForProperty 3,Property CanSearchForProperty 4";
 
 		task ("go to property and add new properties") {
@@ -199,6 +203,8 @@ definition {
 	@description = "Bug: LRAC-11142 | Automation ID: LRAC-11162 | Test Summary: New property created when reconnect and old property remains"
 	@priority = "4"
 	test OnlyAvailablePropertiesAppearInDXP {
+		property portal.upstream = "josh";
+
 		task ("Go to properties page and add 2 new properties") {
 			var propertyList = "Property OnlyAvailablePropertiesAppearInDXP 1,Property OnlyAvailablePropertiesAppearInDXP 2";
 
