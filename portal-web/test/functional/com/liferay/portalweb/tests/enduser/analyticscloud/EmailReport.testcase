@@ -330,6 +330,7 @@ definition {
 	test CheckLinksInEmailReportAreCorrect {
 		property portal.upstream = "josh";
 		property test.name.skip.portal.instance = "EmailReport#CheckLinksInEmailReportAreCorrect";
+		property test.smtp.server.enabled = "true";
 
 		var reportDetailsNameList = "Workspace,Property";
 		var reportDetailsValueList = "FARO-DEV-liferay,${assignedPropertyName}";
