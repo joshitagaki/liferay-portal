@@ -386,9 +386,9 @@ definition {
 		}
 
 		task ("Go to the Mock Mock page > Access the email that was received") {
-			MockMock._gotoMail();
+			ACEmailReport._gotoMail();
 
-			MockMock._gotoMailMessage(asset = "Analytics Cloud: Your Daily Report");
+			ACEmailReport._gotoMailMessage(asset = "Analytics Cloud: Your Daily Report");
 		}
 
 		task ("Check that activity metrics appear in the email report") {
