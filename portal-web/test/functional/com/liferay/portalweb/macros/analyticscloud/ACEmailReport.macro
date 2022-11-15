@@ -1,5 +1,47 @@
 definition {
 
+	macro _gotoMail {
+		if ("${newTab}" == "true") {
+			Open.openInTheNewTab(locator1 = "http://osbfarofrontend:8282");
+		}
+		else {
+			Navigator.openSpecificURL(url = "http://osbfarofrontend:8282");
+		}
+
+		AssertTextEquals.assertPartialText(
+			locator1 = "MockMock#MOCKMOCK_HEADER_LINK",
+			value1 = "MockMock");
+	}
+
+	macro _gotoMailMessage {
+		var key_columnEntry = "${asset}";
+
+		if (isSet(recipient)) {
+			var counter = "0";
+
+			var key_counter = "${counter}";
+			var key_recipient = "${recipient}";
+			var maxRetries = "3";
+
+			while (("${counter}" != "${maxRetries}") && (IsTextNotEqual(locator1 = "MockMock#MOCKMOCK_SPECIFIC_RECIPIENT_SUBJECT_FIELD_LINK", value1 = "${asset}"))) {
+				var counter = ${counter} + 1;
+
+				ACEmailReport._gotoMail();
+
+				Refresh();
+			}
+
+			AssertClick.assertPartialTextClickAt(
+				locator1 = "MockMock#MOCKMOCK_SPECIFIC_RECIPIENT_SUBJECT_FIELD_LINK",
+				value1 = "${asset}");
+		}
+		else {
+			AssertClick.assertPartialTextClickAt(
+				locator1 = "MockMock#MOCKMOCK_SUBJECT_FIELD_LINK",
+				value1 = "${asset}");
+		}
+	}
+	
 	macro accessEmailReportSettings {
 		Click(locator1 = "ACEmailReport#EMAIL_REPORT_WIDGET_ICON");
 	}
