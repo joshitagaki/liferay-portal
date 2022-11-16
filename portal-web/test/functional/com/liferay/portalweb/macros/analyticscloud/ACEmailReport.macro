@@ -35,11 +35,17 @@ definition {
 				Refresh();
 			}
 
+			WaitForElementPresent(
+				locator1 = "MockMock#MOCKMOCK_SPECIFIC_RECIPIENT_SUBJECT_FIELD_LINK",
+				value1 = "${asset}");
+
 			AssertClick.assertPartialTextClickAt(
 				locator1 = "MockMock#MOCKMOCK_SPECIFIC_RECIPIENT_SUBJECT_FIELD_LINK",
 				value1 = "${asset}");
 		}
 		else {
+			Refresh();
+
 			AssertClick.assertPartialTextClickAt(
 				locator1 = "MockMock#MOCKMOCK_SUBJECT_FIELD_LINK",
 				value1 = "${asset}");
