@@ -338,6 +338,16 @@ definition {
 		var activitiesValueList = "0,0.00,0s,0.0%";
 		var emailAddress = "test@liferay.com";
 
+		task ("Get DXP mail server") {
+			ACUtils.launchDXP();
+
+			ACAdmin.goToServerAdministration();
+
+			Navigator.gotoNavItem(navItem = "Mail");
+
+			var extractedIPAddress = selenium.getElementValue("ServerAdministrationMail#OUTGOING_PORT");
+		}
+
 		task ("Launch AC") {
 			var analyticsCloudURL = PropsUtil.get("analytics.cloud.url");
 
@@ -349,7 +359,7 @@ definition {
 		}
 
 		task ("Go to Server Administration > Change SMTP Server Port") {
-			var extractedIPAddress = ACUtils.getIPAddress();
+			// var extractedIPAddress = ACUtils.getIPAddress();
 
 			ACAdmin.configureMailSettings(outgoingSMTPServer = "${extractedIPAddress}");
 		}
