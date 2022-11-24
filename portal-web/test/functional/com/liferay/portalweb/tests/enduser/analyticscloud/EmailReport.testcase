@@ -341,7 +341,10 @@ definition {
 		task ("Get DXP mail server") {
 			ACUtils.launchDXP();
 
-			ACAdmin.goToServerAdministration();
+			ApplicationsMenu.gotoPortlet(
+				category = "System",
+				panel = "Control Panel",
+				portlet = "Server Administration");
 
 			Navigator.gotoNavItem(navItem = "Mail");
 
