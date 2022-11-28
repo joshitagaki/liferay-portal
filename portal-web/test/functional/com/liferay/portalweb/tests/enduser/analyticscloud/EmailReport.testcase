@@ -348,8 +348,6 @@ definition {
 
 			Navigator.gotoNavItem(navItem = "Mail");
 
-			var extractedIPAddress = selenium.getElementValue("ServerAdministrationMail#OUTGOING_SMTP_SERVER");
-
 			var extractedPort = selenium.getElementValue("ServerAdministrationMail#OUTGOING_PORT");
 		}
 
@@ -364,7 +362,7 @@ definition {
 		}
 
 		task ("Go to Server Administration > Change SMTP Server Port") {
-			// var extractedIPAddress = ACUtils.getIPAddress();
+			var extractedIPAddress = ACUtils.getIPAddress();
 
 			ACAdmin.configureMailSettings(
 				outgoingSMTPServer = "${extractedIPAddress}",
