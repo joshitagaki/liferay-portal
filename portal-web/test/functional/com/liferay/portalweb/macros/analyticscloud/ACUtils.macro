@@ -667,7 +667,7 @@ definition {
 	}
 
 	macro getIPAddress {
-		var analyticsCloudURL = PropsUtil.get("analytics.cloud.url");
+		var analyticsCloudURL = PropsUtil.get("portal.url");
 
 		var extractedIPAddress = StringUtil.extractFirst("${analyticsCloudURL}", ":8080");
 
