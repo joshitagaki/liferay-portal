@@ -103,10 +103,10 @@ definition {
 				${faroBackendURL}/api/1.0/pages/search-keywords \
 				-H OSB-Asah-Faro-Backend-Security-Signature: ${osbAsahFaroBackendSS} \
 				-H OSB-Asah-Project-ID: ${osbAsahProjectId}
-				''';
+			''';
 		}
 
-		static var apiResponse = JSONCurlUtil.get("${curl}");
+		var apiResponse = JSONCurlUtil.get("${curl}");
 
 		return "${apiResponse}";
 	}
