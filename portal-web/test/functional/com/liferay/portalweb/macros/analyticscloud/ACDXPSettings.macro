@@ -144,7 +144,7 @@ definition {
 	}
 
 	macro getAssignedPropertyName {
-		WaitForVisible(
+		WaitForElementPresent(
 			key_text = "Assign",
 			locator1 = "Button#ANY");
 
