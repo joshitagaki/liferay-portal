@@ -22,7 +22,7 @@ definition {
 		}
 
 		task ("Create DXP Site with Commerce") {
-			CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium Demo");
+			CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 		}
 	}
 
@@ -53,8 +53,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -107,8 +107,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -218,8 +218,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -272,8 +272,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -384,8 +384,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -428,8 +428,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -673,8 +673,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -717,8 +717,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -827,8 +827,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -937,8 +937,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -1051,8 +1051,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -1174,8 +1174,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}
@@ -1239,8 +1239,8 @@ definition {
 		}
 
 		task ("Get the property name to enable commerce on the right one") {
-			var channelName = "Minium Demo Portal";
-			var siteName = "Minium Demo";
+			var channelName = "Minium Portal";
+			var siteName = "Minium";
 
 			ACDXPSettings.getAssignedPropertyName();
 		}

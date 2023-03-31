@@ -22,11 +22,11 @@ definition {
 		}
 
 		task ("Create DXP Site with Commerce") {
-			CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium Demo");
+			CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 		}
 
 		task ("Connect the DXP to AC and finish the setup wizard") {
-			ACDXPSettings.connectDXPtoAnalyticsCloud(channelName = "Minium Demo Portal");
+			ACDXPSettings.connectDXPtoAnalyticsCloud(channelName = "Minium Portal");
 		}
 	}
 
