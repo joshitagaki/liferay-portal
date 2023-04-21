@@ -450,6 +450,10 @@ definition {
 		}
 
 		task ("Copy the token from AC") {
+			if (IsElementPresent(key_textValue = "Welcome to Analytics Cloud", locator1 = "ACUtils#GENERIC_TEXT")) {
+				ACUtils.closeModal();
+			}
+
 			ACSettings.takeTokenFromAnalyticsCloud();
 		}
 
