@@ -441,6 +441,8 @@ definition {
 	@description = "Story: LRAC-10858 | Automation ID: LRAC-12569 | Test Summary: Assert Empty State upon property creation"
 	@priority = 2
 	test CheckPropertyListEmptyStateMessage {
+		property portal.upstream = "josh";
+
 		task ("Create a new workspace") {
 			ACUtils.launchAC(
 				emailList = "acworkspace@liferay.com",
