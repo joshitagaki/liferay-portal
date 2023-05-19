@@ -22,7 +22,11 @@ definition {
 		}
 
 		task ("Add a new site with a public widget page") {
-			ACUtils.addSiteAndPage();
+			HeadlessSite.addSite(siteName = "Site Name");
+
+			JSONLayout.addPublicLayout(
+				groupName = "Site Name",
+				layoutName = "AC Page");
 		}
 
 		task ("Create a Document And Media") {
