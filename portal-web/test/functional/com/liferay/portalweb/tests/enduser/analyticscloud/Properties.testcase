@@ -14,16 +14,6 @@ definition {
 
 			ACSettings.takeTokenFromAnalyticsCloud();
 		}
-
-		task ("Set up instance and sign in DXP") {
-			TestCase.setUpPortalInstance();
-
-			ACUtils.launchDXP();
-		}
-
-		task ("Add a new site with a public widget page") {
-			ACUtils.addSiteAndPage();
-		}
 	}
 
 	tearDown {
@@ -275,6 +265,16 @@ definition {
 	@description = "Bug ID: LRAC-8093 | Automation ID: LRAC-11533 | Test Summary: Able to clear property data"
 	@priority = 4
 	test ClearPropertyData {
+		task ("Set up instance and sign in DXP") {
+			TestCase.setUpPortalInstance();
+
+			ACUtils.launchDXP();
+		}
+
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
+
 		task ("Connect the DXP to Analytics Cloud") {
 			JSONUser.addUser(
 				userEmailAddress = "userea@liferay.com",
@@ -394,6 +394,16 @@ definition {
 				key_listStatus = "Active",
 				locator1 = "ACSettings#DATA_SOURCE_LIST_STATUS",
 				value1 = "Active");
+		}
+
+		task ("Set up instance and sign in DXP") {
+			TestCase.setUpPortalInstance();
+
+			ACUtils.launchDXP();
+		}
+
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
 		}
 
 		task ("Connect AC to DXP") {
@@ -563,6 +573,16 @@ definition {
 	@priority = 5
 	test PropertiesListInSettingsShowsListOfAllPropertiesInTheWorkspace {
 		property portal.acceptance = "true";
+
+		task ("Set up instance and sign in DXP") {
+			TestCase.setUpPortalInstance();
+
+			ACUtils.launchDXP();
+		}
+
+		task ("Add a new site with a public widget page") {
+			ACUtils.addSiteAndPage();
+		}
 
 		ACDXPSettings.connectDXPtoAnalyticsCloud();
 
