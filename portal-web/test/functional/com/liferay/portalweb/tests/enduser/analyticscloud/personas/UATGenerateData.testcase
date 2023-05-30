@@ -7,7 +7,7 @@ definition {
 	property testray.main.component.name = "Analytics Cloud";
 
 	setUp {
-		Navigator.openURL(baseURL = "https://osbasahdxpserver73-ac-stagingdxps.lfr.cloud/");
+		Navigator.openURL(baseURL = "https://analyticsqa.lxc.liferay.com/");
 	}
 
 	tearDown {
@@ -19,7 +19,7 @@ definition {
 	test AnonymousBrowsePortalPages {
 		ACUtils.navigateToSitePage(
 			pageName = "Home",
-			siteName = "Brother Ocean Co.");
+			siteName = "Brotherocean");
 
 		Navigator.gotoSitePage(pageName = "Blog");
 
@@ -38,7 +38,7 @@ definition {
 		ACUtils.navigateToSitePageWithUser(
 			emailList = "benny.browser@liferay.com",
 			pageName = "Home",
-			siteName = "Brother Ocean Co.");
+			siteName = "Brotherocean");
 
 		Navigator.gotoSitePage(pageName = "Blog");
 
@@ -57,13 +57,13 @@ definition {
 		ACUtils.navigateToSitePageWithUser(
 			emailList = "danny.downloader@liferay.com",
 			pageName = "Home",
-			siteName = "Brother Ocean Co.");
+			siteName = "Brotherocean");
 
 		ACUtils.navigateToSitePage(
 			actionType = "Download DM",
 			documentTitleList = "matthew-hume-I9zW-9Qz7tU-unsplash.jpg",
 			pageName = "Home",
-			siteName = "Brother Ocean Co.");
+			siteName = "Brotherocean");
 	}
 
 	@description = "Test Summary: Order Form portal as Otto Orderer"
@@ -72,7 +72,7 @@ definition {
 		ACUtils.navigateToSitePageWithUser(
 			emailList = "otto.orderer@liferay.com",
 			pageName = "Order",
-			siteName = "Brother Ocean Co.");
+			siteName = "Brotherocean");
 
 		FormFields.editText(
 			fieldName = "Full Name",
