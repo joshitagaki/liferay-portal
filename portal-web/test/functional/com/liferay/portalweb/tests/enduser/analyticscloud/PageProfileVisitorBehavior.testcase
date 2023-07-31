@@ -64,26 +64,44 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8514 | Test Summary: Page Profile Visitor behavior card shows the number of unique visitors and views"
 	@priority = 5
 	test ShowNumberOfUniqueVisitorsAndViews {
-		task ("Create Blog to Add to Page") {
-			ACUtils.createBlogsAndAddToPage();
+		// task ("Create Blog to Add to Page") {
+		// 	ACUtils.createBlogsAndAddToPage();
+		// }
+
+		// task ("Sign in as new user") {
+		// 	User.logoutAndLoginPG(
+		// 		userLoginEmailAddress = "userea@liferay.com",
+		// 		userLoginFullName = "userfn userln");
+		// }
+
+		// task ("View the blog page") {
+		// 	ACUtils.navigateToSitePage(
+		// 		actionType = "View Blog",
+		// 		documentTitleList = "Blogs AC Title",
+		// 		pageName = "AC Page",
+		// 		siteName = "Site Name");
+		// }
+
+		// task ("Close sessions") {
+		// 	ACUtils.closeAllSessionsAndWait();
+		// }
+
+		task ("Go to DXP and get analytics configuration") {
+			ACApi.getAnalyticsConfiguration();
 		}
 
-		task ("Sign in as new user") {
-			User.logoutAndLoginPG(
-				userLoginEmailAddress = "userea@liferay.com",
-				userLoginFullName = "userfn userln");
+		task ("Get the Property ID in AC") {
+			ACUtils.launchAC();
+
+			ACNavigation.goToSettings();
+
+			var expectedChannelId = ACSettings.getPropertyId(propertyName = ${assignedPropertyName});
+
+			var event = "INSERT INTO Event (applicationId, id, canonicalUrl, channelId, eventDate, eventId, sessionId, title, userId) VALUES ('Page', '50', 'http://liferay.com', ${expectedChannelId}, timestamp '\${now}', 'pageViewed', '1', 'Liferay', '1')";
 		}
 
-		task ("View the blog page") {
-			ACUtils.navigateToSitePage(
-				actionType = "View Blog",
-				documentTitleList = "Blogs AC Title",
-				pageName = "AC Page",
-				siteName = "Site Name");
-		}
-
-		task ("Close sessions") {
-			ACUtils.closeAllSessionsAndWait();
+		task ("Run curl to create Page View") {
+			ACDataInjection.sendDataInjection(event = "${event}");
 		}
 
 		task ("Switch to new property in AC") {
@@ -107,7 +125,7 @@ definition {
 		task ("Navigate to page report entry") {
 			var dataSourceName = StringUtil.extractFirst(${assignedPropertyName}, " ");
 
-			ACNavigation.openItem(itemName = "Blogs AC Title - Site Name - ${dataSourceName}");
+			ACNavigation.openItem(itemName = "Liferay");
 		}
 
 		task ("Navigate to the Overview tab in Pages dashboard") {
