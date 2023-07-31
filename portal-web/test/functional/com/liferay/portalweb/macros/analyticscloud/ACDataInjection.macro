@@ -7,6 +7,6 @@ definition {
                 -d "${event};"
             ''';
 
-    static var apiResponse = JSONCurlUtil.post(${curl});
+        static var apiResponse = JSONCurlUtil.post(${curl});
     }
 }
