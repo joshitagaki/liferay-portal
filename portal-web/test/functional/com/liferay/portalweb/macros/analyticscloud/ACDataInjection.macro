@@ -1,0 +1,12 @@
+definition {
+    macro sendDataInjection {
+        var curl = '''
+            ${analyticsCloudURL}:8086/admin/data \
+                -H 'OSB-Asah-Project-ID: ${osbAsahProjectId}' \
+                -H 'Content-Type: text/plain' \
+                -d "${event};"
+            ''';
+
+    static var apiResponse = JSONCurlUtil.post(${curl});
+    }
+}
