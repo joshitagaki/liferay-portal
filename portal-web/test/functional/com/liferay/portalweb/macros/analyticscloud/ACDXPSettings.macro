@@ -258,7 +258,9 @@ definition {
 
 	macro getAssignedPropertyName {
 		while (IsElementPresent(key_text = "Try Again", locator1 = "Button#ANY")) {
-			Refresh();
+			Click(
+				key_text = "Previous",
+				locator1 = "Button#ANY");
 
 			Click(
 				key_text = "Next",
