@@ -64,6 +64,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8514 | Test Summary: Page Profile Visitor behavior card shows the number of unique visitors and views"
 	@priority = 5
 	test ShowNumberOfUniqueVisitorsAndViews {
+		property portal.upstream = "josh";
 		// task ("Create Blog to Add to Page") {
 		// 	ACUtils.createBlogsAndAddToPage();
 		// }
