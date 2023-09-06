@@ -79,6 +79,7 @@ definition {
 	@description = "Feature ID: LRAC-13255 | Automation ID: LRAC-14071 | Test Summary: Add an Error Message When the API Token is Revoked or Nonexistent"
 	@priority = 3
 	test ErrorMessageAppearsWhenAPITokenIsRevokedOrNonexistent {
+		property portal.upstream = "josh";
 		var type = "pages";
 
 		task ("Get the token value") {
