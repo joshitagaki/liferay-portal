@@ -266,7 +266,7 @@ definition {
 				key_text = "Next",
 				locator1 = "Button#ANY");
 		}
-		
+
 		WaitForVisible(
 			key_text = "Assign",
 			locator1 = "Button#ANY");
