@@ -122,6 +122,14 @@ definition {
 	macro getAnalyticsConfiguration {
 		ServerAdministration.openServerAdmin();
 
+		if (IsElementPresent(locator1 = "Message#ERROR", value1 = "You do not have the roles required to access this portlet.")) {
+			User.logoutAndLoginPG(
+				userLoginEmailAddress = "test@liferay.com",
+				userLoginFullName = "Test Test");
+
+			ServerAdministration.openServerAdmin();
+		}
+
 		ACApi.getSearchHeaderValues(header = "liferayAnalyticsFaroBackendURL");
 
 		static var faroBackendURL = ${scriptValue};
