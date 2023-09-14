@@ -120,6 +120,8 @@ definition {
 	}
 
 	macro getAnalyticsConfiguration {
+		User.firstLoginUI();
+
 		ServerAdministration.openServerAdmin();
 
 		ACApi.getSearchHeaderValues(header = "liferayAnalyticsFaroBackendURL");
