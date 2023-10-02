@@ -267,6 +267,7 @@ definition {
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-14011
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var fullNameList = "userfn userln,user1 user1";
@@ -365,6 +366,7 @@ definition {
 		// AC Quarantine Reason: The membership list takes a long time to update
 		// AC Refactor ticket: LRAC-10769
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "user1,user2,user3";
@@ -502,6 +504,7 @@ definition {
 		// AC Quarantine Reason: The membership list takes a long time to update
 		// AC Refactor ticket: LRAC-10769
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "user1,user2,user3";
@@ -734,6 +737,7 @@ definition {
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-14011
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "userea,user1,test";
@@ -975,6 +979,7 @@ definition {
 		// AC Quarantine Reason: The membership list takes a long time to update
 		// AC Refactor ticket: LRAC-10769
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "user1,user2,user3";
@@ -1097,6 +1102,7 @@ definition {
 	@description = "Create a static segment with individual"
 	@priority = 5
 	test CanCreateStaticSegmentWithIndividuals {
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		task ("Sign in as new user") {
@@ -1145,6 +1151,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8474 | Test Summary: Duplicate a criteria"
 	@priority = 3
 	test CanDuplicateCriteria {
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		task ("Switch to new property in AC") {
@@ -1220,6 +1227,7 @@ definition {
 		// AC Quarantine Reason: The membership list takes a long time to update
 		// AC Refactor ticket: LRAC-10769
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "user1,user2,user3,user4,user5";
@@ -1323,6 +1331,7 @@ definition {
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-14011
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var usernameList = "user1,user2,user3,user4,user5";
@@ -1410,6 +1419,7 @@ definition {
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-14011
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var emailList = "userea@liferay.com,user1@liferay.com";
@@ -1501,6 +1511,7 @@ definition {
 		// AC Refactor: Data doesn't appear on time
 		// AC Refactor ticket: LRAC-14011
 
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		var emailList = "userea@liferay.com,user1@liferay.com";
@@ -1570,6 +1581,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8133 | Test Summary: Create button shows option to create static or dynamic"
 	@priority = 5
 	test CanSeeOptionsToCreateStaticOrDynamicSegment {
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		task ("Sign in as new user") {
@@ -1999,6 +2011,7 @@ definition {
 	@description = "Feature ID: Legacy | Automation ID: LRAC-8484 | Test Summary: Segment Form Validation"
 	@priority = 5
 	test ViewSegmentFormValidation {
+		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 
 		task ("Sign in as new user") {
