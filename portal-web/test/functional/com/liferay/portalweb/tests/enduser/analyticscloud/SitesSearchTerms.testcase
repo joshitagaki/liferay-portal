@@ -135,4 +135,68 @@ definition {
 		}
 	}
 
+	@description = "Feature ID: LRAC-13934 | Automation ID: LRAC-14680 | Test Summary: Customized query string will still collect search term"
+	@priority = 4
+	test ViewKeywordSearchedNewStringParameter {
+		task ("Connect DXP to Analytics Cloud") {
+			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+		}
+
+		task ("Navigate to AC workspace search") {
+			ACUtils.launchAC();
+
+			ACNavigation.goToSettings();
+
+			ACSettings.goToDefinitions();
+
+			ACDefinitions.goToDefinitionType(definitionType = "Search");
+		}
+
+		task ("Create a new query string parameter") {
+			ACDefinitions.addSearchQuerySuccessfully(query = "query");
+		}
+
+		task ("Update keyword parameter on DXP") {
+			Navigator.openURL();
+
+			SearchPortlets.configureSearchBarWidget(keywordsParameterName = "query");
+		}
+
+		task ("Use search bar") {
+			SearchPortlets.searchWidget(searchTerm = "test parameter");
+		}
+
+		task ("Close sessions") {
+			ACUtils.closeAllSessionsAndWait();
+		}
+
+		task ("Navigate to AC workspace") {
+			ACUtils.launchAC();
+		}
+
+		task ("Switch to new property in AC") {
+			ACProperties.switchProperty(propertyName = ${propertyName});
+		}
+
+		task ("Go to sites pages tab") {
+			ACNavigation.goToSites();
+
+			ACSites.viewSiteOverviewDashboardCards();
+		}
+
+		task ("View the new report") {
+			ACCards.viewCards(cardTitle = "Search Terms");
+
+			ACTimeFilter.clickTimeFilterButton(cardName = "Search Terms");
+
+			ACTimeFilter.setLast24Hours();
+		}
+
+		task ("Assert Keywords Searched") {
+			AssertElementPresent(
+				key_keyword = "test parameter",
+				locator1 = "ACSites#SEARCHED_KEYWORD");
+		}
+	}
+
 }
