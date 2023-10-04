@@ -159,6 +159,16 @@ definition {
 		task ("Update keyword parameter on DXP") {
 			Navigator.openURL();
 
+			JSONLayout.addPublicLayout(
+				groupName = "Guest",
+				layoutName = "Search Page");
+
+			SearchPortlets.addWidgets(
+				layoutName = "Search Page",
+				searchPortletList = "Type Facet,Search Results,Search Bar");
+
+			Navigator.gotoPage(pageName = "Search Page");
+
 			SearchPortlets.configureSearchBarWidget(keywordsParameterName = "query");
 		}
 
