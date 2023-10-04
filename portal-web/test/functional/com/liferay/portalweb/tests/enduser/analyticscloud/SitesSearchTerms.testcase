@@ -139,7 +139,7 @@ definition {
 	@priority = 4
 	test ViewKeywordSearchedNewStringParameter {
 		task ("Connect DXP to Analytics Cloud") {
-			ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
+			var propertyName = ACDXPSettings.connectDXPtoAnalyticsCloud(siteName = "Site Name");
 		}
 
 		task ("Navigate to AC workspace search") {
