@@ -154,6 +154,10 @@ definition {
 
 		task ("Create a new query string parameter") {
 			ACDefinitions.addSearchQuerySuccessfully(query = "query");
+
+			ACDefinitions.goToDefinitionType(definitionType = "Search");
+
+			ACDefinitions.viewSearchQuery(query = "query");
 		}
 
 		task ("Update keyword parameter on DXP") {
