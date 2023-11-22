@@ -808,6 +808,8 @@ definition {
 			}
 		}
 
+		Refresh();
+
 		if (!(isSet(workspaceName))) {
 			ACWorkspace.openWorkspace();
 		}
