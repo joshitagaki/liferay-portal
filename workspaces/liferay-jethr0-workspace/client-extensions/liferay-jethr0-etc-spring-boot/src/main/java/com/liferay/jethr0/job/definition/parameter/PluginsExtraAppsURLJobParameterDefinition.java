@@ -33,7 +33,7 @@ public class PluginsExtraAppsURLJobParameterDefinition
 
 	@Override
 	public String getValueDescription() {
-		return "Insert your plugins extra apps url here";
+		return "Insert your plugins extra apps URL here";
 	}
 
 	@Override
