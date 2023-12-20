@@ -83,9 +83,9 @@ public class EditVocabularySettingsDisplayContext {
 	}
 
 	public List<SelectOption> getClassNameIdOptions(long selectedClassNameId) {
-		List<SelectOption> options = new ArrayList<>();
+		List<SelectOption> selectOptions = new ArrayList<>();
 
-		options.add(
+		selectOptions.add(
 			new SelectOption(
 				LanguageUtil.get(_themeDisplay.getLocale(), "all-asset-types"),
 				String.valueOf(AssetCategoryConstants.ALL_CLASS_NAME_ID),
@@ -98,7 +98,7 @@ public class EditVocabularySettingsDisplayContext {
 		for (AssetRendererFactory<?> availableAssetRendererFactory :
 				availableAssetRendererFactories) {
 
-			options.add(
+			selectOptions.add(
 				new SelectOption(
 					ResourceActionsUtil.getModelResource(
 						_themeDisplay.getLocale(),
@@ -109,7 +109,7 @@ public class EditVocabularySettingsDisplayContext {
 						availableAssetRendererFactory.getClassNameId()));
 		}
 
-		return options;
+		return selectOptions;
 	}
 
 	public List<AssetRendererFactory<?>> getClassTypedAssetRenderFactories() {
@@ -136,20 +136,20 @@ public class EditVocabularySettingsDisplayContext {
 			return Collections.emptyList();
 		}
 
-		List<SelectOption> options = new ArrayList<>();
+		List<SelectOption> selectOptions = new ArrayList<>();
 
 		boolean exists = classTypePKExists(
 			selectedClassNameId, selectedClassTypePK);
 
 		if (!exists) {
-			options.add(
+			selectOptions.add(
 				new SelectOption(
 					LanguageUtil.get(_themeDisplay.getLocale(), "none"),
 					String.valueOf(selectedClassTypePK), true));
 		}
 
 		for (ClassType classType : classTypes) {
-			options.add(
+			selectOptions.add(
 				new SelectOption(
 					HtmlUtil.escape(classType.getName()),
 					String.valueOf(classType.getClassTypeId()),
@@ -158,7 +158,7 @@ public class EditVocabularySettingsDisplayContext {
 					(selectedClassTypePK == classType.getClassTypeId())));
 		}
 
-		return options;
+		return selectOptions;
 	}
 
 	public long[] getSelectedClassNameIds() {
