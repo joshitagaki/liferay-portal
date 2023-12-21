@@ -319,14 +319,13 @@ public class ${schemaName} <#if dtoParentClassName?has_content>extends ${dtoPare
 			</#list>
 
 			{
-			<#list jsonMapPropertyNames as propertyName>
-				Map<String, Object> ${propertyName} = get${propertyName?cap_first}();
+				<#list jsonMapPropertyNames as propertyName>
+					Map<String, Object> ${propertyName} = get${propertyName?cap_first}();
 
-				if (${propertyName}.containsKey(propertyName)) {
-					return ${propertyName}.get(propertyName);
-				}
-
-			</#list>
+					if (${propertyName}.containsKey(propertyName)) {
+						return ${propertyName}.get(propertyName);
+					}
+				</#list>
 			}
 
 			return null;
