@@ -41,7 +41,7 @@ definition {
 			ACUtils.searchBar(searchItem = ${customEventName});
 		}
 
-		MouseOver(locator1 = "ACUtils#NAME_LIST");
+		MouseOver.javaScriptMouseOver(locator1 = "ACUtils#NAME_LIST");
 
 		Click(locator1 = "ACCustomEvents#BLOCK_UNBLOCK_EVENT_BUTTON");
 
@@ -274,7 +274,7 @@ definition {
 			ACUtils.searchBar(searchItem = ${customEventName});
 		}
 
-		MouseOver(locator1 = "ACUtils#NAME_LIST");
+		MouseOver.javaScriptMouseOver(locator1 = "ACUtils#NAME_LIST");
 
 		Click(locator1 = "ACDefinitions#HIDE_UNHIDE_EVENT_BUTTON");
 
@@ -308,7 +308,7 @@ definition {
 			ACUtils.searchBar(searchItem = ${customEventName});
 		}
 
-		MouseOver(locator1 = "ACUtils#NAME_LIST");
+		MouseOver.javaScriptMouseOver(locator1 = "ACUtils#NAME_LIST");
 
 		Click(locator1 = "ACCustomEvents#BLOCK_UNBLOCK_EVENT_BUTTON");
 	}
