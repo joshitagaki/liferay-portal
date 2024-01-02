@@ -227,9 +227,10 @@ definition {
 		}
 
 		task ("Add a heading to the page to diferentiate from the control") {
-			PageEditor.addFragment(
-				collectionName = "Basic Components",
-				fragmentName = "Heading");
+			PageEditor.editFragmentText(
+				fragmentName = "Button",
+				id = "link",
+				text = "New text");
 		}
 
 		task ("Click to save the variant") {
@@ -238,10 +239,10 @@ definition {
 
 		task ("Click to open the AB test panel") {
 			ABTest.openABTestPanel();
+		}
 
-			task ("Click to review and run the test") {
-				ABTest.runTest();
-			}
+		task ("Click to review and run the test") {
+			ABTest.runTest();
 		}
 
 		task ("Click to terminate the test") {
@@ -253,9 +254,10 @@ definition {
 		}
 
 		task ("Assert the control is published") {
-			AssertElementNotPresent(
-				locator1 = "Experience#FRAGMENT_HEADING",
-				value1 = "Heading Example");
+			ContentPages.viewFragmentText(
+				fragmentName = "button",
+				id = "link",
+				text = "Go Somewhere");
 		}
 
 		task ("Click to edit the page and add a widget to the page and then click save") {
@@ -303,9 +305,10 @@ definition {
 		}
 
 		task ("Add a heading to the page to diferentiate from the control") {
-			PageEditor.addFragment(
-				collectionName = "Basic Components",
-				fragmentName = "Heading");
+			PageEditor.editFragmentText(
+				fragmentName = "Button",
+				id = "link",
+				text = "New text");
 		}
 
 		task ("Click to save the variant") {
@@ -330,9 +333,9 @@ definition {
 
 		task ("Assert the variant published") {
 			ContentPages.viewFragmentText(
-				fragmentName = "heading",
-				id = "element-text",
-				text = "Heading Example");
+				fragmentName = "button",
+				id = "link",
+				text = "New text");
 		}
 
 		task ("Now edit the variant and add a widget to the page and then click save") {
