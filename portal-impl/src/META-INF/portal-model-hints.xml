@@ -1327,9 +1327,7 @@
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
 		<field name="expirationDate" type="Date" />
-		<field name="token" type="String">
-			<hint name="max-length">255</hint>
-		</field>
+		<field name="token" type="String" />
 	</model>
 	<model name="com.liferay.portal.kernel.model.Repository">
 		<field name="mvccVersion" type="long" />
