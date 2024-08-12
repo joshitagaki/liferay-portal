@@ -71,7 +71,7 @@ public class DBPartitionSQLProvider extends BaseSQLProvider {
 		Supplier<String> rulesSQLSupplier = () -> StringPool.BLANK;
 
 		if (db.getDBType() == DBType.POSTGRESQL) {
-			rulesSQLSupplier = this::_getRules;
+			rulesSQLSupplier = this::_getRulesSQL;
 		}
 
 		return StringBundler.concat(
@@ -175,7 +175,7 @@ public class DBPartitionSQLProvider extends BaseSQLProvider {
 		return sb.toString();
 	}
 
-	private String _getRules() {
+	private String _getRulesSQL() {
 		StringBundler sb = new StringBundler();
 
 		for (List<String> ruleTableColumn : _rulesTableColumn) {
