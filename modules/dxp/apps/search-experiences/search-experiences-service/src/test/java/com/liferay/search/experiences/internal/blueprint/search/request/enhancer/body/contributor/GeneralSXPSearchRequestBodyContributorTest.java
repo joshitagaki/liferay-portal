@@ -16,6 +16,8 @@ import com.liferay.search.experiences.rest.dto.v1_0.Configuration;
 import com.liferay.search.experiences.rest.dto.v1_0.GeneralConfiguration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -36,11 +38,11 @@ public class GeneralSXPSearchRequestBodyContributorTest {
 
 	@Test
 	public void testContribute() {
-		List<String> entryClassNames = new ArrayList<>();
+		_testContribute(
+			Collections.emptyList(), Collections.emptyList(), new String[0]);
 
-		_testContribute(entryClassNames, entryClassNames, new String[0]);
-
-		entryClassNames.add("com.liferay.journal.model.JournalArticle");
+		List<String> entryClassNames = Arrays.asList(
+			"com.liferay.journal.model.JournalArticle");
 
 		_testContribute(
 			entryClassNames, entryClassNames,
