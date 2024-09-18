@@ -38,6 +38,7 @@ import com.liferay.object.constants.ObjectActionTriggerConstants;
 import com.liferay.object.constants.ObjectDefinitionConstants;
 import com.liferay.object.constants.ObjectRelationshipConstants;
 import com.liferay.object.field.builder.TextObjectFieldBuilder;
+import com.liferay.object.model.ObjectAction;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectField;
 import com.liferay.object.rest.dto.v1_0.ListEntry;
@@ -62,6 +63,7 @@ import com.liferay.portal.kernel.portletfilerepository.PortletFileRepository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -485,9 +487,17 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 					RandomTestUtil.randomString(),
 					NotificationConstants.TYPE_EMAIL, Collections.emptyList()));
 
+		ObjectDefinition objectDefinition =
+			_addAndPublishCustomObjectDefinition(false);
+
+		_addObjectAction(
+			objectDefinition.getObjectDefinitionId(),
+			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD,
+			notificationTemplate.getNotificationTemplateId());
+
 		_testSendNotificationWithRoles(
-			null, StringPool.BLANK, 0, null, notificationTemplate,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, null);
+			null, StringPool.BLANK, 0, null,
+			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, objectDefinition);
 
 		_roleLocalService.addUserRole(user1.getUserId(), role1.getRoleId());
 
@@ -501,12 +511,25 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			new long[] {role2.getRoleId()}, null, true, null);
 
 		_testSendNotificationWithRoles(
-			null, StringPool.BLANK, 0, null, notificationTemplate,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, null);
+			null, StringPool.BLANK, 0, null,
+			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, objectDefinition);
+
+		resourcePermissionLocalService.addResourcePermission(
+			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
+			ResourceConstants.SCOPE_COMPANY,
+			String.valueOf(TestPropsValues.getCompanyId()), role1.getRoleId(),
+			ActionKeys.VIEW);
+		resourcePermissionLocalService.addResourcePermission(
+			TestPropsValues.getCompanyId(), objectDefinition.getClassName(),
+			ResourceConstants.SCOPE_COMPANY,
+			String.valueOf(TestPropsValues.getCompanyId()), role2.getRoleId(),
+			ActionKeys.VIEW);
+
 		_testSendNotificationWithRoles(
 			null, StringPool.BLANK, 1, user.getEmailAddress(),
-			notificationTemplate, ObjectActionTriggerConstants.KEY_ON_AFTER_ADD,
-			new long[] {role1.getRoleId(), role2.getRoleId()});
+			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD, objectDefinition);
+
+		objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 	}
 
 	@Test
@@ -596,9 +619,17 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 					RandomTestUtil.randomString(),
 					NotificationConstants.TYPE_EMAIL, Collections.emptyList()));
 
+		ObjectDefinition objectDefinition =
+			_addAndPublishCustomObjectDefinition(false);
+
+		ObjectAction objectAction1 = _addObjectAction(
+			objectDefinition.getObjectDefinitionId(),
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			notificationTemplate1.getNotificationTemplateId());
+
 		_testSendNotificationWithRoles(
-			null, null, 0, null, notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			null, null, 0, null,
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, objectDefinition);
 
 		User user1 = UserTestUtil.addUser();
 
@@ -664,22 +695,29 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 				ListUtil.fromArray(
 					user1.getEmailAddress(), user3.getEmailAddress(),
 					user4.getEmailAddress())),
-			notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, objectDefinition);
 
 		// Send email with an object definition restricted by account entry
 
+		ObjectDefinition objectDefinitionAccountEntryRestricted =
+			_addAndPublishCustomObjectDefinition(true);
+
+		ObjectAction objectAction2 = _addObjectAction(
+			objectDefinitionAccountEntryRestricted.getObjectDefinitionId(),
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			notificationTemplate1.getNotificationTemplateId());
+
 		_testSendNotificationWithRoles(
 			accountEntry1, StringPool.BLANK, 1, user1.getEmailAddress(),
-			notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
 		_testSendNotificationWithRoles(
 			accountEntry2, user2.getEmailAddress(), 1,
 			StringUtil.merge(
 				ListUtil.fromArray(
 					user1.getEmailAddress(), user3.getEmailAddress())),
-			notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
 
 		AccountEntry accountEntry3 = _addAccountEntry();
 
@@ -699,8 +737,7 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 				ListUtil.fromArray(
 					user1.getEmailAddress(), user2.getEmailAddress(),
 					user3.getEmailAddress(), user4.getEmailAddress())),
-			notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, objectDefinition);
 
 		// Send email with an object definition restricted by account entry
 
@@ -723,8 +760,9 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			StringUtil.merge(
 				ListUtil.fromArray(
 					user5.getEmailAddress(), user6.getEmailAddress())),
-			1, user2.getEmailAddress(), notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			1, user2.getEmailAddress(),
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
 
 		_accountEntryOrganizationRelLocalService.
 			deleteAccountEntryOrganizationRel(
@@ -737,8 +775,20 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 
 		_testSendNotificationWithRoles(
 			accountEntry3, user6.getEmailAddress(), 1, user2.getEmailAddress(),
-			notificationTemplate1,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
+
+		_accountEntryUserRelLocalService.addAccountEntryUserRels(
+			accountEntry1.getAccountEntryId(),
+			new long[] {user1.getUserId(), user2.getUserId()});
+		_accountEntryUserRelLocalService.addAccountEntryUserRels(
+			accountEntry2.getAccountEntryId(), new long[] {user3.getUserId()});
+		_organizationLocalService.addUserOrganization(
+			user4.getUserId(), organization1.getOrganizationId());
+		_organizationLocalService.addUserOrganization(
+			user5.getUserId(), organization2.getOrganizationId());
+		_organizationLocalService.addUserOrganization(
+			user6.getUserId(), childOrganization.getOrganizationId());
 
 		NotificationTemplate notificationTemplate2 =
 			notificationTemplateLocalService.addNotificationTemplate(
@@ -790,17 +840,18 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 					RandomTestUtil.randomString(),
 					NotificationConstants.TYPE_EMAIL, Collections.emptyList()));
 
-		_accountEntryUserRelLocalService.addAccountEntryUserRels(
-			accountEntry1.getAccountEntryId(),
-			new long[] {user1.getUserId(), user2.getUserId()});
-		_accountEntryUserRelLocalService.addAccountEntryUserRels(
-			accountEntry2.getAccountEntryId(), new long[] {user3.getUserId()});
-		_organizationLocalService.addUserOrganization(
-			user4.getUserId(), organization1.getOrganizationId());
-		_organizationLocalService.addUserOrganization(
-			user5.getUserId(), organization2.getOrganizationId());
-		_organizationLocalService.addUserOrganization(
-			user6.getUserId(), childOrganization.getOrganizationId());
+		_objectActionLocalService.updateObjectAction(
+			objectAction1.getExternalReferenceCode(),
+			objectAction1.getObjectActionId(), objectAction1.isActive(),
+			objectAction1.getConditionExpression(),
+			objectAction1.getDescription(), objectAction1.getErrorMessageMap(),
+			objectAction1.getLabelMap(), objectAction1.getName(),
+			objectAction1.getObjectActionExecutorKey(),
+			objectAction1.getObjectActionTriggerKey(),
+			UnicodePropertiesBuilder.put(
+				"notificationTemplateId",
+				notificationTemplate2.getNotificationTemplateId()
+			).build());
 
 		// Send email with an object definition not restricted by account entry
 
@@ -815,8 +866,7 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 				ListUtil.fromArray(
 					user4.getEmailAddress(), user5.getEmailAddress(),
 					user6.getEmailAddress())),
-			notificationTemplate2,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, objectDefinition);
 
 		// Send email with an object definition restricted by account entry
 
@@ -827,6 +877,19 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			accountEntry2.getAccountEntryId(),
 			organization1.getOrganizationId());
 
+		_objectActionLocalService.updateObjectAction(
+			objectAction2.getExternalReferenceCode(),
+			objectAction2.getObjectActionId(), objectAction2.isActive(),
+			objectAction2.getConditionExpression(),
+			objectAction2.getDescription(), objectAction2.getErrorMessageMap(),
+			objectAction2.getLabelMap(), objectAction2.getName(),
+			objectAction2.getObjectActionExecutorKey(),
+			objectAction2.getObjectActionTriggerKey(),
+			UnicodePropertiesBuilder.put(
+				"notificationTemplateId",
+				notificationTemplate2.getNotificationTemplateId()
+			).build());
+
 		_testSendNotificationWithRoles(
 			accountEntry1,
 			StringUtil.merge(
@@ -836,16 +899,20 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			StringUtil.merge(
 				ListUtil.fromArray(
 					user5.getEmailAddress(), user6.getEmailAddress())),
-			notificationTemplate2,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
 		_testSendNotificationWithRoles(
 			accountEntry2, user3.getEmailAddress(), 1, user4.getEmailAddress(),
-			notificationTemplate2,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
 		_testSendNotificationWithRoles(
 			accountEntry3, null, 1, user5.getEmailAddress(),
-			notificationTemplate2,
-			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE, null);
+			ObjectActionTriggerConstants.KEY_ON_AFTER_DELETE,
+			objectDefinitionAccountEntryRestricted);
+
+		objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
+		objectDefinitionLocalService.deleteObjectDefinition(
+			objectDefinitionAccountEntryRestricted);
 	}
 
 	private AccountEntry _addAccountEntry() throws Exception {
@@ -864,6 +931,60 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			RandomTestUtil.randomString(),
 			RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap());
+	}
+
+	private ObjectDefinition _addAndPublishCustomObjectDefinition(
+			boolean accountRestricted)
+		throws Exception {
+
+		ObjectDefinition objectDefinition =
+			objectDefinitionLocalService.addCustomObjectDefinition(
+				TestPropsValues.getUserId(), 0, false, true, false, false,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				ObjectDefinitionTestUtil.getRandomName(), null, null,
+				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+				true, ObjectDefinitionConstants.SCOPE_COMPANY,
+				ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT,
+				Collections.singletonList(
+					new TextObjectFieldBuilder(
+					).labelMap(
+						LocalizedMapUtil.getLocalizedMap(
+							RandomTestUtil.randomString())
+					).name(
+						"textObjectField"
+					).build()));
+
+		if (accountRestricted) {
+			ObjectDefinition accountEntryObjectDefinition =
+				objectDefinitionLocalService.fetchObjectDefinition(
+					TestPropsValues.getCompanyId(),
+					AccountEntry.class.getSimpleName());
+
+			objectDefinition =
+				objectDefinitionLocalService.enableAccountEntryRestricted(
+					objectRelationshipLocalService.addObjectRelationship(
+						null, TestPropsValues.getUserId(),
+						accountEntryObjectDefinition.getObjectDefinitionId(),
+						objectDefinition.getObjectDefinitionId(), 0,
+						ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
+						LocalizedMapUtil.getLocalizedMap(
+							RandomTestUtil.randomString()),
+						"relationship", false,
+						ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null));
+		}
+
+		objectDefinition =
+			objectDefinitionLocalService.publishCustomObjectDefinition(
+				TestPropsValues.getUserId(),
+				objectDefinition.getObjectDefinitionId());
+
+		resourcePermissionLocalService.addResourcePermission(
+			TestPropsValues.getCompanyId(), objectDefinition.getResourceName(),
+			ResourceConstants.SCOPE_COMPANY,
+			String.valueOf(TestPropsValues.getCompanyId()), role.getRoleId(),
+			ObjectActionKeys.ADD_OBJECT_ENTRY);
+
+		return objectDefinition;
 	}
 
 	private NotificationTemplate _addNotificationTemplate(
@@ -904,6 +1025,26 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 					getTermNames(), StringPool.BLANK, StringPool.SEMICOLON),
 				NotificationConstants.TYPE_EMAIL,
 				Collections.singletonList(objectField.getObjectFieldId())));
+	}
+
+	private ObjectAction _addObjectAction(
+			long objectDefinitionId, String objectActionTriggerKey,
+			long objectNotificationTemplateId)
+		throws Exception {
+
+		return objectActionLocalService.addObjectAction(
+			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
+			objectDefinitionId, true, StringPool.BLANK,
+			RandomTestUtil.randomString(),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			RandomTestUtil.randomString(),
+			ObjectActionExecutorConstants.KEY_NOTIFICATION,
+			objectActionTriggerKey,
+			UnicodePropertiesBuilder.put(
+				"notificationTemplateId", objectNotificationTemplateId
+			).build(),
+			false);
 	}
 
 	private Role _addRole(int type, User user) throws Exception {
@@ -1116,83 +1257,9 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 	private void _testSendNotificationWithRoles(
 			AccountEntry accountEntry, String expectedBcc,
 			int expectedNotificationQueueEntriesCount,
-			String expectedToEmailAddress,
-			NotificationTemplate notificationTemplate,
-			String objectActionTriggerKey, long[] roleIds)
+			String expectedToEmailAddress, String objectActionTriggerKey,
+			ObjectDefinition objectDefinition)
 		throws Exception {
-
-		ObjectDefinition objectDefinition =
-			objectDefinitionLocalService.addCustomObjectDefinition(
-				TestPropsValues.getUserId(), 0, false, true, false, false,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				ObjectDefinitionTestUtil.getRandomName(), null, null,
-				LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-				true, ObjectDefinitionConstants.SCOPE_COMPANY,
-				ObjectDefinitionConstants.STORAGE_TYPE_DEFAULT,
-				Collections.singletonList(
-					new TextObjectFieldBuilder(
-					).labelMap(
-						LocalizedMapUtil.getLocalizedMap(
-							RandomTestUtil.randomString())
-					).name(
-						"textObjectField"
-					).build()));
-
-		if (accountEntry != null) {
-			ObjectDefinition accountEntryObjectDefinition =
-				objectDefinitionLocalService.fetchObjectDefinition(
-					TestPropsValues.getCompanyId(),
-					AccountEntry.class.getSimpleName());
-
-			objectDefinition =
-				objectDefinitionLocalService.enableAccountEntryRestricted(
-					objectRelationshipLocalService.addObjectRelationship(
-						null, TestPropsValues.getUserId(),
-						accountEntryObjectDefinition.getObjectDefinitionId(),
-						objectDefinition.getObjectDefinitionId(), 0,
-						ObjectRelationshipConstants.DELETION_TYPE_PREVENT,
-						LocalizedMapUtil.getLocalizedMap(
-							RandomTestUtil.randomString()),
-						"relationship", false,
-						ObjectRelationshipConstants.TYPE_ONE_TO_MANY, null));
-		}
-
-		objectDefinition =
-			objectDefinitionLocalService.publishCustomObjectDefinition(
-				TestPropsValues.getUserId(),
-				objectDefinition.getObjectDefinitionId());
-
-		resourcePermissionLocalService.addResourcePermission(
-			TestPropsValues.getCompanyId(), objectDefinition.getResourceName(),
-			ResourceConstants.SCOPE_COMPANY,
-			String.valueOf(TestPropsValues.getCompanyId()), role.getRoleId(),
-			ObjectActionKeys.ADD_OBJECT_ENTRY);
-
-		if (roleIds != null) {
-			for (long roleId : roleIds) {
-				resourcePermissionLocalService.addResourcePermission(
-					TestPropsValues.getCompanyId(),
-					objectDefinition.getClassName(),
-					ResourceConstants.SCOPE_COMPANY,
-					String.valueOf(TestPropsValues.getCompanyId()), roleId,
-					ActionKeys.VIEW);
-			}
-		}
-
-		objectActionLocalService.addObjectAction(
-			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
-			objectDefinition.getObjectDefinitionId(), true, StringPool.BLANK,
-			RandomTestUtil.randomString(),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
-			RandomTestUtil.randomString(),
-			ObjectActionExecutorConstants.KEY_NOTIFICATION,
-			objectActionTriggerKey,
-			UnicodePropertiesBuilder.put(
-				"notificationTemplateId",
-				notificationTemplate.getNotificationTemplateId()
-			).build(),
-			false);
 
 		ObjectEntry objectEntry = objectEntryManager.addObjectEntry(
 			dtoConverterContext, objectDefinition,
@@ -1243,8 +1310,6 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 
 		notificationQueueEntryLocalService.deleteNotificationQueueEntry(
 			notificationQueueEntries.get(0));
-
-		objectDefinitionLocalService.deleteObjectDefinition(objectDefinition);
 	}
 
 	private static Map<String, Object> _freeMarkerTermValues;
