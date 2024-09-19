@@ -840,18 +840,8 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 					RandomTestUtil.randomString(),
 					NotificationConstants.TYPE_EMAIL, Collections.emptyList()));
 
-		_objectActionLocalService.updateObjectAction(
-			objectAction1.getExternalReferenceCode(),
-			objectAction1.getObjectActionId(), objectAction1.isActive(),
-			objectAction1.getConditionExpression(),
-			objectAction1.getDescription(), objectAction1.getErrorMessageMap(),
-			objectAction1.getLabelMap(), objectAction1.getName(),
-			objectAction1.getObjectActionExecutorKey(),
-			objectAction1.getObjectActionTriggerKey(),
-			UnicodePropertiesBuilder.put(
-				"notificationTemplateId",
-				notificationTemplate2.getNotificationTemplateId()
-			).build());
+		_updateObjectAction(
+			notificationTemplate2.getNotificationTemplateId(), objectAction1);
 
 		// Send email with an object definition not restricted by account entry
 
@@ -877,18 +867,8 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			accountEntry2.getAccountEntryId(),
 			organization1.getOrganizationId());
 
-		_objectActionLocalService.updateObjectAction(
-			objectAction2.getExternalReferenceCode(),
-			objectAction2.getObjectActionId(), objectAction2.isActive(),
-			objectAction2.getConditionExpression(),
-			objectAction2.getDescription(), objectAction2.getErrorMessageMap(),
-			objectAction2.getLabelMap(), objectAction2.getName(),
-			objectAction2.getObjectActionExecutorKey(),
-			objectAction2.getObjectActionTriggerKey(),
-			UnicodePropertiesBuilder.put(
-				"notificationTemplateId",
-				notificationTemplate2.getNotificationTemplateId()
-			).build());
+		_updateObjectAction(
+			notificationTemplate2.getNotificationTemplateId(), objectAction2);
 
 		_testSendNotificationWithRoles(
 			accountEntry1,
@@ -1314,6 +1294,23 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 
 	private static Map<String, Object> _freeMarkerTermValues;
 	private static HttpServletRequest _originalHttpServletRequest;
+
+	private void _updateObjectAction(
+			long notificationTemplateId, ObjectAction objectAction)
+		throws Exception {
+
+		_objectActionLocalService.updateObjectAction(
+			objectAction.getExternalReferenceCode(),
+			objectAction.getObjectActionId(), objectAction.isActive(),
+			objectAction.getConditionExpression(),
+			objectAction.getDescription(), objectAction.getErrorMessageMap(),
+			objectAction.getLabelMap(), objectAction.getName(),
+			objectAction.getObjectActionExecutorKey(),
+			objectAction.getObjectActionTriggerKey(),
+			UnicodePropertiesBuilder.put(
+				"notificationTemplateId", notificationTemplateId
+			).build());
+	}
 
 	@Inject
 	private static Portal _portal;
