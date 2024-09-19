@@ -41,7 +41,6 @@ public class CPDefinitionSpecificationOptionValueUpgradeProcess
 
 					updatePreparedStatement.setLong(
 						2, resultSet.getLong("ctCollectionId"));
-
 					updatePreparedStatement.setLong(
 						3, cpdSpecificationOptionValueId);
 
