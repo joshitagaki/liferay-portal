@@ -109,7 +109,7 @@ definition {
 	@description = "COMMERCE-12026 | When an admin need to add to cart a product with a discontinued SKU without inventory and allow back orders switched off, your replacement has to be added to the cart"
 	@priority = 5
 	test CanReplacementSKUAddedToCart {
-		property portal.acceptance = "true";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given U-Joint product set as Discontinued with a replacement product") {
 			CommerceProducts.openProductsAdmin();

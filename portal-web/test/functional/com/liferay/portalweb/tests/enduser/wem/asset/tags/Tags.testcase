@@ -197,6 +197,7 @@ definition {
 	@description = "The usar can select another tag to merge in Merge Tags section."
 	@priority = 3
 	test MergeAdditionalTag {
+		property portal.acceptance = "U127Round2";
 		task ("Add six tags") {
 			for (var i : list "1,2,3,4,5,6") {
 				JSONAssettag.addTag(
@@ -237,6 +238,7 @@ definition {
 	@description = "The user can merge multiple tags."
 	@priority = 4
 	test MergeMultipleTags {
+		property portal.acceptance = "U127Round2";
 		task ("Add three tags") {
 			for (var i : list "1,2,3") {
 				JSONAssettag.addTag(

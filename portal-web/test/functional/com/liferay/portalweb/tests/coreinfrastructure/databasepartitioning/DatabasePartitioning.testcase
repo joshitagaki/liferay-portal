@@ -153,7 +153,7 @@ definition {
 	@priority = 5
 	test CanAddCompanyWithPortalInstancesAdminUI {
 		property custom.properties = "database.partition.schema.name.prefix=ltest_${line.separator}virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com";
-		property portal.acceptance = "true";
+		property portal.acceptance = "U127Round2";
 		property test.assert.warning.exceptions = "true";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
