@@ -610,6 +610,7 @@ definition {
 	@description = "Verify that an Image can be uploaded to the Body Text"
 	@priority = 5
 	test CanSupportImages {
+		property portal.acceptance = "U127Round2";
 		FormsAdmin.addForm();
 
 		Form.editName(formName = "Form 1");
@@ -735,6 +736,7 @@ definition {
 	@description = "Verify that a Video can be uploaded to the Body Text"
 	@priority = 5
 	test CanSupportVideos {
+		property portal.acceptance = "U127Round2";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 

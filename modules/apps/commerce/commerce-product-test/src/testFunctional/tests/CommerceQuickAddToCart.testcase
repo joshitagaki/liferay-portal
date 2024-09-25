@@ -807,7 +807,7 @@ definition {
 	@description = "This is a test for COMMERCE-12005. Discontinued SKUs are replaced correctly using quick add to cart."
 	@priority = 5
 	test CanDiscontinuedSKUBeReplaced {
-		property portal.acceptance = "true";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(
@@ -898,7 +898,7 @@ definition {
 	@description = "This is a test for COMMERCE-12037. Discontinued SKU is replaced successfully on quick add to cart using Classic theme."
 	@priority = 3
 	test CanDiscontinuedSKUBeReplacedCorrectlyUsingClassicTheme {
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(
@@ -1014,7 +1014,7 @@ definition {
 	@description = "This is a test for COMMERCE-12035. Discontinued SKU is replaced successfully when the replacement has a discount."
 	@priority = 3
 	test CanDiscountBeAppliedCorrectlyOnReplacementSKU {
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(
@@ -1600,7 +1600,7 @@ definition {
 	@description = "This is a test for COMMERCE-12006. Discontinued SKU is not replaced if it has active back order."
 	@priority = 4
 	test CannotDiscontinuedSKUBeReplacedWithBackOrderActive {
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(
@@ -1846,7 +1846,7 @@ definition {
 	@priority = 3
 	test CanPriceOnApplicationBeAppliedCorrectlyOnReplacementSKU {
 		property custom.properties = "company.security.strangers.verify=false${line.separator}jsonws.web.service.paths.excludes=";
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(
@@ -1963,7 +1963,7 @@ definition {
 	@description = "This is a test for COMMERCE-12034. Discontinued SKU is replaced successfully when the replacement has a promotion."
 	@priority = 3
 	test CanPromotionBeAppliedCorrectlyOnReplacementSKU {
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given an account with a buyer user is created") {
 			CommerceEntry.addAccountEntryUser(

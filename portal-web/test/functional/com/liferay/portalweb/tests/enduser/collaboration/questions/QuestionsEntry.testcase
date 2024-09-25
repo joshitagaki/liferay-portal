@@ -1842,6 +1842,7 @@ definition {
 	@priority = 4
 	@refactordone
 	test CanViewQuestionsWithConfiguredFilter {
+		property portal.acceptance = "U127Round2";
 		task ("Given there are a category and questions created") {
 			JSONMBMessage.addCategory(
 				categoryDescription = "Description",

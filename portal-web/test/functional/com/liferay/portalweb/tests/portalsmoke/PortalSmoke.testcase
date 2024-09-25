@@ -116,6 +116,7 @@ definition {
 
 	@priority = 4
 	test SmokeWithJNDI {
+		property portal.acceptance = "U127Round2";
 		property app.server.types = "tomcat,wildfly,weblogic";
 		property database.jndi.enabled = "true";
 		property database.types = "db2,mariadb,mysql,oracle,postgresql,sqlserver";

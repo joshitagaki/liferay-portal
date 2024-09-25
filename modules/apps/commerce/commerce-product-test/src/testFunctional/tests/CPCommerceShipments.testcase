@@ -1664,7 +1664,7 @@ definition {
 	@description = "COMMERCE-8626. The user with Operations Manager role can view shipments listed on the Shipments Page."
 	@priority = 3
 	test CanOperationsManagerViewShipments {
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given a Minium site with an account") {
 			CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");

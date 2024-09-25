@@ -389,7 +389,7 @@ definition {
 	@description = "COMMERCE-12546. As a buyer, I want to be able to assert decimal UOM prices are converted in product bundles"
 	@priority = 5
 	test CanAssertDecimalUOMPricesAreConvertedInProductBundles {
-		property portal.acceptance = "true";
+		property portal.acceptance = "U127Round2";
 
 		task ("Minimum Order Quantity is set to 0.1 and Multiple Order Quantity is set to 0.1 for ABS Sensor") {
 			CommerceJSONProductsAPI._patchCommerceProductConfiguration(
@@ -565,7 +565,7 @@ definition {
 	@description = "COMMERCE-12547. As a buyer, I want to be able to assert that a bundled product with UOMs is overlapped using normal and quick add to cart"
 	@priority = 5
 	test CanAssertUOMBundledProductIsOverlappedUsingNormalAndQuickAdd {
-		property portal.acceptance = "true";
+		property portal.acceptance = "U127Round2";
 
 		task ("Given 2 UOMs are created to MIN93015(base price: $30, incremental: 0.6 for UOM1; base price: $50, promo price: $40, incremental: 1.5 for UOM2)") {
 			CommerceJSONSKUsAPI._addCommerceUOM(
