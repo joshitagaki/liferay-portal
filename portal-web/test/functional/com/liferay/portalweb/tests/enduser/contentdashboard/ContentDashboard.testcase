@@ -196,6 +196,7 @@ definition {
 	@description = "LPS-162826 Add the Compare to Action to the Version History for Web Content"
 	@priority = 3
 	test BackFromCompareToWebContent {
+		property portal.acceptance = "U127Round2";
 		task ("Given the compare screen for Web Content") {
 			task ("Create a Web Content") {
 				JSONWebcontent.addWebContent(
@@ -243,6 +244,7 @@ definition {
 	@description = "LPS-162823: Add the View Action to the Version History for Documents and Media"
 	@priority = 3
 	test BackFromViewDocumentVersion {
+		property portal.acceptance = "U127Round2";
 		task ("Given the version document page") {
 			task ("Create a Document") {
 				JSONDocument.addFileWithUploadedFile(
@@ -2461,6 +2463,7 @@ definition {
 	@description = "LPS-162826 Add the Compare to Action to the Version History for Web Content"
 	@priority = 3
 	test CompareToLastVersionWebContent {
+		property portal.acceptance = "U127Round2";
 		task ("Given the compare screen for Web Content") {
 			task ("Create a Web Content") {
 				JSONWebcontent.addWebContent(
@@ -2512,6 +2515,7 @@ definition {
 	@description = "LPS-162826 Add the Compare to Action to the Version History for Web Content"
 	@priority = 3
 	test CompareToVersionWebContent {
+		property portal.acceptance = "U127Round2";
 		task ("Given the Versions tab in the Info panel of a Web Content") {
 			task ("Create a Web Content") {
 				JSONWebcontent.addWebContent(
@@ -2958,6 +2962,7 @@ definition {
 	@priority = 3
 	@uitest
 	test DocumentsVersionHistoryInformation {
+		property portal.acceptance = "U127Round2";
 		var groupId = JSONGroupSetter.setGroupId(groupName = "Test Site Name");
 
 		task ("Given the Version History page for documents") {
@@ -3065,6 +3070,7 @@ definition {
 	@priority = 3
 	@uitest
 	test DocumentsVersionHistoryOrdered {
+		property portal.acceptance = "U127Round2";
 		var groupId = JSONGroupSetter.setGroupId(groupName = "Test Site Name");
 
 		task ("Given the Version History page for documents") {
@@ -3321,6 +3327,7 @@ definition {
 	@description = "LPS-161017 Add the Download Action to the Version History for Documents and Media"
 	@priority = 4
 	test DownloadDocumentFromVersionsTab {
+		property portal.acceptance = "U127Round2";
 		task ("Given the Versions tab in the Info panel of a document") {
 			task ("Create a Document") {
 				JSONDocument.addFileWithUploadedFile(
@@ -3483,6 +3490,7 @@ definition {
 	@description = "LPS-162827 Given the kebab menu of a web content with just one version When the user clicks on Expire option Then the web content is expired and it changes its status to Expired"
 	@priority = 4
 	test ExpireVersionLabel {
+		property portal.acceptance = "U127Round2";
 		task ("Create a Web Content") {
 			JSONWebcontent.addWebContent(
 				content = "WC Content",
@@ -5997,6 +6005,7 @@ definition {
 	@description = "LPS-162824 Add the Revert Action to the Version History for Documents and Media"
 	@priority = 4
 	test RevertDocumentVersion {
+		property portal.acceptance = "U127Round2";
 		task ("Given a Document with more than one version") {
 			task ("Create a Document") {
 				JSONDocument.addFileWithUploadedFile(
@@ -6633,6 +6642,7 @@ definition {
 	@description = "LPS-162823 Add the View Action to the Version History for Documents and Media"
 	@priority = 3
 	test ViewDocumentVersion {
+		property portal.acceptance = "U127Round2";
 		task ("Given the Versions tab in the Info panel of a document") {
 			task ("Create a Document") {
 				JSONDocument.addFileWithUploadedFile(

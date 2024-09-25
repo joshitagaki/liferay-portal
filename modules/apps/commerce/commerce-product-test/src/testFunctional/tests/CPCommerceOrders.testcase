@@ -1786,7 +1786,7 @@ definition {
 	@priority = 3
 	test CanSearchAnOrderUsingProductName {
 		property custom.properties = "company.security.strangers.verify=false${line.separator}jsonws.web.service.paths.excludes=";
-		property portal.acceptance = "false";
+		property portal.acceptance = "U127Round2";
 
 		var orderIds = ListUtil.newList();
 
