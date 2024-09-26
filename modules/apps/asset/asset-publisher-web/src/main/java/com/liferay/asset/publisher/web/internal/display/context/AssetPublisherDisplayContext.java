@@ -1269,6 +1269,9 @@ public class AssetPublisherDisplayContext {
 
 		dropdownItemList.add(
 			dropdownItem -> {
+				Group group = _assetPublisherHelper.getItemSelectorScopeGroup(
+					layout.getGroup());
+
 				dropdownItem.putData("action", "openScopeSelector");
 				dropdownItem.putData("eventName", itemSelectorEventName);
 				dropdownItem.putData(
@@ -1279,7 +1282,8 @@ public class AssetPublisherDisplayContext {
 						itemSelector.getItemSelectorURL(
 							RequestBackedPortletURLFactoryUtil.create(
 								_portletRequest),
-							itemSelectorEventName, groupItemSelectorCriterion)
+							group, group.getGroupId(), itemSelectorEventName,
+							groupItemSelectorCriterion)
 					).setPortletResource(
 						getPortletResource()
 					).setParameter(
