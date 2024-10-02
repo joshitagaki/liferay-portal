@@ -132,27 +132,6 @@ public class UserIndexerIndexedFieldsTest {
 	}
 
 	@Test
-	public void testLastLoginDate() throws Exception {
-		User user1 = addUser();
-
-		User user2 = userLocalService.updateLastLogin(user1.getUserId(), null);
-
-		String searchTerm = user2.getFirstName();
-
-		Document document = indexerFixture.searchOnlyOne(searchTerm);
-
-		indexedFieldsFixture.postProcessDocument(document);
-
-		Map<String, String> map = _getExpectedFieldValues(user2);
-
-		indexedFieldsFixture.populateDate(
-			"lastLoginDate", user2.getLastLoginDate(), map);
-
-		FieldValuesAssert.assertFieldValues(
-			document, map, name -> !name.equals("timestamp"), searchTerm);
-	}
-
-	@Test
 	public void testOrganizationIds() throws Exception {
 		Organization organization = addOrganization();
 
@@ -329,6 +308,17 @@ public class UserIndexerIndexedFieldsTest {
 			"fullName", user.getFullName()
 		).put(
 			"groupIds", groupId
+		).put(
+			"hasLoginDate",
+			() -> {
+				boolean hasLoginDate = false;
+
+				if (user.getLastLoginDate() != null) {
+					hasLoginDate = true;
+				}
+
+				return String.valueOf(hasLoginDate);
+			}
 		).put(
 			"lastName", user.getLastName()
 		).put(
