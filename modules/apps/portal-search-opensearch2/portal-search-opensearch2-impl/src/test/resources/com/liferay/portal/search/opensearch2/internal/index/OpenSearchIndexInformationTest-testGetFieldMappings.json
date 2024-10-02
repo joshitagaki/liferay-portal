@@ -1691,6 +1691,10 @@
 					"store": true,
 					"type": "keyword"
 				},
+				"hasLoginDate": {
+					"store": true,
+					"type": "keyword"
+				},
 				"head": {
 					"store": true,
 					"type": "keyword"
