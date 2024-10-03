@@ -3998,7 +3998,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				PropsKeys.LOCALES,
 				StringUtil.merge(
 					LocaleUtil.toLanguageIds(
-						LanguageUtil.getAvailableLocales(groupId))));
+						LanguageUtil.getAvailableLocales())));
 		}
 
 		String newLanguageIds = typeSettingsUnicodeProperties.getProperty(
