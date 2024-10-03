@@ -71,7 +71,7 @@ function AssetVocabulariesCategoriesSelector({
 	const previousInputValue = usePrevious(inputValue);
 
 	useEffect(() => {
-		if (inputValue !== previousInputValue) {
+		if (previousInputValue && inputValue !== previousInputValue) {
 			refetch();
 		}
 
