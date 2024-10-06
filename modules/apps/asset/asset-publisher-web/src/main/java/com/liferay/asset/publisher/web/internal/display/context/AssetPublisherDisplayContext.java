@@ -1269,13 +1269,14 @@ public class AssetPublisherDisplayContext {
 
 		dropdownItemList.add(
 			dropdownItem -> {
-				Group group = _assetPublisherHelper.getItemSelectorScopeGroup(
-					layout.getGroup());
-
 				dropdownItem.putData("action", "openScopeSelector");
 				dropdownItem.putData("eventName", itemSelectorEventName);
 				dropdownItem.putData(
 					"id", HtmlUtil.escapeJS(getPortletResource()));
+
+				Group group = _assetPublisherHelper.getItemSelectorScopeGroup(
+					layout.getGroup());
+
 				dropdownItem.putData(
 					"url",
 					PortletURLBuilder.create(
@@ -1291,6 +1292,7 @@ public class AssetPublisherDisplayContext {
 					).setParameter(
 						"plid", layout.getPlid()
 					).buildString());
+
 				dropdownItem.setLabel(
 					LanguageUtil.get(
 						_httpServletRequest, "other-site-or-asset-library"));
