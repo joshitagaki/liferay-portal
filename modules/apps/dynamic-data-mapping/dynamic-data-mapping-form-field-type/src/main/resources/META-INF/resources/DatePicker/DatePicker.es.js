@@ -243,7 +243,7 @@ export default function DatePicker({
 			localizedValue={localizedValue}
 			name={name}
 			readOnly={readOnly}
-			type="date"
+			type={type}
 			valid={validField.valid}
 			{...otherProps}
 		>
