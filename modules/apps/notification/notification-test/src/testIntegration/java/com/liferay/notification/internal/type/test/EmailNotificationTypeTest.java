@@ -24,10 +24,12 @@ import com.liferay.notification.constants.NotificationQueueEntryConstants;
 import com.liferay.notification.constants.NotificationRecipientConstants;
 import com.liferay.notification.constants.NotificationRecipientSettingConstants;
 import com.liferay.notification.constants.NotificationTemplateConstants;
+import com.liferay.notification.context.NotificationContext;
 import com.liferay.notification.model.NotificationQueueEntry;
 import com.liferay.notification.model.NotificationQueueEntryAttachment;
 import com.liferay.notification.model.NotificationTemplate;
 import com.liferay.notification.service.NotificationQueueEntryAttachmentLocalService;
+import com.liferay.notification.service.NotificationRecipientLocalServiceUtil;
 import com.liferay.notification.test.util.NotificationTemplateUtil;
 import com.liferay.notification.util.NotificationRecipientSettingUtil;
 import com.liferay.object.action.trigger.ObjectActionTriggerRegistry;
@@ -78,6 +80,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -97,6 +100,7 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.SynchronousMailTestRule;
 import com.liferay.portal.vulcan.util.LocalizedMapUtil;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import java.time.chrono.IsoChronology;
@@ -341,6 +345,56 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 
 		_assertNotificationQueueEntryTermValues(
 			Collections.singletonList(listEntry.getName()), StringPool.COMMA);
+	}
+
+	@Test
+	public void testRichTextNotificationTemplateWithDifferentUserLocale()
+		throws Exception {
+
+		ObjectAction objectAction = _addNotificationTemplateObjectAction(
+			StringBundler.concat(
+				_getTermName(childObjectDefinition, "createDate"),
+				StringPool.COMMA,
+				_getTermName(childObjectDefinition, "modifiedDate")),
+			NotificationTemplateConstants.EDITOR_TYPE_RICH_TEXT,
+			ObjectActionTriggerConstants.KEY_ON_AFTER_ADD,
+			childObjectDefinition);
+
+		String originalName = PrincipalThreadLocal.getName();
+
+		try {
+			User user = UserTestUtil.addUser(
+				TestPropsValues.getGroupId(), LocaleUtil.FRENCH);
+
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			ObjectEntry objectEntry = objectEntryManager.addObjectEntry(
+				dtoConverterContext, childObjectDefinition,
+				new ObjectEntry() {
+					{
+						properties = HashMapBuilder.putAll(
+							childObjectEntryValues
+						).build();
+					}
+				},
+				group.getGroupKey());
+
+			DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+				"EEE MMM dd HH:mm:ss zzz yyyy", LocaleUtil.FRENCH);
+
+			_assertNotificationQueueEntryBody(
+				StringBundler.concat(
+					dateFormat.format(objectEntry.getDateCreated()),
+					StringPool.COMMA,
+					dateFormat.format(objectEntry.getDateModified())));
+
+			_objectEntryLocalService.deleteObjectEntry(objectEntry.getId());
+		}
+		finally {
+			PrincipalThreadLocal.setName(originalName);
+
+			_objectActionLocalService.deleteObjectAction(objectAction);
+		}
 	}
 
 	@Test
@@ -1013,6 +1067,68 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 				Collections.singletonList(objectField.getObjectFieldId())));
 	}
 
+	private ObjectAction _addNotificationTemplateObjectAction(
+			String body, String editorType, String objectActionTriggerKey,
+			ObjectDefinition objectDefinition)
+		throws Exception {
+
+		NotificationTemplate notificationTemplate =
+			notificationTemplateLocalService.createNotificationTemplate(
+				RandomTestUtil.randomInt());
+
+		notificationTemplate.setUserId(TestPropsValues.getUserId());
+		notificationTemplate.setObjectDefinitionId(
+			objectDefinition.getObjectDefinitionId());
+		notificationTemplate.setBody(body);
+		notificationTemplate.setDescription(RandomTestUtil.randomString());
+		notificationTemplate.setEditorType(editorType);
+		notificationTemplate.setName(RandomTestUtil.randomString());
+		notificationTemplate.setSubject(RandomTestUtil.randomString());
+		notificationTemplate.setType(NotificationConstants.TYPE_EMAIL);
+
+		NotificationContext notificationContext = new NotificationContext();
+
+		notificationContext.setAttachmentObjectFieldIds(
+			Collections.emptyList());
+		notificationContext.setNotificationRecipient(
+			NotificationRecipientLocalServiceUtil.createNotificationRecipient(
+				RandomTestUtil.randomInt()));
+		notificationContext.setNotificationRecipientSettings(
+			Arrays.asList(
+				NotificationRecipientSettingUtil.
+					createNotificationRecipientSetting(
+						"from", "[%CURRENT_USER_EMAIL_ADDRESS%]"),
+				NotificationRecipientSettingUtil.
+					createNotificationRecipientSetting(
+						"fromName",
+						Collections.singletonMap(
+							LocaleUtil.US, RandomTestUtil.randomString())),
+				NotificationRecipientSettingUtil.
+					createNotificationRecipientSetting(
+						"to", "[%CURRENT_USER_EMAIL_ADDRESS%]")));
+		notificationContext.setNotificationTemplate(notificationTemplate);
+		notificationContext.setType(NotificationConstants.TYPE_EMAIL);
+
+		notificationTemplate =
+			notificationTemplateLocalService.addNotificationTemplate(
+				notificationContext);
+
+		return _objectActionLocalService.addObjectAction(
+			RandomTestUtil.randomString(), TestPropsValues.getUserId(),
+			objectDefinition.getObjectDefinitionId(), true, StringPool.BLANK,
+			RandomTestUtil.randomString(),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
+			RandomTestUtil.randomString(),
+			ObjectActionExecutorConstants.KEY_NOTIFICATION,
+			objectActionTriggerKey,
+			UnicodePropertiesBuilder.put(
+				"notificationTemplateId",
+				notificationTemplate.getNotificationTemplateId()
+			).build(),
+			false);
+	}
+
 	private ObjectAction _addObjectAction(
 			long objectDefinitionId, String objectActionTriggerKey,
 			long objectNotificationTemplateId)
@@ -1112,6 +1228,29 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 				String.valueOf(notificationRecipientSettingsMap.get("to"))));
 	}
 
+	private void _assertNotificationQueueEntryBody(
+			String notificationQueueEntryBody)
+		throws Exception {
+
+		List<NotificationQueueEntry> notificationQueueEntries =
+			notificationQueueEntryLocalService.getNotificationEntries(
+				NotificationConstants.TYPE_EMAIL,
+				NotificationQueueEntryConstants.STATUS_SENT);
+
+		Assert.assertEquals(
+			notificationQueueEntries.toString(), 1,
+			notificationQueueEntries.size());
+
+		NotificationQueueEntry notificationQueueEntry =
+			notificationQueueEntries.get(0);
+
+		Assert.assertEquals(
+			notificationQueueEntryBody, notificationQueueEntry.getBody());
+
+		notificationQueueEntryLocalService.deleteNotificationQueueEntry(
+			notificationQueueEntry);
+	}
+
 	private void _assertNotificationQueueEntryTermValues(
 			List<Object> expectedTermValues, String delimiter)
 		throws Exception {
@@ -1151,6 +1290,16 @@ public class EmailNotificationTypeTest extends BaseNotificationTypeTest {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			String.valueOf(
 				notificationQueueEntry.getNotificationQueueEntryId()));
+	}
+
+	private String _getTermName(
+		ObjectDefinition objectDefinition, String objectFieldName) {
+
+		return StringBundler.concat(
+			"[%",
+			StringUtil.toUpperCase(
+				objectDefinition.getShortName() + "_" + objectFieldName),
+			"%]");
 	}
 
 	private void _setUser(User user) {
