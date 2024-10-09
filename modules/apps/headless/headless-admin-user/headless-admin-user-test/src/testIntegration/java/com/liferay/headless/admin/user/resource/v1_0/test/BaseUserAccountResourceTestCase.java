@@ -4756,6 +4756,14 @@ public abstract class BaseUserAccountResourceTestCase {
 				continue;
 			}
 
+			if (Objects.equals("hasLoginDate", additionalAssertFieldName)) {
+				if (userAccount.getHasLoginDate() == null) {
+					valid = false;
+				}
+
+				continue;
+			}
+
 			if (Objects.equals("honorificPrefix", additionalAssertFieldName)) {
 				if (userAccount.getHonorificPrefix() == null) {
 					valid = false;
@@ -5175,6 +5183,17 @@ public abstract class BaseUserAccountResourceTestCase {
 				if (!Objects.deepEquals(
 						userAccount1.getGivenName(),
 						userAccount2.getGivenName())) {
+
+					return false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals("hasLoginDate", additionalAssertFieldName)) {
+				if (!Objects.deepEquals(
+						userAccount1.getHasLoginDate(),
+						userAccount2.getHasLoginDate())) {
 
 					return false;
 				}
@@ -5976,6 +5995,11 @@ public abstract class BaseUserAccountResourceTestCase {
 			return sb.toString();
 		}
 
+		if (entityFieldName.equals("hasLoginDate")) {
+			throw new IllegalArgumentException(
+				"Invalid entity field " + entityFieldName);
+		}
+
 		if (entityFieldName.equals("honorificPrefix")) {
 			Object object = userAccount.getHonorificPrefix();
 
@@ -6531,6 +6555,7 @@ public abstract class BaseUserAccountResourceTestCase {
 					RandomTestUtil.randomString());
 				givenName = StringUtil.toLowerCase(
 					RandomTestUtil.randomString());
+				hasLoginDate = RandomTestUtil.randomBoolean();
 				honorificPrefix = StringUtil.toLowerCase(
 					RandomTestUtil.randomString());
 				honorificSuffix = StringUtil.toLowerCase(
