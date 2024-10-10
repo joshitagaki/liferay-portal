@@ -1523,7 +1523,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	@Override
 	public Group fetchStagingGroup(long liveGroupId) {
-		if (_cacheableQueryLimitStagingGroups <= 0) {
+		if (_cacheableQueryLimitLPD28122 <= 0) {
 			return GroupUtil.fetchByLiveGroupId(liveGroupId);
 		}
 
@@ -1531,8 +1531,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			_stagingGroupIdsDCLSingleton.getSingleton(
 				this::_getStagingGroupIds);
 
-		if (stagingGroupIds.size() > _cacheableQueryLimitStagingGroups) {
-			_cacheableQueryLimitStagingGroups = 0;
+		if (stagingGroupIds.size() > _cacheableQueryLimitLPD28122) {
+			_cacheableQueryLimitLPD28122 = 0;
 
 			_stagingGroupIdsDCLSingleton.destroy(null);
 		}
@@ -5510,9 +5510,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	private static final Log _log = LogFactoryUtil.getLog(
 		GroupLocalServiceImpl.class);
 
-	private static volatile int _cacheableQueryLimitStagingGroups =
-		GetterUtil.getInteger(
-			PropsUtil.get("cacheable.query.limit.staging.groups"));
+	private static volatile int _cacheableQueryLimitLPD28122 =
+		GetterUtil.getInteger(PropsUtil.get("cacheable.query.limit.LPD-28122"));
 	private static final MethodKey _checkRemoteStagingGroupMethodKey =
 		new MethodKey(
 			GroupServiceUtil.class, "checkRemoteStagingGroup",
