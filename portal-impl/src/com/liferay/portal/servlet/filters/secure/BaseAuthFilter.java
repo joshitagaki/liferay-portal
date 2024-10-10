@@ -189,7 +189,7 @@ public abstract class BaseAuthFilter extends BasePortalFilter {
 		else {
 			User user2 = UserLocalServiceUtil.getUser(user1.getUserId());
 
-			if (isDigestModified(httpSession) || !user2.isActive()) {
+			if (_isDigestModified(httpSession) || !user2.isActive()) {
 				httpSession.invalidate();
 
 				HttpAuthManagerUtil.generateChallenge(
@@ -233,25 +233,6 @@ public abstract class BaseAuthFilter extends BasePortalFilter {
 
 		PermissionThreadLocal.setPermissionChecker(
 			PermissionCheckerFactoryUtil.create(user));
-	}
-
-	protected boolean isDigestModified(HttpSession httpSession)
-		throws PortalException {
-
-		User user = (User)httpSession.getAttribute(WebKeys.USER);
-
-		if (user != null) {
-			String digest = (String)httpSession.getAttribute(
-				WebKeys.USER_DIGEST);
-
-			user = UserLocalServiceUtil.getUser(user.getUserId());
-
-			if (!StringUtil.equals(digest, user.getDigest())) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	@Override
@@ -396,6 +377,26 @@ public abstract class BaseAuthFilter extends BasePortalFilter {
 
 	protected void setUsePermissionChecker(boolean usePermissionChecker) {
 		_usePermissionChecker = usePermissionChecker;
+	}
+
+
+	private boolean _isDigestModified(HttpSession httpSession)
+		throws PortalException {
+
+		User user = (User)httpSession.getAttribute(WebKeys.USER);
+
+		if (user != null) {
+			String digest = (String)httpSession.getAttribute(
+				WebKeys.USER_DIGEST);
+
+			user = UserLocalServiceUtil.getUser(user.getUserId());
+
+			if (!StringUtil.equals(digest, user.getDigest())) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(BaseAuthFilter.class);
