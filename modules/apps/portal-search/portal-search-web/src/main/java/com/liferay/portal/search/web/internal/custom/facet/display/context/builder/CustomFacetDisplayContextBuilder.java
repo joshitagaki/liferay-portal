@@ -10,9 +10,11 @@ import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.web.internal.custom.facet.display.context.CustomFacetDisplayContext;
 import com.liferay.portal.search.web.internal.facet.display.context.BucketDisplayContext;
 import com.liferay.portal.search.web.internal.util.comparator.BucketDisplayContextComparatorFactoryUtil;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +37,11 @@ public class CustomFacetDisplayContextBuilder {
 		HttpServletRequest httpServletRequest) {
 
 		_httpServletRequest = httpServletRequest;
+
+		_themeDisplay = (ThemeDisplay)httpServletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		_locale = _themeDisplay.getLocale();
 	}
 
 	public CustomFacetDisplayContext build() throws ConfigurationException {
@@ -209,6 +217,7 @@ public class CustomFacetDisplayContextBuilder {
 
 		bucketDisplayContext.setFrequency(termCollector.getFrequency());
 		bucketDisplayContext.setFrequencyVisible(_frequenciesVisible);
+		bucketDisplayContext.setLocale(_locale);
 		bucketDisplayContext.setSelected(isSelected(term));
 
 		return bucketDisplayContext;
@@ -277,10 +286,12 @@ public class CustomFacetDisplayContextBuilder {
 	private boolean _frequenciesVisible;
 	private int _frequencyThreshold;
 	private final HttpServletRequest _httpServletRequest;
+	private final Locale _locale;
 	private int _maxTerms;
 	private String _order;
 	private String _paginationStartParameterName;
 	private String _parameterName;
 	private List<String> _parameterValues = Collections.emptyList();
+	private final ThemeDisplay _themeDisplay;
 
 }
