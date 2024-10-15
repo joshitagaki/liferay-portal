@@ -1566,6 +1566,7 @@ definition {
 	@description = "LPS-92053 - Verify that an item is considered overdue if it has at least one SLA overdue, regardless if it is resolved or open"
 	@priority = 4
 	test ItemIsConsideredOverdueWhenItHasOneSlaOverdue {
+		property portal.acceptance = "U127Round2";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 

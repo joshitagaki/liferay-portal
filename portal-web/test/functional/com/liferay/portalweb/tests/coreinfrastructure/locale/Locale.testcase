@@ -185,6 +185,7 @@ definition {
 	@description = "This is a use case for LPS-113225. Verify a group can be updated when available languages differ between instances"
 	@priority = 3
 	test CanUpdateGroupSettingsWithDifferentAvailableLanguages {
+		property portal.acceptance = "U127Round2";
 		property test.assert.warning.exceptions = "true";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
