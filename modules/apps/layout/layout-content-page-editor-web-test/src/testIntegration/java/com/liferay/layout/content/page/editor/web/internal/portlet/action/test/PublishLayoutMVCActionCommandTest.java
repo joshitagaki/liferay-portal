@@ -108,7 +108,6 @@ public class PublishLayoutMVCActionCommandTest {
 		_layout = LayoutTestUtil.addTypeContentLayout(_group);
 
 		_draftLayout = _layout.fetchDraftLayout();
-
 		_segmentsExperienceId =
 			_segmentsExperienceLocalService.fetchDefaultSegmentsExperienceId(
 				_layout.getPlid());
@@ -322,7 +321,7 @@ public class PublishLayoutMVCActionCommandTest {
 
 	@Test
 	@TestInfo({"LPD-39213", "LPS-202932"})
-	public void testPublishedLayoutFragmentEntryLinkWithFreemarkerEmbeddedPortlet()
+	public void testPublishedLayoutFragmentEntryLinkWithFreeMarkerEmbeddedPortlet()
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -332,7 +331,7 @@ public class PublishLayoutMVCActionCommandTest {
 		try {
 			ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
-			_assertPublishedLayoutFragmentEntryLinkWithFreemarkerEmbeddedPortlet(
+			_assertPublishedLayoutFragmentEntryLinkWithFreeMarkerEmbeddedPortlet(
 				new String[] {
 					StringBundler.concat(
 						"<div class=\"fragment_1\">[@liferay_portlet.runtime ",
@@ -358,7 +357,7 @@ public class PublishLayoutMVCActionCommandTest {
 
 	@Test
 	@TestInfo({"LPD-39213", "LPS-202932"})
-	public void testPublishedLayoutFragmentEntryLinkWithFreemarkerEmbeddedPortletAndDynamicInstanceId()
+	public void testPublishedLayoutFragmentEntryLinkWithFreeMarkerEmbeddedPortletAndDynamicInstanceId()
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -368,7 +367,7 @@ public class PublishLayoutMVCActionCommandTest {
 		try {
 			ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
-			_assertPublishedLayoutFragmentEntryLinkWithFreemarkerEmbeddedPortlet(
+			_assertPublishedLayoutFragmentEntryLinkWithFreeMarkerEmbeddedPortlet(
 				new String[] {
 					StringBundler.concat(
 						"<div class=\"fragment_1\">[@liferay_portlet.runtime ",
@@ -486,7 +485,7 @@ public class PublishLayoutMVCActionCommandTest {
 	}
 
 	private void
-			_assertPublishedLayoutFragmentEntryLinkWithFreemarkerEmbeddedPortlet(
+			_assertPublishedLayoutFragmentEntryLinkWithFreeMarkerEmbeddedPortlet(
 				String[] htmls,
 				BiFunction<Integer, String, String> portletIdFunction)
 		throws Exception {
