@@ -66,7 +66,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Localization;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -82,7 +81,6 @@ import com.liferay.portal.vulcan.util.SearchUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -216,9 +214,6 @@ public class ObjectDefinitionResourceImpl
 		com.liferay.object.model.ObjectDefinition
 			serviceBuilderObjectDefinition;
 
-		Locale defaultLocale = LocaleUtil.fromLanguageId(
-			objectDefinition.getDefaultLanguageId());
-
 		if (GetterUtil.getBoolean(objectDefinition.getSystem())) {
 			serviceBuilderObjectDefinition =
 				_objectDefinitionService.addSystemObjectDefinition(
@@ -230,24 +225,21 @@ public class ObjectDefinitionResourceImpl
 					GetterUtil.getBoolean(objectDefinition.getEnableComments()),
 					GetterUtil.getBoolean(
 						objectDefinition.getEnableIndexSearch()),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getLabel()),
 					objectDefinition.getName(),
 					objectDefinition.getPanelAppOrder(),
 					objectDefinition.getPanelCategoryKey(),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getPluralLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getPluralLabel()),
 					GetterUtil.getBoolean(objectDefinition.getPortlet()),
 					objectDefinition.getScope(),
 					transformToList(
 						objectDefinition.getObjectFields(),
 						objectField -> ObjectFieldUtil.toObjectField(
-							LocaleUtil.fromLanguageId(
-								objectDefinition.getDefaultLanguageId()),
+							objectDefinition.getDefaultLanguageId(),
 							GetterUtil.getBoolean(
 								objectDefinition.getEnableLocalization()),
 							_listTypeDefinitionLocalService, objectField,
@@ -268,17 +260,15 @@ public class ObjectDefinitionResourceImpl
 						objectDefinition.getEnableLocalization()),
 					GetterUtil.getBoolean(
 						objectDefinition.getEnableObjectEntryDraft()),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getLabel()),
 					objectDefinition.getName(),
 					objectDefinition.getPanelAppOrder(),
 					objectDefinition.getPanelCategoryKey(),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getPluralLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getPluralLabel()),
 					GetterUtil.getBoolean(objectDefinition.getPortlet(), true),
 					objectDefinition.getScope(),
 					objectDefinition.getStorageType(),
@@ -295,7 +285,7 @@ public class ObjectDefinitionResourceImpl
 									ObjectFieldConstants.
 										BUSINESS_TYPE_RELATIONSHIP)),
 						objectField -> ObjectFieldUtil.toObjectField(
-							defaultLocale,
+							objectDefinition.getDefaultLanguageId(),
 							GetterUtil.getBoolean(
 								objectDefinition.getEnableLocalization()),
 							_listTypeDefinitionLocalService, objectField,
@@ -344,7 +334,7 @@ public class ObjectDefinitionResourceImpl
 		}
 
 		_addObjectDefinitionResources(
-			Collections.emptySet(), LocaleUtil.toLanguageId(defaultLocale),
+			Collections.emptySet(), objectDefinition.getDefaultLanguageId(),
 			objectDefinition.getObjectActions(),
 			serviceBuilderObjectDefinition.getObjectDefinitionId(),
 			objectDefinition.getObjectLayouts(),
@@ -362,9 +352,8 @@ public class ObjectDefinitionResourceImpl
 								ObjectFieldConstants.
 									BUSINESS_TYPE_AGGREGATION)),
 						objectField -> ObjectFieldUtil.toObjectField(
-							LocaleUtil.fromLanguageId(
-								objectDefinition.getDefaultLanguageId()),
-							false, _listTypeDefinitionLocalService, objectField,
+							objectDefinition.getDefaultLanguageId(), false,
+							_listTypeDefinitionLocalService, objectField,
 							_objectFieldLocalService,
 							_objectFieldSettingLocalService,
 							_objectFilterLocalService))) {
@@ -510,9 +499,6 @@ public class ObjectDefinitionResourceImpl
 					0);
 		}
 		else {
-			Locale defaultLocale = LocaleUtil.fromLanguageId(
-				objectDefinition.getDefaultLanguageId());
-
 			serviceBuilderObjectDefinition =
 				_objectDefinitionService.updateCustomObjectDefinition(
 					objectDefinition.getExternalReferenceCode(),
@@ -538,18 +524,16 @@ public class ObjectDefinitionResourceImpl
 						objectDefinition.getEnableObjectEntryDraft()),
 					GetterUtil.getBoolean(
 						objectDefinition.getEnableObjectEntryHistory()),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getLabel()),
 					objectDefinition.getName(),
 					objectDefinition.getPanelAppOrder(),
 					objectDefinition.getPanelCategoryKey(),
 					GetterUtil.getBoolean(objectDefinition.getPortlet()),
-					_getLocalizedMap(
-						defaultLocale,
-						LocalizedMapUtil.getLocalizedMap(
-							objectDefinition.getPluralLabel())),
+					_getLocalizedLabelMap(
+						objectDefinition.getDefaultLanguageId(),
+						objectDefinition.getPluralLabel()),
 					objectDefinition.getScope(), statusInt);
 		}
 
@@ -882,24 +866,12 @@ public class ObjectDefinitionResourceImpl
 					continue;
 				}
 
-				Map<String, String> labelMap = new HashMap<>(
-					objectAction.getLabel());
+				Map<String, String> i18nLabelMap = objectAction.getLabel();
 
-				String siteDefaultLanguageId = LocaleUtil.toLanguageId(
-					LocaleUtil.getSiteDefault());
-
-				if (!Objects.equals(defaultLanguageId, siteDefaultLanguageId) &&
-					Validator.isNull(labelMap.get(siteDefaultLanguageId)) &&
-					Validator.isNotNull(labelMap.get(defaultLanguageId))) {
-
-					labelMap.put(
-						siteDefaultLanguageId, labelMap.get(defaultLanguageId));
-				}
-
-				labelMap.putIfAbsent(
-					siteDefaultLanguageId, objectAction.getName());
-
-				objectAction.setLabel(() -> labelMap);
+				objectAction.setLabel(
+					() -> LocalizedMapUtil.populateI18nMap(
+						defaultLanguageId, i18nLabelMap,
+						objectAction.getName()));
 
 				objectActionResource.postObjectDefinitionObjectAction(
 					objectDefinitionId, objectAction);
@@ -1113,10 +1085,9 @@ public class ObjectDefinitionResourceImpl
 			serviceBuilderObjectDefinition1.getObjectDefinitionId(),
 			serviceBuilderObjectDefinition2.getObjectDefinitionId(),
 			ObjectFieldUtil.toObjectField(
-				LocaleUtil.fromLanguageId(defaultLanguageId), false,
-				_listTypeDefinitionLocalService, objectField,
-				_objectFieldLocalService, _objectFieldSettingLocalService,
-				_objectFilterLocalService));
+				defaultLanguageId, false, _listTypeDefinitionLocalService,
+				objectField, _objectFieldLocalService,
+				_objectFieldSettingLocalService, _objectFilterLocalService));
 	}
 
 	private com.liferay.object.model.ObjectDefinition
@@ -1232,19 +1203,12 @@ public class ObjectDefinitionResourceImpl
 		return accountEntryRestrictedObjectRelationshipsNames;
 	}
 
-	private Map<Locale, String> _getLocalizedMap(
-		Locale defaultLocale, Map<Locale, String> localizedMap) {
+	private Map<Locale, String> _getLocalizedLabelMap(
+		String defaultLanguageId, Map<String, String> i18nLabelMap) {
 
-		Locale siteDefaultLocale = LocaleUtil.getSiteDefault();
-
-		if (localizedMap.containsKey(defaultLocale) &&
-			!localizedMap.containsKey(siteDefaultLocale)) {
-
-			localizedMap.put(
-				siteDefaultLocale, localizedMap.get(defaultLocale));
-		}
-
-		return localizedMap;
+		return LocalizedMapUtil.getLocalizedMap(
+			LocalizedMapUtil.populateI18nMap(
+				defaultLanguageId, i18nLabelMap, null));
 	}
 
 	private long _getObjectFolderId(String objectFolderExternalReferenceCode)
