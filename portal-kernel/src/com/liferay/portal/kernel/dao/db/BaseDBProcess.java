@@ -580,7 +580,10 @@ public abstract class BaseDBProcess implements DBProcess {
 			Objects.requireNonNull(unsafeBiConsumer);
 		}
 
-		ExecutorService executorService = Executors.newWorkStealingPool();
+		Runtime runtime = Runtime.getRuntime();
+
+		ExecutorService executorService = Executors.newFixedThreadPool(
+			runtime.availableProcessors());
 
 		ThrowableCollector throwableCollector = new ThrowableCollector();
 
