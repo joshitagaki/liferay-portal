@@ -229,6 +229,7 @@ public class DateFacetDisplayContextBuilder implements Serializable {
 		bucketDisplayContext.setFrequency(
 			getFrequency(getTermCollector(range)));
 		bucketDisplayContext.setFrequencyVisible(_frequenciesVisible);
+		bucketDisplayContext.setLocale(_locale);
 		bucketDisplayContext.setSelected(_selectedRanges.contains(label));
 
 		return bucketDisplayContext;
