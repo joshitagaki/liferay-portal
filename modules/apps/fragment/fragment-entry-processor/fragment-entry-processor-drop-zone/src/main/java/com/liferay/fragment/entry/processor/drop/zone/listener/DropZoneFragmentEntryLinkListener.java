@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -184,8 +185,9 @@ public class DropZoneFragmentEntryLinkListener
 			}
 
 			if (childrenItemIds.size() > elements.size()) {
-				List<String> childrenItemIdsToRemove = childrenItemIds.subList(
-					elements.size(), childrenItemIds.size());
+				List<String> childrenItemIdsToRemove = new ArrayList<>(
+					childrenItemIds.subList(
+						elements.size(), childrenItemIds.size()));
 
 				childrenItemIdsToRemove.forEach(
 					itemId ->
