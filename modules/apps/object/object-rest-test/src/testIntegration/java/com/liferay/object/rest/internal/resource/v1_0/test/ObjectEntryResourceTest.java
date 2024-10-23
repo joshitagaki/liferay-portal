@@ -11862,7 +11862,8 @@ public class ObjectEntryResourceTest {
 			expectedFieldName, objectFieldNamesAndObjectFieldValues, type);
 	}
 
-	private void _testGetObjectEntriesFilteredBySystemDate(String fieldName) {
+	private void _testGetObjectEntriesFilteredBySystemDate(String fieldName)
+		throws Exception {
 
 		// eq
 
