@@ -5,13 +5,14 @@
 	<version>
 		<libraries>
 			<library>
-				<file-name>com.liferay.adaptive.media.image.impl.jar!com.drew.metadata.jar</file-name>
-				<version>2.19.0.LIFERAY-PATCHED-1</version>
-				<project-name>com.drew.metadata</project-name>
+				<file-name>com.liferay.adaptive.media.image.impl.jar!metadata-extractor.jar</file-name>
+				<version>2.19.0</version>
+				<project-name>metadata-extractor</project-name>
+				<project-url>https://drewnoakes.com/code/exif/</project-url>
 				<licenses>
 					<license>
-						<license-name>LGPL 2.1</license-name>
-						<license-url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</license-url>
+						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
 			</library>
@@ -1862,7 +1863,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.oauth2.provider.rest.jar!jose4j.jar</file-name>
-				<version>0.9.3</version>
+				<version>0.9.4</version>
 				<project-name>jose4j</project-name>
 				<project-url>https://bitbucket.org/b_c/jose4j/</project-url>
 				<licenses>
@@ -3556,30 +3557,6 @@
 				</licenses>
 			</library>
 			<library>
-				<file-name>com.liferay.portal.store.gcs.jar!protobuf-java-util.jar</file-name>
-				<version>3.21.7</version>
-				<project-name>Protocol Buffers [Util]</project-name>
-				<project-url>https://developers.google.com/protocol-buffers/</project-url>
-				<licenses>
-					<license>
-						<license-name>BSD-3-Clause</license-name>
-						<license-url>https://opensource.org/licenses/BSD-3-Clause</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
-				<file-name>com.liferay.portal.store.gcs.jar!protobuf-java.jar</file-name>
-				<version>3.21.7</version>
-				<project-name>Protocol Buffers [Core]</project-name>
-				<project-url>https://developers.google.com/protocol-buffers/</project-url>
-				<licenses>
-					<license>
-						<license-name>BSD-3-Clause</license-name>
-						<license-url>https://opensource.org/licenses/BSD-3-Clause</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
 				<file-name>com.liferay.portal.store.gcs.jar!threetenbp.jar</file-name>
 				<version>1.5.0</version>
 				<project-name>ThreeTen backport</project-name>
@@ -3745,17 +3722,6 @@
 				</licenses>
 			</library>
 			<library>
-				<file-name>com.liferay.portal.tika.jar!com.drew.metadata.jar</file-name>
-				<version>2.19.0.LIFERAY-PATCHED-1</version>
-				<project-name>com.drew.metadata</project-name>
-				<licenses>
-					<license>
-						<license-name>LGPL 2.1</license-name>
-						<license-url>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
 				<file-name>com.liferay.portal.tika.jar!commons-exec.jar</file-name>
 				<version>1.3</version>
 				<project-name>Apache Commons Exec</project-name>
@@ -3836,6 +3802,18 @@
 					<license>
 						<license-name>Mozilla Public License 1.1 (MPL 1.1)</license-name>
 						<license-url>http://www.mozilla.org/MPL/MPL-1.1.html</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
+				<file-name>com.liferay.portal.tika.jar!metadata-extractor.jar</file-name>
+				<version>2.19.0</version>
+				<project-name>metadata-extractor</project-name>
+				<project-url>https://drewnoakes.com/code/exif/</project-url>
+				<licenses>
+					<license>
+						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
 			</library>
@@ -4051,18 +4029,6 @@
 				</licenses>
 			</library>
 			<library>
-				<file-name>com.liferay.portal.url.rewrite.filter.jar!urlrewritefilter.jar</file-name>
-				<version>4.0.4</version>
-				<project-name>UrlRewriteFilter</project-name>
-				<project-url>http://www.tuckey.org/urlrewrite/</project-url>
-				<licenses>
-					<license>
-						<license-name>BSD</license-name>
-						<license-url>http://www.opensource.org/licenses/bsd-license.php</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
 				<file-name>com.liferay.portal.vulcan.api.jar!jackson-dataformat-xml.jar</file-name>
 				<version>2.10.3</version>
 				<project-name>Jackson-dataformat-XML</project-name>
@@ -4172,7 +4138,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.vulcan.impl.jar!graphql-java.jar</file-name>
-				<version>17.5</version>
+				<version>18.7</version>
 				<project-name>graphql-java</project-name>
 				<project-url>https://github.com/graphql-java/graphql-java</project-url>
 				<licenses>
@@ -5281,6 +5247,30 @@
 					<license>
 						<license-name>The Apache Software License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
+				<file-name>com.liferay.shared.dependencies.protobuf.jar!protobuf-java-util.jar</file-name>
+				<version>3.25.5</version>
+				<project-name>Protocol Buffers [Util]</project-name>
+				<project-url>https://developers.google.com/protocol-buffers/</project-url>
+				<licenses>
+					<license>
+						<license-name>BSD-3-Clause</license-name>
+						<license-url>https://opensource.org/licenses/BSD-3-Clause</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
+				<file-name>com.liferay.shared.dependencies.protobuf.jar!protobuf-java.jar</file-name>
+				<version>3.25.5</version>
+				<project-name>Protocol Buffers [Core]</project-name>
+				<project-url>https://developers.google.com/protocol-buffers/</project-url>
+				<licenses>
+					<license>
+						<license-name>BSD-3-Clause</license-name>
+						<license-url>https://opensource.org/licenses/BSD-3-Clause</license-url>
 					</license>
 				</licenses>
 			</library>
