@@ -703,7 +703,7 @@ public class AssetListAssetEntryProviderImpl
 		if (_assetListConfiguration.combineAssetsFromAllSegmentsManual()) {
 			Map<AssetListEntryAssetEntryRel, Long> groupIds = new HashMap<>();
 
-			segmentsEntryIds = _sortSegmentsByPriority(
+			segmentsEntryIds = _sort(
 				assetListEntry,
 				_getCombinedSegmentsEntryIds(assetListEntry, segmentsEntryIds));
 
@@ -1033,7 +1033,7 @@ public class AssetListAssetEntryProviderImpl
 		assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 	}
 
-	private long[] _sortSegmentsByPriority(
+	private long[] _sort(
 		AssetListEntry assetListEntry, long[] segmentsEntryIds) {
 
 		return TransformUtil.transformToLongArray(
