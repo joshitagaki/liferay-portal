@@ -167,6 +167,14 @@ public class LocaleUtil {
 		return _locale;
 	}
 
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), with no direct replacement
+	 */
+	@Deprecated
+	public static LocaleUtil getInstance() {
+		throw new UnsupportedOperationException();
+	}
+
 	public static Map<String, String> getISOLanguages(Locale locale) {
 		Map<String, String> isoLanguages = new TreeMap<>(
 			String.CASE_INSENSITIVE_ORDER);

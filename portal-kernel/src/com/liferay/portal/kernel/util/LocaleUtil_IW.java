@@ -44,6 +44,14 @@ public class LocaleUtil_IW {
 		return LocaleUtil.getDefault();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
+	public com.liferay.portal.kernel.util.LocaleUtil getWrappedInstance() {
+		return LocaleUtil.getInstance();
+	}
+
 	public java.util.Map<java.lang.String, java.lang.String> getISOLanguages(
 		java.util.Locale locale) {
 		return LocaleUtil.getISOLanguages(locale);
