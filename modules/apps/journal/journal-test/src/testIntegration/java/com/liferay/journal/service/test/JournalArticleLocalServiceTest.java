@@ -65,6 +65,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.language.Language;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.LayoutConstants;
@@ -96,6 +97,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
@@ -1408,6 +1410,14 @@ public class JournalArticleLocalServiceTest {
 
 		JournalTestUtil.addArticle(_group.getGroupId(), folder.getFolderId());
 
+		Company company = CompanyTestUtil.addCompany();
+
+		Group group = GroupTestUtil.addGroup();
+
+		JournalTestUtil.addArticle(
+			group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
 		calendar.add(Calendar.DATE, -1);
 
 		List<JournalArticle> journalArticles =
@@ -1417,6 +1427,8 @@ public class JournalArticleLocalServiceTest {
 		Assert.assertEquals(
 			journalArticles.toString(), 1, journalArticles.size());
 		Assert.assertEquals(journalArticle, journalArticles.get(0));
+
+		_companyLocalService.deleteCompany(company);
 	}
 
 	@Test
