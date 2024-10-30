@@ -2811,7 +2811,7 @@ public class JournalArticleLocalServiceImpl
 
 	@Override
 	public List<JournalArticle> getArticlesByReviewDate(
-		Date previousCheckDate, Date reviewDate) {
+		long companyId, Date previousCheckDate, Date reviewDate) {
 
 		return journalArticlePersistence.dslQuery(
 			DSLQueryFactoryUtil.select(
@@ -2819,8 +2819,11 @@ public class JournalArticleLocalServiceImpl
 			).from(
 				JournalArticleTable.INSTANCE
 			).where(
-				JournalArticleTable.INSTANCE.classNameId.eq(
-					JournalArticleConstants.CLASS_NAME_ID_DEFAULT
+				JournalArticleTable.INSTANCE.companyId.eq(
+					companyId
+				).and(
+					JournalArticleTable.INSTANCE.classNameId.eq(
+						JournalArticleConstants.CLASS_NAME_ID_DEFAULT)
 				).and(
 					JournalArticleTable.INSTANCE.reviewDate.gte(
 						previousCheckDate)
@@ -6191,7 +6194,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		List<JournalArticle> articles = getArticlesByReviewDate(
-			previousCheckDate, reviewDate);
+			companyId, previousCheckDate, reviewDate);
 
 		for (JournalArticle article : articles) {
 			if (article.isInTrash() ||
