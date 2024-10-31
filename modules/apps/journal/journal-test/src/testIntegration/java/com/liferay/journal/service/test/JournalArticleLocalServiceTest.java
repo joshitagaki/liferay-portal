@@ -183,20 +183,6 @@ public class JournalArticleLocalServiceTest {
 			journalArticle.getArticleId(), true);
 	}
 
-	@Test(
-		expected = FriendlyURLLocalizationUrlTitleException.MustNotHaveTrailingSlash.class
-	)
-	public void testAddArticleWithURLWithStartingSlashThrowsMustNotHaveTrailingSlashException()
-		throws Exception {
-
-		JournalTestUtil.addArticle(
-			_group.getGroupId(),
-			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			HashMapBuilder.put(
-				_portal.getSiteDefaultLocale(_group), "test/"
-			).build());
-	}
-
 	@Test
 	public void testAddArticleWithoutFriendlyURLWithTitleWithTrailingSlashes()
 		throws Exception {
@@ -229,6 +215,20 @@ public class JournalArticleLocalServiceTest {
 		for (Map.Entry<Locale, String> entry : friendlyURLMap.entrySet()) {
 			Assert.assertEquals("test", entry.getValue());
 		}
+	}
+
+	@Test(
+		expected = FriendlyURLLocalizationUrlTitleException.MustNotHaveTrailingSlash.class
+	)
+	public void testAddArticleWithURLWithStartingSlashThrowsMustNotHaveTrailingSlashException()
+		throws Exception {
+
+		JournalTestUtil.addArticle(
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			HashMapBuilder.put(
+				_portal.getSiteDefaultLocale(_group), "test/"
+			).build());
 	}
 
 	@Test
