@@ -995,7 +995,7 @@ public class RenderLayoutStructureTagTest {
 				mockHttpServletRequest, formItemId,
 				infoFormValidationException);
 			SessionErrors.add(
-				mockHttpServletRequest, infoField.getUniqueId(),
+				mockHttpServletRequest, InfoFormException.class,
 				infoFormValidationException);
 
 			MockHttpServletResponse mockHttpServletResponse = _renderLayout(
@@ -1005,7 +1005,7 @@ public class RenderLayoutStructureTagTest {
 				SessionErrors.contains(mockHttpServletRequest, formItemId));
 			Assert.assertFalse(
 				SessionErrors.contains(
-					mockHttpServletRequest, infoField.getUniqueId()));
+					mockHttpServletRequest, InfoFormException.class));
 
 			String content = mockHttpServletResponse.getContentAsString();
 
