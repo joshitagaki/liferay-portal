@@ -144,6 +144,10 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 		(state) => state
 	);
 
+	const layoutDataItem = useSelector(
+		(state) => state.layoutData.items[item.id]
+	);
+
 	const isInputFragment =
 		item.type === LAYOUT_DATA_ITEM_TYPES.fragment &&
 		fragmentEntryLinks[item.config.fragmentEntryLinkId]
@@ -156,7 +160,7 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 
 		if (
 			item.type !== LAYOUT_DATA_ITEM_TYPES.dropZone &&
-			!hasDropZoneChild(item, layoutData) &&
+			!hasDropZoneChild(layoutDataItem, layoutData) &&
 			!isInputFragment
 		) {
 			items.push({
@@ -197,7 +201,7 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 			});
 		}
 
-		if (canBeSaved(item, layoutData)) {
+		if (canBeSaved(layoutDataItem, layoutData)) {
 			items.push({
 				action: () => setOpenSaveModal(true),
 				icon: 'disk',
@@ -211,7 +215,14 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 			});
 		}
 
-		if (canBeDuplicated(fragmentEntryLinks, item, layoutData, widgets)) {
+		if (
+			canBeDuplicated(
+				fragmentEntryLinks,
+				layoutDataItem,
+				layoutData,
+				widgets
+			)
+		) {
 			items.push({
 				action: () => {
 					dispatch(
@@ -228,7 +239,7 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 			});
 		}
 
-		if (canBeRenamed(item)) {
+		if (canBeRenamed(layoutDataItem)) {
 			items.push({
 				action: () => {
 					setEditingNodeId(item.id);
@@ -266,6 +277,7 @@ const ActionList = ({item, setActive, setEditingNodeId, setOpenSaveModal}) => {
 		isInputFragment,
 		item,
 		layoutData,
+		layoutDataItem,
 		selectedViewportSize,
 		selectItem,
 		widgets,
