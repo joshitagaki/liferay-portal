@@ -13,21 +13,16 @@ import com.liferay.portal.instances.service.PortalInstancesLocalService;
 import com.liferay.portal.kernel.exception.UserEmailAddressException;
 import com.liferay.portal.kernel.exception.UserScreenNameException;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.Contact;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.auth.EmailAddressValidator;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.CompanyService;
-import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.EmailAddressValidatorFactory;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.vulcan.pagination.Page;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
@@ -105,50 +100,28 @@ public class PortalInstanceResourceImpl extends BasePortalInstanceResourceImpl {
 
 		Admin admin = portalInstance.getAdmin();
 
-		if (admin != null) {
-			_validateAdmin(admin);
-		}
-
 		Long companyId = portalInstance.getCompanyId();
 
 		if (companyId == null) {
 			companyId = 0L;
 		}
 
-		Company company = _companyService.addCompany(
-			companyId, portalInstance.getPortalInstanceId(),
-			portalInstance.getVirtualHost(), portalInstance.getDomain(), 0,
-			true);
+		Company company;
 
 		if (admin != null) {
-			User defaultAdminUser = _userLocalService.getUserByEmailAddress(
-				company.getCompanyId(),
-				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" +
-					company.getMx());
+			_validateAdmin(admin);
 
-			Contact contact = defaultAdminUser.getContact();
-
-			Calendar calendar = CalendarFactoryUtil.getCalendar();
-
-			calendar.setTime(contact.getBirthday());
-
-			_userLocalService.updateUser(
-				defaultAdminUser.getUserId(), null, null, null, false,
-				defaultAdminUser.getReminderQueryQuestion(),
-				defaultAdminUser.getReminderQueryAnswer(),
-				defaultAdminUser.getScreenName(), admin.getEmailAddress(), true,
-				null, defaultAdminUser.getLanguageId(),
-				defaultAdminUser.getTimeZoneId(),
-				defaultAdminUser.getGreeting(), defaultAdminUser.getComments(),
-				admin.getGivenName(), defaultAdminUser.getMiddleName(),
-				admin.getFamilyName(), contact.getPrefixListTypeId(),
-				contact.getSuffixListTypeId(), defaultAdminUser.isMale(),
-				calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DAY_OF_MONTH),
-				calendar.get(Calendar.YEAR), contact.getSmsSn(),
-				contact.getFacebookSn(), contact.getJabberSn(),
-				contact.getSkypeSn(), contact.getTwitterSn(),
-				contact.getJobTitle(), null, null, null, null, null, null);
+			company = _companyLocalService.addCompany(
+				companyId, portalInstance.getPortalInstanceId(),
+				portalInstance.getVirtualHost(), portalInstance.getDomain(), 0,
+				true, null, null, admin.getEmailAddress(), admin.getGivenName(),
+				null, admin.getFamilyName());
+		}
+		else {
+			company = _companyService.addCompany(
+				companyId, portalInstance.getPortalInstanceId(),
+				portalInstance.getVirtualHost(), portalInstance.getDomain(), 0,
+				true);
 		}
 
 		try (SafeCloseable safeCloseable =
@@ -216,12 +189,12 @@ public class PortalInstanceResourceImpl extends BasePortalInstanceResourceImpl {
 	}
 
 	@Reference
+	private CompanyLocalService _companyLocalService;
+
+	@Reference
 	private CompanyService _companyService;
 
 	@Reference
 	private PortalInstancesLocalService _portalInstancesLocalService;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
