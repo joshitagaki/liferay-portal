@@ -94,7 +94,7 @@ public class PortalInstanceResourceTest
 	public void testPostPortalInstance() throws Exception {
 		_testPostPortalInstanceWithoutAdmin();
 		_testPostPortalInstanceWithAdmin();
-		_testPostPortalInstanceWithAdminWithCompanyStrangersTrue();
+		_testPostPortalInstanceWithAdminAndCompanyStrangersTrue();
 	}
 
 	@Override
@@ -411,7 +411,7 @@ public class PortalInstanceResourceTest
 		}
 	}
 
-	private void _testPostPortalInstanceWithAdminWithCompanyStrangersTrue()
+	private void _testPostPortalInstanceWithAdminAndCompanyStrangersTrue()
 		throws Exception {
 
 		PropsUtil.set(
