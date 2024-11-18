@@ -87,8 +87,8 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
 	@Override
 	public Company addCompany(
-			String webId, String virtualHost, String mx, int maxUsers,
-			boolean active, String defaultAdminPassword,
+			Long companyId, String webId, String virtualHost, String mx,
+			int maxUsers, boolean active, String defaultAdminPassword,
 			String defaultAdminScreenName, String defaultAdminEmailAddress,
 			String defaultAdminFirstName, String defaultAdminMiddleName,
 			String defaultAdminLastName)
@@ -101,7 +101,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		return companyLocalService.addCompany(
-			null, webId, virtualHost, mx, maxUsers, active,
+			companyId, webId, virtualHost, mx, maxUsers, active,
 			defaultAdminPassword, defaultAdminScreenName,
 			defaultAdminEmailAddress, defaultAdminFirstName,
 			defaultAdminMiddleName, defaultAdminLastName);
@@ -121,11 +121,11 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 	@JSONWebService(mode = JSONWebServiceMode.IGNORE)
 	@Override
 	public Company addCompany(
-		Long companyId, String webId, String virtualHost, String mx, int maxUsers,
-		boolean active, String defaultAdminPassword,
-		String defaultAdminScreenName, String defaultAdminEmailAddress,
-		String defaultAdminFirstName, String defaultAdminMiddleName,
-		String defaultAdminLastName)
+			String webId, String virtualHost, String mx, int maxUsers,
+			boolean active, String defaultAdminPassword,
+			String defaultAdminScreenName, String defaultAdminEmailAddress,
+			String defaultAdminFirstName, String defaultAdminMiddleName,
+			String defaultAdminLastName)
 		throws PortalException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -135,7 +135,7 @@ public class CompanyServiceImpl extends CompanyServiceBaseImpl {
 		}
 
 		return companyLocalService.addCompany(
-			companyId, webId, virtualHost, mx, maxUsers, active,
+			null, webId, virtualHost, mx, maxUsers, active,
 			defaultAdminPassword, defaultAdminScreenName,
 			defaultAdminEmailAddress, defaultAdminFirstName,
 			defaultAdminMiddleName, defaultAdminLastName);
