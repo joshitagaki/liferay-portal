@@ -15,7 +15,6 @@ import com.liferay.portal.kernel.exception.UserScreenNameException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.auth.EmailAddressValidator;
-import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.CompanyService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -111,7 +110,7 @@ public class PortalInstanceResourceImpl extends BasePortalInstanceResourceImpl {
 		if (admin != null) {
 			_validateAdmin(admin);
 
-			company = _companyLocalService.addCompany(
+			company = _companyService.addCompany(
 				companyId, portalInstance.getPortalInstanceId(),
 				portalInstance.getVirtualHost(), portalInstance.getDomain(), 0,
 				true, null, null, admin.getEmailAddress(), admin.getGivenName(),
@@ -187,9 +186,6 @@ public class PortalInstanceResourceImpl extends BasePortalInstanceResourceImpl {
 				admin.getEmailAddress(), emailAddressValidator);
 		}
 	}
-
-	@Reference
-	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CompanyService _companyService;
