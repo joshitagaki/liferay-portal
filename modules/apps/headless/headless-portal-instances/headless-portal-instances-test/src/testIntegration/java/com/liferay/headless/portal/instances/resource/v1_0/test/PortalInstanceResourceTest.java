@@ -19,9 +19,11 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.test.rule.Inject;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.List;
 
@@ -92,6 +94,7 @@ public class PortalInstanceResourceTest
 	public void testPostPortalInstance() throws Exception {
 		_testPostPortalInstanceWithoutAdmin();
 		_testPostPortalInstanceWithAdmin();
+		_testPostPortalInstanceWithAdminWithCompanyStrangersTrue();
 	}
 
 	@Override
@@ -405,6 +408,21 @@ public class PortalInstanceResourceTest
 			if (postPortalInstance != null) {
 				_deletePortalInstance(postPortalInstance);
 			}
+		}
+	}
+
+	private void _testPostPortalInstanceWithAdminWithCompanyStrangersTrue()
+		throws Exception {
+
+		PropsUtil.set(
+			PropsKeys.COMPANY_SECURITY_STRANGERS, Boolean.TRUE.toString());
+
+		try {
+			_testPostPortalInstanceWithAdmin();
+		}
+		finally {
+			PropsUtil.set(
+				PropsKeys.COMPANY_SECURITY_STRANGERS, Boolean.FALSE.toString());
 		}
 	}
 
