@@ -7423,15 +7423,15 @@ public class JournalArticleLocalServiceImpl
 		Locale defaultLocale, Map<Locale, String> friendlyURLMap,
 		Map<Locale, String> titleMap) {
 
-		for (Map.Entry<Locale, String> friendlyURL :
-				friendlyURLMap.entrySet()) {
+		if (friendlyURLMap.containsKey(defaultLocale) &&
+			Validator.isNotNull(friendlyURLMap.get(defaultLocale))) {
 
-			if (Validator.isNotNull(friendlyURL.getValue())) {
-				return friendlyURLMap;
-			}
+			return friendlyURLMap;
 		}
 
-		return HashMapBuilder.put(
+		return HashMapBuilder.putAll(
+			friendlyURLMap
+		).put(
 			defaultLocale, _removeTrailingSlashes(titleMap.get(defaultLocale))
 		).build();
 	}
