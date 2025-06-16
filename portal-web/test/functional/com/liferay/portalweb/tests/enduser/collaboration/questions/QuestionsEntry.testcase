@@ -824,6 +824,7 @@ definition {
 	@description = "LPS-131941 - Validate if a user can view question details after restoring history router to default setting."
 	@priority = 3
 	test CanRestoreHistoryRouterToDefaultSetting {
+		property portal.acceptance = "customtestsuite";
 		property test.liferay.virtual.instance = "false";
 		property test.run.type = "single";
 

@@ -515,7 +515,7 @@ definition {
 	@priority = 4
 	@refactordone
 	test CanPublishDocumentTypeViaSAP {
-		property portal.acceptance = "true";
+		property portal.acceptance = "customtestsuite";
 
 		DMNavigator.gotoDocumentType();
 
