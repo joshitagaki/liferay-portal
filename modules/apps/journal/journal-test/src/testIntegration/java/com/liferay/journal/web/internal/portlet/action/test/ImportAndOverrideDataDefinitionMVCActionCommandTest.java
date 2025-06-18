@@ -8,6 +8,7 @@ package com.liferay.journal.web.internal.portlet.action.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.data.engine.rest.dto.v2_0.DataDefinition;
 import com.liferay.data.engine.rest.dto.v2_0.DataDefinitionField;
+import com.liferay.data.engine.rest.dto.v2_0.DataLayout;
 import com.liferay.data.engine.rest.test.util.DataDefinitionTestUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -18,6 +19,8 @@ import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.test.log.LogCapture;
+import com.liferay.portal.test.log.LoggerTestUtil;
 import com.liferay.portal.test.rule.Inject;
 
 import org.junit.Assert;
@@ -79,12 +82,56 @@ public class ImportAndOverrideDataDefinitionMVCActionCommandTest
 			dataDefinitionFields[0].getName(), previousTextFieldName);
 
 		Assert.assertTrue(Validator.isNumber(suffix));
+
+		try (LogCapture logCapture = LoggerTestUtil.configureLog4JLogger(
+				_CLASS_NAME, LoggerTestUtil.OFF)) {
+
+			_processAction(
+				dataDefinition.getId(), "valid_data_definition.json",
+				"Imported Structure");
+		}
+
+		DataLayout previousDataLayout = dataDefinition.getDefaultDataLayout();
+
+		dataDefinition = getImportedDataDefinition();
+
+		Assert.assertEquals(
+			dataDefinition.getDefaultDataLayout(), previousDataLayout);
+	}
+
+	private void _processAction(
+			Long dataDefinitionId, String fileName, String name)
+		throws Exception {
+
+		MockLiferayPortletActionRequest mockLiferayPortletActionRequest =
+			createMockLiferayPortletActionRequest(
+				fileName, name, dataDefinitionId);
+
+		setUpUploadPortletRequest(mockLiferayPortletActionRequest);
+
+		_mvcActionCommand.processAction(
+			mockLiferayPortletActionRequest,
+			new MockLiferayPortletActionResponse());
+
+		Assert.assertNotNull(
+			SessionMessages.get(
+				mockLiferayPortletActionRequest,
+				portal.getPortletId(mockLiferayPortletActionRequest) +
+					SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE));
+		Assert.assertNotNull(
+			SessionErrors.get(
+				mockLiferayPortletActionRequest,
+				"importDataDefinitionErrorMessage"));
 	}
 
 	private String _read(String fileName) throws Exception {
 		return new String(
 			FileUtil.getBytes(getClass(), "dependencies/" + fileName));
 	}
+
+	private static final String _CLASS_NAME =
+		"com.liferay.journal.web.internal.portlet.action." +
+			"ImportAndOverrideDataDefinitionMVCActionCommand";
 
 	@Inject(
 		filter = "mvc.command.name=/journal/import_and_override_data_definition"
