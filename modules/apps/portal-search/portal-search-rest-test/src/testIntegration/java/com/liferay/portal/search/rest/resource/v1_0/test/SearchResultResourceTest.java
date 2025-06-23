@@ -1010,8 +1010,24 @@ public class SearchResultResourceTest extends BaseSearchResultResourceTestCase {
 			return;
 		}
 
-		_testPostSearchPageWithEmbeddedNestedFieldsInObjectEntry();
 		_testPostSearchPageWithEmbeddedNestedFieldsInLayout();
+		_testPostSearchPageWithEmbeddedNestedFieldsInObjectEntry();
+	}
+
+	private void _testPostSearchPageWithEmbeddedNestedFieldsInLayout()
+		throws Exception {
+
+		SearchPage<SearchResult> searchPage = _postSearchPage(
+			Layout.class.getName(), null, "home", "embedded", null,
+			new SearchRequestBody());
+
+		Collection<SearchResult> searchResults = searchPage.getItems();
+
+		Assert.assertFalse(searchResults.isEmpty());
+
+		for (SearchResult searchResult : searchResults) {
+			Assert.assertNotNull(searchResult.getEmbedded());
+		}
 	}
 
 	private void _testPostSearchPageWithEmbeddedNestedFieldsInObjectEntry()
@@ -1070,22 +1086,6 @@ public class SearchResultResourceTest extends BaseSearchResultResourceTestCase {
 
 		_objectDefinitionLocalService.deleteObjectDefinition(
 			objectDefinition.getObjectDefinitionId());
-	}
-
-	private void _testPostSearchPageWithEmbeddedNestedFieldsInLayout()
-		throws Exception {
-
-		SearchPage<SearchResult> searchPage = _postSearchPage(
-			Layout.class.getName(), null, "home", "embedded", null,
-			new SearchRequestBody());
-
-		Collection<SearchResult> searchResults = searchPage.getItems();
-
-		Assert.assertFalse(searchResults.isEmpty());
-
-		for (SearchResult searchResult : searchResults) {
-			Assert.assertNotNull(searchResult.getEmbedded());
-		}
 	}
 
 	private void _testPostSearchPageWithEmptyScope() throws Exception {
