@@ -348,7 +348,7 @@ definition {
 
 	@priority = 3
 	test AssertCategoryFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		JSONCategory.addVocabulary(
 			groupName = "Guest",
@@ -502,7 +502,7 @@ definition {
 
 	@priority = 3
 	test AssertCustomFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		for (var count : list "1,2,3") {
 			JSONDocument.addFileWithUploadedFile(
@@ -576,7 +576,7 @@ definition {
 	@description = "This is a use case for LPS-170111. When configuring the Folder Facet, facet terms are present with different display templates"
 	@priority = 3
 	test AssertFolderFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		task ("Add the folders and populate them with files") {
 			for (var folder : list "Product,Engineering,Company") {
@@ -655,7 +655,7 @@ definition {
 
 	@priority = 3
 	test AssertModifiedFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		task ("Create the Web Contents") {
 			for (var count : list "1,2,3") {
@@ -790,7 +790,7 @@ definition {
 
 	@priority = 3
 	test AssertSiteFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		for (var siteName : list "Community,Engineering,Product") {
 			HeadlessSite.addSite(siteName = ${siteName});
@@ -864,7 +864,7 @@ definition {
 
 	@priority = 3
 	test AssertTagFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		JSONWebcontent.addWebContent(
 			assetTagNames = "engineering,product,2021,2022",
@@ -957,7 +957,7 @@ definition {
 
 	@priority = 3
 	test AssertTypeFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		JSONWebcontent.addWebContent(
 			content = "WC WebContent Content",
@@ -1031,7 +1031,7 @@ definition {
 
 	@priority = 3
 	test AssertUserFacetTermsWithDifferentDisplayTemplates {
-		property portal.acceptance = "true";
+		property portal.acceptance = "false";
 
 		for (var count : list "1,2,3") {
 			JSONUser.addUser(
