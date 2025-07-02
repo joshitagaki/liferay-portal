@@ -5,24 +5,23 @@
 
 import {expect, mergeTests} from '@playwright/test';
 
-import {apiHelpersTest} from '../../../fixtures/apiHelpersTest';
-import {calendarPagesTest} from '../../../fixtures/calendarPagesTest';
-import {collectionsPagesTest} from '../../../fixtures/collectionsPagesTest';
-import {dataApiHelpersTest} from '../../../fixtures/dataApiHelpersTest';
-import {featureFlagsTest} from '../../../fixtures/featureFlagsTest';
-import {isolatedSiteTest} from '../../../fixtures/isolatedSiteTest';
-import {loginTest} from '../../../fixtures/loginTest';
-import {pageEditorPagesTest} from '../../../fixtures/pageEditorPagesTest';
-import {getRandomInt} from '../../../utils/getRandomInt';
-import getRandomString from '../../../utils/getRandomString';
+import {apiHelpersTest} from '../../fixtures/apiHelpersTest';
+import {calendarPagesTest} from '../../fixtures/calendarPagesTest';
+import {collectionsPagesTest} from '../../fixtures/collectionsPagesTest';
+import {dataApiHelpersTest} from '../../fixtures/dataApiHelpersTest';
+import {featureFlagsTest} from '../../fixtures/featureFlagsTest';
+import {isolatedSiteTest} from '../../fixtures/isolatedSiteTest';
+import {loginTest} from '../../fixtures/loginTest';
+import {pageEditorPagesTest} from '../../fixtures/pageEditorPagesTest';
+import {getRandomInt} from '../../utils/getRandomInt';
+import getRandomString from '../../utils/getRandomString';
 import performLogin, {
 	performLogout,
 	userData,
 } from '../../../utils/performLogin';
-import {journalPagesTest} from '../../journal-web/main/fixtures/journalPagesTest';
-import getPageDefinition from '../../layout-content-page-editor-web/main/utils/getPageDefinition';
-import getWidgetDefinition from '../../layout-content-page-editor-web/main/utils/getWidgetDefinition';
-import {getNextOrPreviousSaturday} from './utils/getNextOrPreviousSaturday';
+import {journalPagesTest} from '../journal-web/fixtures/journalPagesTest';
+import getPageDefinition from '../layout-content-page-editor-web/utils/getPageDefinition';
+import getWidgetDefinition from '../layout-content-page-editor-web/utils/getWidgetDefinition';
 import {toLocalDateTimeFormatted} from './utils/toLocalDateTimeFormatted';
 export const test = mergeTests(
 	apiHelpersTest,
@@ -478,14 +477,13 @@ test('event ending at midnight does not render on the next day', async ({
 	calendarWidgetPage,
 	page,
 }) => {
-	const today = new Date();
+	const eventStartDay = new Date();
+	eventStartDay.setDate(15);
 
-	const saturday = getNextOrPreviousSaturday(today);
+	const eventEndDay = new Date();
+	eventEndDay.setDate(eventStartDay.getDate() + 1);
 
-	const sunday = new Date(saturday);
-	sunday.setDate(saturday.getDate() + 1);
-
-	const [startDate, endDate] = [saturday, sunday].map((date) =>
+	const [startDate, endDate] = [eventStartDay, eventEndDay].map((date) =>
 		toLocalDateTimeFormatted(date.toUTCString(), {
 			day: '2-digit',
 			month: '2-digit',
