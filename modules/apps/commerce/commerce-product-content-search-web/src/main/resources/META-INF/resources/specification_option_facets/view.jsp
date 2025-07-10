@@ -43,7 +43,7 @@ CPSpecificationOptionFacetsDisplayContext cpSpecificationOptionFacetsDisplayCont
 					String panelId = liferayPortletResponse.getNamespace() + "facetCPSpecificationOptionsPanel" + j;
 				%>
 
-					<aui:form action="#" method="post" name="fm">
+					<aui:form method="post" name='<%= "assetEntriesFacetForm_" + parameterName %>'>
 						<aui:input autocomplete="off" name="<%= HtmlUtil.escapeAttribute(cpSpecificationOptionsSearchFacetDisplayContext.getParameterName()) %>" type="hidden" value="<%= cpSpecificationOptionsSearchFacetDisplayContext.getParameterValue() %>" />
 						<aui:input cssClass="facet-parameter-name" name="facet-parameter-name" type="hidden" value="<%= parameterName %>" />
 						<aui:input cssClass="start-parameter-name" name="start-parameter-name" type="hidden" value="<%= cpSpecificationOptionsSearchFacetDisplayContext.getPaginationStartParameterName() %>" />
@@ -104,7 +104,6 @@ CPSpecificationOptionFacetsDisplayContext cpSpecificationOptionFacetsDisplayCont
 																		<%= cpSpecificationOptionsSearchFacetTermDisplayContext.isSelected() ? "checked" : StringPool.BLANK %>
 																		class="custom-control-input facet-term"
 																		data-term-id="<%= HtmlUtil.escapeAttribute(cpSpecificationOptionsSearchFacetTermDisplayContext.getDisplayName()) %>"
-																		disabled
 																		id="<portlet:namespace />term_<%= parameterName + i %>"
 																		name="<portlet:namespace />term_<%= parameterName + i %>"
 																		onChange="Liferay.Search.FacetUtil.changeSelection(event);"
@@ -152,10 +151,5 @@ CPSpecificationOptionFacetsDisplayContext cpSpecificationOptionFacetsDisplayCont
 </c:choose>
 
 <liferay-frontend:component
-	context='<%=
-		HashMapBuilder.<String, Object>put(
-			"namespace", liferayPortletResponse.getNamespace()
-		).build()
-	%>'
 	module="{FacetUtil} from portal-search-web"
 />
