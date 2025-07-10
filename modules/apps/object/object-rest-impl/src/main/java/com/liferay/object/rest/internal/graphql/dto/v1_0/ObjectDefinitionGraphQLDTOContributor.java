@@ -118,6 +118,8 @@ public class ObjectDefinitionGraphQLDTOContributor
 				objectDefinition.getObjectDefinitionId());
 		}
 
+		List<ObjectField> finalObjectFields = objectFields;
+
 		for (ObjectField objectField : objectFields) {
 			if (ObjectFieldUtil.isMetadata(objectField.getName())) {
 				continue;
