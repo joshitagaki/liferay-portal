@@ -1359,7 +1359,7 @@ public class JournalDisplayContext {
 		}
 
 		if (((isTypeWebContent() && !hasResults()) || isTypeVersions()) &&
-			!hasVersionsResults() && hasCommentsResults()) {
+			!hasVersionsResults() && hasCommentsResults() && isSearch()) {
 
 			_searchIn = "comments";
 
