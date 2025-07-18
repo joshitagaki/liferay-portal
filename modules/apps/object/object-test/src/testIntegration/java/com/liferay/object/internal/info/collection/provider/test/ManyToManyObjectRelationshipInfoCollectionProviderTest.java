@@ -91,7 +91,7 @@ public class ManyToManyObjectRelationshipInfoCollectionProviderTest {
 
 		return _objectDefinitionLocalService.addCustomObjectDefinition(
 			TestPropsValues.getUserId(), 0, null, false, false, true, false,
-			false, false, false, null,
+			false, false,
 			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
 			ObjectDefinitionTestUtil.getRandomName(), null, null,
 			LocalizedMapUtil.getLocalizedMap(RandomTestUtil.randomString()),
@@ -184,7 +184,7 @@ public class ManyToManyObjectRelationshipInfoCollectionProviderTest {
 
 		ObjectEntry objectDefinition1ObjectEntry1 =
 			_objectEntryLocalService.addObjectEntry(
-				groupId1, TestPropsValues.getUserId(),
+				TestPropsValues.getUserId(), groupId1,
 				_objectDefinition1.getObjectDefinitionId(),
 				ObjectEntryFolderConstants.
 					PARENT_OBJECT_ENTRY_FOLDER_ID_DEFAULT,
@@ -197,7 +197,7 @@ public class ManyToManyObjectRelationshipInfoCollectionProviderTest {
 
 		ObjectEntry objectDefinition1ObjectEntry2 =
 			_objectEntryLocalService.addObjectEntry(
-				groupId1, TestPropsValues.getUserId(),
+				TestPropsValues.getUserId(), groupId1,
 				_objectDefinition1.getObjectDefinitionId(),
 				ObjectEntryFolderConstants.
 					PARENT_OBJECT_ENTRY_FOLDER_ID_DEFAULT,
@@ -216,7 +216,7 @@ public class ManyToManyObjectRelationshipInfoCollectionProviderTest {
 
 		ObjectEntry objectDefinition2ObjectEntry =
 			_objectEntryLocalService.addObjectEntry(
-				groupId2, TestPropsValues.getUserId(),
+				TestPropsValues.getUserId(), groupId2,
 				_objectDefinition2.getObjectDefinitionId(),
 				ObjectEntryFolderConstants.
 					PARENT_OBJECT_ENTRY_FOLDER_ID_DEFAULT,
