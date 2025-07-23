@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -98,6 +99,8 @@ public class InfoRequestFieldValuesProviderHelper {
 		String classTypeId = ParamUtil.getString(
 			uploadServletRequest, "classTypeId");
 		long groupId = ParamUtil.getLong(uploadServletRequest, "groupId");
+		boolean nestedEntity = ParamUtil.getBoolean(
+			uploadServletRequest, "nestedEntity");
 
 		Map<String, FileItem[]> multipartParameterMap =
 			uploadServletRequest.getMultipartParameterMap();
@@ -108,7 +111,11 @@ public class InfoRequestFieldValuesProviderHelper {
 		for (InfoField<?> infoField :
 				_getInfoFields(className, classTypeId, groupId)) {
 
-			if (!infoField.isEditable()) {
+			if (!infoField.isEditable() ||
+				(!nestedEntity &&
+				 StringUtil.startsWith(
+					 infoField.getUniqueId(), "ObjectRelationship"))) {
+
 				continue;
 			}
 
