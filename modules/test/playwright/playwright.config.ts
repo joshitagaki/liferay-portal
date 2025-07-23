@@ -67,6 +67,7 @@ import {config as frontendTaglibConfig} from './tests/frontend-taglib/main/confi
 import {config as frontendTheme} from './tests/frontend-theme/main/config';
 import {config as headlessBuilderImplConfig} from './tests/headless-builder-impl/main/config';
 import {config as headlessBuilderWebConfig} from './tests/headless-builder-web/main/config';
+import {config as headlessDiscoveryWebConfig} from './tests/headless-discovery-web/main/config';
 import {config as iframeWebConfig} from './tests/iframe-web/main/config';
 import {config as itemSelectorTaglibConfig} from './tests/item-selector-taglib/main/config';
 import {config as journalWebConfig} from './tests/journal-web/main/config';
@@ -215,6 +216,7 @@ export default defineConfig({
 		frontendTheme,
 		headlessBuilderImplConfig,
 		headlessBuilderWebConfig,
+		headlessDiscoveryWebConfig,
 		iframeWebConfig,
 		itemSelectorTaglibConfig,
 		jethr0Config,
