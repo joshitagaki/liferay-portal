@@ -155,222 +155,241 @@ portletDisplay.setURLBack(backURL);
 
 			form.insertAdjacentElement('afterbegin', loadingElement);
 
-			current.validate().then((result) => {
-				if (result) {
-					const fields = current.getFields();
-					let shouldSubmitForm = true;
+			current
+				.validate()
+				.then((result) => {
+					if (result) {
+						const fields = current.getFields();
+						let shouldSubmitForm = true;
 
-					fields.forEach((field) => {
-						if (
-							field.displayStyle === 'singleline' &&
-							field.type === 'text' &&
-							field.value.length > 280
-						) {
-							shouldSubmitForm = false;
-
-							loadingElement.remove();
-
-							Liferay.Util.openToast({
-								message: Liferay.Util.sub(
-									'<liferay-ui:message key="the-entry-value-exceeds-the-maximum-length-of-x-characters-for-object-field-x" />',
-									'280',
-									'"' + field.fieldName + '"'
-								),
-								type: 'danger',
-							});
-
-							return false;
-						}
-					});
-
-					if (shouldSubmitForm) {
-						let values = <portlet:namespace />getValues(fields);
-						const categoriesContent = document.getElementById(
-							'<portlet:namespace />categorization'
-						);
-						const externalReferenceCode =
-							<portlet:namespace />getExternalReferenceCode();
-						const path = <portlet:namespace />getPath(
-							externalReferenceCode
-						);
-
-						if (categoriesContent) {
-							values = Object.assign(
-								values,
-								{
-									['keywords']: <portlet:namespace />getInputValues(
-										categoriesContent,
-										'input[name^="<portlet:namespace />assetTagNames"]'
-									),
-								},
-								{
-									['taxonomyCategoryIds']:
-										<portlet:namespace />getInputValues(
-											categoriesContent,
-											'input[name^="<portlet:namespace />assetCategoryIds"]'
-										),
-								}
-							);
-						}
-
-						const autoRelatedValue = {
-							['relationshipField']:
-								'<%= objectEntryDisplayContext.getObjectRelationshipERCObjectFieldName() %>',
-							['parentObjectEntryERC']:
-								'<%= objectEntryDisplayContext.getParentObjectEntryId() %>',
-						};
-
-						if (autoRelatedValue['relationshipField'] !== 'null') {
-							values = Object.assign(values, {
-								[autoRelatedValue['relationshipField']]:
-									autoRelatedValue['parentObjectEntryERC'],
-							});
-						}
-
-						const friendlyURLInputs = document.querySelectorAll(
-							'[data-field-name="friendlyURL"]'
-						);
-
-						if (friendlyURLInputs) {
-							const friendlyURLValues = {};
-
-							friendlyURLInputs.forEach((input) => {
-								friendlyURLValues[input.dataset.languageid] =
-									input.value;
-							});
-
-							values = Object.assign(values, {
-								['friendlyUrlPath']: '',
-								['friendlyUrlPath_i18n']: friendlyURLValues,
-							});
-						}
-
-						Liferay.Util.fetch(path, {
-							body: JSON.stringify(values),
-							headers: new Headers({
-								'Accept': 'application/json',
-								'Accept-Language':
-									'<%= LanguageUtil.getBCP47LanguageId(request) %>',
-								'Content-Type': 'application/json',
-							}),
-							method: externalReferenceCode ? 'PATCH' : 'POST',
-						})
-							.then((response) => {
-								Liferay.fire('submitButtonClicked');
-
-								if (response.status === 401) {
-									window.location.reload();
-								}
-								else if (response.ok) {
-									Liferay.Util.openToast({
-										message:
-											'<%=
-												HtmlUtil.escapeJS(LanguageUtil.get(
-													LocaleUtil.fromLanguageId(LanguageUtil.getBCP47LanguageId(request)), "your-request-completed-successfully")) %>',
-										type: 'success',
-									});
-
-									response.json().then((payload) => {
-										const portletURL =
-											Liferay.Util.PortletURL.createPortletURL(
-												'<%= currentURLObj %>',
-												{
-													externalReferenceCode:
-														payload.externalReferenceCode,
-												}
-											);
-
-										Liferay.Util.navigate(portletURL.toString());
-									});
-								}
-								else {
-									return response.json();
-								}
-							})
-							.then((response) => {
-								if (response && response.detail) {
-									const errorMessageArray = JSON.parse(
-										response.detail
-									);
-
-									const alertClassName = '<portlet:namespace />alert';
-
-									const alertElements =
-										document.getElementsByClassName(alertClassName);
-
-									for (let i = 0; i < alertElements.length; i++) {
-										alertElements[i].remove();
-									}
-
-									for (const error of errorMessageArray) {
-										const portletBody =
-											document.querySelector('.portlet-body');
-
-										const existingAlert =
-											portletBody.querySelector('.alert');
-
-										if (existingAlert) {
-											existingAlert.remove();
-										}
-
-										const alertElement =
-											document.createElement('div');
-
-										alertElement.className =
-											'alert alert-danger ' + alertClassName;
-										alertElement.setAttribute('role', 'alert');
-										alertElement.style.bottom = '20px';
-										alertElement.style.margin = '2rem auto 0';
-										alertElement.style.width = '800px';
-
-										alertElement.insertAdjacentHTML(
-											'afterbegin',
-											"<span class='alert-indicator'><svg class='lexicon-icon lexicon-icon-exclamation-full' focusable='false' role='presentation'><use xlink:href='/o/admin-theme/images/clay/icons.svg#exclamation-full'/></svg> <strong class='lead'>Error:</strong></span>"
-										);
-
-										alertElement.insertAdjacentHTML(
-											'beforeend',
-											error.errorMessage
-										);
-
-										const closeButton =
-											document.createElement('button');
-										closeButton.classList.add('close');
-										closeButton.setAttribute('aria-label', 'Close');
-										closeButton.setAttribute('type', 'button');
-										closeButton.style.fontSize = '32px';
-										closeButton.style.fontWeight = '300';
-										closeButton.innerHTML = '&times;';
-										closeButton.onclick = () => {
-											alertElement.remove();
-										};
-
-										alertElement.appendChild(closeButton);
-
-										form.insertAdjacentElement(
-											'afterbegin',
-											alertElement
-										);
-									}
-									scroll(0, 0);
-								}
-								else if (response && response.title) {
-									Liferay.Util.openToast({
-										message: response.title,
-										type: 'danger',
-									});
-								}
+						fields.forEach((field) => {
+							if (
+								field.displayStyle === 'singleline' &&
+								field.type === 'text' &&
+								field.value.length > 280
+							) {
+								shouldSubmitForm = false;
 
 								loadingElement.remove();
-							});
+
+								Liferay.Util.openToast({
+									message: Liferay.Util.sub(
+										'<liferay-ui:message key="the-entry-value-exceeds-the-maximum-length-of-x-characters-for-object-field-x" />',
+										'280',
+										'"' + field.fieldName + '"'
+									),
+									type: 'danger',
+								});
+
+								return false;
+							}
+						});
+
+						if (shouldSubmitForm) {
+							let values = <portlet:namespace />getValues(fields);
+							const categoriesContent = document.getElementById(
+								'<portlet:namespace />categorization'
+							);
+							const externalReferenceCode =
+								<portlet:namespace />getExternalReferenceCode();
+							const path = <portlet:namespace />getPath(
+								externalReferenceCode
+							);
+
+							if (categoriesContent) {
+								values = Object.assign(
+									values,
+									{
+										['keywords']:
+											<portlet:namespace />getInputValues(
+												categoriesContent,
+												'input[name^="<portlet:namespace />assetTagNames"]'
+											),
+									},
+									{
+										['taxonomyCategoryIds']:
+											<portlet:namespace />getInputValues(
+												categoriesContent,
+												'input[name^="<portlet:namespace />assetCategoryIds"]'
+											),
+									}
+								);
+							}
+
+							const autoRelatedValue = {
+								['relationshipField']:
+									'<%= objectEntryDisplayContext.getObjectRelationshipERCObjectFieldName() %>',
+								['parentObjectEntryERC']:
+									'<%= objectEntryDisplayContext.getParentObjectEntryId() %>',
+							};
+
+							if (autoRelatedValue['relationshipField'] !== 'null') {
+								values = Object.assign(values, {
+									[autoRelatedValue['relationshipField']]:
+										autoRelatedValue['parentObjectEntryERC'],
+								});
+							}
+
+							const friendlyURLInputs = document.querySelectorAll(
+								'[data-field-name="friendlyURL"]'
+							);
+
+							if (friendlyURLInputs) {
+								const friendlyURLValues = {};
+
+								friendlyURLInputs.forEach((input) => {
+									friendlyURLValues[input.dataset.languageid] =
+										input.value;
+								});
+
+								values = Object.assign(values, {
+									['friendlyUrlPath']: '',
+									['friendlyUrlPath_i18n']: friendlyURLValues,
+								});
+							}
+
+							Liferay.Util.fetch(path, {
+								body: JSON.stringify(values),
+								headers: new Headers({
+									'Accept': 'application/json',
+									'Accept-Language':
+										'<%= LanguageUtil.getBCP47LanguageId(request) %>',
+									'Content-Type': 'application/json',
+								}),
+								method: externalReferenceCode ? 'PATCH' : 'POST',
+							})
+								.then((response) => {
+									Liferay.fire('submitButtonClicked');
+
+									if (response.status === 401) {
+										window.location.reload();
+									}
+									else if (response.ok) {
+										Liferay.Util.openToast({
+											message:
+												'<%=
+												HtmlUtil.escapeJS(LanguageUtil.get(
+													LocaleUtil.fromLanguageId(LanguageUtil.getBCP47LanguageId(request)), "your-request-completed-successfully")) %>',
+											type: 'success',
+										});
+
+										response.json().then((payload) => {
+											const portletURL =
+												Liferay.Util.PortletURL.createPortletURL(
+													'<%= currentURLObj %>',
+													{
+														externalReferenceCode:
+															payload.externalReferenceCode,
+													}
+												);
+
+											Liferay.Util.navigate(
+												portletURL.toString()
+											);
+										});
+									}
+									else {
+										return response.json();
+									}
+								})
+								.then((response) => {
+									if (response && response.detail) {
+										const errorMessageArray = JSON.parse(
+											response.detail
+										);
+
+										const alertClassName =
+											'<portlet:namespace />alert';
+
+										const alertElements =
+											document.getElementsByClassName(
+												alertClassName
+											);
+
+										for (let i = 0; i < alertElements.length; i++) {
+											alertElements[i].remove();
+										}
+
+										for (const error of errorMessageArray) {
+											const portletBody =
+												document.querySelector('.portlet-body');
+
+											const existingAlert =
+												portletBody.querySelector('.alert');
+
+											if (existingAlert) {
+												existingAlert.remove();
+											}
+
+											const alertElement =
+												document.createElement('div');
+
+											alertElement.className =
+												'alert alert-danger ' + alertClassName;
+											alertElement.setAttribute('role', 'alert');
+											alertElement.style.bottom = '20px';
+											alertElement.style.margin = '2rem auto 0';
+											alertElement.style.width = '800px';
+
+											alertElement.insertAdjacentHTML(
+												'afterbegin',
+												"<span class='alert-indicator'><svg class='lexicon-icon lexicon-icon-exclamation-full' focusable='false' role='presentation'><use xlink:href='/o/admin-theme/images/clay/icons.svg#exclamation-full'/></svg> <strong class='lead'>Error:</strong></span>"
+											);
+
+											alertElement.insertAdjacentHTML(
+												'beforeend',
+												error.errorMessage
+											);
+
+											const closeButton =
+												document.createElement('button');
+											closeButton.classList.add('close');
+											closeButton.setAttribute(
+												'aria-label',
+												'Close'
+											);
+											closeButton.setAttribute('type', 'button');
+											closeButton.style.fontSize = '32px';
+											closeButton.style.fontWeight = '300';
+											closeButton.innerHTML = '&times;';
+											closeButton.onclick = () => {
+												alertElement.remove();
+											};
+
+											alertElement.appendChild(closeButton);
+
+											form.insertAdjacentElement(
+												'afterbegin',
+												alertElement
+											);
+										}
+										scroll(0, 0);
+									}
+									else if (response && response.title) {
+										Liferay.Util.openToast({
+											message: response.title,
+											type: 'danger',
+										});
+									}
+
+									loadingElement.remove();
+								});
+						}
 					}
-				}
-				else {
-					current.updateLocalesDropdownToDefaultLanguage();
+					else {
+						current.updateLocalesDropdownToDefaultLanguage();
+
+						loadingElement.remove();
+					}
+				})
+				.catch((error) => {
+					Liferay.Util.openToast({
+						message: error.message,
+						type: 'danger',
+					});
 
 					loadingElement.remove();
-				}
-			});
+				});
 		});
 	</aui:script>
 </c:if>
