@@ -620,6 +620,8 @@ public class PortalUpgradeProcessRegistryImpl
 				"activitySettingId asc"),
 			new DeleteDuplicateUniqueFinderRowsUpgradeProcess(
 				"Ticket", new String[] {"key_"}, "ticketId asc"));
+
+		upgradeVersionTreeMap.put(new Version(32, 1, 0), new UpgradeDB2());
 	}
 
 }
