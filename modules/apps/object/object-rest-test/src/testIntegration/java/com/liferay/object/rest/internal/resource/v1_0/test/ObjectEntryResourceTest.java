@@ -5778,11 +5778,13 @@ public class ObjectEntryResourceTest {
 	@Test
 	public void testGetObjectEntriesVersionsPage() throws Exception {
 		_objectDefinition1.setEnableObjectEntryVersioning(true);
-		_objectDefinition2.setEnableObjectEntryVersioning(true);
 
 		_objectDefinition1 =
 			_objectDefinitionLocalService.updateObjectDefinition(
 				_objectDefinition1);
+
+		_objectDefinition2.setEnableObjectEntryVersioning(true);
+
 		_objectDefinition2 =
 			_objectDefinitionLocalService.updateObjectDefinition(
 				_objectDefinition2);
