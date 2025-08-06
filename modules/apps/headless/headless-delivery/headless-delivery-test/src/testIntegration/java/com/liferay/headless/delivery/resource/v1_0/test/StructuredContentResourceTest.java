@@ -646,8 +646,8 @@ public class StructuredContentResourceTest
 
 		super.testPostStructuredContentFolderStructuredContent();
 
-		_testPostStructuredContentFolderStructuredContentWithDisplayPageTemplate();
-		_testPostStructuredContentFolderStructuredContentWithImageContentField();
+		_testPostStructuredContentFolderStructuredContentWithDisplayPage();
+		_testPostStructuredContentFolderStructuredContentWithMandatoryImageField();
 	}
 
 	@Override
@@ -2681,7 +2681,7 @@ public class StructuredContentResourceTest
 
 		ContentField contentField = getStructuredContent.getContentFields()[0];
 
-		ContentFieldValue contentFieldValue 
+		ContentFieldValue contentFieldValue =
 			contentField.getContentFieldValue();
 
 		ContentDocument contentDocument = contentFieldValue.getImage();
