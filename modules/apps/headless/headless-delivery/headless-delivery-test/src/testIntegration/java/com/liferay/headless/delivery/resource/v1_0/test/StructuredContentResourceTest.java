@@ -646,8 +646,8 @@ public class StructuredContentResourceTest
 
 		super.testPostStructuredContentFolderStructuredContent();
 
-		_testPostStructuredContentFolderStructuredContentWithDisplayPage();
-		_testPostStructuredContentFolderStructuredContentWithMandatoryImageField();
+		_testPostStructuredContentFolderStructuredContentWithDisplayPageTemplate();
+		_testPostStructuredContentFolderStructuredContentWithImageContentField();
 	}
 
 	@Override
@@ -2640,13 +2640,7 @@ public class StructuredContentResourceTest
 	private void _testPostStructuredContentFolderStructuredContentWithMandatoryImageField()
 		throws Exception {
 
-		DDMStructure imageStructure = _addDDMStructure(
-			testGroup, "test-ddm-structure-image.json");
-
 		StructuredContent structuredContent = randomStructuredContent();
-
-		structuredContent.setContentStructureId(
-			imageStructure.getStructureId());
 
 		structuredContent.setContentFields(
 			new ContentField[] {
@@ -2668,6 +2662,12 @@ public class StructuredContentResourceTest
 				}
 			});
 
+		DDMStructure imageDDMStructure = _addDDMStructure(
+			testGroup, "test-ddm-structure-image.json");
+
+		structuredContent.setContentStructureId(
+			imageDDMStructure.getStructureId());
+
 		StructuredContent postStructuredContent =
 			structuredContentResource.
 				postStructuredContentFolderStructuredContent(
@@ -2681,14 +2681,15 @@ public class StructuredContentResourceTest
 
 		ContentField contentField = getStructuredContent.getContentFields()[0];
 
-		Assert.assertEquals("image", contentField.getName());
+		ContentFieldValue contentFieldValue 
+			contentField.getContentFieldValue();
 
-		ContentDocument contentDocument = contentField.getContentFieldValue(
-		).getImage();
+		ContentDocument contentDocument = contentFieldValue.getImage();
 
-		Assert.assertNotNull(contentDocument);
 		Assert.assertEquals(
 			_dlFileEntry.getFileEntryId(), (long)contentDocument.getId());
+
+		Assert.assertEquals("image", contentField.getName());
 	}
 
 	private void _testPutSiteStructuredContentByExternalReferenceCodeWithCustomField()
