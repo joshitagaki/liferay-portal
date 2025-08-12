@@ -10,8 +10,8 @@ import {dataApiHelpersTest} from '../../../fixtures/dataApiHelpersTest';
 import {featureFlagsTest} from '../../../fixtures/featureFlagsTest';
 import {loginAnalyticsCloudTest} from '../../../fixtures/loginAnalyticsCloudTest';
 import {loginTest} from '../../../fixtures/loginTest';
-import getRandomString from '../../../utils/getRandomString';
 import {pageEditorPagesTest} from '../../../fixtures/pageEditorPagesTest';
+import getRandomString from '../../../utils/getRandomString';
 import {syncAnalyticsCloud} from '../../analytics-settings-web/main/utils/analytics-settings';
 import {
 	assertTerminatedABTest,
@@ -240,9 +240,9 @@ test(
 		const pageTitle = 'MyPage-' + getRandomString();
 
 		const layout = await apiHelpers.headlessDelivery.createSitePage({
-				siteId: siteName,
-				title: pageTitle,
-			});
+			siteId: siteName,
+			title: pageTitle,
+		});
 
 		const channelName = 'My Property - ' + getRandomString();
 
@@ -255,7 +255,6 @@ test(
 
 		await test.step('Go to site page', async () => {
 			await navigateToSitePage({
-				layout,
 				page,
 				pageName: pageTitle,
 				siteName,
