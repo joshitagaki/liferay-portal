@@ -239,17 +239,12 @@ test(
 	async ({apiHelpers, page, pageEditorPage, site}) => {
 		const siteName = getRandomString();
 
-		await apiHelpers.headlessSite.createSite({
-			name: siteName,
-		});
-
 		const pageTitle = 'MyPage-' + getRandomString();
 
-		const layout = await createSitePage({
-			apiHelpers,
-			pageTitle,
-			siteName,
-		});
+		const layout = await apiHelpers.headlessDelivery.createSitePage({
+				siteId: siteName,
+				title: pageTitle,
+			});
 
 		const channelName = 'My Property - ' + getRandomString();
 
