@@ -85,7 +85,8 @@ export async function navigateToSitePage({
 				`${liferayConfig.environment.baseUrl}/web/${siteNameURL}/` +
 					`${pageNameURL}?p_l_mode=edit`
 			);
-		} else {
+		}
+		else {
 			await page.goto(
 				`${liferayConfig.environment.baseUrl}/web/${siteNameURL}/` +
 					`${pageNameURL}`
