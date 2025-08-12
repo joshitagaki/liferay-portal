@@ -8,7 +8,6 @@ import {expect, mergeTests} from '@playwright/test';
 import {apiHelpersTest} from '../../../fixtures/apiHelpersTest';
 import {dataApiHelpersTest} from '../../../fixtures/dataApiHelpersTest';
 import {featureFlagsTest} from '../../../fixtures/featureFlagsTest';
-import {isolatedSiteTest} from '../../../fixtures/isolatedSiteTest';
 import {loginAnalyticsCloudTest} from '../../../fixtures/loginAnalyticsCloudTest';
 import {loginTest} from '../../../fixtures/loginTest';
 import getRandomString from '../../../utils/getRandomString';
@@ -36,7 +35,6 @@ export const test = mergeTests(
 	featureFlagsTest({
 		'LPS-178052': {enabled: true},
 	}),
-	isolatedSiteTest,
 	loginAnalyticsCloudTest(),
 	loginTest(),
 	pageEditorPagesTest
@@ -236,7 +234,7 @@ test(
 	{
 		tag: '@LPS-103334',
 	},
-	async ({apiHelpers, page, pageEditorPage, site}) => {
+	async ({apiHelpers, page, pageEditorPage}) => {
 		const siteName = getRandomString();
 
 		const pageTitle = 'MyPage-' + getRandomString();
@@ -257,6 +255,7 @@ test(
 
 		await test.step('Go to site page', async () => {
 			await navigateToSitePage({
+				layout,
 				page,
 				pageName: pageTitle,
 				siteName,
@@ -266,7 +265,12 @@ test(
 		});
 
 		await test.step('Create a new Experience', async () => {
-			await pageEditorPage.goto(layout, site.friendlyUrlPath);
+			await navigateToSitePage({
+				layout,
+				page,
+				pageName: pageTitle,
+				siteName,
+			});
 
 			await pageEditorPage.createExperience('Experience 1');
 
@@ -292,7 +296,12 @@ test(
 		});
 
 		await test.step('Able to Edit Experience', async () => {
-			await pageEditorPage.goto(layout, site.friendlyUrlPath);
+			await navigateToSitePage({
+				layout,
+				page,
+				pageName: pageTitle,
+				siteName,
+			});
 
 			await pageEditorPage.openExperienceSelector();
 
