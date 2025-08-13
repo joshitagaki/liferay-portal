@@ -285,6 +285,12 @@ test(
 		const abTestName = 'AB Test -' + getRandomString();
 
 		await test.step('Create a new AB Test with a variant', async () => {
+			await navigateToSitePage({
+				page,
+				pageName: pageTitle,
+				siteName,
+			});
+
 			await clickAndExpectToBeVisible({
 				autoClick: true,
 				target: page.getByRole('option', {
