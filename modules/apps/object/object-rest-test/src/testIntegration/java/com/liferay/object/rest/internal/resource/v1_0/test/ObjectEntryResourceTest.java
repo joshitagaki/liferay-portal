@@ -70,7 +70,6 @@ import com.liferay.object.rest.test.util.ObjectRelationshipTestUtil;
 import com.liferay.object.rest.test.util.UserAccountTestUtil;
 import com.liferay.object.scope.ObjectScopeProvider;
 import com.liferay.object.scope.ObjectScopeProviderRegistry;
-import com.liferay.object.scope.util.GroupUtil;
 import com.liferay.object.service.ObjectActionLocalService;
 import com.liferay.object.service.ObjectDefinitionLocalService;
 import com.liferay.object.service.ObjectDefinitionSettingLocalService;
@@ -5775,6 +5774,7 @@ public class ObjectEntryResourceTest {
 		}
 	}
 
+	@FeatureFlags("LPD-17564")
 	@Test
 	public void testGetObjectEntriesVersionsPage() throws Exception {
 		_objectDefinition1.setEnableObjectEntryVersioning(true);
