@@ -6,6 +6,7 @@
 import {expect, mergeTests} from '@playwright/test';
 
 import {apiHelpersTest} from '../../../fixtures/apiHelpersTest';
+import {clickAndExpectToBeVisible} from '../../../utils/clickAndExpectToBeVisible';
 import {dataApiHelpersTest} from '../../../fixtures/dataApiHelpersTest';
 import {featureFlagsTest} from '../../../fixtures/featureFlagsTest';
 import {loginAnalyticsCloudTest} from '../../../fixtures/loginAnalyticsCloudTest';
@@ -284,13 +285,13 @@ test(
 		const abTestName = 'AB Test -' + getRandomString();
 
 		await test.step('Create a new AB Test with a variant', async () => {
-			await navigateToSitePage({
-				page,
-				pageName: pageTitle,
-				siteName,
+			await clickAndExpectToBeVisible({
+				autoClick: true,
+				target: page.getByRole('option', {
+					name: 'Experience 1 Segment: Anyone Inactive',
+				}),
+				trigger: page.getByLabel('Experience Selector'),
 			});
-
-			await pageEditorPage.switchExperience('Experience 1');
 
 			await openABTesSidebar(page);
 
