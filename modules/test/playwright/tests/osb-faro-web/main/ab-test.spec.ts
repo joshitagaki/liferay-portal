@@ -279,13 +279,19 @@ test(
 			await pageEditorPage.createExperience('Experience 1');
 
 			await pageEditorPage.publishPage();
-
-			await pageEditorPage.switchExperience('Experience 1');
 		});
 
 		const abTestName = 'AB Test -' + getRandomString();
 
 		await test.step('Create a new AB Test with a variant', async () => {
+			await navigateToSitePage({
+				page,
+				pageName: pageTitle,
+				siteName,
+			});
+
+			await pageEditorPage.switchExperience('Experience 1');
+
 			await openABTesSidebar(page);
 
 			await createABTest({
