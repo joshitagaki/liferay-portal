@@ -769,12 +769,16 @@ public class DefaultObjectEntryManagerImpl
 
 	@Override
 	public Page<ObjectEntry> getVersionedObjectEntries(
-			DTOConverterContext dtoConverterContext, long objectEntryId,
+			DTOConverterContext dtoConverterContext,
+			ObjectDefinition objectDefinition, long objectEntryId,
 			Pagination pagination)
 		throws Exception {
 
 		com.liferay.object.model.ObjectEntry serviceBuilderObjectEntry =
 			objectEntryLocalService.getObjectEntry(objectEntryId);
+
+		_checkObjectEntryObjectDefinitionId(
+			objectDefinition, serviceBuilderObjectEntry);
 
 		return Page.of(
 			TransformUtil.transform(
@@ -806,8 +810,8 @@ public class DefaultObjectEntryManagerImpl
 				objectDefinition.getObjectDefinitionId());
 
 		return getVersionedObjectEntries(
-			dtoConverterContext, serviceBuilderObjectEntry.getObjectEntryId(),
-			pagination);
+			dtoConverterContext, objectDefinition,
+			serviceBuilderObjectEntry.getObjectEntryId(), pagination);
 	}
 
 	@Override

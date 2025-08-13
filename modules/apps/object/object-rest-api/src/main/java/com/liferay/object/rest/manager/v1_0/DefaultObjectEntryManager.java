@@ -116,8 +116,17 @@ public interface DefaultObjectEntryManager extends ObjectEntryManager {
 			ObjectDefinition objectDefinition, long primaryKey)
 		throws Exception;
 
-	public Page<ObjectEntry> getVersionedObjectEntries(
+	public default Page<ObjectEntry> getVersionedObjectEntries(
 			DTOConverterContext dtoConverterContext, long objectEntryId,
+			Pagination pagination)
+		throws Exception {
+
+		return null;
+	}
+
+	public Page<ObjectEntry> getVersionedObjectEntries(
+			DTOConverterContext dtoConverterContext,
+			ObjectDefinition objectDefinition, long objectEntryId,
 			Pagination pagination)
 		throws Exception;
 
