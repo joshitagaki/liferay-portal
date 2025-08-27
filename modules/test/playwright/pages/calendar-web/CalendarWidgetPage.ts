@@ -13,21 +13,22 @@ type RecurrenceOption = 'Entire Series' | 'Following Events' | 'Single Event';
 export class CalendarWidgetPage {
 	readonly addEventButton: Locator;
 	readonly allDayCheckbox: Locator;
-	readonly calendarWidget: Locator;
 	readonly calendarColumns: Locator;
 	readonly calendarOptions: Locator;
+	readonly calendarWidget: Locator;
 	readonly closeConfigurationButton: Locator;
+	readonly closeEventModalButton: Locator;
 	readonly configurationMenuItem: Locator;
 	readonly endDate: Locator;
 	readonly endTime: Locator;
 	readonly invitations: Locator;
 	readonly inviteResource: Locator;
-	readonly modalRecurrencePage: ModalRecurrencePage;
 	readonly miniCalendarBase: Locator;
 	readonly miniCalendarGrid: Locator;
 	readonly miniCalendarHeaderLabel: Locator;
 	readonly miniCalendarNextMonthButton: Locator;
 	readonly miniCalendarPastMonthButton: Locator;
+	readonly modalRecurrencePage: ModalRecurrencePage;
 	readonly monthViewTab: Locator;
 	readonly page: Page;
 	readonly previousButton: Locator;
@@ -64,6 +65,7 @@ export class CalendarWidgetPage {
 			exact: true,
 			name: 'close',
 		});
+		this.closeEventModalButton = page.getByRole('button', {name: 'Close'});
 		this.configurationMenuItem = page.getByRole('menuitem', {
 			exact: true,
 			name: 'Configuration',
@@ -81,7 +83,6 @@ export class CalendarWidgetPage {
 		this.inviteResource = page
 			.frameLocator('iframe')
 			.getByTitle('Invite Resource', {exact: true});
-		this.modalRecurrencePage = new ModalRecurrencePage(page);
 		this.miniCalendarBase = page.locator('.yui3-calendarbase');
 		this.miniCalendarGrid = page.locator('.yui3-calendar-grid');
 		this.miniCalendarHeaderLabel = page.locator(
@@ -93,6 +94,7 @@ export class CalendarWidgetPage {
 		this.miniCalendarPastMonthButton = page.locator(
 			'.yui3-calendarnav-prevmonth'
 		);
+		this.modalRecurrencePage = new ModalRecurrencePage(page);
 		this.monthViewTab = page.getByRole('tab', {name: 'Month View'});
 		this.page = page;
 		this.previousButton = page.getByLabel('Previous');
@@ -202,36 +204,8 @@ export class CalendarWidgetPage {
 			.click();
 	}
 
-	async openInvitations() {
-		await this.invitations.click();
-	}
-
-	async publishEvent({
-		recurrenceOption,
-		waitForSuccessAlert,
-	}: {
-		recurrenceOption?: RecurrenceOption;
-		waitForSuccessAlert?: boolean;
-	} = {}) {
-		await this.publishEventButton.click();
-
-		if (recurrenceOption) {
-			await this.page
-				.frameLocator('iframe')
-				.getByRole('button', {name: recurrenceOption})
-				.click();
-		}
-
-		if (waitForSuccessAlert) {
-			await waitForAlert(
-				this.page.frameLocator('iframe'),
-				`Success:Your request completed successfully.`
-			);
-		}
-	}
-
 	async closeModalEvent() {
-		await this.page.getByRole('button', {name: 'Close'}).click();
+		await this.closeEventModalButton.click();
 	}
 
 	async clickAddEventButton() {
@@ -268,6 +242,34 @@ export class CalendarWidgetPage {
 		await this.repeatCheckbox.setChecked(true);
 
 		await this.modalRecurrencePage.addRecurrenceUntilDate(daysFromNow);
+	}
+
+	async openInvitations() {
+		await this.invitations.click();
+	}
+
+	async publishEvent({
+		recurrenceOption,
+		waitForSuccessAlert,
+	}: {
+		recurrenceOption?: RecurrenceOption;
+		waitForSuccessAlert?: boolean;
+	} = {}) {
+		await this.publishEventButton.click();
+
+		if (recurrenceOption) {
+			await this.page
+				.frameLocator('iframe')
+				.getByRole('button', {name: recurrenceOption})
+				.click();
+		}
+
+		if (waitForSuccessAlert) {
+			await waitForAlert(
+				this.page.frameLocator('iframe'),
+				`Success:Your request completed successfully.`
+			);
+		}
 	}
 
 	async setCalendarWidgetConfiguration(
