@@ -2276,6 +2276,8 @@ public class DefaultObjectEntryManagerImplTest
 						HashMapBuilder.put(
 							"en_US", "Test URL"
 						).put(
+							"es_ES", "Test URL Spanish"
+						).put(
 							"pt_BR", ""
 						).build());
 				}
@@ -2286,7 +2288,7 @@ public class DefaultObjectEntryManagerImplTest
 			HashMapBuilder.put(
 				"en_US", "test-url-1"
 			).put(
-				"pt_BR", objectEntry.getExternalReferenceCode()
+				"es_ES", "test-url-spanish"
 			).build(),
 			objectEntry.getFriendlyUrlPath_i18n());
 

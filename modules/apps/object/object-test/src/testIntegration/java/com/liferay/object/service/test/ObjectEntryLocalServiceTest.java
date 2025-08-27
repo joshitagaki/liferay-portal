@@ -3157,8 +3157,6 @@ public class ObjectEntryLocalServiceTest {
 		AssertUtils.assertEquals(
 			HashMapBuilder.put(
 				"en_US", "test-url-1"
-			).put(
-				"pt_BR", "test-url-1"
 			).build(),
 			companyObjectEntry2.getURLTitleMap());
 
