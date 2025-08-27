@@ -40,6 +40,7 @@ export class CalendarWidgetPage {
 	readonly successAlert: Locator;
 	readonly timeZoneDropdown: Locator;
 	readonly title: Locator;
+	readonly titleLocalesDropdown: Locator;
 	readonly toggleSideBarButton: Locator;
 	readonly untoggleSideBarButton: Locator;
 	readonly useGlobalTimeZoneCheckBox: Locator;
@@ -128,6 +129,9 @@ export class CalendarWidgetPage {
 		this.title = page
 			.frameLocator('iframe')
 			.getByLabel('Title', {exact: true});
+		this.titleLocalesDropdown = page
+			.frameLocator('iframe')
+			.locator('[id$="titleMenu"]');
 		this.toggleSideBarButton = page.locator(
 			'.calendar-portlet-column-toggler .lexicon-icon-caret-left'
 		);
