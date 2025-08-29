@@ -62,6 +62,7 @@ definition {
 	test ViewLDAPConfigurationAfterUpgrade73101 {
 		property data.archive.type = "data-archive-ldap";
 		property portal.version = "7.3.10.1";
+		property portal.acceptance = "customtestsuite";
 
 		ValidateLDAPUpgrade.viewLDAPConfiguration();
 	}
