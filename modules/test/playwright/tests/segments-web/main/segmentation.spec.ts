@@ -1730,7 +1730,7 @@ test(
 		});
 
 		await test.step('Validate correct experience is displayed using a spanish IP address', async () => {
-			await page.goto(`/web${site.friendlyUrlPath}${mockAddress}`);
+			await page.goto(`/web${site.friendlyUrlPath}${layout.friendlyURL}${mockAddress}`);
 
 			await expect(page.getByText('Spanish Segment Heading')).toBeVisible();
 		});
