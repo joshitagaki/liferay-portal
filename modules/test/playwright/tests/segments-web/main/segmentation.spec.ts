@@ -1671,32 +1671,33 @@ test(
 		tag: '@LPS-163095',
 	},
 
-	async ({apiHelpers, page, pageEditorPage}) => {
+	async ({apiHelpers, page, pageEditorPage, segmentsPage}) => {
 		const layout = await apiHelpers.jsonWebServicesLayout.addLayout({
 			groupId: site.id,
 			options: {type: 'content'},
 			title: getRandomString(),
 		});
 		
-		const mockAddress = '?mockIPGeocoderRemoteAddr=57.78.128.0'
+		const mockAddress = '?mockIPGeocoderRemoteAddr=57.78.128.0';
+
+		const segmentName = 'IP Geocoder Country Segment';
 
 		await test.step('Create segment using IP Geocoder Country', async () => {
-			await apiHelpers.jsonWebServicesSegmentsEntry.addSegmentsEntry({
-				criteria: {
-					criteria: {
-						user: {
-							conjunction: 'and',
-							filterString: `(customContext/ipGeocoderCountry eq 'ES')`,
-							typeValue: 'model',
-						},
-					},
-					filterString: {
-						model: `(customContext/ipGeocoderCountry eq 'ES')`,
-					},
-				},
-				groupId: site.id,
-				name: 'IP Geocoder Country Segment',
-			});
+			await goToSegmentsAdmin(page, site.friendlyUrlPath);
+
+			await segmentsPage.clickAddNewSegmentButton();
+
+			await segmentsPage.addSegmentField(
+				'IP Geocoder Country',
+				'Session',
+				segmentName
+			);
+
+			await segmentsPage.selectOption('Spain');
+
+			await segmentsPage.saveButton.click();
+
+			await waitForAlert(page);
 		});
 
 		await test.step('Create segmented experience', async () => {
