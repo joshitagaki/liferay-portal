@@ -1686,12 +1686,12 @@ test(
 					criteria: {
 						user: {
 							conjunction: 'and',
-							filterString: `(ipGeocoderCountry eq 'ES')`,
+							filterString: `(customContext/ipGeocoderCountry eq 'ES')`,
 							typeValue: 'model',
 						},
 					},
 					filterString: {
-						model: `(ipGeocoderCountry eq 'ES')`,
+						model: `(customContext/ipGeocoderCountry eq 'ES')`,
 					},
 				},
 				groupId: site.id,
