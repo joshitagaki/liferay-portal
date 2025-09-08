@@ -1695,8 +1695,6 @@ test(
 
 			await segmentsPage.selectOption('Spain');
 
-			await segmentsPage.saveButton.click();
-
 			await waitForAlert(page);
 		});
 
