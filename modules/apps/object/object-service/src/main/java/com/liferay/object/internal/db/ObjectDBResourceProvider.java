@@ -138,55 +138,60 @@ public class ObjectDBResourceProvider implements DBResourceProvider {
 
 			return objectDefinitions;
 		}
-		catch (Exception exception) {
+		catch (Exception exception1) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(exception);
+				_log.debug(exception1);
 			}
-		}
 
-		try (Connection connection = DataAccess.getConnection()) {
-			try (PreparedStatement preparedStatement =
-					connection.prepareStatement(
-						StringBundler.concat(
-							"select dbTableName, modifiable, ",
-							"objectDefinitionId, pkObjectFieldDBColumnName, ",
-							"system_ from ObjectDefinition where companyId = ",
-							"? and status = ?"))) {
+			try (Connection connection = DataAccess.getConnection()) {
+				try (PreparedStatement preparedStatement =
+						connection.prepareStatement(
+							StringBundler.concat(
+								"select dbTableName, modifiable,  ",
+								"objectDefinitionId, ",
+								"pkObjectFieldDBColumnName, system_ from ",
+								"ObjectDefinition where companyId = ? and ",
+								"status = ?"))) {
 
-				preparedStatement.setLong(1, companyId);
-				preparedStatement.setInt(2, WorkflowConstants.STATUS_APPROVED);
+					preparedStatement.setLong(1, companyId);
+					preparedStatement.setInt(
+						2, WorkflowConstants.STATUS_APPROVED);
 
-				try (ResultSet resultSet = preparedStatement.executeQuery()) {
-					while (resultSet.next()) {
-						ObjectDefinition objectDefinition =
-							new ObjectDefinitionImpl() {
-								{
-									setCompanyId(companyId);
-									setDBTableName(
-										resultSet.getString("dbTableName"));
-									setModifiable(
-										resultSet.getBoolean("modifiable"));
-									setObjectDefinitionId(
-										resultSet.getLong(
-											"objectDefinitionId"));
-									setPKObjectFieldDBColumnName(
-										resultSet.getString(
-											"pkObjectFieldDBColumnName"));
-									setSystem(resultSet.getBoolean("system_"));
-								}
-							};
+					try (ResultSet resultSet =
+							preparedStatement.executeQuery()) {
 
-						objectDefinitions.put(
-							objectDefinition.getObjectDefinitionId(),
-							objectDefinition);
+						while (resultSet.next()) {
+							ObjectDefinition objectDefinition =
+								new ObjectDefinitionImpl() {
+									{
+										setCompanyId(companyId);
+										setDBTableName(
+											resultSet.getString("dbTableName"));
+										setModifiable(
+											resultSet.getBoolean("modifiable"));
+										setObjectDefinitionId(
+											resultSet.getLong(
+												"objectDefinitionId"));
+										setPKObjectFieldDBColumnName(
+											resultSet.getString(
+												"pkObjectFieldDBColumnName"));
+										setSystem(
+											resultSet.getBoolean("system_"));
+									}
+								};
+
+							objectDefinitions.put(
+								objectDefinition.getObjectDefinitionId(),
+								objectDefinition);
+						}
+
+						return objectDefinitions;
 					}
-
-					return objectDefinitions;
 				}
 			}
-		}
-		catch (Exception exception) {
-			throw new PortalException(exception);
+			catch (Exception exception2) {
+				throw new PortalException(exception2);
+			}
 		}
 	}
 
