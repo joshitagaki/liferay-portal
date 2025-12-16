@@ -77,14 +77,14 @@ public class PrimaryKeyUpdaterUtilTest {
 		DB db = DBManagerUtil.getDB();
 
 		try (Connection connection = DataAccess.getConnection()) {
-			db.removePrimaryKey(connection, "Counter");
+			db.removePrimaryKey(connection, "Company");
 			db.removePrimaryKey(connection, "Lock_");
 
 			PrimaryKeyUpdaterUtil.updateAllPrimaryKeys();
 
 			Assert.assertTrue(
 				ArrayUtil.isNotEmpty(
-					db.getPrimaryKeyColumnNames(connection, "Counter")));
+					db.getPrimaryKeyColumnNames(connection, "Company")));
 			Assert.assertTrue(
 				ArrayUtil.isNotEmpty(
 					db.getPrimaryKeyColumnNames(connection, "Lock_")));
