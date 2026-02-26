@@ -58,9 +58,10 @@ definition {
 	@priority = 4
 	test AutoUpgradeFromLatest7413UpdateWithDBPartitionEnabled {
 		property custom.properties = "virtual.hosts.valid.hosts=localhost,127.0.0.1,www.able.com";
-		property database.types = "mysql";
+		property database.types = "mysql,postgresql";
 		property liferay.online.properties = "true";
 		property portal.smoke.upgrades = "true";
+		property portal.version = "7.4.13";
 		property timeout.explicit.wait = "120";
 
 		User.firstLoginUI(
