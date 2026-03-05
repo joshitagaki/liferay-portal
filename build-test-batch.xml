@@ -6568,12 +6568,12 @@ information. Make sure to commit in all format-javadoc results.
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" database.version="10.4" test.portal.log.assert="true" />
 	</target>
 
-	<target name="functional-smoke-tomcat101-mariadb118">
-		<run-functional-test app.server.type="tomcat" database.type="mariadb" database.version="11.8" test.portal.log.assert="true" />
-	</target>
-
 	<target name="functional-smoke-tomcat101-mariadb106">
 		<run-functional-test app.server.type="tomcat" database.type="mariadb" database.version="10.6" test.portal.log.assert="true" />
+	</target>
+
+	<target name="functional-smoke-tomcat101-mariadb118">
+		<run-functional-test app.server.type="tomcat" database.type="mariadb" database.version="11.8" test.portal.log.assert="true" />
 	</target>
 
 	<target name="functional-smoke-tomcat101-mysql">
