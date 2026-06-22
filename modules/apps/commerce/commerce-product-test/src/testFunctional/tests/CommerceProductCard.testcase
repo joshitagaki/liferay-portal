@@ -559,7 +559,7 @@ definition {
 	@description = "COMMERCE-6657. As a buyer, I want to be able to add a bundled product(Price Type Dynamic) that has a single sku to cart from the product card"
 	@priority = 5
 	test CanAddToCartSingleSkuDynamicPriceBundledProductFromProductCard {
-		property portal.acceptance = "true";
+		property portal.acceptance = "customtestsuite";
 
 		task ("Given a Commerce Account with a buyer user") {
 			CommerceEntry.addAccountEntryUser(

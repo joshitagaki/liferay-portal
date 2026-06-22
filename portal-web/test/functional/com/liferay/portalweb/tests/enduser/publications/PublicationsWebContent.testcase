@@ -414,6 +414,7 @@ definition {
 
 	@priority = 4
 	test PublishWebContentWithCategory {
+		property portal.acceptance = "customtestsuite";
 		JSONPublications.addPublication(publicationName = "Publication Name");
 
 		JSONPublications.selectPublication(publicationName = "Publication Name");
